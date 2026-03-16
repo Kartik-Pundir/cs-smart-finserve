@@ -1,0 +1,39 @@
+{
+  "name": "cs-smart-finserve",
+  "version": "1.0.0",
+  "description": "CS Smart Finserve - Complete FinTech Platform",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "install-all": "npm install && cd frontend && npm install"
+  },
+  "keywords": [
+    "fintech",
+    "loans",
+    "insurance"
+  ],
+  "author": "CS Smart Finserve",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "nodemailer": "^6.9.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22"
+  }
+}

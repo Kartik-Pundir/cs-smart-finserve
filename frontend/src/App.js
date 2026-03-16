@@ -1,0 +1,81 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
+
+// Components
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+
+// Pages
+import Home from './pages/Home';
+import AutoLoan from './pages/AutoLoan';
+import HomeLoan from './pages/HomeLoan';
+import PersonalLoan from './pages/PersonalLoan';
+import BusinessLoan from './pages/BusinessLoan';
+import UsedCarLoan from './pages/UsedCarLoan';
+import LoanAgainstProperty from './pages/LoanAgainstProperty';
+import Insurance from './pages/Insurance';
+import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
+import EMICalculator from './pages/EMICalculator';
+import CibilCheck from './pages/CibilCheck';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import AdminDashboard from './pages/AdminDashboard';
+import Feedback from './pages/Feedback';
+import GoogleAuthSuccess from './pages/GoogleAuthSuccess';
+import BookAppointment from './pages/BookAppointment';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <Router>
+          <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auto-loan" element={<AutoLoan />} />
+              <Route path="/home-loan" element={<HomeLoan />} />
+              <Route path="/personal-loan" element={<PersonalLoan />} />
+              <Route path="/business-loan" element={<BusinessLoan />} />
+              <Route path="/used-car-loan" element={<UsedCarLoan />} />
+              <Route path="/loan-against-property" element={<LoanAgainstProperty />} />
+              <Route path="/insurance" element={<Insurance />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/emi-calculator" element={<EMICalculator />} />
+              <Route path="/cibil-check" element={<CibilCheck />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
+              <Route path="/book-appointment" element={<BookAppointment />} />
+            </Routes>
+            <Footer />
+            <WhatsAppButton />
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="colored"
+            />
+          </div>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
+
+export default App;

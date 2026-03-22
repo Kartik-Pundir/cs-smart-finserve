@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
@@ -13,11 +13,7 @@ const EMICalculator = () => {
   const [totalInterest, setTotalInterest] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
 
-  useEffect(() => {
-    calculateEMI();
-  }, [loanAmount, interestRate, tenure]);
-
-  const calculateEMI = () => {
+  const calculateEMI = useCallback(() => {
     const principal = parseFloat(loanAmount);
     const rate = parseFloat(interestRate) / 12 / 100;
     const time = parseFloat(tenure);
@@ -33,7 +29,11 @@ const EMICalculator = () => {
       setTotalInterest(Math.round(totalInterestValue));
       setTotalPayment(Math.round(totalPaymentValue));
     }
-  };
+  }, [loanAmount, interestRate, tenure]);
+
+  useEffect(() => {
+    calculateEMI();
+  }, [calculateEMI]);
 
   const chartData = {
     labels: ['Principal Amount', 'Total Interest'],

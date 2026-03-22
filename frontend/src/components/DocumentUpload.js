@@ -2,6 +2,9 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaUpload, FaFilePdf, FaFileImage, FaFileAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
 const ACCEPTED = '.pdf,.jpg,.jpeg,.png,.doc,.docx';
 
@@ -26,6 +29,8 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
   const [files, setFiles] = useState({});
   const [dragOver, setDragOver] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [contactInfo, setContactInfo] = useState({ name: '', phone: '', email: '' });
   const inputRefs = useRef({});
 
   const handleFile = (id, file) => {
@@ -48,18 +53,35 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
     setFiles(prev => { const n = { ...prev }; delete n[id]; return n; });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const uploaded = Object.keys(files);
-    if (uploaded.length === 0) {
-      toast.error('Please upload at least one document');
-      return;
+    if (uploaded.length === 0) { toast.error('Please upload at least one document'); return; }
+    if (!contactInfo.name) { toast.error('Please enter your name'); return; }
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('name', contactInfo.name);
+      formData.append('phone', contactInfo.phone);
+      formData.append('email', contactInfo.email);
+      formData.append('loanType', loanType);
+      uploaded.forEach(id => formData.append(id, files[id]));
+
+      await axios.post(`${API_BASE}/documents`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      toast.success('Documents submitted! We will review and contact you within 24 hours.');
+      setFiles({});
+      setContactInfo({ name: '', phone: '', email: '' });
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Upload failed. Please try again.');
+    } finally {
+      setUploading(false);
     }
-    // In production: send via FormData to backend
-    toast.success(`${uploaded.length} document(s) submitted successfully! Our team will review and contact you.`);
-    setFiles({});
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
   };
 
   return (
@@ -86,6 +108,24 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="bg-cream rounded-2xl p-8 shadow-md">
+            {/* Contact info */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Your Name *</label>
+                <input type="text" required value={contactInfo.name} onChange={e => setContactInfo(p => ({...p, name: e.target.value}))}
+                  placeholder="Full name" className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/30" />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Phone</label>
+                <input type="tel" value={contactInfo.phone} onChange={e => setContactInfo(p => ({...p, phone: e.target.value}))}
+                  placeholder="Mobile number" className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/30" />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Email</label>
+                <input type="email" value={contactInfo.email} onChange={e => setContactInfo(p => ({...p, email: e.target.value}))}
+                  placeholder="your@email.com" className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/30" />
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
               {docTypes.map((doc) => {
                 const file = files[doc.id];
@@ -152,9 +192,9 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
               </div>
             )}
 
-            <button type="submit"
-              className="w-full py-3 bg-accent text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all hover:scale-[1.01]">
-              Submit Documents →
+            <button type="submit" disabled={uploading}
+              className="w-full py-3 bg-accent text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all hover:scale-[1.01] disabled:opacity-60 disabled:cursor-not-allowed">
+              {uploading ? 'Uploading...' : 'Submit Documents →'}
             </button>
             <p className="text-center text-xs text-gray-400 mt-3">
               🔒 Your documents are encrypted and never shared without your consent.

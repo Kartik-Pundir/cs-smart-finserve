@@ -8,6 +8,8 @@ require('dotenv').config();
 
 const passport = require('./config/passport');
 
+const path = require('path');
+
 const app = express();
 
 // Trust proxy (needed for rate limiting behind proxies)
@@ -30,10 +32,11 @@ app.use(cors({
   credentials: true
 }));
 
-// Rate Limiting
+// Rate Limiting — relaxed in dev, strict in production
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: process.env.NODE_ENV === 'production' ? 50000 : 100000,
+  message: { success: false, message: 'Too many requests, please try again later.' }
 });
 app.use('/api/', limiter);
 
@@ -61,6 +64,11 @@ app.use('/api/applications', require('./routes/applicationRoutes'));
 app.use('/api/cibil', require('./routes/cibilRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/feedback', require('./routes/feedbackRoutes'));
+app.use('/api/user', require('./routes/userRoutes'));
+app.use('/api/documents', require('./routes/documentRoutes'));
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health Check
 app.get('/api/health', (req, res) => {

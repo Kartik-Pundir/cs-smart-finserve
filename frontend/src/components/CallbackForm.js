@@ -21,7 +21,7 @@ const CallbackForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await api.post('/leads', formData);
+      await api.post('/leads', formData);
       toast.success('Message sent! Check your email for confirmation.');
       setSent(true);
       setFormData({ fullName: '', phone: '', email: '', serviceInterested: '', message: '' });

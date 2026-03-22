@@ -28,56 +28,55 @@ const AboutUs = () => {
       {/* Our Story */}
       <section className="py-20" style={{ background: '#faf8ff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="w-full rounded-2xl overflow-hidden shadow-xl border border-purple-100 bg-white">
-                {/* Photo area */}
-                <div className="w-full h-80 bg-gradient-to-br from-red-700 to-red-900 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="text-8xl mb-2">👨‍💼</div>
-                  </div>
-                </div>
-                {/* Caption below photo */}
-                <div className="px-6 py-5 text-center border-t border-gray-100">
-                  <p className="text-xl font-heading font-bold text-gray-900">Krishan Pal Singh</p>
-                  <p className="text-sm font-semibold mt-1" style={{ color: '#c0392b' }}>Director & Co-Founder</p>
-                  <p className="text-xs text-gray-400 mt-0.5 tracking-wide uppercase">CS Smart Finserve Private Limited</p>
-                </div>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>
-                Our Story
-              </span>
-              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-6">
-                Built on Trust. Driven by Results.
-              </h2>
-              <p className="text-gray-600 text-lg mb-4">
-                CS Smart Finserve Private Limited was founded with a vision to make financial services
-                accessible, transparent, and customer-centric. We believe everyone deserves quality
-                financial products without complex procedures.
+          {/* Sushil Singh */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-32">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-100 bg-white">
+              <div className="w-full h-80 flex items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, #1a1a2e, #2d1b1b)' }}>
+                <div className="text-9xl">👨‍💼</div>
+              </div>
+              <div className="px-6 py-5 text-center">
+                <p className="text-xl font-heading font-bold text-gray-900">Sushil Singh</p>
+                <p className="text-sm font-semibold mt-1" style={{ color: '#c0392b' }}>MD & Founder</p>
+              </div>
+            </div>
+            <div className="pt-4">
+              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-8">Sushil Singh</h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                Sushil Singh is the Managing Director and Founder of CS Smart Finserve Private Limited. With a deep understanding of the financial services industry, he laid the foundation of the company with a vision to make loans and insurance accessible to every Indian household.
               </p>
-              <p className="text-gray-600 text-lg mb-4">
-                Based in Gurugram, we've built a strong network of satisfied customers and banking
-                partners. Our team of 60+ financial experts works tirelessly to find you the best
-                loan and insurance solutions.
+              <p className="text-gray-600 text-lg leading-relaxed">
+                His leadership and strategic thinking have been instrumental in building strong partnerships with 50+ banks and NBFCs, enabling the company to serve thousands of customers across Faridabad and the NCR region.
               </p>
-              <p className="text-gray-600 text-lg">
-                We've disbursed over ₹500 Crores in loans, helping 10,000+ customers achieve their
-                financial goals. Transparency, speed, and customer satisfaction define everything we do.
+            </div>
+          </motion.div>
+
+          {/* Krishan Pal Singh */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-100 bg-white lg:order-2">
+              <div className="w-full h-80 flex items-center justify-center"
+                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                <div className="text-9xl">👨‍💼</div>
+              </div>
+              <div className="px-6 py-5 text-center">
+                <p className="text-xl font-heading font-bold text-gray-900">Krishan Pal Singh</p>
+                <p className="text-sm font-semibold mt-1" style={{ color: '#c0392b' }}>Director & Co-Founder</p>
+              </div>
+            </div>
+            <div className="lg:order-1 pt-4">
+              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-8">Krishan Pal Singh</h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                Krishan Pal Singh is the Director and Co-Founder of CS Smart Finserve Private Limited. Based in Gurugram, he brings years of expertise in financial consulting and customer relationship management to the company.
               </p>
-            </motion.div>
-          </div>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                His commitment to transparency and customer-first approach has helped CS Smart Finserve build a reputation of trust across the NCR. He oversees day-to-day operations and ensures every client receives personalised, honest financial guidance.
+              </p>
+            </div>
+          </motion.div>
+
         </div>
       </section>
 

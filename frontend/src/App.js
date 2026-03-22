@@ -29,6 +29,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import Feedback from './pages/Feedback';
 import GoogleAuthSuccess from './pages/GoogleAuthSuccess';
 import BookAppointment from './pages/BookAppointment';
+import CustomerDashboard from './pages/CustomerDashboard';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -56,6 +59,9 @@ function App() {
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
               <Route path="/book-appointment" element={<BookAppointment />} />
+              <Route path="/dashboard" element={<CustomerDashboard />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
             </Routes>
             <Footer />
             <WhatsAppButton />

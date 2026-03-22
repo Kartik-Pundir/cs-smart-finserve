@@ -24,7 +24,7 @@ exports.createLead = async (req, res) => {
       message
     });
 
-    // Send confirmation email — failure here does NOT block the response
+    // Send confirmation email to customer
     try {
       await sendEmail({
         email: email,
@@ -33,6 +33,37 @@ exports.createLead = async (req, res) => {
       });
     } catch (emailError) {
       console.error('Auto-reply email failed (non-critical):', emailError.message);
+    }
+
+    // Send notification email to admin
+    try {
+      await sendEmail({
+        email: process.env.ADMIN_EMAIL,
+        subject: `New Lead: ${fullName} — ${serviceInterested}`,
+        html: `
+          <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+            <div style="background:linear-gradient(135deg,#1a1a2e,#c0392b);padding:24px 32px;">
+              <h2 style="margin:0;color:#fff;font-size:20px;">New Lead Received</h2>
+              <p style="margin:4px 0 0;color:rgba(255,255,255,0.7);font-size:13px;">CS Smart Finserve — Admin Alert</p>
+            </div>
+            <div style="padding:28px 32px;">
+              <table style="width:100%;border-collapse:collapse;">
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;width:140px;">Name</td><td style="padding:8px 0;font-weight:600;color:#111827;">${fullName}</td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Phone</td><td style="padding:8px 0;font-weight:600;color:#111827;"><a href="tel:${phone}" style="color:#c0392b;">${phone}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Email</td><td style="padding:8px 0;font-weight:600;color:#111827;"><a href="mailto:${email}" style="color:#c0392b;">${email}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Service</td><td style="padding:8px 0;font-weight:600;color:#111827;">${serviceInterested}</td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Message</td><td style="padding:8px 0;color:#374151;">${message || '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Time</td><td style="padding:8px 0;color:#374151;">${new Date().toLocaleString('en-IN')}</td></tr>
+              </table>
+              <div style="margin-top:24px;">
+                <a href="http://localhost:8000/admin" style="display:inline-block;padding:12px 28px;background:#c0392b;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;">View in Admin Dashboard →</a>
+              </div>
+            </div>
+          </div>
+        `
+      });
+    } catch (emailError) {
+      console.error('Admin notification email failed (non-critical):', emailError.message);
     }
 
     res.status(201).json({

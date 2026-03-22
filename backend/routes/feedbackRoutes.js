@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { createFeedback, getFeedback } = require('../controllers/feedbackController');
-const { protect } = require('../middleware/auth');
+const { createFeedback, getFeedback, deleteFeedback } = require('../controllers/feedbackController');
+const { protect, authorize } = require('../middleware/auth');
 
 router.post('/', createFeedback);
-router.get('/', protect, getFeedback); // admin only
+router.get('/', protect, getFeedback);
+router.delete('/:id', protect, authorize('admin'), deleteFeedback);
 
 module.exports = router;

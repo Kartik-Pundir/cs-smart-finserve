@@ -44,14 +44,11 @@ const Home = () => {
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative h-[600px] mt-20 overflow-hidden">
-        {/* Handshake photo with soft lavender overlay */}
         <div className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(180,160,240,0.40) 0%, rgba(200,160,220,0.35) 50%, rgba(160,180,240,0.38) 100%)' }} />
-        {/* soft blob accents on top */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-30" style={{ background: '#d4b8f0' }} />
-        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-25" style={{ background: '#b8c8f0' }} />
-
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(180,160,240,0.18) 0%, rgba(200,160,220,0.15) 50%, rgba(160,180,240,0.16) 100%)' }} />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#d4b8f0' }} />
+        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ background: '#b8c8f0' }} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl">
             <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight">
@@ -240,9 +237,9 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'Rahul Sharma', role: 'Home Loan Customer', location: 'Gurugram', review: 'CS Smart Finserve made my home loan process incredibly smooth. Got sanctioned in 48 hours with a rate better than what my bank offered. Highly recommend!', rating: 5, avatar: '👨‍💼' },
-              { name: 'Priya Mehta', role: 'Business Loan Customer', location: 'Delhi', review: 'I needed working capital urgently for my business. The team found me the best offer within a day. No hidden charges, complete transparency throughout.', rating: 5, avatar: '👩‍💼' },
-              { name: 'Amit Verma', role: 'Auto Loan Customer', location: 'Faridabad', review: 'Applied for a car loan on Saturday, got keys on Monday. The entire process was digital — no branch visits, no stress. Absolutely brilliant service.', rating: 5, avatar: '👨‍🔧' },
+              { name: 'Rahul Sharma', role: 'Home Loan Customer', review: 'CS Smart Finserve made my home loan process incredibly smooth. Got sanctioned in 48 hours with a rate better than what my bank offered. Highly recommend!', rating: 5, avatar: '👨‍💼' },
+              { name: 'Priya Mehta', role: 'Business Loan Customer', review: 'I needed working capital urgently for my business. The team found me the best offer within a day. No hidden charges, complete transparency throughout.', rating: 5, avatar: '👩‍💼' },
+              { name: 'Amit Verma', role: 'Auto Loan Customer', review: 'Applied for a car loan on Saturday, got keys on Monday. The entire process was digital — no branch visits, no stress. Absolutely brilliant service.', rating: 5, avatar: '👨‍🔧' },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
                 className="rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col"
@@ -261,7 +258,7 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role} · {t.location}</p>
+                    <p className="text-xs text-gray-400">{t.role}</p>
                   </div>
                 </div>
               </motion.div>

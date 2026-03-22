@@ -79,7 +79,7 @@ const BookAppointment = () => {
             {[
               { icon: '🎯', title: 'Personalised Advice', desc: 'Get loan recommendations tailored to your profile and needs.' },
               { icon: '⚡', title: 'Fast Processing', desc: 'Our experts help you get approvals faster with the right documents.' },
-              { icon: '🔒', title: 'Completely Free', desc: 'No charges for consultation. We earn only when you get your loan.' },
+              { icon: '🔒', title: 'Completely Free', desc: 'No charges for consultation.' },
               { icon: '🏦', title: '20+ Bank Partners', desc: 'We compare across banks to get you the best rate.' },
             ].map((item, i) => (
               <div key={i} className="flex gap-3 mb-4">

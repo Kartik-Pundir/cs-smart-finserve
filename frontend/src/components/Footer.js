@@ -124,14 +124,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-sky-400 transition-colors">
+                <button className="text-gray-400 hover:text-sky-400 transition-colors text-left">
                   Privacy Policy
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-sky-400 transition-colors">
+                <button className="text-gray-400 hover:text-sky-400 transition-colors text-left">
                   Terms & Conditions
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -144,8 +144,8 @@ const Footer = () => {
                 <FaEnvelope className="mt-1 mr-3 text-sky-400" />
                 <div>
                   <p className="text-gray-400">Email</p>
-                  <a href="mailto:Krishan.pal1986@gmail.com" className="text-white hover:text-sky-400">
-                    Krishan.pal1986@gmail.com
+                  <a href="mailto:kartikpundir231@gmail.com" className="text-white hover:text-sky-400">
+                    kartikpundir231@gmail.com
                   </a>
                 </div>
               </li>

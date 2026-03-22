@@ -28,3 +28,15 @@ exports.getFeedback = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+// @desc    Delete feedback
+// @route   DELETE /api/feedback/:id
+exports.deleteFeedback = async (req, res) => {
+  try {
+    const feedback = await Feedback.findByIdAndDelete(req.params.id);
+    if (!feedback) return res.status(404).json({ success: false, message: 'Feedback not found' });
+    res.status(200).json({ success: true, message: 'Feedback deleted' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

@@ -23,8 +23,8 @@ const Contact = () => {
       icon: <FaEnvelope className="text-white text-lg" />,
       bg: 'bg-accent',
       label: 'Email Us',
-      value: 'Krishan.pal1986@gmail.com',
-      href: 'mailto:Krishan.pal1986@gmail.com',
+      value: 'kartikpundir231@gmail.com',
+      href: 'mailto:kartikpundir231@gmail.com',
     },
     {
       icon: <FaClock className="text-white text-lg" />,
@@ -160,7 +160,7 @@ const Contact = () => {
                     <span className="text-sm font-semibold text-gray-700">Call Now</span>
                   </a>
                   <a
-                    href="mailto:Krishan.pal1986@gmail.com"
+                    href="mailto:kartikpundir231@gmail.com"
                     className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
                   >
                     <FaEnvelope className="text-gray-500 text-lg" />

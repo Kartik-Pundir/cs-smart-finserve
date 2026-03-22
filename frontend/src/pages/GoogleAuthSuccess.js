@@ -18,7 +18,7 @@ const GoogleAuthSuccess = () => {
       toast.error('Google sign-in failed. Please try again.');
       navigate('/login');
     }
-  }, []);
+  }, [searchParams, loginWithToken, navigate]);
 
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: '#faf8ff' }}>

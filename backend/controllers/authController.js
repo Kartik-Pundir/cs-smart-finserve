@@ -178,18 +178,12 @@ exports.forgotPassword = async (req, res) => {
     // Create reset URL
     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
-    const message = `
-      <h2>Password Reset Request</h2>
-      <p>You requested a password reset. Click the link below to reset your password:</p>
-      <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background: #0ea5e9; color: white; text-decoration: none; border-radius: 5px;">Reset Password</a>
-      <p>This link will expire in 1 hour.</p>
-      <p>If you didn't request this, please ignore this email.</p>
-    `;
+    const message = require('../utils/emailTemplates').resetPasswordEmail(user.name, resetUrl);
 
     try {
       await sendEmail({
         email: user.email,
-        subject: 'Password Reset Request - CS Smart Finserve',
+        subject: 'Reset Your Password — CS Smart Finserve',
         html: message
       });
 
@@ -212,5 +206,38 @@ exports.forgotPassword = async (req, res) => {
       success: false,
       message: error.message
     });
+  }
+};
+
+// @desc    Reset password
+// @route   PUT /api/auth/reset-password/:token
+exports.resetPassword = async (req, res) => {
+  try {
+    const resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(req.params.token)
+      .digest('hex');
+
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired reset link. Please request a new one.',
+      });
+    }
+
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+
+    const token = generateToken(user._id);
+    res.status(200).json({ success: true, message: 'Password reset successful', token });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 };

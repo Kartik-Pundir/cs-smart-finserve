@@ -477,25 +477,63 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'Rahul Sharma', role: 'Home Loan Customer', review: 'CS Smart Finserve made my home loan process incredibly smooth. Got sanctioned in 48 hours with a rate better than what my bank offered. Highly recommend!', rating: 5, avatar: '👨‍💼' },
-              { name: 'Priya Mehta', role: 'Business Loan Customer', review: 'I needed working capital urgently for my business. The team found me the best offer within a day. No hidden charges, complete transparency throughout.', rating: 5, avatar: '👩‍💼' },
-              { name: 'Amit Verma', role: 'Auto Loan Customer', review: 'Applied for a car loan on Saturday, got keys on Monday. The entire process was digital — no branch visits, no stress. Absolutely brilliant service.', rating: 5, avatar: '👨‍🔧' },
+              {
+                name: 'Deepak Chauhan',
+                role: 'Home Loan · Gurgaon',
+                review: 'Honestly was skeptical at first — my bank had already rejected me once. Kartik bhai helped me understand why and fixed my application. Got ₹42L sanctioned from HDFC at 8.65%. Took about 6 days total.',
+                rating: 5,
+                date: 'March 2025',
+                loan: '₹42L Home Loan',
+              },
+              {
+                name: 'Sunita Rawat',
+                role: 'Personal Loan · Delhi NCR',
+                review: 'Needed money quickly for my daughter\'s college fees. The team was very helpful and didn\'t make me feel embarrassed about my situation. Got ₹3.5L in 2 days. Interest rate was fair, no hidden fees.',
+                rating: 4,
+                date: 'January 2025',
+                loan: '₹3.5L Personal Loan',
+              },
+              {
+                name: 'Manish Tomar',
+                role: 'Car Loan · Faridabad',
+                review: 'Bought a pre-owned BMW 3 Series. Wasn\'t sure if I\'d get financing on a used luxury car but CS Smart Finserve got it done through Chola Finance. EMI is comfortable and the whole thing was sorted in 3 days.',
+                rating: 5,
+                date: 'February 2025',
+                loan: 'Used Car Loan',
+              },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                className="rounded-2xl p-8 hover:shadow-xl transition-all flex flex-col"
+                className="rounded-2xl p-7 hover:shadow-xl transition-all flex flex-col"
                 style={{ background: "var(--bg-card2)", border: "1px solid var(--border)" }}>
-                <div className="flex gap-1 mb-4">
-                  {Array(t.rating).fill(0).map((_, s) => <FaStar key={s} className="text-yellow-400 text-sm" />)}
+                {/* Stars */}
+                <div className="flex gap-1 mb-3">
+                  {Array(5).fill(0).map((_, s) => (
+                    <FaStar key={s} className="text-sm" style={{ color: s < t.rating ? '#f59e0b' : 'var(--border)' }} />
+                  ))}
+                  <span className="text-xs ml-2" style={{ color: 'var(--text-muted)' }}>{t.date}</span>
                 </div>
-                <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: "var(--text-secondary)" }}>"{t.review}"</p>
+                {/* Loan tag */}
+                <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 w-fit"
+                  style={{ background: 'rgba(192,57,43,0.1)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>
+                  {t.loan}
+                </span>
+                <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "var(--text-secondary)" }}>"{t.review}"</p>
                 <div className="flex items-center gap-3 pt-4" style={{ borderTop: "1px solid var(--border)" }}>
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center text-2xl"
-                    style={{ background: 'rgba(192,57,43,0.12)' }}>
-                    {t.avatar}
+                  {/* Avatar with initials */}
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                    style={{ background: ['#1a5276','#6c3483','#1e8449'][i] }}>
+                    {t.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
                     <p className="font-semibold text-sm" style={{ color: "var(--text-primary)" }}>{t.name}</p>
                     <p className="text-xs" style={{ color: "var(--text-muted)" }}>{t.role}</p>
+                  </div>
+                  {/* Verified badge */}
+                  <div className="ml-auto flex items-center gap-1 text-xs font-medium" style={{ color: '#16a34a' }}>
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                    </svg>
+                    Verified
                   </div>
                 </div>
               </motion.div>

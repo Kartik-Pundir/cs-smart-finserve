@@ -26,114 +26,88 @@ const partnerLogos = [
   { name: 'Chola Finance', color: '#e05c5c', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M20 10 Q6 10 6 20 Q6 30 20 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="28" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">CHOLA</text><text x="28" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINANCE</text></svg> },
 ];
 
-const loanSlides = [
+const heroSlides = [
   {
-    label: 'Car Loan',
-    tag: 'From 7.5% p.a.',
-    img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85',
-    link: '/auto-loan',
+    line2: 'Starts Here.',
+    sub: 'From home loans to car loans — we find the best rates, fastest approvals, and simplest process.',
+    tag: 'Smart Finance. Trusted Partners.',
+    img: 'https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=800&q=85',
+    label: 'Smart Finance',
+    rate: '',
+    link: '/contact',
+    cta: 'Get Started Today',
   },
   {
-    label: 'Home Loan',
-    tag: 'Up to ₹5 Crore',
+    line2: 'Home Loans.',
+    sub: 'Stop paying rent. Loans up to ₹5 Crore at the lowest rates with tenure up to 30 years.',
+    tag: 'Lowest Interest Rates',
     img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=85',
+    label: 'Home Loan',
+    rate: 'from 8.5% p.a.',
     link: '/home-loan',
+    cta: 'Apply for Home Loan',
   },
   {
-    label: 'Business Loan',
-    tag: 'Fast Approval',
+    line2: 'Car Loans.',
+    sub: 'Zero to keys in 24 hours. Finance up to 100% on-road price across 50+ lenders.',
+    tag: 'Fastest Approval',
+    img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85',
+    label: 'Car Loan',
+    rate: 'from 7.5% p.a.',
+    link: '/auto-loan',
+    cta: 'Apply for Car Loan',
+  },
+  {
+    line2: 'Business Loans.',
+    sub: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.',
+    tag: 'Quick Disbursal',
     img: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&q=85',
+    label: 'Business Loan',
+    rate: 'from 12% p.a.',
     link: '/business-loan',
+    cta: 'Apply for Business Loan',
   },
   {
-    label: 'Personal Loan',
-    tag: 'No Collateral',
+    line2: 'Personal Loans.',
+    sub: 'Instant funds with no collateral. Get approved in hours for any personal need.',
+    tag: 'No Collateral Needed',
     img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=85',
+    label: 'Personal Loan',
+    rate: 'from 10.5% p.a.',
     link: '/personal-loan',
+    cta: 'Apply for Personal Loan',
   },
   {
-    label: 'Insurance',
+    line2: 'Used Car Loans.',
+    sub: 'Smarter finance on pre-owned cars. Best rates, quick processing, flexible tenure.',
+    tag: 'Pre-Owned Cars',
+    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85',
+    label: 'Used Car Loan',
+    rate: 'from 9% p.a.',
+    link: '/used-car-loan',
+    cta: 'Apply for Used Car Loan',
+  },
+  {
+    line2: 'Loan Against Property.',
+    sub: "Unlock your property's value. Get high-value loans against residential or commercial property.",
+    tag: 'High Value Loans',
+    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=85',
+    label: 'Loan Against Property',
+    rate: 'from 9.5% p.a.',
+    link: '/loan-against-property',
+    cta: 'Apply Now',
+  },
+  {
+    line2: 'General Insurance.',
+    sub: "Car, health, home — India's top insurers at the best premiums. Instant policy issuance.",
     tag: 'Best Premiums',
     img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=85',
+    label: 'Insurance',
+    rate: 'Best Rates',
     link: '/insurance',
+    cta: 'Explore Insurance',
   },
 ];
-
-const HeroSlideshow = () => {
-  const [current, setCurrent] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setCurrent(p => (p + 1) % loanSlides.length), 3500);
-    return () => clearInterval(t);
-  }, []);
-  const slide = loanSlides[current];
-  return (
-    <div className="relative w-full h-full flex flex-col gap-3">
-      {/* Main rotating image */}
-      <div className="relative rounded-2xl overflow-hidden flex-1 shadow-2xl" style={{ minHeight: '280px' }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={current}
-            src={slide.img}
-            alt={slide.label}
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.06 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.7, ease: 'easeInOut' }}
-          />
-        </AnimatePresence>
-        {/* Gradient overlay */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
-        {/* Label */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current + '-label'}
-            className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <div>
-              <p className="text-white font-bold text-lg leading-tight">{slide.label}</p>
-              <p className="text-white/70 text-xs mt-0.5">{slide.tag}</p>
-            </div>
-            <Link to={slide.link}
-              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all hover:scale-105"
-              style={{ background: 'rgba(192,57,43,0.85)', backdropFilter: 'blur(4px)' }}>
-              Apply →
-            </Link>
-          </motion.div>
-        </AnimatePresence>
-        {/* Dot indicators */}
-        <div className="absolute top-3 right-3 flex gap-1.5">
-          {loanSlides.map((_, i) => (
-            <button key={i} onClick={() => setCurrent(i)}
-              className="rounded-full transition-all"
-              style={{ width: i === current ? '20px' : '6px', height: '6px', background: i === current ? '#c0392b' : 'rgba(255,255,255,0.5)' }} />
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom mini-cards row */}
-      <div className="grid grid-cols-3 gap-2">
-        {[
-          { icon: '🏠', label: 'Home Loan', rate: '8.5%', link: '/home-loan' },
-          { icon: '🚗', label: 'Car Loan', rate: '7.5%', link: '/auto-loan' },
-          { icon: '💼', label: 'Business', rate: '12%', link: '/business-loan' },
-        ].map((item, i) => (
-          <Link key={i} to={item.link}
-            className="rounded-xl p-3 text-center hover:scale-105 transition-all cursor-pointer"
-            style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-            <div className="text-xl mb-1">{item.icon}</div>
-            <p className="text-white text-xs font-semibold leading-tight">{item.label}</p>
-            <p className="text-white/60 text-xs mt-0.5">from {item.rate}</p>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const CheckIcon = () => (
   <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
@@ -145,84 +119,173 @@ const CheckIcon = () => (
 
 const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
+  const [heroIdx, setHeroIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setHeroIdx(p => (p + 1) % heroSlides.length), 3800);
+    return () => clearInterval(t);
+  }, []);
+
+  const slide = heroSlides[heroIdx];
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg-base)" }}>
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative min-h-[600px] mt-20 overflow-hidden">
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.4, ease: 'easeOut' }}
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }}
-        />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.88) 0%, rgba(10,10,20,0.75) 50%, rgba(10,10,20,0.45) 100%)' }} />
+        {/* Background — always the dark car image */}
+        <div className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.92) 0%, rgba(10,10,20,0.80) 50%, rgba(10,10,20,0.50) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
 
           {/* LEFT — Text */}
           <div>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-5"
-              style={{ background: 'rgba(192,57,43,0.25)', color: '#fff', border: '1px solid rgba(192,57,43,0.5)' }}
-            >
-              Smart Finance. Trusted Partners.
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
-              className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight"
-            >
-              Smart Finance<br />Starts Here.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl mb-8 text-white/85"
-            >
-              From home loans to car loans — we find the best rates, fastest approvals, and simplest process. Your financial goals, our expertise.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-wrap gap-4 mb-12"
-            >
-              <Link to="/contact"
-                className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-2xl transition-all hover:scale-105"
-                style={{ boxShadow: '0 8px 32px rgba(192,57,43,0.35)' }}>
-                Get Started Today
-              </Link>
-              <Link to="/emi-calculator"
-                className="inline-block px-8 py-4 rounded-xl font-semibold text-lg text-white border border-white/30 hover:bg-white/10 transition-all backdrop-blur-sm">
-                EMI Calculator
-              </Link>
-            </motion.div>
+            {/* Cycling tag */}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={heroIdx + '-tag'}
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.4 }}
+                className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-5"
+                style={{ background: 'rgba(192,57,43,0.25)', color: '#fff', border: '1px solid rgba(192,57,43,0.5)' }}
+              >
+                {slide.tag}
+              </motion.span>
+            </AnimatePresence>
+
+            {/* Heading — "Smart Finance" fixed, line 2 cycles */}
+            <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight">
+              Smart Finance<br />
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={heroIdx + '-line2'}
+                  initial={{ opacity: 0, y: 24, clipPath: 'inset(0 0 100% 0)' }}
+                  animate={{ opacity: 1, y: 0, clipPath: 'inset(0 0 0% 0)' }}
+                  exit={{ opacity: 0, y: -20, clipPath: 'inset(100% 0 0% 0)' }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="inline-block"
+                  style={{ color: heroIdx === 0 ? '#fff' : '#e05c5c' }}
+                >
+                  {slide.line2}
+                </motion.span>
+              </AnimatePresence>
+            </h1>
+
+            {/* Cycling subtitle */}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={heroIdx + '-sub'}
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="text-lg mb-8 text-white/85"
+              >
+                {slide.sub}
+              </motion.p>
+            </AnimatePresence>
+
+            {/* CTA buttons */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={heroIdx + '-cta'}
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                className="flex flex-wrap gap-4 mb-12"
+              >
+                <Link to={slide.link}
+                  className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-2xl transition-all hover:scale-105"
+                  style={{ boxShadow: '0 8px 32px rgba(192,57,43,0.35)' }}>
+                  {slide.cta}
+                </Link>
+                <Link to="/emi-calculator"
+                  className="inline-block px-8 py-4 rounded-xl font-semibold text-lg text-white border border-white/30 hover:bg-white/10 transition-all backdrop-blur-sm">
+                  EMI Calculator
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Slide dots */}
+            <div className="flex gap-2 mb-8">
+              {heroSlides.map((_, i) => (
+                <button key={i} onClick={() => setHeroIdx(i)}
+                  className="rounded-full transition-all"
+                  style={{ height: '6px', width: i === heroIdx ? '24px' : '6px', background: i === heroIdx ? '#c0392b' : 'rgba(255,255,255,0.3)' }} />
+              ))}
+            </div>
 
             {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.75 }}
-              className="flex flex-wrap gap-6 sm:gap-10"
-            >
+            <div className="flex flex-wrap gap-6 sm:gap-10">
               {[
                 { value: '5,000+', label: 'Happy Customers' },
                 { value: '50+', label: 'Banking Partners' },
                 { value: '24hrs', label: 'Avg. Approval Time' },
                 { value: '₹500Cr+', label: 'Loans Disbursed' },
               ].map((stat, i) => (
-                <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85 + i * 0.1 }} className="text-white">
+                <div key={i} className="text-white">
                   <p className="text-2xl font-black leading-none">{stat.value}</p>
                   <p className="text-white/60 text-xs mt-0.5 font-medium">{stat.label}</p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
-          {/* RIGHT — Auto-rotating loan showcase */}
+          {/* RIGHT — Synced photo */}
           <motion.div
             initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
             className="hidden lg:flex flex-col h-[420px]"
           >
-            <HeroSlideshow />
+            <div className="relative w-full h-full flex flex-col gap-3">
+              {/* Main synced image */}
+              <div className="relative rounded-2xl overflow-hidden flex-1 shadow-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={heroIdx + '-img'}
+                    src={slide.img}
+                    alt={slide.label}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.06 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={heroIdx + '-overlay'}
+                    className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between"
+                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <div>
+                      <p className="text-white font-bold text-lg leading-tight">{slide.label}</p>
+                      <p className="text-white/70 text-xs mt-0.5">{slide.rate}</p>
+                    </div>
+                    <Link to={slide.link}
+                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all hover:scale-105"
+                      style={{ background: 'rgba(192,57,43,0.85)', backdropFilter: 'blur(4px)' }}>
+                      Apply →
+                    </Link>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Bottom service pills */}
+              <div className="grid grid-cols-4 gap-2">
+                {heroSlides.slice(1).map((s, i) => (
+                  <button key={i} onClick={() => setHeroIdx(i + 1)}
+                    className="rounded-xl p-2 text-center transition-all hover:scale-105"
+                    style={{
+                      background: heroIdx === i + 1 ? 'rgba(192,57,43,0.7)' : 'rgba(255,255,255,0.1)',
+                      backdropFilter: 'blur(8px)',
+                      border: heroIdx === i + 1 ? '1px solid rgba(192,57,43,0.8)' : '1px solid rgba(255,255,255,0.15)'
+                    }}>
+                    <p className="text-white text-xs font-semibold leading-tight">{s.label}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
           </motion.div>
 
         </div>

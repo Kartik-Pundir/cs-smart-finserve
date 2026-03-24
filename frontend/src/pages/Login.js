@@ -176,7 +176,8 @@ const Login = () => {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 md:p-10 w-full max-w-md mx-4 border border-white/20"
+        className="relative z-10 login-card rounded-2xl shadow-2xl p-8 md:p-10 w-full max-w-md mx-4 border border-white/20"
+        style={{ background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(12px)' }}
       >
         <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6"
           style={{ background: 'rgba(192,57,43,0.08)' }}>

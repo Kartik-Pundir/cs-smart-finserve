@@ -265,3 +265,64 @@ html.dark td { border-color: rgba(255,255,255,0.06) !important; }
 
 /* Scrollbar track */
 html.dark ::-webkit-scrollbar-track { background: #1a1a1a; }
+
+/* ── Login / Signup card — always light (has its own dark bg) ── */
+.login-card,
+.login-card * {
+  /* Reset dark overrides — card stays white */
+}
+html.dark .login-card {
+  background: rgba(255,255,255,0.97) !important;
+  color: #111111 !important;
+}
+html.dark .login-card h2,
+html.dark .login-card h1,
+html.dark .login-card p,
+html.dark .login-card label,
+html.dark .login-card span:not(.text-accent),
+html.dark .login-card .text-gray-900,
+html.dark .login-card .text-gray-800,
+html.dark .login-card .text-gray-700,
+html.dark .login-card .text-gray-600,
+html.dark .login-card .text-gray-500,
+html.dark .login-card .text-gray-400 {
+  color: inherit !important;
+}
+html.dark .login-card .text-gray-900 { color: #111111 !important; }
+html.dark .login-card .text-gray-700 { color: #374151 !important; }
+html.dark .login-card .text-gray-600 { color: #4b5563 !important; }
+html.dark .login-card .text-gray-500 { color: #6b7280 !important; }
+html.dark .login-card .text-gray-400 { color: #9ca3af !important; }
+html.dark .login-card input,
+html.dark .login-card .input-field {
+  background-color: #f9fafb !important;
+  border-color: #d1d5db !important;
+  color: #111111 !important;
+}
+html.dark .login-card input::placeholder { color: #9ca3af !important; }
+html.dark .login-card .bg-gray-200 { background-color: #e5e7eb !important; }
+html.dark .login-card .border-gray-200 { border-color: #e5e7eb !important; }
+html.dark .login-card .hover\:bg-gray-50:hover { background-color: #f9fafb !important; }
+html.dark .login-card a.border { border-color: #e5e7eb !important; color: #374151 !important; }
+
+/* Signup right panel */
+html.dark .signup-panel {
+  background-color: #faf8ff !important;
+}
+html.dark .signup-panel .text-gray-900 { color: #111111 !important; }
+html.dark .signup-panel .text-gray-700 { color: #374151 !important; }
+html.dark .signup-panel .text-gray-600 { color: #4b5563 !important; }
+html.dark .signup-panel .text-gray-500 { color: #6b7280 !important; }
+html.dark .signup-panel .text-gray-400 { color: #9ca3af !important; }
+html.dark .signup-panel input,
+html.dark .signup-panel .input-field {
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+  color: #111111 !important;
+}
+html.dark .signup-panel input::placeholder { color: #9ca3af !important; }
+html.dark .signup-panel .bg-white { background-color: #ffffff !important; }
+html.dark .signup-panel .bg-gray-50 { background-color: #f9fafb !important; }
+html.dark .signup-panel .border-gray-200 { border-color: #e5e7eb !important; }
+html.dark .signup-panel label { color: #374151 !important; }
+html.dark .signup-panel .flex-1.h-px { background-color: #e5e7eb !important; }

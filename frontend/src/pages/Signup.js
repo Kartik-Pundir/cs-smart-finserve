@@ -49,7 +49,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen pt-20" style={{ background: 'var(--bg-base)' }}>
 
       {/* Full-page two-column layout */}
       <div className="min-h-[calc(100vh-80px)] grid grid-cols-1 lg:grid-cols-2">
@@ -124,7 +124,7 @@ const Signup = () => {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className="flex items-center justify-center p-6 lg:p-12"
+          className="signup-panel flex items-center justify-center p-6 lg:p-12"
         >
           <div className="w-full max-w-md">
 

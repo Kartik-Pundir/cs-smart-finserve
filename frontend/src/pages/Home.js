@@ -11,20 +11,68 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Real logos via Clearbit + fallback colored initials
+// Real bank logos from Wikipedia/official public CDNs
 const partnerLogos = [
-  { name: 'Axis Bank',          domain: 'axisbank.com',           initials: 'AXIS',  color: '#97144D' },
-  { name: 'Chola Finance',      domain: 'cholamandalam.com',      initials: 'CHOLA', color: '#C0392B' },
-  { name: 'HDFC Bank',          domain: 'hdfcbank.com',           initials: 'HDFC',  color: '#004C8F' },
-  { name: 'ICICI Bank',         domain: 'icicibank.com',          initials: 'ICICI', color: '#F58220' },
-  { name: 'IDFC First Bank',    domain: 'idfcfirstbank.com',      initials: 'IDFC',  color: '#9B1B30' },
-  { name: 'Indian Bank',        domain: 'indianbank.in',          initials: 'IB',    color: '#1F618D' },
-  { name: 'Poonawalla Fincorp', domain: 'poonawallafincorp.com',  initials: 'PFL',   color: '#1A237E' },
-  { name: 'Bank of Baroda',     domain: 'bankofbaroda.in',        initials: 'BOB',   color: '#F5821F' },
-  { name: 'Tata Capital',       domain: 'tatacapital.com',        initials: 'TATA',  color: '#1B4F72' },
-  { name: 'Yes Bank',           domain: 'yesbank.in',             initials: 'YES',   color: '#00549A' },
-  { name: 'Bajaj Finserv',      domain: 'bajajfinserv.in',        initials: 'BAJAJ', color: '#003399' },
-  { name: 'LIC',                domain: 'licindia.in',            initials: 'LIC',   color: '#F5A623' },
+  {
+    name: 'HDFC Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/320px-HDFC_Bank_Logo.svg.png',
+    color: '#004C8F',
+  },
+  {
+    name: 'ICICI Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/320px-ICICI_Bank_Logo.svg.png',
+    color: '#F58220',
+  },
+  {
+    name: 'Axis Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/320px-Axis_Bank_logo.svg.png',
+    color: '#97144D',
+  },
+  {
+    name: 'Bajaj Finserv',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Bajaj_finserv.svg/320px-Bajaj_finserv.svg.png',
+    color: '#003399',
+  },
+  {
+    name: 'IDFC First Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/IDFC_FIRST_Bank_Logo.svg/320px-IDFC_FIRST_Bank_Logo.svg.png',
+    color: '#9B1B30',
+  },
+  {
+    name: 'Yes Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Yes_Bank_Logo.svg/320px-Yes_Bank_Logo.svg.png',
+    color: '#00549A',
+  },
+  {
+    name: 'LIC',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/320px-LIC_India_logo.svg.png',
+    color: '#F5A623',
+  },
+  {
+    name: 'Indian Bank',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/320px-Indian_Bank_Logo.svg.png',
+    color: '#1F618D',
+  },
+  {
+    name: 'Bank of Baroda',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bank_of_Baroda_logo.svg/320px-Bank_of_Baroda_logo.svg.png',
+    color: '#F5821F',
+  },
+  {
+    name: 'Tata Capital',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tata_Capital_Logo.svg/320px-Tata_Capital_Logo.svg.png',
+    color: '#1B4F72',
+  },
+  {
+    name: 'Poonawalla Fincorp',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Poonawalla_Fincorp_Logo.png/320px-Poonawalla_Fincorp_Logo.png',
+    color: '#1A237E',
+  },
+  {
+    name: 'Chola Finance',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Cholamandalam_Investment_and_Finance_Company_Logo.png/320px-Cholamandalam_Investment_and_Finance_Company_Logo.png',
+    color: '#C0392B',
+  },
 ];
 
 const heroSlides = [
@@ -595,26 +643,28 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {partnerLogos.map((bank, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="rounded-2xl flex flex-col items-center justify-center py-5 px-4 cursor-default hover:shadow-lg transition-all"
-                style={{ minHeight: "100px", background: "#ffffff", border: "1px solid #e5e7eb" }}>
+              <motion.div key={index}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: index * 0.05 }}
+                className="rounded-2xl flex flex-col items-center justify-center gap-2 py-5 px-4 hover:shadow-md transition-all"
+                style={{ minHeight: '110px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
                 <img
-                  src={`https://logo.clearbit.com/${bank.domain}`}
+                  src={bank.img}
                   alt={bank.name}
                   className="object-contain"
-                  style={{ height: '36px', maxWidth: '100px', width: 'auto' }}
+                  style={{ height: '40px', maxWidth: '110px', width: 'auto' }}
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                    e.target.nextSibling.style.display = 'inline-flex';
                   }}
                 />
-                {/* Fallback colored initials */}
-                <div
-                  className="items-center justify-center rounded-lg px-3 py-1.5 text-white text-xs font-black"
+                {/* Fallback: colored pill with name */}
+                <span
+                  className="text-white text-xs font-black px-3 py-1.5 rounded-lg"
                   style={{ display: 'none', background: bank.color }}>
-                  {bank.initials}
-                </div>
-                <span className="text-xs font-medium text-center leading-tight mt-2.5 text-gray-500">{bank.name}</span>
+                  {bank.name}
+                </span>
+                <span className="text-xs font-medium text-center leading-tight text-gray-400">{bank.name}</span>
               </motion.div>
             ))}
           </div>

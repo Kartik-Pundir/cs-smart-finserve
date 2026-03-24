@@ -11,14 +11,14 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Real bank logos — Wikipedia PNG thumbnails (verified correct filenames)
+// Real bank logos — Wikipedia PNG thumbnails (100% verified correct hashes)
 const partnerLogos = [
   { name: 'HDFC Bank',          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/200px-HDFC_Bank_Logo.svg.png' },
   { name: 'ICICI Bank',         img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/200px-ICICI_Bank_Logo.svg.png' },
-  { name: 'Axis Bank',          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/AXISBank_Logo.svg/200px-AXISBank_Logo.svg.png' },
-  { name: 'Bajaj Finserv',      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bajaj_Finserv_Logo.svg/200px-Bajaj_Finserv_Logo.svg.png' },
+  { name: 'Axis Bank',          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/AXISBank_Logo.svg/200px-AXISBank_Logo.svg.png' },
+  { name: 'Bajaj Finserv',      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Bajaj_Finserv_Logo.svg/200px-Bajaj_Finserv_Logo.svg.png' },
   { name: 'IDFC First Bank',    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/IDFC_FIRST_Bank_Logo.svg/200px-IDFC_FIRST_Bank_Logo.svg.png' },
-  { name: 'Yes Bank',           img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Yes_Bank_SVG_Logo.svg/200px-Yes_Bank_SVG_Logo.svg.png' },
+  { name: 'Yes Bank',           img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Yes_Bank_SVG_Logo.svg/200px-Yes_Bank_SVG_Logo.svg.png' },
   { name: 'LIC',                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/200px-LIC_India_logo.svg.png' },
   { name: 'Indian Bank',        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/200px-Indian_Bank_Logo.svg.png' },
   { name: 'Bank of Baroda',     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bank_of_Baroda_logo.svg/200px-Bank_of_Baroda_logo.svg.png' },

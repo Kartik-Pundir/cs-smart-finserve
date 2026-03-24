@@ -11,68 +11,20 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Real bank logos from Wikipedia/official public CDNs
+// Real bank logos — direct SVG from logotyp.us (reliable, always loads)
 const partnerLogos = [
-  {
-    name: 'HDFC Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/320px-HDFC_Bank_Logo.svg.png',
-    color: '#004C8F',
-  },
-  {
-    name: 'ICICI Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/320px-ICICI_Bank_Logo.svg.png',
-    color: '#F58220',
-  },
-  {
-    name: 'Axis Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Axis_Bank_logo.svg/320px-Axis_Bank_logo.svg.png',
-    color: '#97144D',
-  },
-  {
-    name: 'Bajaj Finserv',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Bajaj_finserv.svg/320px-Bajaj_finserv.svg.png',
-    color: '#003399',
-  },
-  {
-    name: 'IDFC First Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/IDFC_FIRST_Bank_Logo.svg/320px-IDFC_FIRST_Bank_Logo.svg.png',
-    color: '#9B1B30',
-  },
-  {
-    name: 'Yes Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Yes_Bank_Logo.svg/320px-Yes_Bank_Logo.svg.png',
-    color: '#00549A',
-  },
-  {
-    name: 'LIC',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/320px-LIC_India_logo.svg.png',
-    color: '#F5A623',
-  },
-  {
-    name: 'Indian Bank',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/320px-Indian_Bank_Logo.svg.png',
-    color: '#1F618D',
-  },
-  {
-    name: 'Bank of Baroda',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bank_of_Baroda_logo.svg/320px-Bank_of_Baroda_logo.svg.png',
-    color: '#F5821F',
-  },
-  {
-    name: 'Tata Capital',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tata_Capital_Logo.svg/320px-Tata_Capital_Logo.svg.png',
-    color: '#1B4F72',
-  },
-  {
-    name: 'Poonawalla Fincorp',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Poonawalla_Fincorp_Logo.png/320px-Poonawalla_Fincorp_Logo.png',
-    color: '#1A237E',
-  },
-  {
-    name: 'Chola Finance',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Cholamandalam_Investment_and_Finance_Company_Logo.png/320px-Cholamandalam_Investment_and_Finance_Company_Logo.png',
-    color: '#C0392B',
-  },
+  { name: 'HDFC Bank',          img: 'https://logotyp.us/file/hdfc-bank.svg' },
+  { name: 'ICICI Bank',         img: 'https://logotyp.us/file/icici-bank.svg' },
+  { name: 'Axis Bank',          img: 'https://logotyp.us/file/axis-bank.svg' },
+  { name: 'Bajaj Finserv',      img: 'https://logotyp.us/file/bajaj-finserv.svg' },
+  { name: 'IDFC First Bank',    img: 'https://logotyp.us/file/idfc-first-bank.svg' },
+  { name: 'Yes Bank',           img: 'https://logotyp.us/file/yes-bank.svg' },
+  { name: 'LIC',                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/240px-LIC_India_logo.svg.png' },
+  { name: 'Indian Bank',        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/240px-Indian_Bank_Logo.svg.png' },
+  { name: 'Bank of Baroda',     img: 'https://logotyp.us/file/bank-of-baroda.svg' },
+  { name: 'Tata Capital',       img: 'https://logotyp.us/file/tata-capital.svg' },
+  { name: 'Poonawalla Fincorp', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Poonawalla_Fincorp_Logo.png/240px-Poonawalla_Fincorp_Logo.png' },
+  { name: 'Chola Finance',      img: 'https://logotyp.us/file/cholamandalam.svg' },
 ];
 
 const heroSlides = [
@@ -655,15 +607,11 @@ const Home = () => {
                   style={{ height: '40px', maxWidth: '110px', width: 'auto' }}
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'inline-flex';
+                    e.target.nextSibling.style.display = 'block';
                   }}
                 />
-                {/* Fallback: colored pill with name */}
-                <span
-                  className="text-white text-xs font-black px-3 py-1.5 rounded-lg"
-                  style={{ display: 'none', background: bank.color }}>
-                  {bank.name}
-                </span>
+                <span className="text-xs font-black hidden px-2 py-1 rounded text-white"
+                  style={{ background: '#c0392b' }}>{bank.name}</span>
                 <span className="text-xs font-medium text-center leading-tight text-gray-400">{bank.name}</span>
               </motion.div>
             ))}

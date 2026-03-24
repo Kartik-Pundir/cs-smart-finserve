@@ -293,14 +293,69 @@ const Home = () => {
       </section>
 
       {/* ── Why CS Smart Finserve ────────────────────────── */}
-      <section className="py-20" style={{ background: "var(--bg-alt)" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: "var(--text-primary)" }}>Why CS Smart Finserve?</h2>
-            <p className="text-lg max-w-3xl mx-auto" style={{ color: "var(--text-secondary)" }}>
+      <section className="py-20 overflow-hidden" style={{ background: "var(--bg-alt)" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Top — heading left, text right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-14">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4"
+                style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>
+                Why Choose Us
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-heading font-bold leading-tight" style={{ color: "var(--text-primary)" }}>
+                Why CS Smart<br />Finserve?
+              </h2>
+            </motion.div>
+            <motion.p initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+              className="text-lg leading-relaxed lg:pb-2" style={{ color: "var(--text-secondary)" }}>
               CS Smart Finserve that provides simple, affordable, and accessible financial products and services.
-            </p>
+            </motion.p>
+          </div>
+
+          {/* Feature cards — 3 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              { icon: '🏦', title: '50+ Banking Partners', desc: 'We work with India\'s top banks and NBFCs to compare hundreds of offers and get you the best rate for your profile.' },
+              { icon: '⚡', title: '24-Hour Approvals', desc: 'Our streamlined digital process means most loans get sanctioned within 24 hours — no branch visits, no paperwork piles.' },
+              { icon: '🔒', title: 'Zero Hidden Charges', desc: 'Complete transparency from day one. The rate we quote is the rate you get — no processing fee surprises.' },
+              { icon: '📊', title: 'Free CIBIL Check', desc: 'Know your credit score before you apply. We help you understand and improve your eligibility at no cost.' },
+              { icon: '🤝', title: 'Dedicated Advisor', desc: 'Every customer gets a personal loan advisor who guides you from application to disbursement, step by step.' },
+              { icon: '📱', title: 'Fully Digital Process', desc: 'Apply, upload documents, and track your loan status — all from your phone. No office visits required.' },
+            ].map((item, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="group rounded-2xl p-6 hover:shadow-xl transition-all duration-300"
+                style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4"
+                  style={{ background: "var(--badge-bg)", border: "1px solid var(--badge-border)" }}>
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-heading font-bold mb-2 group-hover:text-accent transition-colors"
+                  style={{ color: "var(--text-primary)" }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Bottom stats bar */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+            style={{ background: 'linear-gradient(135deg, #c0392b 0%, #922b21 100%)' }}>
+            {[
+              { value: '5,000+', label: 'Happy Customers' },
+              { value: '50+',    label: 'Banking Partners' },
+              { value: '24 hrs', label: 'Avg. Approval Time' },
+              { value: '₹500Cr+', label: 'Loans Disbursed' },
+            ].map((stat, i) => (
+              <div key={i}>
+                <p className="text-3xl font-black text-white leading-none">{stat.value}</p>
+                <p className="text-white/70 text-sm mt-1 font-medium">{stat.label}</p>
+              </div>
+            ))}
           </motion.div>
+
         </div>
       </section>
 

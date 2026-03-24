@@ -31,7 +31,7 @@ const heroSlides = [
     line2: 'Starts Here.',
     sub: 'From home loans to car loans — we find the best rates, fastest approvals, and simplest process.',
     tag: 'Smart Finance. Trusted Partners.',
-    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=85',
     label: 'Smart Finance',
     rate: 'Your Trusted Partner',
     link: '/contact',

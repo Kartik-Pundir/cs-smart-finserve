@@ -44,25 +44,91 @@ const Home = () => {
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative h-[600px] mt-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=90)' }} />
+        <motion.div
+          className="absolute inset-0 bg-cover bg-center"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.4, ease: 'easeOut' }}
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=90)' }}
+        />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,10,20,0.72) 0%, rgba(10,10,20,0.45) 60%, rgba(10,10,20,0.25) 100%)' }} />
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#d4b8f0' }} />
         <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ background: '#b8c8f0' }} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl">
-            <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight">
-              Smart Finance Starts Here.
-            </h1>
-            <p className="text-xl mb-8 text-white/90">
+          <div className="max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-5"
+              style={{ background: 'rgba(192,57,43,0.25)', color: '#fff', border: '1px solid rgba(192,57,43,0.5)' }}
+            >
+              Smart Finance. Trusted Partners.
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight"
+            >
+              Smart Finance<br />Starts Here.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-xl mb-8 text-white/85"
+            >
               From home loans to car loans — we find the best rates, fastest approvals, and simplest process. Your financial goals, our expertise.
-            </p>
-            <Link to="/contact"
-              className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-xl transition-all hover:scale-105">
-              Get Started Today
-            </Link>
-          </motion.div>
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Link to="/contact"
+                className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-2xl transition-all hover:scale-105"
+                style={{ boxShadow: '0 8px 32px rgba(192,57,43,0.35)' }}>
+                Get Started Today
+              </Link>
+              <Link to="/emi-calculator"
+                className="inline-block px-8 py-4 rounded-xl font-semibold text-lg text-white border border-white/30 hover:bg-white/10 transition-all backdrop-blur-sm">
+                EMI Calculator
+              </Link>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Floating quick-stats bar at bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
+          className="absolute bottom-0 left-0 right-0"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+            <div className="flex flex-wrap gap-6 sm:gap-10">
+              {[
+                { value: '5,000+', label: 'Happy Customers' },
+                { value: '50+', label: 'Banking Partners' },
+                { value: '24hrs', label: 'Avg. Approval Time' },
+                { value: '₹500Cr+', label: 'Loans Disbursed' },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.85 + i * 0.1 }}
+                  className="text-white"
+                >
+                  <p className="text-2xl font-black leading-none">{stat.value}</p>
+                  <p className="text-white/60 text-xs mt-0.5 font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* ── Why CS Smart Finserve ────────────────────────── */}
@@ -97,9 +163,10 @@ const Home = () => {
                 Apply for Car Loan →
               </Link>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=700&q=85" alt="Car Loan"
-                className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
+            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+              <motion.img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=700&q=85" alt="Car Loan"
+                className="w-full max-w-md object-cover h-80"
+                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
             </motion.div>
           </div>
         </div>
@@ -109,9 +176,10 @@ const Home = () => {
       <section className="py-20" style={{ background: '#f0eeff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center order-2 lg:order-1">
-              <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" alt="Home Loan"
-                className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
+            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
+              <motion.img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" alt="Home Loan"
+                className="w-full max-w-md object-cover h-80"
+                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2">
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
@@ -153,9 +221,10 @@ const Home = () => {
                 Explore Insurance Plans →
               </Link>
             </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" alt="Insurance"
-                className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
+            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+              <motion.img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" alt="Insurance"
+                className="w-full max-w-md object-cover h-80"
+                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
             </motion.div>
           </div>
         </div>
@@ -175,13 +244,27 @@ const Home = () => {
               { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', link: '/business-loan' },
               { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400', link: '/insurance' },
             ].map((service, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border-2 border-transparent hover:border-accent">
-                <img src={service.img} alt={service.title} className="w-full h-48 object-cover" />
+              <motion.div key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-accent group cursor-pointer"
+              >
+                <div className="overflow-hidden h-48">
+                  <motion.img
+                    src={service.img}
+                    alt={service.title}
+                    className="w-full h-48 object-cover"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  />
+                </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-heading font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <h3 className="text-xl font-heading font-bold text-gray-900 mb-3 group-hover:text-accent transition-colors">{service.title}</h3>
                   <p className="text-gray-600 mb-4 text-sm">{service.desc}</p>
-                  <Link to={service.link} className="inline-block px-6 py-2 bg-accent text-white rounded-lg font-semibold hover:shadow-lg transition-all text-sm">More</Link>
+                  <Link to={service.link} className="inline-block px-6 py-2 bg-accent text-white rounded-lg font-semibold hover:shadow-lg transition-all text-sm hover:scale-105">More →</Link>
                 </div>
               </motion.div>
             ))}

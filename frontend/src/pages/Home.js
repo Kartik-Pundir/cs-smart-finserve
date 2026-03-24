@@ -45,8 +45,8 @@ const Home = () => {
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative h-[600px] mt-20 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(180,160,240,0.18) 0%, rgba(200,160,220,0.15) 50%, rgba(160,180,240,0.16) 100%)' }} />
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=90)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,10,20,0.72) 0%, rgba(10,10,20,0.45) 60%, rgba(10,10,20,0.25) 100%)' }} />
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#d4b8f0' }} />
         <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ background: '#b8c8f0' }} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
@@ -98,7 +98,7 @@ const Home = () => {
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=700&q=80" alt="Car Loan"
+              <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=700&q=85" alt="Car Loan"
                 className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
             </motion.div>
           </div>
@@ -110,7 +110,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center order-2 lg:order-1">
-              <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="Home Loan"
+              <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" alt="Home Loan"
                 className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2">
@@ -154,7 +154,7 @@ const Home = () => {
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80" alt="Insurance"
+              <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" alt="Insurance"
                 className="w-full max-w-md rounded-2xl shadow-xl object-cover h-80" />
             </motion.div>
           </div>

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 
@@ -26,6 +26,115 @@ const partnerLogos = [
   { name: 'Chola Finance', color: '#e05c5c', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M20 10 Q6 10 6 20 Q6 30 20 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="28" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">CHOLA</text><text x="28" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINANCE</text></svg> },
 ];
 
+const loanSlides = [
+  {
+    label: 'Car Loan',
+    tag: 'From 7.5% p.a.',
+    img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85',
+    link: '/auto-loan',
+  },
+  {
+    label: 'Home Loan',
+    tag: 'Up to ₹5 Crore',
+    img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=85',
+    link: '/home-loan',
+  },
+  {
+    label: 'Business Loan',
+    tag: 'Fast Approval',
+    img: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&q=85',
+    link: '/business-loan',
+  },
+  {
+    label: 'Personal Loan',
+    tag: 'No Collateral',
+    img: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=85',
+    link: '/personal-loan',
+  },
+  {
+    label: 'Insurance',
+    tag: 'Best Premiums',
+    img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=85',
+    link: '/insurance',
+  },
+];
+
+const HeroSlideshow = () => {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setCurrent(p => (p + 1) % loanSlides.length), 3500);
+    return () => clearInterval(t);
+  }, []);
+  const slide = loanSlides[current];
+  return (
+    <div className="relative w-full h-full flex flex-col gap-3">
+      {/* Main rotating image */}
+      <div className="relative rounded-2xl overflow-hidden flex-1 shadow-2xl" style={{ minHeight: '280px' }}>
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={current}
+            src={slide.img}
+            alt={slide.label}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
+        {/* Label */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current + '-label'}
+            className="absolute bottom-0 left-0 right-0 p-4 flex items-end justify-between"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <div>
+              <p className="text-white font-bold text-lg leading-tight">{slide.label}</p>
+              <p className="text-white/70 text-xs mt-0.5">{slide.tag}</p>
+            </div>
+            <Link to={slide.link}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all hover:scale-105"
+              style={{ background: 'rgba(192,57,43,0.85)', backdropFilter: 'blur(4px)' }}>
+              Apply →
+            </Link>
+          </motion.div>
+        </AnimatePresence>
+        {/* Dot indicators */}
+        <div className="absolute top-3 right-3 flex gap-1.5">
+          {loanSlides.map((_, i) => (
+            <button key={i} onClick={() => setCurrent(i)}
+              className="rounded-full transition-all"
+              style={{ width: i === current ? '20px' : '6px', height: '6px', background: i === current ? '#c0392b' : 'rgba(255,255,255,0.5)' }} />
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom mini-cards row */}
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { icon: '🏠', label: 'Home Loan', rate: '8.5%', link: '/home-loan' },
+          { icon: '🚗', label: 'Car Loan', rate: '7.5%', link: '/auto-loan' },
+          { icon: '💼', label: 'Business', rate: '12%', link: '/business-loan' },
+        ].map((item, i) => (
+          <Link key={i} to={item.link}
+            className="rounded-xl p-3 text-center hover:scale-105 transition-all cursor-pointer"
+            style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            <div className="text-xl mb-1">{item.icon}</div>
+            <p className="text-white text-xs font-semibold leading-tight">{item.label}</p>
+            <p className="text-white/60 text-xs mt-0.5">from {item.rate}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const CheckIcon = () => (
   <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +150,7 @@ const Home = () => {
     <div className="min-h-screen" style={{ background: "var(--bg-base)" }}>
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative h-[600px] mt-20 overflow-hidden">
+      <section className="relative min-h-[600px] mt-20 overflow-hidden">
         <motion.div
           className="absolute inset-0 bg-cover bg-center"
           initial={{ scale: 1.08 }}
@@ -49,41 +158,34 @@ const Home = () => {
           transition={{ duration: 1.4, ease: 'easeOut' }}
           style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,10,20,0.72) 0%, rgba(10,10,20,0.45) 60%, rgba(10,10,20,0.25) 100%)' }} />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#d4b8f0' }} />
-        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl opacity-10" style={{ background: '#b8c8f0' }} />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-          <div className="max-w-2xl">
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.88) 0%, rgba(10,10,20,0.75) 50%, rgba(10,10,20,0.45) 100%)' }} />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+
+          {/* LEFT — Text */}
+          <div>
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-5"
               style={{ background: 'rgba(192,57,43,0.25)', color: '#fff', border: '1px solid rgba(192,57,43,0.5)' }}
             >
               Smart Finance. Trusted Partners.
             </motion.span>
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
+              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
               className="text-5xl md:text-6xl font-heading font-bold mb-6 text-white leading-tight"
             >
               Smart Finance<br />Starts Here.
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
               className="text-xl mb-8 text-white/85"
             >
               From home loans to car loans — we find the best rates, fastest approvals, and simplest process. Your financial goals, our expertise.
             </motion.p>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}
+              className="flex flex-wrap gap-4 mb-12"
             >
               <Link to="/contact"
                 className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-2xl transition-all hover:scale-105"
@@ -95,38 +197,35 @@ const Home = () => {
                 EMI Calculator
               </Link>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Floating quick-stats bar at bottom */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.75 }}
-          className="absolute bottom-0 left-0 right-0"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
-            <div className="flex flex-wrap gap-6 sm:gap-10">
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.75 }}
+              className="flex flex-wrap gap-6 sm:gap-10"
+            >
               {[
                 { value: '5,000+', label: 'Happy Customers' },
                 { value: '50+', label: 'Banking Partners' },
                 { value: '24hrs', label: 'Avg. Approval Time' },
                 { value: '₹500Cr+', label: 'Loans Disbursed' },
               ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.85 + i * 0.1 }}
-                  className="text-white"
-                >
+                <motion.div key={i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85 + i * 0.1 }} className="text-white">
                   <p className="text-2xl font-black leading-none">{stat.value}</p>
                   <p className="text-white/60 text-xs mt-0.5 font-medium">{stat.label}</p>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          {/* RIGHT — Auto-rotating loan showcase */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
+            className="hidden lg:flex flex-col h-[420px]"
+          >
+            <HeroSlideshow />
+          </motion.div>
+
+        </div>
       </section>
 
       {/* ── Why CS Smart Finserve ────────────────────────── */}
@@ -146,8 +245,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                className="theme-badge" style={{}}>Auto Loan</span>
+              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Auto Loan</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Drive Home Your Dream Car — Today.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Why wait? With CS Smart Finserve, getting a car loan is faster than ever. We compare 50+ lenders to get you the lowest EMI with zero hidden charges.
@@ -180,8 +278,7 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2">
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                className="theme-badge" style={{}}>Home Loan</span>
+              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Home Loan</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Dream Home Is One Step Away.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Stop paying rent and start building equity. Our home loan experts guide you through every step — from eligibility to disbursement — making the process smooth and stress-free.
@@ -204,8 +301,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                className="theme-badge" style={{}}>General Insurance</span>
+              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>General Insurance</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Protect What You've Built. Insure What You Love.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Life is unpredictable — your protection shouldn't be. From vehicle insurance to health and property coverage, we connect you with India's top insurers at the best premiums.
@@ -275,8 +371,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-              className="theme-badge" style={{}}>Simple Process</span>
+            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Simple Process</span>
             <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: "var(--text-primary)" }}>Get Your Loan in 3 Simple Steps</h2>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
           </motion.div>
@@ -312,8 +407,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-              className="theme-badge" style={{}}>Customer Stories</span>
+            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Customer Stories</span>
             <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: "var(--text-primary)" }}>What Our Customers Say</h2>
             <p style={{ color: "var(--text-secondary)" }}>Real people. Real loans. Real results.</p>
           </motion.div>
@@ -351,8 +445,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                className="theme-badge" style={{}}>Free Credit Check</span>
+              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Free Credit Check</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Check Your CIBIL Score Instantly</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>Know your credit score before applying for a loan. A good CIBIL score gets you better interest rates and faster approvals.</p>
               <div className="space-y-4 mb-8">

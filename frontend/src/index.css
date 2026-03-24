@@ -143,6 +143,27 @@ html { scroll-behavior: smooth; }
   color: #fff;
 }
 
+/* ── Input field — full width, clean, professional ─────── */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  background-color: #ffffff;
+  color: #111111;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+}
+.input-field::placeholder {
+  color: #9ca3af;
+}
+.input-field:focus {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+}
+
 /* ═══════════════════════════════════════════════════════════
    DARK MODE — Global Tailwind class overrides
    When html.dark is active, these override the light defaults

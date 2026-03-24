@@ -38,7 +38,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+          <div className="min-h-screen transition-colors duration-300" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />

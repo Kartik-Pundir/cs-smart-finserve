@@ -11,20 +11,20 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Real bank logos — direct SVG from logotyp.us (reliable, always loads)
+// Real bank logos — Wikipedia PNG thumbnails (verified correct filenames)
 const partnerLogos = [
-  { name: 'HDFC Bank',          img: 'https://logotyp.us/file/hdfc-bank.svg' },
-  { name: 'ICICI Bank',         img: 'https://logotyp.us/file/icici-bank.svg' },
-  { name: 'Axis Bank',          img: 'https://logotyp.us/file/axis-bank.svg' },
-  { name: 'Bajaj Finserv',      img: 'https://logotyp.us/file/bajaj-finserv.svg' },
-  { name: 'IDFC First Bank',    img: 'https://logotyp.us/file/idfc-first-bank.svg' },
-  { name: 'Yes Bank',           img: 'https://logotyp.us/file/yes-bank.svg' },
-  { name: 'LIC',                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/240px-LIC_India_logo.svg.png' },
-  { name: 'Indian Bank',        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/240px-Indian_Bank_Logo.svg.png' },
-  { name: 'Bank of Baroda',     img: 'https://logotyp.us/file/bank-of-baroda.svg' },
-  { name: 'Tata Capital',       img: 'https://logotyp.us/file/tata-capital.svg' },
-  { name: 'Poonawalla Fincorp', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Poonawalla_Fincorp_Logo.png/240px-Poonawalla_Fincorp_Logo.png' },
-  { name: 'Chola Finance',      img: 'https://logotyp.us/file/cholamandalam.svg' },
+  { name: 'HDFC Bank',          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/200px-HDFC_Bank_Logo.svg.png' },
+  { name: 'ICICI Bank',         img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/200px-ICICI_Bank_Logo.svg.png' },
+  { name: 'Axis Bank',          img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/AXISBank_Logo.svg/200px-AXISBank_Logo.svg.png' },
+  { name: 'Bajaj Finserv',      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Bajaj_Finserv_Logo.svg/200px-Bajaj_Finserv_Logo.svg.png' },
+  { name: 'IDFC First Bank',    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/IDFC_FIRST_Bank_Logo.svg/200px-IDFC_FIRST_Bank_Logo.svg.png' },
+  { name: 'Yes Bank',           img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Yes_Bank_SVG_Logo.svg/200px-Yes_Bank_SVG_Logo.svg.png' },
+  { name: 'LIC',                img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/LIC_India_logo.svg/200px-LIC_India_logo.svg.png' },
+  { name: 'Indian Bank',        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Indian_Bank_Logo.svg/200px-Indian_Bank_Logo.svg.png' },
+  { name: 'Bank of Baroda',     img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Bank_of_Baroda_logo.svg/200px-Bank_of_Baroda_logo.svg.png' },
+  { name: 'Tata Capital',       img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tata_logo.svg/200px-Tata_logo.svg.png' },
+  { name: 'Poonawalla Fincorp', img: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Poonawalla_Fincorp_Logo.png/200px-Poonawalla_Fincorp_Logo.png' },
+  { name: 'Chola Finance',      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Cholamandalam_Investment_and_Finance_Company_Logo.png/200px-Cholamandalam_Investment_and_Finance_Company_Logo.png' },
 ];
 
 const heroSlides = [
@@ -653,21 +653,25 @@ const Home = () => {
               <motion.div key={index}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="rounded-2xl flex flex-col items-center justify-center gap-2 py-5 px-4 hover:shadow-md transition-all"
-                style={{ minHeight: '110px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
-                <img
-                  src={bank.img}
-                  alt={bank.name}
-                  className="object-contain"
-                  style={{ height: '40px', maxWidth: '110px', width: 'auto' }}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'block';
-                  }}
-                />
-                <span className="text-xs font-black hidden px-2 py-1 rounded text-white"
-                  style={{ background: '#c0392b' }}>{bank.name}</span>
-                <span className="text-xs font-medium text-center leading-tight text-gray-400">{bank.name}</span>
+                className="rounded-2xl flex flex-col items-center justify-center gap-3 py-6 px-4 hover:shadow-md transition-all"
+                style={{ minHeight: '120px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
+                <div className="flex items-center justify-center" style={{ height: '52px', width: '100%' }}>
+                  <img
+                    src={bank.img}
+                    alt={bank.name}
+                    style={{ maxHeight: '52px', maxWidth: '120px', width: 'auto', height: 'auto', objectFit: 'contain' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  {/* Fallback: name text badge */}
+                  <div className="hidden items-center justify-center rounded-lg px-3 py-2 text-white text-xs font-black text-center"
+                    style={{ background: '#c0392b', minWidth: '80px' }}>
+                    {bank.name}
+                  </div>
+                </div>
+                <span className="text-xs font-medium text-center leading-tight" style={{ color: '#9ca3af' }}>{bank.name}</span>
               </motion.div>
             ))}
           </div>

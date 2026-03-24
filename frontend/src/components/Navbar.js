@@ -33,13 +33,14 @@ const Navbar = () => {
     navigate('/');
   };
 
-  const navLink = 'text-gray-600 hover:text-accent transition-colors font-medium text-sm';
+  const navLink = 'text-gray-300 hover:text-accent transition-colors font-medium text-sm';
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full top-0 z-50 transition-all duration-300 bg-white ${isScrolled ? 'shadow-md' : 'border-b border-gray-100'}`}
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : 'border-b border-white/5'}`}
+      style={{ background: '#111111' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-18 py-3">
@@ -66,10 +67,12 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-xl shadow-xl py-2 border border-gray-100">
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 rounded-xl shadow-xl py-2"
+                    style={{ background: '#1e1e1e', border: '1px solid rgba(255,255,255,0.08)' }}>
                     {services.map((s) => (
                       <Link key={s.path} to={s.path}
-                        className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-red-50 hover:text-accent transition-colors">
+                        className="block px-4 py-2.5 text-sm transition-colors hover:text-accent"
+                        style={{ color: '#a0a0a0' }}>
                         {s.name}
                       </Link>
                     ))}
@@ -96,19 +99,22 @@ const Navbar = () => {
                   </Link>
                 )}
                 <Link to="/dashboard"
-                  className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700 hover:border-accent hover:text-accent transition-all">
+                  className="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all"
+                  style={{ color: '#d0d0d0', borderColor: 'rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)' }}>
                   My Dashboard
                 </Link>
-                <span className="text-sm text-gray-700 font-medium">{user.name}</span>
+                <span className="text-sm font-medium" style={{ color: '#d0d0d0' }}>{user.name}</span>
                 <button onClick={handleLogout}
-                  className="px-4 py-2 text-sm text-gray-600 hover:text-accent transition-colors font-medium border border-gray-200 rounded-lg hover:border-accent">
+                  className="px-4 py-2 text-sm font-medium border rounded-lg transition-all hover:text-accent"
+                  style={{ color: '#a0a0a0', borderColor: 'rgba(255,255,255,0.1)' }}>
                   Logout
                 </button>
               </>
             ) : (
               <>
                 <Link to="/login"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg hover:border-accent hover:text-accent transition-all">
+                  className="px-4 py-2 text-sm font-medium rounded-lg border transition-all hover:text-accent"
+                  style={{ color: '#d0d0d0', borderColor: 'rgba(255,255,255,0.15)' }}>
                   Log in
                 </Link>
                 <Link to="/signup"
@@ -122,7 +128,7 @@ const Navbar = () => {
 
           {/* Mobile hamburger */}
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden ml-auto p-2 rounded-lg text-gray-700">
+            className="lg:hidden ml-auto p-2 rounded-lg" style={{ color: '#d0d0d0' }}>
             {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
@@ -135,19 +141,21 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-gray-100">
+            className="lg:hidden border-t"
+            style={{ background: '#111111', borderColor: 'rgba(255,255,255,0.06)' }}>
             <div className="px-4 py-4 space-y-2">
-              <Link to="/" className="block py-2 text-sm text-gray-700 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+              <Link to="/" className="block py-2 text-sm font-medium" style={{ color: '#d0d0d0' }} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
               <div>
                 <button onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="flex items-center justify-between w-full py-2 text-sm text-gray-700 font-medium">
+                  className="flex items-center justify-between w-full py-2 text-sm font-medium" style={{ color: '#d0d0d0' }}>
                   Services <FiChevronDown size={14} />
                 </button>
                 {isServicesOpen && (
                   <div className="pl-4 space-y-1 mt-1">
                     {services.map((s) => (
                       <Link key={s.path} to={s.path}
-                        className="block py-1.5 text-sm text-gray-500 hover:text-accent"
+                        className="block py-1.5 text-sm hover:text-accent"
+                        style={{ color: '#888' }}
                         onClick={() => setIsMobileMenuOpen(false)}>
                         {s.name}
                       </Link>
@@ -155,36 +163,38 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
-              <Link to="/about" className="block py-2 text-sm text-gray-700 font-medium" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
-              <Link to="/contact" className="block py-2 text-sm text-gray-700 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
-              <Link to="/book-appointment" className="block py-2 text-sm text-gray-700 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Book Appointment</Link>
-              <Link to="/feedback" className="block py-2 text-sm text-gray-700 font-medium" onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
+              <Link to="/about" className="block py-2 text-sm font-medium" style={{ color: '#d0d0d0' }} onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+              <Link to="/contact" className="block py-2 text-sm font-medium" style={{ color: '#d0d0d0' }} onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+              <Link to="/book-appointment" className="block py-2 text-sm font-medium" style={{ color: '#d0d0d0' }} onClick={() => setIsMobileMenuOpen(false)}>Book Appointment</Link>
+              <Link to="/feedback" className="block py-2 text-sm font-medium" style={{ color: '#d0d0d0' }} onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-gray-100">
+              <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                 {user ? (
                   <>
                     {user.role === 'admin' && (
                       <Link to="/admin"
                         className="px-3 py-1.5 text-xs font-semibold rounded-lg"
-                        style={{ color: '#c0392b', background: 'rgba(192,57,43,0.08)' }}
+                        style={{ color: '#c0392b', background: 'rgba(192,57,43,0.12)' }}
                         onClick={() => setIsMobileMenuOpen(false)}>
                         ⚙ Admin Panel
                       </Link>
                     )}
                     <Link to="/dashboard"
-                      className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-200 text-gray-700"
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg border"
+                      style={{ color: '#d0d0d0', borderColor: 'rgba(255,255,255,0.15)' }}
                       onClick={() => setIsMobileMenuOpen(false)}>
                       My Dashboard
                     </Link>
                     <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
-                      className="px-4 py-2 text-sm text-gray-700 font-medium">
+                      className="px-4 py-2 text-sm font-medium" style={{ color: '#a0a0a0' }}>
                       Logout
                     </button>
                   </>
                 ) : (
                   <>
                     <Link to="/login"
-                      className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-200 rounded-lg"
+                      className="px-4 py-2 text-sm font-medium rounded-lg border"
+                      style={{ color: '#d0d0d0', borderColor: 'rgba(255,255,255,0.15)' }}
                       onClick={() => setIsMobileMenuOpen(false)}>
                       Log in
                     </Link>

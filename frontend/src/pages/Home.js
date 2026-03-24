@@ -3,29 +3,27 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 
-/* ── Soft warm gradient theme ────────────────────────────────
-   Base:      #fffaf7  (warm white)
-   Alt:       #fff5f0  (blush tint)
+/* ── Dark luxury theme ───────────────────────────────────────
+   Base:      #111111  (near black)
+   Alt:       #1a1a1a  (dark surface)
+   Card:      #1e1e1e
    Accent:    #c0392b  (brand red — unchanged)
-   Badge bg:  rgba(192,57,43,0.08)
-   Blob 1:    #ffd6c0  peach
-   Blob 2:    #ffe8a0  soft yellow
-   Blob 3:    #ffb8b8  blush pink
+   Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
 const partnerLogos = [
-  { name: 'HDFC Bank', color: '#004C8F', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="8" width="6" height="24" fill="currentColor"/><rect x="2" y="18" width="16" height="4" fill="currentColor"/><rect x="12" y="8" width="6" height="24" fill="currentColor"/><text x="26" y="28" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">HDFC</text><text x="26" y="38" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
-  { name: 'ICICI Bank', color: '#F58220', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="12" cy="20" r="10" fill="none" stroke="currentColor" strokeWidth="3"/><circle cx="12" cy="20" r="4" fill="currentColor"/><text x="28" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">ICICI</text><text x="28" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
-  { name: 'Axis Bank', color: '#97144D', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><polygon points="12,8 22,32 2,32" fill="none" stroke="currentColor" strokeWidth="2.5"/><text x="28" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">AXIS</text><text x="28" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
-  { name: 'Bajaj Finserv', color: '#003399', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="10" width="18" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2.5"/><rect x="6" y="14" width="10" height="5" rx="1" fill="currentColor"/><text x="26" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">BAJAJ</text><text x="26" y="35" fontFamily="Arial,sans-serif" fontSize="9" fill="currentColor" opacity="0.8">FINSERV</text></svg> },
-  { name: 'IDFC First Bank', color: '#9B1B30', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="8" width="5" height="24" fill="currentColor"/><text x="14" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="currentColor">IDFC</text><text x="14" y="36" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FIRST BANK</text></svg> },
-  { name: 'Yes Bank', color: '#00529B', svg: <svg viewBox="0 0 110 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M4 8 L14 22 L14 32" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><path d="M24 8 L14 22" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="32" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="14" fill="currentColor">YES</text><text x="32" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
-  { name: 'LIC', color: '#006400', svg: <svg viewBox="0 0 90 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M4 8 L4 28 L16 28" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/><rect x="22" y="8" width="5" height="20" fill="currentColor"/><path d="M34 8 Q46 8 46 18 Q46 28 34 28 L32 28 L32 8 Z" fill="none" stroke="currentColor" strokeWidth="2.5"/><text x="4" y="38" fontFamily="Arial,sans-serif" fontSize="7" fill="currentColor" opacity="0.7">LIFE INSURANCE CORP.</text></svg> },
-  { name: 'Indian Bank', color: '#1a3c6e', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><polygon points="14,6 26,6 28,12 12,12" fill="currentColor" opacity="0.9"/><rect x="14" y="12" width="12" height="16" fill="none" stroke="currentColor" strokeWidth="2"/><rect x="10" y="28" width="20" height="3" fill="currentColor"/><text x="36" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">INDIAN</text><text x="36" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
-  { name: 'Bank of Baroda', color: '#F7941D', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="14" cy="20" r="11" fill="none" stroke="currentColor" strokeWidth="2.5"/><circle cx="14" cy="20" r="5" fill="currentColor"/><text x="32" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">BANK OF</text><text x="32" y="33" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">BARODA</text></svg> },
-  { name: 'Union Bank', color: '#003087', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M6 8 L6 24 Q6 32 14 32 Q22 32 22 24 L22 8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="30" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">UNION</text><text x="30" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK OF INDIA</text></svg> },
-  { name: 'Poonawalla Fincorp', color: '#0057a8', svg: <svg viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="12" cy="16" r="8" fill="none" stroke="currentColor" strokeWidth="2.5"/><circle cx="12" cy="16" r="3" fill="currentColor"/><text x="26" y="20" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="10" fill="currentColor">POONAWALLA</text><text x="26" y="32" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINCORP</text></svg> },
-  { name: 'Chola Finance', color: '#e63329', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M20 10 Q6 10 6 20 Q6 30 20 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="28" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">CHOLA</text><text x="28" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINANCE</text></svg> },
+  { name: 'HDFC Bank', color: '#4d9de0', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="8" width="6" height="24" fill="currentColor"/><rect x="2" y="18" width="16" height="4" fill="currentColor"/><rect x="12" y="8" width="6" height="24" fill="currentColor"/><text x="26" y="28" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">HDFC</text><text x="26" y="38" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
+  { name: 'ICICI Bank', color: '#f5a623', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="12" cy="20" r="10" fill="none" stroke="currentColor" strokeWidth="3"/><circle cx="12" cy="20" r="4" fill="currentColor"/><text x="28" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">ICICI</text><text x="28" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
+  { name: 'Axis Bank', color: '#e05c8a', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><polygon points="12,8 22,32 2,32" fill="none" stroke="currentColor" strokeWidth="2.5"/><text x="28" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="15" fill="currentColor">AXIS</text><text x="28" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
+  { name: 'Bajaj Finserv', color: '#6b8cff', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="10" width="18" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2.5"/><rect x="6" y="14" width="10" height="5" rx="1" fill="currentColor"/><text x="26" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">BAJAJ</text><text x="26" y="35" fontFamily="Arial,sans-serif" fontSize="9" fill="currentColor" opacity="0.8">FINSERV</text></svg> },
+  { name: 'IDFC First Bank', color: '#e05c5c', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><rect x="2" y="8" width="5" height="24" fill="currentColor"/><text x="14" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="currentColor">IDFC</text><text x="14" y="36" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FIRST BANK</text></svg> },
+  { name: 'Yes Bank', color: '#5bc0eb', svg: <svg viewBox="0 0 110 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M4 8 L14 22 L14 32" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><path d="M24 8 L14 22" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="32" y="25" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="14" fill="currentColor">YES</text><text x="32" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
+  { name: 'LIC', color: '#5cb85c', svg: <svg viewBox="0 0 90 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M4 8 L4 28 L16 28" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/><rect x="22" y="8" width="5" height="20" fill="currentColor"/><path d="M34 8 Q46 8 46 18 Q46 28 34 28 L32 28 L32 8 Z" fill="none" stroke="currentColor" strokeWidth="2.5"/><text x="4" y="38" fontFamily="Arial,sans-serif" fontSize="7" fill="currentColor" opacity="0.7">LIFE INSURANCE CORP.</text></svg> },
+  { name: 'Indian Bank', color: '#7ab8f5', svg: <svg viewBox="0 0 130 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><polygon points="14,6 26,6 28,12 12,12" fill="currentColor" opacity="0.9"/><rect x="14" y="12" width="12" height="16" fill="none" stroke="currentColor" strokeWidth="2"/><rect x="10" y="28" width="20" height="3" fill="currentColor"/><text x="36" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">INDIAN</text><text x="36" y="35" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK</text></svg> },
+  { name: 'Bank of Baroda', color: '#f5a623', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="14" cy="20" r="11" fill="none" stroke="currentColor" strokeWidth="2.5"/><circle cx="14" cy="20" r="5" fill="currentColor"/><text x="32" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">BANK OF</text><text x="32" y="33" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">BARODA</text></svg> },
+  { name: 'Union Bank', color: '#6b8cff', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M6 8 L6 24 Q6 32 14 32 Q22 32 22 24 L22 8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="30" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="currentColor">UNION</text><text x="30" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">BANK OF INDIA</text></svg> },
+  { name: 'Poonawalla Fincorp', color: '#5bc0eb', svg: <svg viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><circle cx="12" cy="16" r="8" fill="none" stroke="currentColor" strokeWidth="2.5"/><circle cx="12" cy="16" r="3" fill="currentColor"/><text x="26" y="20" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="10" fill="currentColor">POONAWALLA</text><text x="26" y="32" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINCORP</text></svg> },
+  { name: 'Chola Finance', color: '#e05c5c', svg: <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="90" height="30"><path d="M20 10 Q6 10 6 20 Q6 30 20 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/><text x="28" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="currentColor">CHOLA</text><text x="28" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="currentColor" opacity="0.8">FINANCE</text></svg> },
 ];
 
 const CheckIcon = () => (
@@ -40,7 +38,7 @@ const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
 
   return (
-    <div className="min-h-screen" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen" style={{ background: '#111111' }}>
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative h-[600px] mt-20 overflow-hidden">
@@ -132,11 +130,11 @@ const Home = () => {
       </section>
 
       {/* ── Why CS Smart Finserve ────────────────────────── */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#1a1a1a' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-4">Why CS Smart Finserve?</h2>
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: '#f5f5f5' }}>Why CS Smart Finserve?</h2>
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: '#a0a0a0' }}>
               CS Smart Finserve that provides simple, affordable, and accessible financial products and services.
             </p>
           </motion.div>
@@ -144,19 +142,19 @@ const Home = () => {
       </section>
 
       {/* ── Car Loan ─────────────────────────────────────── */}
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#111111' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>Auto Loan</span>
-              <h2 className="text-4xl font-heading font-bold text-gray-900 mb-6">Drive Home Your Dream Car — Today.</h2>
-              <p className="text-gray-600 text-lg mb-8">
+                style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>Auto Loan</span>
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: '#f5f5f5' }}>Drive Home Your Dream Car — Today.</h2>
+              <p className="text-lg mb-8" style={{ color: '#a0a0a0' }}>
                 Why wait? With CS Smart Finserve, getting a car loan is faster than ever. We compare 50+ lenders to get you the lowest EMI with zero hidden charges.
               </p>
               <div className="space-y-4 mb-8">
                 {['Finance up to 100% of on-road price','Approval in as little as 2 hours','Flexible tenure from 1 to 7 years','Rates starting at just 7.5% p.a.'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p className="text-gray-700">{point}</p></div>
+                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: '#d0d0d0' }}>{point}</p></div>
                 ))}
               </div>
               <Link to="/auto-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
@@ -173,7 +171,7 @@ const Home = () => {
       </section>
 
       {/* ── Home Loan ────────────────────────────────────── */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#1a1a1a' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
@@ -183,14 +181,14 @@ const Home = () => {
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2">
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>Home Loan</span>
-              <h2 className="text-4xl font-heading font-bold text-gray-900 mb-6">Your Dream Home Is One Step Away.</h2>
-              <p className="text-gray-600 text-lg mb-8">
+                style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>Home Loan</span>
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: '#f5f5f5' }}>Your Dream Home Is One Step Away.</h2>
+              <p className="text-lg mb-8" style={{ color: '#a0a0a0' }}>
                 Stop paying rent and start building equity. Our home loan experts guide you through every step — from eligibility to disbursement — making the process smooth and stress-free.
               </p>
               <div className="space-y-4 mb-8">
                 {['Loans up to ₹5 Crore at lowest rates','Tenure up to 30 years for easy EMIs','Balance transfer with top-up facility','Tax benefits under Section 80C & 24B'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p className="text-gray-700">{point}</p></div>
+                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: '#d0d0d0' }}>{point}</p></div>
                 ))}
               </div>
               <Link to="/home-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
@@ -202,19 +200,19 @@ const Home = () => {
       </section>
 
       {/* ── Insurance ────────────────────────────────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: '#111111' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>General Insurance</span>
-              <h2 className="text-4xl font-heading font-bold text-gray-900 mb-6">Protect What You've Built. Insure What You Love.</h2>
-              <p className="text-gray-600 text-lg mb-8">
+                style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>General Insurance</span>
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: '#f5f5f5' }}>Protect What You've Built. Insure What You Love.</h2>
+              <p className="text-lg mb-8" style={{ color: '#a0a0a0' }}>
                 Life is unpredictable — your protection shouldn't be. From vehicle insurance to health and property coverage, we connect you with India's top insurers at the best premiums.
               </p>
               <div className="space-y-4 mb-8">
                 {['Car, bike & commercial vehicle insurance','Health & family floater plans','Home & property insurance','Instant policy issuance online'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p className="text-gray-700">{point}</p></div>
+                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: '#d0d0d0' }}>{point}</p></div>
                 ))}
               </div>
               <Link to="/insurance" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
@@ -231,11 +229,11 @@ const Home = () => {
       </section>
 
       {/* ── Our Services Grid ────────────────────────────── */}
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#1a1a1a' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-gray-600 text-lg">One platform. Every financial solution you need — loans, insurance, and credit tools, all in one place.</p>
+            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: '#f5f5f5' }}>Our Services</h2>
+            <p className="text-lg" style={{ color: '#a0a0a0' }}>One platform. Every financial solution you need — loans, insurance, and credit tools, all in one place.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -250,7 +248,8 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-accent group cursor-pointer"
+                className="rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-accent group cursor-pointer"
+                style={{ background: '#222222', borderColor: 'rgba(255,255,255,0.06)' }}
               >
                 <div className="overflow-hidden h-48">
                   <motion.img
@@ -262,8 +261,8 @@ const Home = () => {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-heading font-bold text-gray-900 mb-3 group-hover:text-accent transition-colors">{service.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm">{service.desc}</p>
+                  <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-accent transition-colors" style={{ color: '#f5f5f5' }}>{service.title}</h3>
+                  <p className="mb-4 text-sm" style={{ color: '#a0a0a0' }}>{service.desc}</p>
                   <Link to={service.link} className="inline-block px-6 py-2 bg-accent text-white rounded-lg font-semibold hover:shadow-lg transition-all text-sm hover:scale-105">More →</Link>
                 </div>
               </motion.div>
@@ -273,31 +272,31 @@ const Home = () => {
       </section>
 
       {/* ── How It Works ─────────────────────────────────── */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#111111' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-              style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>Simple Process</span>
-            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-4">Get Your Loan in 3 Simple Steps</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
+              style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>Simple Process</span>
+            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: '#f5f5f5' }}>Get Your Loan in 3 Simple Steps</h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#a0a0a0' }}>No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* connector line — desktop only */}
-            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-0.5" style={{ background: 'rgba(192,57,43,0.2)' }} />
+            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-0.5" style={{ background: 'rgba(192,57,43,0.3)' }} />
             {[
               { step: '01', icon: '📋', title: 'Apply Online', desc: 'Fill a quick form with your basic details and loan requirement — takes under 2 minutes.' },
               { step: '02', icon: '🏦', title: 'Get Matched', desc: 'We compare offers from 50+ banks and NBFCs and present you the best rate for your profile.' },
               { step: '03', icon: '💰', title: 'Get Funded', desc: 'Documents verified, loan sanctioned, and funds disbursed — all within 24–48 hours.' },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="relative flex flex-col items-center text-center bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-purple-100">
+                className="relative flex flex-col items-center text-center rounded-2xl p-8 hover:shadow-xl transition-all"
+                style={{ background: '#1e1e1e', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-5 shadow-md"
-                  style={{ background: 'linear-gradient(135deg, #f0eeff, #e8e0ff)' }}>
+                  style={{ background: 'rgba(192,57,43,0.12)', border: '1px solid rgba(192,57,43,0.25)' }}>
                   {item.icon}
                 </div>
                 <span className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#c0392b' }}>Step {item.step}</span>
-                <h3 className="text-xl font-heading font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-heading font-bold mb-3" style={{ color: '#f5f5f5' }}>{item.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#a0a0a0' }}>{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -310,13 +309,13 @@ const Home = () => {
       </section>
 
       {/* ── Testimonials ─────────────────────────────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: '#1a1a1a' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
             <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-              style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>Customer Stories</span>
-            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-4">What Our Customers Say</h2>
-            <p className="text-gray-600 text-lg">Real people. Real loans. Real results.</p>
+              style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>Customer Stories</span>
+            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: '#f5f5f5' }}>What Our Customers Say</h2>
+            <p style={{ color: '#a0a0a0' }}>Real people. Real loans. Real results.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -325,23 +324,20 @@ const Home = () => {
               { name: 'Amit Verma', role: 'Auto Loan Customer', review: 'Applied for a car loan on Saturday, got keys on Monday. The entire process was digital — no branch visits, no stress. Absolutely brilliant service.', rating: 5, avatar: '👨‍🔧' },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                className="rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col"
-                style={{ background: '#faf8ff' }}>
-                {/* Stars */}
+                className="rounded-2xl p-8 hover:shadow-xl transition-all flex flex-col"
+                style={{ background: '#222222', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="flex gap-1 mb-4">
                   {Array(t.rating).fill(0).map((_, s) => <FaStar key={s} className="text-yellow-400 text-sm" />)}
                 </div>
-                {/* Quote */}
-                <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1">"{t.review}"</p>
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: '#a0a0a0' }}>"{t.review}"</p>
+                <div className="flex items-center gap-3 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="w-11 h-11 rounded-full flex items-center justify-center text-2xl"
-                    style={{ background: 'linear-gradient(135deg, #f0eeff, #e8e0ff)' }}>
+                    style={{ background: 'rgba(192,57,43,0.12)' }}>
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role}</p>
+                    <p className="font-semibold text-sm" style={{ color: '#f5f5f5' }}>{t.name}</p>
+                    <p className="text-xs" style={{ color: '#666' }}>{t.role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -351,17 +347,17 @@ const Home = () => {
       </section>
 
       {/* ── CIBIL Score ──────────────────────────────────── */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#111111' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-                style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>Free Credit Check</span>
-              <h2 className="text-4xl font-heading font-bold text-gray-900 mb-6">Check Your CIBIL Score Instantly</h2>
-              <p className="text-gray-600 text-lg mb-8">Know your credit score before applying for a loan. A good CIBIL score gets you better interest rates and faster approvals.</p>
+                style={{ background: 'rgba(192,57,43,0.15)', color: '#e05c5c', border: '1px solid rgba(192,57,43,0.3)' }}>Free Credit Check</span>
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: '#f5f5f5' }}>Check Your CIBIL Score Instantly</h2>
+              <p className="text-lg mb-8" style={{ color: '#a0a0a0' }}>Know your credit score before applying for a loan. A good CIBIL score gets you better interest rates and faster approvals.</p>
               <div className="space-y-4 mb-8">
                 {['Free credit score check — no charges','Instant result in seconds','Improve your loan eligibility','Get personalized loan offers'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p className="text-gray-700 font-medium">{point}</p></div>
+                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p className="font-medium" style={{ color: '#d0d0d0' }}>{point}</p></div>
                 ))}
               </div>
               <Link to="/cibil-check" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
@@ -369,21 +365,21 @@ const Home = () => {
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <div className="rounded-3xl p-10 w-full max-w-md shadow-xl" style={{ background: 'white', border: '1px solid rgba(160,120,220,0.2)' }}>
+              <div className="rounded-3xl p-10 w-full max-w-md shadow-xl" style={{ background: '#1e1e1e', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div className="text-center mb-8">
-                  <p className="text-gray-500 text-sm font-medium mb-2 uppercase tracking-wider">Your Credit Score</p>
+                  <p className="text-sm font-medium mb-2 uppercase tracking-wider" style={{ color: '#a0a0a0' }}>Your Credit Score</p>
                   <svg viewBox="0 0 200 120" className="w-64 mx-auto">
-                    <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#f3e8e8" strokeWidth="16" strokeLinecap="round"/>
+                    <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#2a2a2a" strokeWidth="16" strokeLinecap="round"/>
                     <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#22c55e" strokeWidth="16" strokeLinecap="round" strokeDasharray="251" strokeDashoffset="63"/>
-                    <text x="100" y="90" textAnchor="middle" fontSize="32" fill="#1f2937" fontWeight="bold">750</text>
-                    <text x="100" y="110" textAnchor="middle" fontSize="12" fill="#6b7280">Excellent</text>
+                    <text x="100" y="90" textAnchor="middle" fontSize="32" fill="#f5f5f5" fontWeight="bold">750</text>
+                    <text x="100" y="110" textAnchor="middle" fontSize="12" fill="#a0a0a0">Excellent</text>
                   </svg>
                 </div>
                 <div className="space-y-3">
                   {[{ label: 'Poor', range: '300–549', color: 'bg-red-400', width: 'w-1/4' },{ label: 'Fair', range: '550–649', color: 'bg-yellow-400', width: 'w-2/4' },{ label: 'Good', range: '650–749', color: 'bg-blue-400', width: 'w-3/4' },{ label: 'Excellent', range: '750–900', color: 'bg-green-500', width: 'w-full' }].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className={`h-2 rounded-full ${item.color} ${item.width}`} />
-                      <span className="text-xs text-gray-500 whitespace-nowrap">{item.label} ({item.range})</span>
+                      <span className="text-xs whitespace-nowrap" style={{ color: '#666' }}>{item.label} ({item.range})</span>
                     </div>
                   ))}
                 </div>
@@ -397,18 +393,18 @@ const Home = () => {
       </section>
 
       {/* ── Partners ─────────────────────────────────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ background: '#1a1a1a' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-heading font-bold text-gray-900">Our Partners from Across the Industry</h2>
+            <h2 className="text-4xl font-heading font-bold" style={{ color: '#f5f5f5' }}>Our Partners from Across the Industry</h2>
           </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {partnerLogos.map((bank, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-accent flex flex-col items-center justify-center py-5 px-3 cursor-default group"
-                style={{ minHeight: '110px' }}>
+                className="rounded-xl hover:shadow-lg transition-all flex flex-col items-center justify-center py-5 px-3 cursor-default group"
+                style={{ minHeight: '110px', background: '#222222', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="flex items-center justify-center" style={{ color: bank.color }}>{bank.svg}</div>
-                <span className="text-xs font-semibold text-gray-500 text-center leading-tight mt-3 group-hover:text-gray-800 transition-colors">{bank.name}</span>
+                <span className="text-xs font-semibold text-center leading-tight mt-3 transition-colors" style={{ color: '#666' }}>{bank.name}</span>
               </motion.div>
             ))}
           </div>
@@ -416,10 +412,10 @@ const Home = () => {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────── */}
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#111111' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: '#f5f5f5' }}>Frequently Asked Questions</h2>
           </motion.div>
           <div className="space-y-4">
             {[
@@ -429,13 +425,13 @@ const Home = () => {
               { q: 'Can I prepay my loan?', a: 'Yes, you can prepay your loan. Terms and conditions apply based on the loan type.' },
             ].map((faq, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
+                className="rounded-xl overflow-hidden" style={{ background: '#1e1e1e', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <button onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-purple-50 transition-colors">
-                  <span className="font-semibold text-gray-900">{faq.q}</span>
-                  {openFaq === index ? <FaChevronUp className="text-accent" /> : <FaChevronDown className="text-gray-400" />}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center transition-colors hover:bg-white/5">
+                  <span className="font-semibold" style={{ color: '#f5f5f5' }}>{faq.q}</span>
+                  {openFaq === index ? <FaChevronUp className="text-accent" /> : <FaChevronDown style={{ color: '#555' }} />}
                 </button>
-                {openFaq === index && <div className="px-6 pb-4 text-gray-600">{faq.a}</div>}
+                {openFaq === index && <div className="px-6 pb-4" style={{ color: '#a0a0a0' }}>{faq.a}</div>}
               </motion.div>
             ))}
           </div>

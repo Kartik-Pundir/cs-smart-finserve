@@ -61,7 +61,7 @@ const heroSlides = [
     line2: 'Business Loans.',
     sub: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.',
     tag: 'Quick Disbursal',
-    img: 'https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=85',
     label: 'Business Loan',
     rate: 'from 12% p.a.',
     link: '/business-loan',
@@ -398,7 +398,7 @@ const Home = () => {
             {[
               { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400', link: '/auto-loan' },
               { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Loans up to ₹5 Cr with tenure up to 30 years.', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400', link: '/home-loan' },
-              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', link: '/business-loan' },
+              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400', link: '/business-loan' },
               { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400', link: '/insurance' },
             ].map((service, index) => (
               <motion.div key={index}

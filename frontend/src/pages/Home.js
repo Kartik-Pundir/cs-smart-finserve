@@ -730,7 +730,7 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Free Credit Check</span>
-              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Check Your CIBIL Score Instantly</h2>
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>CIBIL Score Check Estimator</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>Know your credit score before applying for a loan. A good CIBIL score gets you better interest rates and faster approvals.</p>
               <div className="space-y-4 mb-8">
                 {['Free credit score check — no charges','Instant result in seconds','Improve your loan eligibility','Get personalized loan offers'].map((point, i) => (

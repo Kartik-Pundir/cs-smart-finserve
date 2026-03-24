@@ -81,7 +81,7 @@ const heroSlides = [
     line2: 'Used Car Loans.',
     sub: 'Smarter finance on pre-owned cars. Best rates, quick processing, flexible tenure.',
     tag: 'Pre-Owned Cars',
-    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=800&q=85',
     label: 'Used Car Loan',
     rate: 'from 9% p.a.',
     link: '/used-car-loan',

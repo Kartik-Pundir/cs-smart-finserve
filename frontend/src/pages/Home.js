@@ -13,18 +13,18 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 
 // Real logos via Clearbit + fallback colored initials
 const partnerLogos = [
-  { name: 'HDFC Bank',         domain: 'hdfcbank.com',       initials: 'HDFC', color: '#004C8F' },
-  { name: 'ICICI Bank',        domain: 'icicibank.com',      initials: 'ICICI', color: '#F58220' },
-  { name: 'Axis Bank',         domain: 'axisbank.com',       initials: 'AXIS', color: '#97144D' },
-  { name: 'Bajaj Finserv',     domain: 'bajajfinserv.in',    initials: 'BAJAJ', color: '#003399' },
-  { name: 'IDFC First Bank',   domain: 'idfcfirstbank.com',  initials: 'IDFC', color: '#9B1B30' },
-  { name: 'Yes Bank',          domain: 'yesbank.in',         initials: 'YES', color: '#00549A' },
-  { name: 'LIC Housing',       domain: 'lichousing.com',     initials: 'LIC', color: '#1A5276' },
-  { name: 'Indian Bank',       domain: 'indianbank.in',      initials: 'IB', color: '#1F618D' },
-  { name: 'Bank of Baroda',    domain: 'bankofbaroda.in',    initials: 'BOB', color: '#F5821F' },
-  { name: 'Union Bank',        domain: 'unionbankofindia.co.in', initials: 'UBI', color: '#003087' },
-  { name: 'Poonawalla Fincorp',domain: 'poonawallafincorp.com', initials: 'PFL', color: '#E31837' },
-  { name: 'Chola Finance',     domain: 'cholamandalam.com',  initials: 'CHOLA', color: '#C0392B' },
+  { name: 'Axis Bank',          domain: 'axisbank.com',           initials: 'AXIS',  color: '#97144D' },
+  { name: 'Chola Finance',      domain: 'cholamandalam.com',      initials: 'CHOLA', color: '#C0392B' },
+  { name: 'HDFC Bank',          domain: 'hdfcbank.com',           initials: 'HDFC',  color: '#004C8F' },
+  { name: 'ICICI Bank',         domain: 'icicibank.com',          initials: 'ICICI', color: '#F58220' },
+  { name: 'IDFC First Bank',    domain: 'idfcfirstbank.com',      initials: 'IDFC',  color: '#9B1B30' },
+  { name: 'Indian Bank',        domain: 'indianbank.in',          initials: 'IB',    color: '#1F618D' },
+  { name: 'Poonawalla Fincorp', domain: 'poonawallafincorp.com',  initials: 'PFL',   color: '#1A237E' },
+  { name: 'Bank of Baroda',     domain: 'bankofbaroda.in',        initials: 'BOB',   color: '#F5821F' },
+  { name: 'Tata Capital',       domain: 'tatacapital.com',        initials: 'TATA',  color: '#1B4F72' },
+  { name: 'Yes Bank',           domain: 'yesbank.in',             initials: 'YES',   color: '#00549A' },
+  { name: 'Bajaj Finserv',      domain: 'bajajfinserv.in',        initials: 'BAJAJ', color: '#003399' },
+  { name: 'LIC',                domain: 'licindia.in',            initials: 'LIC',   color: '#F5A623' },
 ];
 
 const heroSlides = [
@@ -596,26 +596,25 @@ const Home = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {partnerLogos.map((bank, index) => (
               <motion.div key={index} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="rounded-xl hover:shadow-lg transition-all flex flex-col items-center justify-center py-4 px-3 cursor-default"
-                style={{ minHeight: "100px", background: "var(--bg-card2)", border: "1px solid var(--border)" }}>
-                {/* Real logo via Clearbit, fallback to colored initials badge */}
+                className="rounded-2xl flex flex-col items-center justify-center py-5 px-4 cursor-default hover:shadow-lg transition-all"
+                style={{ minHeight: "100px", background: "#ffffff", border: "1px solid #e5e7eb" }}>
                 <img
                   src={`https://logo.clearbit.com/${bank.domain}`}
                   alt={bank.name}
-                  className="h-9 w-auto object-contain"
-                  style={{ maxWidth: '90px' }}
+                  className="object-contain"
+                  style={{ height: '36px', maxWidth: '100px', width: 'auto' }}
                   onError={(e) => {
                     e.target.style.display = 'none';
                     e.target.nextSibling.style.display = 'flex';
                   }}
                 />
+                {/* Fallback colored initials */}
                 <div
-                  className="items-center justify-center rounded-lg px-3 py-2 text-white text-xs font-black tracking-wide"
-                  style={{ display: 'none', background: bank.color, letterSpacing: '0.05em' }}
-                >
+                  className="items-center justify-center rounded-lg px-3 py-1.5 text-white text-xs font-black"
+                  style={{ display: 'none', background: bank.color }}>
                   {bank.initials}
                 </div>
-                <span className="text-xs font-medium text-center leading-tight mt-2.5" style={{ color: "var(--text-muted)" }}>{bank.name}</span>
+                <span className="text-xs font-medium text-center leading-tight mt-2.5 text-gray-500">{bank.name}</span>
               </motion.div>
             ))}
           </div>

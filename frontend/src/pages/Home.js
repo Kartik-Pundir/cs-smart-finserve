@@ -47,7 +47,7 @@ const Home = () => {
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.4, ease: 'easeOut' }}
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1600&q=90)' }}
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }}
         />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,10,20,0.72) 0%, rgba(10,10,20,0.45) 60%, rgba(10,10,20,0.25) 100%)' }} />
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#d4b8f0' }} />
@@ -162,7 +162,7 @@ const Home = () => {
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
-              <motion.img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=700&q=85" alt="Car Loan"
+              <motion.img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=85" alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
             </motion.div>
@@ -237,7 +237,7 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=400', link: '/auto-loan' },
+              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400', link: '/auto-loan' },
               { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Loans up to ₹5 Cr with tenure up to 30 years.', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400', link: '/home-loan' },
               { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', link: '/business-loan' },
               { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400', link: '/insurance' },

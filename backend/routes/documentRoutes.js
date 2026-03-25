@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { submitDocuments, getDocuments, deleteDocument } = require('../controllers/documentController');
+const { submitDocuments, getDocuments, deleteDocument, downloadDocument } = require('../controllers/documentController');
 const { protect, authorize } = require('../middleware/auth');
 
 // Ensure uploads folder exists
@@ -39,6 +39,7 @@ const fields = [
 
 router.post('/', upload.fields(fields), submitDocuments);
 router.get('/', protect, authorize('admin'), getDocuments);
+router.get('/:id/download/:filename', protect, authorize('admin'), downloadDocument);
 router.delete('/:id', protect, authorize('admin'), deleteDocument);
 
 module.exports = router;

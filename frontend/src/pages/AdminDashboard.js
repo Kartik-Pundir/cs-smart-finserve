@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FaStar, FaTrash, FaEye, FaTimes, FaSearch } from 'react-icons/fa';
+import { FaStar, FaTrash, FaEye, FaTimes, FaSearch, FaDownload } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 
@@ -187,6 +187,25 @@ const AdminDashboard = () => {
       setEditingScore(prev => { const n = { ...prev }; delete n[id]; return n; });
       fetchData();
     } catch { toast.error('Failed to save score'); }
+  };
+
+  const downloadDocument = async (docId, filename, originalName) => {
+    try {
+      const response = await api.get(`/documents/${docId}/download/${filename}`, {
+        responseType: 'blob',
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', originalName);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+      toast.success('Document downloaded');
+    } catch {
+      toast.error('Failed to download document');
+    }
   };
 
   const q = search.toLowerCase();
@@ -424,8 +443,19 @@ const AdminDashboard = () => {
                     <td className="px-4 py-3 text-gray-500">{d.email || '—'}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{d.loanType || '—'}</td>
                     <td className="px-4 py-3">
-                      <div className="flex flex-wrap gap-1">
-                        {d.files?.map((f, i) => <span key={i} className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs">{f.label}</span>)}
+                      <div className="flex flex-col gap-1">
+                        {d.files?.map((f, i) => (
+                          <div key={i} className="flex items-center gap-2">
+                            <span className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs">{f.label}</span>
+                            <button
+                              onClick={() => downloadDocument(d._id, f.filename, f.originalName)}
+                              className="p-1 rounded hover:bg-blue-50 text-blue-500 transition-colors"
+                              title="Download file"
+                            >
+                              <FaDownload size={11} />
+                            </button>
+                          </div>
+                        ))}
                       </div>
                     </td>
                     <td className="px-4 py-3"><Badge status={d.status} /></td>

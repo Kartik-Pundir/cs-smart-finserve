@@ -11,147 +11,20 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Bank logos as inline SVG — zero dependency, always renders, pixel-perfect
+// Bank logos - using multiple fallback sources
 const partnerLogos = [
-  {
-    name: 'HDFC Bank',
-    logo: (
-      <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" style={{width:'110px',height:'33px'}}>
-        <rect x="0" y="0" width="32" height="36" fill="#004C8F"/>
-        <rect x="4" y="4" width="10" height="28" fill="white"/>
-        <rect x="4" y="16" width="24" height="5" fill="white"/>
-        <rect x="18" y="4" width="10" height="28" fill="white"/>
-        <text x="36" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="#004C8F" letterSpacing="0.5">HDFC</text>
-        <text x="36" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="#004C8F" letterSpacing="1">BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'ICICI Bank',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <ellipse cx="18" cy="18" rx="16" ry="16" fill="none" stroke="#F58220" strokeWidth="3"/>
-        <ellipse cx="18" cy="18" rx="8" ry="8" fill="none" stroke="#F58220" strokeWidth="2"/>
-        <line x1="18" y1="2" x2="18" y2="34" stroke="#F58220" strokeWidth="2"/>
-        <line x1="2" y1="18" x2="34" y2="18" stroke="#F58220" strokeWidth="2"/>
-        <text x="40" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="#F58220">ICICI</text>
-        <text x="40" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="#888" letterSpacing="1">BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Axis Bank',
-    logo: (
-      <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" style={{width:'110px',height:'33px'}}>
-        <polygon points="16,4 28,32 4,32" fill="none" stroke="#97144D" strokeWidth="2.5"/>
-        <polygon points="16,10 24,28 8,28" fill="#97144D"/>
-        <text x="34" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="14" fill="#97144D">AXIS</text>
-        <text x="34" y="33" fontFamily="Arial,sans-serif" fontSize="8" fill="#888" letterSpacing="1">BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Bajaj Finserv',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <rect x="0" y="6" width="26" height="24" rx="3" fill="#003399"/>
-        <text x="4" y="23" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="14" fill="white">BF</text>
-        <text x="32" y="18" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="#003399">BAJAJ</text>
-        <text x="32" y="31" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="10" fill="#003399">FINSERV</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'IDFC First Bank',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <rect x="0" y="4" width="26" height="28" rx="2" fill="#9B1B30"/>
-        <text x="3" y="16" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="9" fill="white">IDFC</text>
-        <text x="3" y="27" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="8" fill="white">FIRST</text>
-        <text x="32" y="20" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="#9B1B30">IDFC</text>
-        <text x="32" y="31" fontFamily="Arial,sans-serif" fontSize="8" fill="#888">FIRST BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Yes Bank',
-    logo: (
-      <svg viewBox="0 0 110 36" xmlns="http://www.w3.org/2000/svg" style={{width:'100px',height:'33px'}}>
-        <rect x="0" y="4" width="108" height="28" rx="3" fill="#00549A"/>
-        <text x="8" y="24" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="16" fill="white" letterSpacing="1">YES BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'LIC',
-    logo: (
-      <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg" style={{width:'90px',height:'36px'}}>
-        <rect x="0" y="0" width="38" height="40" rx="2" fill="#1A3A6B"/>
-        <ellipse cx="19" cy="16" rx="10" ry="12" fill="none" stroke="#F5A623" strokeWidth="2"/>
-        <path d="M14 22 Q19 10 24 22" fill="#F5A623"/>
-        <text x="4" y="35" fontFamily="Arial,sans-serif" fontSize="7" fill="#F5A623">LIC</text>
-        <text x="42" y="18" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="16" fill="#1A3A6B">LIC</text>
-        <text x="42" y="30" fontFamily="Arial,sans-serif" fontSize="7" fill="#888">INDIA</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Indian Bank',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <rect x="0" y="4" width="28" height="28" rx="2" fill="#1F618D"/>
-        <polygon points="14,7 20,7 22,13 6,13" fill="white" opacity="0.9"/>
-        <rect x="10" y="13" width="8" height="12" fill="none" stroke="white" strokeWidth="1.5"/>
-        <rect x="6" y="25" width="16" height="3" fill="white"/>
-        <text x="34" y="20" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="11" fill="#1F618D">INDIAN</text>
-        <text x="34" y="32" fontFamily="Arial,sans-serif" fontSize="9" fill="#888">BANK</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Bank of Baroda',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <circle cx="18" cy="18" r="15" fill="none" stroke="#F5821F" strokeWidth="3"/>
-        <circle cx="18" cy="18" r="7" fill="#F5821F"/>
-        <text x="38" y="17" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="10" fill="#F5821F">BANK OF</text>
-        <text x="38" y="30" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="10" fill="#F5821F">BARODA</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Tata Capital',
-    logo: (
-      <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" style={{width:'110px',height:'33px'}}>
-        <rect x="0" y="8" width="28" height="4" fill="#1B4F72"/>
-        <rect x="12" y="8" width="4" height="22" fill="#1B4F72"/>
-        <text x="36" y="22" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="13" fill="#1B4F72">TATA</text>
-        <text x="36" y="33" fontFamily="Arial,sans-serif" fontSize="9" fill="#888">CAPITAL</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Poonawalla Fincorp',
-    logo: (
-      <svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" style={{width:'120px',height:'33px'}}>
-        <rect x="0" y="4" width="26" height="28" rx="13" fill="#1A237E"/>
-        <text x="8" y="23" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="14" fill="white">P</text>
-        <text x="32" y="18" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="9" fill="#1A237E">POONAWALLA</text>
-        <text x="32" y="30" fontFamily="Arial,sans-serif" fontSize="8" fill="#888">FINCORP</text>
-      </svg>
-    ),
-  },
-  {
-    name: 'Chola Finance',
-    logo: (
-      <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" style={{width:'110px',height:'33px'}}>
-        <path d="M24 6 Q4 6 4 18 Q4 30 24 30" fill="none" stroke="#C0392B" strokeWidth="3.5" strokeLinecap="round"/>
-        <path d="M20 11 Q8 11 8 18 Q8 25 20 25" fill="none" stroke="#C0392B" strokeWidth="2" strokeLinecap="round"/>
-        <text x="32" y="20" fontFamily="Arial Black,sans-serif" fontWeight="900" fontSize="12" fill="#C0392B">CHOLA</text>
-        <text x="32" y="31" fontFamily="Arial,sans-serif" fontSize="8" fill="#888">FINANCE</text>
-      </svg>
-    ),
-  },
+  { name: 'HDFC Bank', img: 'https://logo.brandfetch.io/hdfcbank.com' },
+  { name: 'ICICI Bank', img: 'https://logo.brandfetch.io/icicibank.com' },
+  { name: 'Axis Bank', img: 'https://logo.brandfetch.io/axisbank.com' },
+  { name: 'Bajaj Finserv', img: 'https://logo.brandfetch.io/bajajfinserv.in' },
+  { name: 'IDFC First Bank', img: 'https://logo.brandfetch.io/idfcfirstbank.com' },
+  { name: 'Yes Bank', img: 'https://logo.brandfetch.io/yesbank.in' },
+  { name: 'LIC', img: 'https://logo.brandfetch.io/licindia.in' },
+  { name: 'Indian Bank', img: 'https://logo.brandfetch.io/indianbank.in' },
+  { name: 'Bank of Baroda', img: 'https://logo.brandfetch.io/bankofbaroda.in' },
+  { name: 'Tata Capital', img: 'https://logo.brandfetch.io/tatacapital.com' },
+  { name: 'Poonawalla Fincorp', img: 'https://logo.brandfetch.io/poonawallafincorp.com' },
+  { name: 'Chola Finance', img: 'https://logo.brandfetch.io/cholamandalam.com' },
 ];
 
 const heroSlides = [
@@ -773,17 +646,19 @@ const Home = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold" style={{ color: "var(--text-primary)" }}>Our Partners from Across the Industry</h2>
           </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {partnerLogos.map((bank, index) => (
               <motion.div key={index}
                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="rounded-2xl flex flex-col items-center justify-center gap-3 py-5 px-3 hover:shadow-md transition-all"
-                style={{ minHeight: '110px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
-                <div className="flex items-center justify-center" style={{ height: '40px' }}>
-                  {bank.logo}
-                </div>
-                <span className="text-xs font-medium text-center leading-tight" style={{ color: '#9ca3af' }}>{bank.name}</span>
+                className="rounded-xl flex items-center justify-center p-6 hover:shadow-lg transition-all"
+                style={{ minHeight: '100px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
+                <img 
+                  src={bank.img}
+                  alt={bank.name}
+                  className="max-w-full h-12 w-auto object-contain"
+                  loading="lazy"
+                />
               </motion.div>
             ))}
           </div>

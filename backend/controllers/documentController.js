@@ -70,6 +70,31 @@ exports.getDocuments = async (req, res) => {
   }
 };
 
+// @desc    Download a specific document file
+// @route   GET /api/documents/:id/download/:filename
+exports.downloadDocument = async (req, res) => {
+  try {
+    const { id, filename } = req.params;
+    const doc = await Document.findById(id);
+    if (!doc) return res.status(404).json({ success: false, message: 'Document not found' });
+
+    const file = doc.files.find(f => f.filename === filename);
+    if (!file) return res.status(404).json({ success: false, message: 'File not found' });
+
+    const path = require('path');
+    const filePath = path.join(__dirname, '../uploads', filename);
+    const fs = require('fs');
+    
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ success: false, message: 'File not found on server' });
+    }
+
+    res.download(filePath, file.originalName);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // @desc    Delete document submission
 // @route   DELETE /api/documents/:id
 exports.deleteDocument = async (req, res) => {

@@ -85,22 +85,35 @@ exports.getDocuments = async (req, res) => {
 exports.downloadDocument = async (req, res) => {
   try {
     const { id, filename } = req.params;
+    console.log('Download request:', { id, filename });
+    
     const doc = await Document.findById(id);
-    if (!doc) return res.status(404).json({ success: false, message: 'Document not found' });
+    if (!doc) {
+      console.log('Document not found:', id);
+      return res.status(404).json({ success: false, message: 'Document not found' });
+    }
 
     const file = doc.files.find(f => f.filename === filename);
-    if (!file) return res.status(404).json({ success: false, message: 'File not found' });
+    if (!file) {
+      console.log('File not found in document:', filename);
+      return res.status(404).json({ success: false, message: 'File not found' });
+    }
 
     const path = require('path');
     const filePath = path.join(__dirname, '../uploads', filename);
     const fs = require('fs');
     
+    console.log('Looking for file at:', filePath);
+    
     if (!fs.existsSync(filePath)) {
+      console.log('File does not exist on disk:', filePath);
       return res.status(404).json({ success: false, message: 'File not found on server' });
     }
 
+    console.log('Sending file:', file.originalName);
     res.download(filePath, file.originalName);
   } catch (error) {
+    console.error('Download error:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 };

@@ -20,12 +20,18 @@ const exportCSV = (data, filename) => {
   URL.revokeObjectURL(url);
 };
 
-const TabBtn = ({ label, count, active, onClick }) => (
+const TabBtn = ({ label, count, active, onClick, highlight }) => (
   <button onClick={onClick}
-    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${active ? 'text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'}`}
+    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2 ${
+      active 
+        ? 'text-white shadow-md' 
+        : highlight 
+          ? 'bg-gradient-to-r from-red-50 to-orange-50 text-accent border-2 border-accent/30 hover:border-accent/50 shadow-sm' 
+          : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+    }`}
     style={active ? { background: 'linear-gradient(135deg, #c0392b, #e74c3c)' } : {}}>
     {label}
-    {count > 0 && <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${active ? 'bg-white/30 text-white' : 'bg-gray-100 text-gray-500'}`}>{count}</span>}
+    {count > 0 && <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${active ? 'bg-white/30 text-white' : highlight ? 'bg-accent text-white' : 'bg-gray-100 text-gray-500'}`}>{count}</span>}
   </button>
 );
 
@@ -203,8 +209,10 @@ const AdminDashboard = () => {
       link.remove();
       window.URL.revokeObjectURL(url);
       toast.success('Document downloaded');
-    } catch {
-      toast.error('Failed to download document');
+    } catch (error) {
+      console.error('Download error:', error);
+      console.error('Error response:', error.response?.data);
+      toast.error(error.response?.data?.message || 'Failed to download document');
     }
   };
 
@@ -235,17 +243,32 @@ const AdminDashboard = () => {
     { label: 'Feedback',         value: feedback.length,                sub: feedback.length ? `avg ${(feedback.reduce((a, f) => a + f.rating, 0) / feedback.length).toFixed(1)}` + '\u2605' : 'none yet', color: 'from-yellow-500 to-amber-500', tab: 'feedback' },
   ];
 
+  // Filter today's leads
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayLeads = fLeads.filter(l => new Date(l.createdAt) >= today);
+  
+  // Group today's leads by service
+  const todayByService = todayLeads.reduce((acc, lead) => {
+    const service = lead.serviceInterested || 'Other';
+    if (!acc[service]) acc[service] = [];
+    acc[service].push(lead);
+    return acc;
+  }, {});
+
   const tabs = [
-    { key: 'leads',        label: 'Leads',        count: fLeads.length },
-    { key: 'appointments', label: 'Appointments', count: fApts.length },
-    { key: 'applications', label: 'Applications', count: fApps.length },
-    { key: 'cibil',        label: 'CIBIL Checks', count: fCibil.length },
-    { key: 'documents',    label: 'Documents',    count: fDocs.length },
-    { key: 'users',        label: 'Users',        count: fUsers.length },
-    { key: 'feedback',     label: 'Feedback',     count: fFb.length },
+    { key: 'today',        label: "Today's Leads", count: todayLeads.length, highlight: true },
+    { key: 'leads',        label: 'All Leads',     count: fLeads.length },
+    { key: 'appointments', label: 'Appointments',  count: fApts.length },
+    { key: 'applications', label: 'Applications',  count: fApps.length },
+    { key: 'cibil',        label: 'CIBIL Checks',  count: fCibil.length },
+    { key: 'documents',    label: 'Documents',     count: fDocs.length },
+    { key: 'users',        label: 'Users',         count: fUsers.length },
+    { key: 'feedback',     label: 'Feedback',      count: fFb.length },
   ];
 
   const exportMap = {
+    today:        () => exportCSV(todayLeads.map(l => ({ Name: l.fullName, Phone: l.phone, Email: l.email, Service: l.serviceInterested, Message: l.message || '', Status: l.status, Time: new Date(l.createdAt).toLocaleTimeString() })), 'todays-leads.csv'),
     leads:        () => exportCSV(fLeads.map(l => ({ Name: l.fullName, Phone: l.phone, Email: l.email, Service: l.serviceInterested, Message: l.message || '', Status: l.status, Date: new Date(l.createdAt).toLocaleDateString() })), 'leads.csv'),
     appointments: () => exportCSV(fApts.map(a => ({ Name: a.fullName, Phone: a.phone, Email: a.email, Service: a.service, Date: new Date(a.preferredDate).toLocaleDateString(), Time: a.preferredTime, Status: a.status })), 'appointments.csv'),
     applications: () => exportCSV(fApps.map(a => ({ Name: a.fullName, Phone: a.phone, Email: a.email, Service: a.serviceType, LoanAmount: a.loanAmount || '', MonthlyIncome: a.monthlyIncome || '', Employment: a.employmentType || '', City: a.city || '', Status: a.status, Date: new Date(a.createdAt).toLocaleDateString() })), 'applications.csv'),
@@ -290,10 +313,84 @@ const AdminDashboard = () => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-5">
-          {tabs.map(t => <TabBtn key={t.key} label={t.label} count={t.count} active={activeTab === t.key} onClick={() => setActiveTab(t.key)} />)}
+          {tabs.map(t => <TabBtn key={t.key} label={t.label} count={t.count} active={activeTab === t.key} highlight={t.highlight} onClick={() => setActiveTab(t.key)} />)}
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm border border-purple-100 overflow-x-auto">
+
+          {activeTab === 'today' && (
+            <div className="p-6">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="w-1 h-8 bg-gradient-to-b from-accent to-orange-500 rounded-full"></div>
+                <div>
+                  <h2 className="text-xl font-heading font-bold text-gray-900">Today's Leads</h2>
+                  <p className="text-sm text-gray-500">{new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
+              </div>
+
+              {todayLeads.length === 0 ? (
+                <div className="text-center py-16">
+                  <div className="text-6xl mb-4">📭</div>
+                  <p className="text-gray-400 text-lg font-medium">No leads received today yet</p>
+                  <p className="text-gray-400 text-sm mt-1">Check back later or view all leads</p>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {Object.entries(todayByService).map(([service, serviceLeads]) => (
+                    <div key={service} className="border border-gray-100 rounded-xl overflow-hidden">
+                      <div className="bg-gradient-to-r from-accent/5 to-orange-500/5 px-4 py-3 border-b border-gray-100">
+                        <div className="flex items-center justify-between">
+                          <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-accent"></span>
+                            {service}
+                          </h3>
+                          <span className="px-3 py-1 bg-accent text-white text-xs font-bold rounded-full">
+                            {serviceLeads.length} {serviceLeads.length === 1 ? 'lead' : 'leads'}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead className="bg-gray-50 border-b border-gray-100">
+                            <tr>
+                              {['Time','Name','Phone','Email','Message','Status','Actions'].map(h => 
+                                <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>
+                              )}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {serviceLeads.map(l => (
+                              <tr key={l._id} className="border-b border-gray-50 hover:bg-gray-50">
+                                <td className="px-4 py-3 text-gray-500 whitespace-nowrap">
+                                  {new Date(l.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
+                                </td>
+                                <td className="px-4 py-3 font-medium whitespace-nowrap">{l.fullName}</td>
+                                <td className="px-4 py-3 whitespace-nowrap">{l.phone}</td>
+                                <td className="px-4 py-3 text-gray-500">{l.email}</td>
+                                <td className="px-4 py-3 text-gray-500 max-w-[160px] truncate">{l.message || '—'}</td>
+                                <td className="px-4 py-3">
+                                  <select value={l.status} onChange={e => updateLeadStatus(l._id, e.target.value)}
+                                    className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
+                                    {['new','contacted','qualified','converted','closed'].map(s => <option key={s} value={s}>{s}</option>)}
+                                  </select>
+                                </td>
+                                <td className="px-4 py-3">
+                                  <div className="flex gap-1">
+                                    <ViewBtn onClick={() => setViewItem(l)} />
+                                    <DelBtn onClick={() => deleteItem('/leads', l._id, 'lead')} />
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
           {activeTab === 'leads' && (
             <table className="w-full text-sm">

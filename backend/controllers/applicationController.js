@@ -1,6 +1,7 @@
 const Application = require('../models/Application');
 const sendEmail = require('../utils/sendEmail');
 const { applicationReceived } = require('../utils/emailTemplates');
+const { sendSMS, smsTemplates } = require('../utils/sendSMS');
 
 // @desc    Create new application
 // @route   POST /api/applications
@@ -17,6 +18,18 @@ exports.createApplication = async (req, res) => {
       });
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
+    }
+
+    // Send SMS notification to customer
+    if (req.body.phone) {
+      try {
+        await sendSMS(
+          req.body.phone,
+          smsTemplates.applicationSubmitted(req.body.fullName, req.body.serviceType)
+        );
+      } catch (smsError) {
+        console.error('SMS sending failed:', smsError);
+      }
     }
 
     // Notify admin
@@ -111,6 +124,8 @@ exports.getApplication = async (req, res) => {
 // @route   PUT /api/applications/:id
 exports.updateApplication = async (req, res) => {
   try {
+    const oldApplication = await Application.findById(req.params.id);
+    
     const application = await Application.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -122,6 +137,34 @@ exports.updateApplication = async (req, res) => {
         success: false,
         message: 'Application not found'
       });
+    }
+
+    // Send SMS notification if status changed
+    if (req.body.status && oldApplication.status !== req.body.status && application.phone) {
+      try {
+        let smsMessage = '';
+        
+        switch (req.body.status) {
+          case 'processing':
+            smsMessage = smsTemplates.applicationProcessing(application.fullName, application.serviceType);
+            break;
+          case 'approved':
+            smsMessage = smsTemplates.applicationApproved(application.fullName, application.serviceType, application.loanAmount);
+            break;
+          case 'rejected':
+            smsMessage = smsTemplates.applicationRejected(application.fullName, application.serviceType);
+            break;
+          case 'disbursed':
+            smsMessage = smsTemplates.applicationDisbursed(application.fullName, application.serviceType, application.loanAmount);
+            break;
+        }
+
+        if (smsMessage) {
+          await sendSMS(application.phone, smsMessage);
+        }
+      } catch (smsError) {
+        console.error('SMS notification failed:', smsError);
+      }
     }
 
     res.status(200).json({

@@ -1,5 +1,6 @@
 const Document = require('../models/Document');
 const sendEmail = require('../utils/sendEmail');
+const { sendSMS, smsTemplates } = require('../utils/sendSMS');
 
 const labelMap = {
   id_proof: 'ID Proof', address_proof: 'Address Proof',
@@ -31,6 +32,15 @@ exports.submitDocuments = async (req, res) => {
     });
 
     const doc = await Document.create({ name, phone, email, loanType, files });
+
+    // Send SMS notification
+    if (phone) {
+      try {
+        await sendSMS(phone, smsTemplates.documentsReceived(name, loanType || 'Loan'));
+      } catch (smsErr) {
+        console.error('SMS notification failed:', smsErr);
+      }
+    }
 
     // Notify admin
     try {

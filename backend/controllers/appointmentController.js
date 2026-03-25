@@ -1,6 +1,7 @@
 const Appointment = require('../models/Appointment');
 const sendEmail = require('../utils/sendEmail');
 const { appointmentConfirmation } = require('../utils/emailTemplates');
+const { sendSMS, smsTemplates } = require('../utils/sendSMS');
 
 // @desc    Create new appointment
 // @route   POST /api/appointments
@@ -178,6 +179,21 @@ exports.confirmAppointment = async (req, res) => {
       console.log('✅ Confirmation email sent to:', appointment.email);
     } catch (emailErr) {
       console.error('❌ Confirmation email FAILED:', emailErr.message);
+    }
+
+    // Send SMS notification
+    if (appointment.phone) {
+      try {
+        const formattedDate = new Date(appointment.preferredDate).toLocaleDateString('en-IN', {
+          timeZone: 'UTC', day: 'numeric', month: 'short', year: 'numeric'
+        });
+        await sendSMS(
+          appointment.phone,
+          smsTemplates.appointmentConfirmed(appointment.fullName, formattedDate, appointment.preferredTime)
+        );
+      } catch (smsErr) {
+        console.error('SMS notification failed:', smsErr);
+      }
     }
 
     res.status(200).json({

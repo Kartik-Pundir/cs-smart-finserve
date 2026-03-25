@@ -420,53 +420,53 @@ const Home = () => {
       </section>
 
       {/* ── Why CS Smart Finserve ────────────────────────── */}
-      <section className="py-12" style={{ background: "var(--bg-alt)" }}>
+      <section className="py-16" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-8">
-            <div>
-              <span className="inline-block px-3 py-0.5 rounded-full text-xs font-bold tracking-widest uppercase mb-2"
-                style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>
-                Why Choose Us
-              </span>
-              <h2 className="text-3xl font-heading font-bold" style={{ color: "var(--text-primary)" }}>Why CS Smart Finserve?</h2>
-            </div>
-            <p className="text-sm max-w-sm" style={{ color: "var(--text-secondary)" }}>
+          {/* Header */}
+          <div className="text-center mb-10">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-3"
+              style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>
+              Why Choose Us
+            </span>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3" style={{ color: "var(--text-primary)" }}>
+              Why CS Smart Finserve?
+            </h2>
+            <p className="text-base max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>
               Simple, affordable, and accessible financial products and services — all in one place.
             </p>
           </div>
 
-          {/* Feature grid — 3 cols, compact */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {/* Feature grid — 3 cols, balanced size */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             {[
-              { icon: '🏦', title: '50+ Banking Partners', desc: 'Compare hundreds of offers from top banks and NBFCs to get you the best rate.' },
-              { icon: '⚡', title: '24-Hour Approvals', desc: 'Most loans sanctioned within 24 hours — fully digital, no branch visits.' },
-              { icon: '🔒', title: 'Zero Hidden Charges', desc: 'Complete transparency. The rate we quote is the rate you get.' },
-              { icon: '📊', title: 'Free CIBIL Check', desc: 'Know your score before applying. Improve eligibility at no cost.' },
-              { icon: '🤝', title: 'Dedicated Advisor', desc: 'A personal advisor guides you from application to disbursement.' },
-              { icon: '📱', title: 'Fully Digital', desc: 'Apply, upload docs, and track status — all from your phone.' },
+              { icon: '🏦', title: '50+ Banking Partners', desc: 'Compare hundreds of offers from India\'s top banks and NBFCs to get you the best rate.' },
+              { icon: '⚡', title: '24-Hour Approvals', desc: 'Most loans sanctioned within 24 hours — fully digital, no branch visits required.' },
+              { icon: '🔒', title: 'Zero Hidden Charges', desc: 'Complete transparency from day one. The rate we quote is the rate you get.' },
+              { icon: '📊', title: 'Free CIBIL Check', desc: 'Know your credit score before applying. Improve your eligibility at no cost.' },
+              { icon: '🤝', title: 'Dedicated Advisor', desc: 'A personal loan advisor guides you from application to disbursement, step by step.' },
+              { icon: '📱', title: 'Fully Digital', desc: 'Apply, upload documents, and track your loan status — all from your phone.' },
             ].map((item, i) => (
               <motion.div key={i}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                className="flex items-start gap-3 rounded-xl p-4 hover:shadow-md transition-all"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                className="flex items-start gap-4 rounded-xl p-5 hover:shadow-lg transition-all"
                 style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center text-lg flex-shrink-0"
+                <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
                   style={{ background: "var(--badge-bg)" }}>
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold mb-0.5" style={{ color: "var(--text-primary)" }}>{item.title}</h3>
-                  <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>{item.desc}</p>
+                  <h3 className="text-base font-bold mb-1" style={{ color: "var(--text-primary)" }}>{item.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{item.desc}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* Stats strip */}
-          <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="rounded-xl px-6 py-4 flex flex-wrap justify-around gap-4"
+          <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="rounded-xl px-8 py-5 flex flex-wrap justify-around gap-6"
             style={{ background: 'linear-gradient(135deg, #c0392b 0%, #922b21 100%)' }}>
             {[
               { value: '5,000+', label: 'Happy Customers' },
@@ -475,8 +475,8 @@ const Home = () => {
               { value: '₹500Cr+', label: 'Loans Disbursed' },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <p className="text-xl font-black text-white leading-none">{stat.value}</p>
-                <p className="text-white/70 text-xs mt-0.5">{stat.label}</p>
+                <p className="text-2xl font-black text-white leading-none">{stat.value}</p>
+                <p className="text-white/70 text-xs mt-1">{stat.label}</p>
               </div>
             ))}
           </motion.div>

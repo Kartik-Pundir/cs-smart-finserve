@@ -8,7 +8,7 @@ import { AuthProvider } from './context/AuthContext';
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
+import Chatbot from './components/Chatbot';
 
 // Pages
 import Home from './pages/Home';
@@ -64,7 +64,7 @@ function App() {
               <Route path="/reset-password/:token" element={<ResetPassword />} />
             </Routes>
             <Footer />
-            <WhatsAppButton />
+            <Chatbot />
             <ToastContainer
               position="top-right"
               autoClose={3000}

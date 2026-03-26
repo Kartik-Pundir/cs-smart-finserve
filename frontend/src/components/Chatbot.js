@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaPaperPlane, FaRobot, FaUser } from 'react-icons/fa';
+import { FaTimes, FaPaperPlane, FaUser, FaHeadset, FaComments } from 'react-icons/fa';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +51,38 @@ const Chatbot = () => {
 
   const getBotResponse = (userInput) => {
     const input = userInput.toLowerCase();
+
+    // Callback Request
+    if (input.includes('request callback') || input.includes('callback') || input === 'get callback') {
+      return {
+        text: "📞 Request a Callback\n\nI'll connect you with our loan expert. Please share your details:\n\n• Name\n• Phone Number\n• Preferred Time\n• Loan Type\n\nOr you can directly call us at +91 92679 53513\n\nWould you like to:",
+        quickReplies: ['Book Appointment', 'Call Now', 'Send WhatsApp', 'Back to Menu']
+      };
+    }
+
+    // Book Appointment
+    if (input.includes('book appointment') || input.includes('schedule') || input.includes('appointment')) {
+      return {
+        text: "📅 Book an Appointment\n\nGreat! You can book a free consultation with our experts.\n\nVisit our Book Appointment page or call us directly at +91 92679 53513\n\nOffice Hours: Mon-Sat, 9 AM - 6 PM",
+        quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Call Instead']
+      };
+    }
+
+    // Send WhatsApp
+    if (input.includes('whatsapp') || input.includes('send whatsapp')) {
+      return {
+        text: "💬 WhatsApp Us!\n\nChat with us on WhatsApp for instant support:\n\n📱 +91 92679 53513\n\nClick below to start chatting:\nwa.me/919267953513\n\nOur team will respond within minutes during business hours (Mon-Sat, 9 AM - 6 PM)",
+        quickReplies: ['Call Instead', 'Send Email', 'Back to Menu']
+      };
+    }
+
+    // Send Email
+    if (input.includes('email') || input.includes('send email') || input.includes('mail')) {
+      return {
+        text: "📧 Email Us\n\nSend your queries to:\nkartikpundir231@gmail.com\n\nWe typically respond within 24 hours.\n\nFor urgent matters, please call us at +91 92679 53513\n\nWhat would you like to do?",
+        quickReplies: ['Call Now', 'WhatsApp', 'Book Appointment', 'Back to Menu']
+      };
+    }
 
     // Home Loan
     if (input.includes('home loan') || input.includes('house loan') || input.includes('property loan')) {
@@ -125,10 +157,18 @@ const Chatbot = () => {
     }
 
     // Contact/Support
-    if (input.includes('contact') || input.includes('call') || input.includes('phone') || input.includes('talk') || input.includes('speak') || input.includes('agent') || input.includes('expert')) {
+    if (input.includes('contact') || input.includes('phone') || input.includes('talk') || input.includes('speak') || input.includes('agent') || input.includes('expert')) {
       return {
         text: "📞 Contact Us:\n\n📱 Phone: +91 92679 53513\n📧 Email: kartikpundir231@gmail.com\n📍 Office: Sector 17, Sukhrali, Gurgaon\n\nOur team is available Mon-Sat, 9 AM - 6 PM\n\nWould you like to:",
-        quickReplies: ['Book Appointment', 'Request Callback', 'Send Email', 'Back to Menu']
+        quickReplies: ['Request Callback', 'Book Appointment', 'Send Email', 'Back to Menu']
+      };
+    }
+
+    // Call/Phone specific
+    if (input.includes('call now') || input.includes('phone number')) {
+      return {
+        text: "📱 Call Us Now!\n\n+91 92679 53513\n\nOur loan experts are ready to assist you.\n\nOffice Hours:\nMon-Sat: 9 AM - 6 PM\n\nPrefer a callback instead?",
+        quickReplies: ['Request Callback', 'Send WhatsApp', 'Back to Menu']
       };
     }
 
@@ -136,7 +176,15 @@ const Chatbot = () => {
     if (input.includes('apply') || input.includes('application') || input.includes('start')) {
       return {
         text: "🎯 Ready to Apply?\n\nGreat! Let me help you get started. Which loan would you like to apply for?",
-        quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Not Sure']
+        quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Talk to Expert']
+      };
+    }
+
+    // Back to menu
+    if (input.includes('back') || input.includes('menu') || input.includes('main menu')) {
+      return {
+        text: "🏠 Main Menu\n\nHow can I help you today?",
+        quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'CIBIL Score', 'Contact Us']
       };
     }
 
@@ -200,10 +248,10 @@ const Chatbot = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-white text-2xl"
+            className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-white text-2xl group"
             style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}
           >
-            <FaRobot />
+            <FaHeadset className="group-hover:scale-110 transition-transform" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -222,10 +270,10 @@ const Chatbot = () => {
             <div className="p-4 text-white flex items-center justify-between" style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <FaRobot className="text-xl" />
+                  <FaHeadset className="text-xl" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm">CS Smart Assistant</h3>
+                  <h3 className="font-bold text-sm">CS Smart Support</h3>
                   <p className="text-xs opacity-90">Online • Always here to help</p>
                 </div>
               </div>
@@ -245,7 +293,7 @@ const Chatbot = () => {
                   >
                     {msg.type === 'bot' && (
                       <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-orange-500 flex items-center justify-center text-white flex-shrink-0">
-                        <FaRobot size={14} />
+                        <FaComments size={14} />
                       </div>
                     )}
                     <div className={`max-w-[75%] rounded-2xl px-4 py-2 ${
@@ -292,7 +340,7 @@ const Chatbot = () => {
                   className="flex gap-2"
                 >
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-orange-500 flex items-center justify-center text-white">
-                    <FaRobot size={14} />
+                    <FaComments size={14} />
                   </div>
                   <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
                     <div className="flex gap-1">

@@ -11,20 +11,20 @@ import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
-// Bank logos - using multiple fallback sources
+// Bank logos - using colored initials
 const partnerLogos = [
-  { name: 'HDFC Bank', img: 'https://logo.brandfetch.io/hdfcbank.com' },
-  { name: 'ICICI Bank', img: 'https://logo.brandfetch.io/icicibank.com' },
-  { name: 'Axis Bank', img: 'https://logo.brandfetch.io/axisbank.com' },
-  { name: 'Bajaj Finserv', img: 'https://logo.brandfetch.io/bajajfinserv.in' },
-  { name: 'IDFC First Bank', img: 'https://logo.brandfetch.io/idfcfirstbank.com' },
-  { name: 'Yes Bank', img: 'https://logo.brandfetch.io/yesbank.in' },
-  { name: 'LIC', img: 'https://logo.brandfetch.io/licindia.in' },
-  { name: 'Indian Bank', img: 'https://logo.brandfetch.io/indianbank.in' },
-  { name: 'Bank of Baroda', img: 'https://logo.brandfetch.io/bankofbaroda.in' },
-  { name: 'Tata Capital', img: 'https://logo.brandfetch.io/tatacapital.com' },
-  { name: 'Poonawalla Fincorp', img: 'https://logo.brandfetch.io/poonawallafincorp.com' },
-  { name: 'Chola Finance', img: 'https://logo.brandfetch.io/cholamandalam.com' },
+  { name: 'HDFC Bank', color: '#004C8F' },
+  { name: 'ICICI Bank', color: '#F58220' },
+  { name: 'Axis Bank', color: '#97144D' },
+  { name: 'Bajaj Finserv', color: '#003399' },
+  { name: 'IDFC First Bank', color: '#9B1B30' },
+  { name: 'Yes Bank', color: '#00529B' },
+  { name: 'LIC', color: '#006400' },
+  { name: 'Indian Bank', color: '#1a5490' },
+  { name: 'Bank of Baroda', color: '#F7941D' },
+  { name: 'Tata Capital', color: '#1D3557' },
+  { name: 'Poonawalla Fincorp', color: '#0057a8' },
+  { name: 'Chola Finance', color: '#e63329' },
 ];
 
 const heroSlides = [
@@ -647,20 +647,24 @@ const Home = () => {
             <h2 className="text-4xl font-heading font-bold" style={{ color: "var(--text-primary)" }}>Our Partners from Across the Industry</h2>
           </motion.div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {partnerLogos.map((bank, index) => (
-              <motion.div key={index}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                className="rounded-xl flex items-center justify-center p-6 hover:shadow-lg transition-all"
-                style={{ minHeight: '100px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
-                <img 
-                  src={bank.img}
-                  alt={bank.name}
-                  className="max-w-full h-12 w-auto object-contain"
-                  loading="lazy"
-                />
-              </motion.div>
-            ))}
+            {partnerLogos.map((bank, index) => {
+              const initials = bank.name.split(' ').slice(0, 2).map(w => w[0]).join('');
+              return (
+                <motion.div key={index}
+                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ delay: index * 0.05 }}
+                  className="rounded-xl flex flex-col items-center justify-center p-6 hover:shadow-lg transition-all group"
+                  style={{ minHeight: '120px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
+                  <div
+                    className="flex items-center justify-center rounded-xl font-black text-white text-lg transition-all duration-300 group-hover:scale-110 mb-2"
+                    style={{ width: '56px', height: '56px', background: bank.color, letterSpacing: '-1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                  >
+                    {initials}
+                  </div>
+                  <span className="text-xs font-semibold text-gray-500 text-center">{bank.name}</span>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

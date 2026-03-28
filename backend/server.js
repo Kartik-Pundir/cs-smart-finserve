@@ -66,6 +66,7 @@ app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/feedback', require('./routes/feedbackRoutes'));
 app.use('/api/user', require('./routes/userRoutes'));
 app.use('/api/documents', require('./routes/documentRoutes'));
+app.use('/api/notifications', require('./routes/notificationRoutes'));
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

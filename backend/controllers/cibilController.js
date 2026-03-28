@@ -1,6 +1,5 @@
 const CibilCheck = require('../models/CibilCheck');
 const sendEmail = require('../utils/sendEmail');
-const { sendSMS, smsTemplates } = require('../utils/sendSMS');
 
 // @desc    Submit CIBIL check request
 // @route   POST /api/cibil
@@ -125,18 +124,6 @@ exports.updateCibilCheck = async (req, res) => {
         success: false,
         message: 'CIBIL check not found'
       });
-    }
-
-    // Send SMS if score was added/updated
-    if (req.body.score && oldCheck.score !== req.body.score && cibilCheck.mobile) {
-      try {
-        await sendSMS(
-          cibilCheck.mobile,
-          smsTemplates.cibilScoreReady(cibilCheck.name, req.body.score)
-        );
-      } catch (smsErr) {
-        console.error('SMS notification failed:', smsErr);
-      }
     }
 
     res.status(200).json({

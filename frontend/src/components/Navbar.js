@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import Logo from './Logo';
+import NotificationBell from './NotificationBell';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -103,6 +104,7 @@ const Navbar = () => {
 
             {user ? (
               <>
+                <NotificationBell />
                 {user.role === 'admin' && (
                   <Link to="/admin"
                     className="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all"

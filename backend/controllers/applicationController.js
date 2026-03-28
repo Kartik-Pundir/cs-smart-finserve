@@ -1,7 +1,7 @@
 const Application = require('../models/Application');
 const sendEmail = require('../utils/sendEmail');
 const { applicationReceived } = require('../utils/emailTemplates');
-const { sendSMS, smsTemplates } = require('../utils/sendSMS');
+const createNotification = require('../utils/createNotification');
 
 // @desc    Create new application
 // @route   POST /api/applications
@@ -18,18 +18,6 @@ exports.createApplication = async (req, res) => {
       });
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
-    }
-
-    // Send SMS notification to customer
-    if (req.body.phone) {
-      try {
-        await sendSMS(
-          req.body.phone,
-          smsTemplates.applicationSubmitted(req.body.fullName, req.body.serviceType)
-        );
-      } catch (smsError) {
-        console.error('SMS sending failed:', smsError);
-      }
     }
 
     // Notify admin
@@ -139,31 +127,36 @@ exports.updateApplication = async (req, res) => {
       });
     }
 
-    // Send SMS notification if status changed
-    if (req.body.status && oldApplication.status !== req.body.status && application.phone) {
+    // Send notification if status changed
+    if (req.body.status && oldApplication.status !== req.body.status && req.user) {
       try {
-        let smsMessage = '';
+        let title = '';
+        let message = '';
         
         switch (req.body.status) {
           case 'processing':
-            smsMessage = smsTemplates.applicationProcessing(application.fullName, application.serviceType);
+            title = 'Application Processing';
+            message = `Your ${application.serviceType} application is now being processed. We'll update you on the progress soon.`;
             break;
           case 'approved':
-            smsMessage = smsTemplates.applicationApproved(application.fullName, application.serviceType, application.loanAmount);
+            title = 'Application Approved! 🎉';
+            message = `Congratulations! Your ${application.serviceType} application${application.loanAmount ? ' for ₹' + application.loanAmount.toLocaleString() : ''} has been approved.`;
             break;
           case 'rejected':
-            smsMessage = smsTemplates.applicationRejected(application.fullName, application.serviceType);
+            title = 'Application Update';
+            message = `Your ${application.serviceType} application could not be approved at this time. Please contact us for more details.`;
             break;
           case 'disbursed':
-            smsMessage = smsTemplates.applicationDisbursed(application.fullName, application.serviceType, application.loanAmount);
+            title = 'Loan Disbursed! 💰';
+            message = `Great news! Your ${application.serviceType}${application.loanAmount ? ' of ₹' + application.loanAmount.toLocaleString() : ''} has been disbursed.`;
             break;
         }
 
-        if (smsMessage) {
-          await sendSMS(application.phone, smsMessage);
+        if (title && message) {
+          await createNotification(req.user._id, title, message, 'application', application._id);
         }
-      } catch (smsError) {
-        console.error('SMS notification failed:', smsError);
+      } catch (notifError) {
+        console.error('Notification creation failed:', notifError);
       }
     }
 

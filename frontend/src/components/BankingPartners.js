@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const logos = [
-  { name: 'HDFC Bank',            domain: 'hdfcbank.com',       color: '#004C8F' },
-  { name: 'ICICI Bank',           domain: 'icicibank.com',      color: '#F58220' },
-  { name: 'Axis Bank',            domain: 'axisbank.com',       color: '#97144D' },
-  { name: 'State Bank of India',  domain: 'sbi.co.in',          color: '#22409A' },
-  { name: 'Kotak Mahindra',       domain: 'kotak.com',          color: '#ED1C24' },
-  { name: 'Bajaj Finserv',        domain: 'bajajfinserv.in',    color: '#003399' },
-  { name: 'Yes Bank',             domain: 'yesbank.in',         color: '#00529B' },
-  { name: 'IDFC First Bank',      domain: 'idfcfirstbank.com',  color: '#9B1B30' },
-  { name: 'Bank of Baroda',       domain: 'bankofbaroda.in',    color: '#F7941D' },
-  { name: 'Punjab National Bank', domain: 'pnbindia.in',        color: '#1a3c6e' },
-  { name: 'LIC Housing Finance',  domain: 'lichousing.com',     color: '#006400' },
-  { name: 'Tata Capital',         domain: 'tatacapital.com',    color: '#1D3557' },
-  { name: 'Poonawalla Fincorp',   domain: 'poonawallafincorp.com', color: '#0057a8' },
-  { name: 'Cholamandalam',        domain: 'cholamandalam.com',  color: '#e63329' },
+  { name: 'HDFC Bank',            file: 'hdfc-logo.svg',       color: '#004C8F' },
+  { name: 'ICICI Bank',           file: 'icici-logo.svg',      color: '#F58220' },
+  { name: 'Axis Bank',            file: 'axis-logo.svg',       color: '#97144D' },
+  { name: 'State Bank of India',  file: null,                  color: '#22409A' },
+  { name: 'Kotak Mahindra',       file: null,                  color: '#ED1C24' },
+  { name: 'Bajaj Finserv',        file: 'bajaj-logo.svg',      color: '#003399' },
+  { name: 'Yes Bank',             file: 'yesbank-logo.svg',    color: '#00529B' },
+  { name: 'IDFC First Bank',      file: 'idfc-logo.svg',       color: '#9B1B30' },
+  { name: 'Bank of Baroda',       file: 'bob-logo.svg',        color: '#F7941D' },
+  { name: 'Punjab National Bank', file: null,                  color: '#1a3c6e' },
+  { name: 'LIC Housing Finance',  file: 'lic-logo.svg',        color: '#006400' },
+  { name: 'Tata Capital',         file: 'tata-logo.svg',       color: '#1D3557' },
+  { name: 'Poonawalla Fincorp',   file: null,                  color: '#0057a8' },
+  { name: 'Cholamandalam',        file: 'chola-logo.svg',      color: '#e63329' },
+  { name: 'Indian Bank',          file: 'indianbank-logo.svg', color: '#1a5490' },
 ];
 
 const BankCard = ({ bank }) => {
-  const [imgFailed, setImgFailed] = useState(false);
   const initials = bank.name.split(' ').slice(0, 2).map(w => w[0]).join('');
 
   return (
@@ -30,13 +30,12 @@ const BankCard = ({ bank }) => {
         className="flex items-center justify-center px-5 py-4 rounded-2xl bg-white shadow-sm border border-gray-100 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
         style={{ minHeight: '76px', width: '150px' }}
       >
-        {!imgFailed ? (
+        {bank.file ? (
           <img
-            src={`https://logo.clearbit.com/${bank.domain}`}
+            src={`/assets/${bank.file}`}
             alt={bank.name}
             style={{ maxHeight: '40px', maxWidth: '120px', objectFit: 'contain', filter: 'grayscale(100%)', opacity: 0.7, transition: 'filter 0.3s, opacity 0.3s' }}
             className="group-hover:grayscale-0 group-hover:opacity-100"
-            onError={() => setImgFailed(true)}
           />
         ) : (
           <div

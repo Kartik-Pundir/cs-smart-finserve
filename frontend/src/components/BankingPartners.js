@@ -1,21 +1,21 @@
 import React from 'react';
 
 const logos = [
-  { name: 'HDFC Bank',            file: 'hdfc-logo.svg',       color: '#004C8F' },
-  { name: 'ICICI Bank',           file: 'icici-logo.svg',      color: '#F58220' },
-  { name: 'Axis Bank',            file: 'axis-logo.svg',       color: '#97144D' },
-  { name: 'State Bank of India',  file: null,                  color: '#22409A' },
-  { name: 'Kotak Mahindra',       file: null,                  color: '#ED1C24' },
-  { name: 'Bajaj Finserv',        file: 'bajaj-logo.svg',      color: '#003399' },
-  { name: 'Yes Bank',             file: 'yesbank-logo.svg',    color: '#00529B' },
-  { name: 'IDFC First Bank',      file: 'idfc-logo.svg',       color: '#9B1B30' },
-  { name: 'Bank of Baroda',       file: 'bob-logo.svg',        color: '#F7941D' },
-  { name: 'Punjab National Bank', file: null,                  color: '#1a3c6e' },
-  { name: 'LIC Housing Finance',  file: 'lic-logo.svg',        color: '#006400' },
-  { name: 'Tata Capital',         file: 'tata-logo.svg',       color: '#1D3557' },
-  { name: 'Poonawalla Fincorp',   file: null,                  color: '#0057a8' },
-  { name: 'Cholamandalam',        file: 'chola-logo.svg',      color: '#e63329' },
-  { name: 'Indian Bank',          file: 'indianbank-logo.svg', color: '#1a5490' },
+  { name: 'HDFC Bank',            color: '#004C8F' },
+  { name: 'ICICI Bank',           color: '#F58220' },
+  { name: 'Axis Bank',            color: '#97144D' },
+  { name: 'State Bank of India',  color: '#22409A' },
+  { name: 'Kotak Mahindra',       color: '#ED1C24' },
+  { name: 'Bajaj Finserv',        color: '#003399' },
+  { name: 'Yes Bank',             color: '#00529B' },
+  { name: 'IDFC First Bank',      color: '#9B1B30' },
+  { name: 'Bank of Baroda',       color: '#F7941D' },
+  { name: 'Punjab National Bank', color: '#1a3c6e' },
+  { name: 'LIC Housing Finance',  color: '#006400' },
+  { name: 'Tata Capital',         color: '#1D3557' },
+  { name: 'Poonawalla Fincorp',   color: '#0057a8' },
+  { name: 'Cholamandalam',        color: '#e63329' },
+  { name: 'Indian Bank',          color: '#1a5490' },
 ];
 
 const BankCard = ({ bank }) => {
@@ -30,21 +30,12 @@ const BankCard = ({ bank }) => {
         className="flex items-center justify-center px-5 py-4 rounded-2xl bg-white shadow-sm border border-gray-100 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
         style={{ minHeight: '76px', width: '150px' }}
       >
-        {bank.file ? (
-          <img
-            src={`/assets/${bank.file}`}
-            alt={bank.name}
-            style={{ maxHeight: '40px', maxWidth: '120px', objectFit: 'contain', filter: 'grayscale(100%)', opacity: 0.7, transition: 'filter 0.3s, opacity 0.3s' }}
-            className="group-hover:grayscale-0 group-hover:opacity-100"
-          />
-        ) : (
-          <div
-            className="flex items-center justify-center rounded-xl font-black text-white text-lg"
-            style={{ width: '48px', height: '48px', background: bank.color, letterSpacing: '-1px' }}
-          >
-            {initials}
-          </div>
-        )}
+        <div
+          className="flex items-center justify-center rounded-xl font-black text-white text-lg transition-all duration-300 group-hover:scale-110"
+          style={{ width: '56px', height: '56px', background: bank.color, letterSpacing: '-1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+        >
+          {initials}
+        </div>
       </div>
       <span className="text-xs mt-2 font-semibold text-gray-400 group-hover:text-gray-700 transition-colors duration-300 text-center leading-tight" style={{ maxWidth: '140px' }}>
         {bank.name}

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
+import ApplyNowCTA from '../components/ApplyNowCTA';
 
 const steps = [
   { n: '01', title: 'Choose Your Car',            desc: 'Pick any used car from a dealer or private seller — we finance all makes and models.' },
@@ -181,6 +182,7 @@ const UsedCarLoan = () => {
         </div>
       </section>
       <LoanCTABanner loanType="Used Car Loan" />
+      <ApplyNowCTA loanType="Used Car Loan" />
     </div>
   );
 };

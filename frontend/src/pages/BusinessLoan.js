@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
+import ApplyNowCTA from '../components/ApplyNowCTA';
 
 const steps = [
   { n: '01', title: 'Share Business Details',     desc: 'Tell us about your business — turnover, vintage, and the loan amount you need.' },
@@ -173,6 +174,7 @@ const BusinessLoan = () => {
         </div>
       </section>
       <LoanCTABanner loanType="Business Loan" />
+      <ApplyNowCTA loanType="Business Loan" />
     </div>
   );
 };

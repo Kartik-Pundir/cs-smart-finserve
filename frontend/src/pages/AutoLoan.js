@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaCheckCircle, FaCarSide } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
+import ApplyNowCTA from '../components/ApplyNowCTA';
 
 const steps = [
   { n: '01', title: 'Fill the Application',      desc: 'Complete the simple online form with your basic details and loan requirement.' },
@@ -246,6 +247,7 @@ const AutoLoan = () => {
       </section>
 
       <LoanCTABanner loanType="Auto Loan" />
+      <ApplyNowCTA loanType="Car Loan" />
     </div>
   );
 };

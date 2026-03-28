@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
+import ApplyNowCTA from '../components/ApplyNowCTA';
 
 const steps = [
   { n: '01', title: 'Property Assessment',        desc: 'Share your property details — type, location, and estimated value — in under 2 minutes.' },
@@ -181,6 +182,7 @@ const LoanAgainstProperty = () => {
         </div>
       </section>
       <LoanCTABanner loanType="Loan Against Property" />
+      <ApplyNowCTA loanType="Loan Against Property" />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
+import ApplyNowCTA from '../components/ApplyNowCTA';
 
 const steps = [
   { n: '01', title: 'Apply Online in 2 Minutes',   desc: 'Fill in your basic details and the loan amount you need — quick and completely digital.' },
@@ -182,6 +183,7 @@ const PersonalLoan = () => {
         </div>
       </section>
       <LoanCTABanner loanType="Personal Loan" />
+      <ApplyNowCTA loanType="Personal Loan" />
     </div>
   );
 };

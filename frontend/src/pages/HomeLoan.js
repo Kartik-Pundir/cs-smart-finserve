@@ -6,6 +6,7 @@ import api from '../utils/api';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
 import ApplyNowCTA from '../components/ApplyNowCTA';
+import { trackLoanView } from '../components/RecentlyViewedLoans';
 
 const steps = [
   { n: '01', title: 'Check Your Eligibility',       desc: 'Answer a few quick questions online — know your eligible loan amount and best interest rate in under 60 seconds.' },
@@ -28,6 +29,18 @@ const HomeLoan = () => {
   const sectionRef = useRef(null);
   const isVisible = useRef(false);
   const pausedRef = useRef(false);
+
+  // Track page view
+  useEffect(() => {
+    trackLoanView({
+      title: 'Home Loan',
+      rate: '8.5%',
+      icon: '🏠',
+      color: '#c0392b',
+      gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+      link: '/home-loan'
+    });
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

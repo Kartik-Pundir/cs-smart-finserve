@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 import PopularLoans from '../components/PopularLoans';
 import VideoTestimonials from '../components/VideoTestimonials';
+import RecentlyViewedLoans from '../components/RecentlyViewedLoans';
 
 /* ── Dark luxury theme ───────────────────────────────────────
    Base:      #111111  (near black)
@@ -644,6 +645,9 @@ const Home = () => {
 
       {/* ── Popular Loans ────────────────────────────────── */}
       <PopularLoans />
+
+      {/* ── Recently Viewed ───────────────────────────────── */}
+      <RecentlyViewedLoans />
 
       {/* ── Video Testimonials ───────────────────────────── */}
       <VideoTestimonials />

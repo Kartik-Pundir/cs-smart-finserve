@@ -14,17 +14,41 @@ const CallbackForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  
+  // Simple Math CAPTCHA
+  const [captcha, setCaptcha] = useState({ num1: 0, num2: 0, answer: '' });
+  const [captchaError, setCaptchaError] = useState(false);
+
+  // Generate new CAPTCHA on mount
+  useState(() => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    setCaptcha({ num1, num2, answer: '' });
+  }, []);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Verify CAPTCHA
+    const correctAnswer = captcha.num1 + captcha.num2;
+    if (parseInt(captcha.answer) !== correctAnswer) {
+      setCaptchaError(true);
+      toast.error('Please solve the math problem correctly');
+      return;
+    }
+    
     setLoading(true);
     try {
       await api.post('/leads', formData);
       toast.success('Message sent! Check your email for confirmation.');
       setSent(true);
       setFormData({ fullName: '', phone: '', email: '', serviceInterested: '', message: '' });
+      // Reset CAPTCHA
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      setCaptcha({ num1, num2, answer: '' });
     } catch (error) {
       toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
@@ -85,6 +109,51 @@ const CallbackForm = () => {
           <textarea name="message" value={formData.message} onChange={handleChange}
             rows={4} className="input-field resize-none"
             placeholder="Tell us about your requirements..." />
+        </div>
+        
+        {/* CAPTCHA */}
+        <div className="md:col-span-2">
+          <label className="block text-gray-700 mb-1.5 font-medium text-sm">Security Check *</label>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            padding: '16px',
+            background: captchaError ? '#fee' : '#f9fafb',
+            border: `2px solid ${captchaError ? '#c0392b' : '#e5e7eb'}`,
+            borderRadius: '12px'
+          }}>
+            <span style={{ fontSize: '18px', fontWeight: '600', color: '#374151' }}>
+              {captcha.num1} + {captcha.num2} =
+            </span>
+            <input
+              type="number"
+              value={captcha.answer}
+              onChange={(e) => {
+                setCaptcha({ ...captcha, answer: e.target.value });
+                setCaptchaError(false);
+              }}
+              required
+              style={{
+                width: '80px',
+                padding: '8px 12px',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: '600',
+                textAlign: 'center'
+              }}
+              placeholder="?"
+            />
+            <span style={{ fontSize: '14px', color: '#6b7280' }}>
+              (Solve to prove you're human)
+            </span>
+          </div>
+          {captchaError && (
+            <p style={{ color: '#c0392b', fontSize: '13px', marginTop: '6px' }}>
+              ❌ Incorrect answer. Please try again.
+            </p>
+          )}
         </div>
       </div>
 

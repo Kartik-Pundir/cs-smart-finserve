@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
+import StickyCallButton from './components/StickyCallButton';
 
 // Pages
 import Home from './pages/Home';
@@ -65,6 +66,7 @@ function App() {
             </Routes>
             <Footer />
             <Chatbot />
+            <StickyCallButton />
             <ToastContainer
               position="top-right"
               autoClose={3000}

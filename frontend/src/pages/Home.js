@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 import PopularLoans from '../components/PopularLoans';
-import VideoTestimonials from '../components/VideoTestimonials';
 import RecentlyViewedLoans from '../components/RecentlyViewedLoans';
 
 /* ── Dark luxury theme ───────────────────────────────────────
@@ -648,9 +647,6 @@ const Home = () => {
 
       {/* ── Recently Viewed ───────────────────────────────── */}
       <RecentlyViewedLoans />
-
-      {/* ── Video Testimonials ───────────────────────────── */}
-      <VideoTestimonials />
 
       {/* ── Partners ─────────────────────────────────────── */}
       <section className="py-20" style={{ background: "var(--bg-alt)" }}>

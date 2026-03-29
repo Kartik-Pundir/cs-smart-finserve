@@ -240,7 +240,7 @@ const AdminDashboard = () => {
     { label: 'Applications',     value: stats?.totalApplications ?? 0,  sub: `${stats?.submittedApplications ?? 0} submitted`, color: 'from-purple-500 to-purple-600', tab: 'applications' },
     { label: 'CIBIL Checks',     value: stats?.totalCibilChecks ?? 0,   sub: 'total requests',                             color: 'from-orange-500 to-orange-600', tab: 'cibil' },
     { label: 'Registered Users', value: users.length,                   sub: 'signed up',                                  color: 'from-pink-500 to-rose-500',     tab: 'users' },
-    { label: 'Feedback',         value: feedback.length,                sub: feedback.length ? `avg ${(feedback.reduce((a, f) => a + f.rating, 0) / feedback.length).toFixed(1)}` + '\u2605' : 'none yet', color: 'from-yellow-500 to-amber-500', tab: 'feedback' },
+    { label: 'Feedback',         value: feedback.length,                sub: feedback.length ? `avg ${(feedback.reduce((a, f) => a + f.rating, 0) / feedback.length).toFixed(1)}\u2605` : 'none yet', color: 'from-yellow-500 to-amber-500', tab: 'feedback' },
   ];
 
   // Filter today's leads

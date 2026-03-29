@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaBell, FaTimes, FaCheck, FaCheckDouble } from 'react-icons/fa';
+import { FaBell, FaTimes, FaCheckDouble } from 'react-icons/fa';
 import axios from 'axios';
 
 const NotificationBell = () => {

@@ -1,213 +1,217 @@
-# 🚀 VERCEL DEPLOYMENT - STEP BY STEP
+# Vercel Deployment Guide
 
-## ✅ PREPARATION COMPLETE
-All configuration files are ready. Just follow these steps:
+## Complete Monorepo Deployment (Frontend + Backend Together)
 
----
+This guide will help you deploy the entire CS Smart Finserve project (frontend + backend) on a single Vercel deployment.
 
-## STEP 1: Deploy Frontend (5 minutes)
-
-1. **Open Vercel**: https://vercel.com/login
-   - Sign in with GitHub
-
-2. **Import Project**:
-   - Click "Add New" → "Project"
-   - Find repository: `Kartik-Pundir/cs-smart-finserve`
-   - Click "Import"
-
-3. **Configure**:
-   ```
-   Project Name: cs-smart-finserve-frontend
-   Root Directory: frontend (IMPORTANT!)
-   Framework: Create React App (auto-detected)
-   ```
-
-4. **Environment Variables** (click "Add"):
-   ```
-   Name: REACT_APP_API_URL
-   Value: https://your-backend-url.vercel.app/api
-   ```
-   (You'll update this after deploying backend)
-
-5. **Click "Deploy"** → Wait 2-3 minutes
-
-6. **Copy your frontend URL**: 
-   Example: `https://cs-smart-finserve-frontend.vercel.app`
+### Prerequisites
+- GitHub account with your repository
+- Vercel account (sign up at vercel.com)
+- MongoDB Atlas database URL
+- Gmail App Password for email notifications
 
 ---
 
-## STEP 2: Deploy Backend (5 minutes)
+## Step 1: Prepare Your Repository
 
-1. **Go back to Vercel Dashboard**
-   - Click "Add New" → "Project"
-   - Select SAME repository: `Kartik-Pundir/cs-smart-finserve`
-   - Click "Import"
-
-2. **Configure**:
-   ```
-   Project Name: cs-smart-finserve-backend
-   Root Directory: backend (IMPORTANT!)
-   Framework: Other
-   ```
-
-3. **Environment Variables** (Add ALL of these):
-
-   ```
-   PORT = 5001
-   NODE_ENV = production
-   
-   MONGODB_URI = mongodb+srv://kartikpundir231:YOUR_PASSWORD@cluster.mongodb.net/cssmartfinserve?retryWrites=true&w=majority
-   
-   JWT_SECRET = your-super-secret-jwt-key-here
-   JWT_EXPIRES_IN = 7d
-   
-   EMAIL_HOST = smtp.gmail.com
-   EMAIL_PORT = 587
-   EMAIL_USER = kartikpundir231@gmail.com
-   EMAIL_PASS = nesyidojhwbafzmb
-   ADMIN_EMAIL = kartikpundir231@gmail.com
-   
-   CLIENT_URL = https://cs-smart-finserve-frontend.vercel.app
-   
-   GOOGLE_CLIENT_ID = your-google-client-id
-   GOOGLE_CLIENT_SECRET = your-google-client-secret
-   ```
-
-4. **Click "Deploy"** → Wait 2-3 minutes
-
-5. **Copy your backend URL**: 
-   Example: `https://cs-smart-finserve-backend.vercel.app`
+1. Make sure all changes are committed and pushed to GitHub:
+```bash
+git add -A
+git commit -m "Ready for Vercel deployment"
+git push origin main
+```
 
 ---
 
-## STEP 3: Update Frontend Environment Variable (2 minutes)
+## Step 2: Deploy to Vercel
 
-1. **Go to Frontend Project**:
-   - Click on "cs-smart-finserve-frontend" project
-   - Go to "Settings" → "Environment Variables"
-
-2. **Edit REACT_APP_API_URL**:
-   - Delete the old value
-   - Add new value: `https://cs-smart-finserve-backend.vercel.app/api`
-   - Click "Save"
-
-3. **Redeploy**:
-   - Go to "Deployments" tab
-   - Click "..." on latest deployment
-   - Click "Redeploy"
-   - Wait 2 minutes
+1. Go to [vercel.com](https://vercel.com) and sign in
+2. Click "Add New" → "Project"
+3. Import your GitHub repository: `cs-smart-finserve`
+4. Configure the project:
+   - **Framework Preset**: Other
+   - **Root Directory**: Leave as `.` (root)
+   - **Build Command**: Leave default (will use vercel.json)
+   - **Output Directory**: Leave default (will use vercel.json)
 
 ---
 
-## STEP 4: Update Google OAuth (3 minutes)
+## Step 3: Add Environment Variables
 
-1. **Go to Google Cloud Console**:
-   https://console.cloud.google.com/apis/credentials
+In the Vercel project settings, add these environment variables:
 
-2. **Click on your OAuth 2.0 Client**
+### Backend Environment Variables:
+```
+MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret_key_here
+JWT_EXPIRE=7d
+COOKIE_EXPIRE=7
 
-3. **Add Authorized Redirect URIs**:
-   ```
-   https://cs-smart-finserve-backend.vercel.app/api/auth/google/callback
-   https://cs-smart-finserve-frontend.vercel.app/auth/google/success
-   ```
+EMAIL_USER=kartikpundir231@gmail.com
+EMAIL_PASS=nesyidojhwbafzmb
 
-4. **Click "Save"**
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=https://your-domain.vercel.app/api/auth/google/callback
 
----
+FRONTEND_URL=https://your-domain.vercel.app
+NODE_ENV=production
+```
 
-## STEP 5: Test Your Live Site! 🎉
+### Frontend Environment Variables:
+```
+REACT_APP_API_URL=/api
+```
 
-1. **Open your frontend URL**:
-   `https://cs-smart-finserve-frontend.vercel.app`
-
-2. **Test these features**:
-   - ✅ Homepage loads
-   - ✅ Chatbot works
-   - ✅ Contact form submits
-   - ✅ Login/Signup works
-   - ✅ Google OAuth works
-   - ✅ Apply for loan works
-
----
-
-## 🔧 TROUBLESHOOTING
-
-### If frontend shows blank page:
-- Check browser console for errors
-- Verify `REACT_APP_API_URL` is correct
-- Redeploy frontend
-
-### If API calls fail:
-- Check backend logs in Vercel dashboard
-- Verify all environment variables are set
-- Check MongoDB connection string
-
-### If Google OAuth fails:
-- Verify redirect URIs in Google Console
-- Check `CLIENT_URL` in backend env vars
-- Make sure both URLs use HTTPS
+**Important**: Replace `your-domain.vercel.app` with your actual Vercel domain after deployment.
 
 ---
 
-## 📱 OPTIONAL: Add Custom Domain
+## Step 4: Deploy
 
-1. **Buy domain** (if you don't have): cssfinserve.com
-
-2. **In Vercel Frontend Project**:
-   - Settings → Domains
-   - Add: `cssfinserve.com` and `www.cssfinserve.com`
-   - Follow DNS instructions
-
-3. **Update Backend CLIENT_URL**:
-   - Change to: `https://cssfinserve.com`
-   - Redeploy backend
-
-4. **Update Google OAuth**:
-   - Add: `https://cssfinserve.com/auth/google/success`
+1. Click "Deploy"
+2. Wait for the build to complete (usually 2-3 minutes)
+3. Once deployed, you'll get a URL like: `https://your-project.vercel.app`
 
 ---
 
-## 🎯 DEPLOYMENT CHECKLIST
+## Step 5: Update Google OAuth Callback
 
-- [ ] Frontend deployed on Vercel
-- [ ] Backend deployed on Vercel
-- [ ] Frontend env var updated with backend URL
-- [ ] Backend env vars all added
-- [ ] Google OAuth redirect URIs updated
-- [ ] Test live site
-- [ ] Custom domain added (optional)
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Navigate to your OAuth 2.0 Client
+3. Add these to "Authorized redirect URIs":
+   - `https://your-domain.vercel.app/api/auth/google/callback`
+   - `https://your-domain.vercel.app/google-auth-success`
 
 ---
 
-## 💡 TIPS
+## Step 6: Update Environment Variables
 
-1. **Free Tier Limits**:
-   - Vercel: 100GB bandwidth/month
-   - Good for 10,000+ visitors/month
-
-2. **MongoDB Atlas**:
-   - Make sure to whitelist all IPs: `0.0.0.0/0`
-   - Or add Vercel IPs specifically
-
-3. **Environment Variables**:
-   - Never commit `.env` files
-   - Always add them in Vercel dashboard
-
-4. **Logs**:
-   - Check logs in Vercel dashboard if something breaks
-   - Go to project → "Logs" tab
+1. Go back to Vercel project settings
+2. Update these variables with your actual domain:
+   - `GOOGLE_CALLBACK_URL=https://your-actual-domain.vercel.app/api/auth/google/callback`
+   - `FRONTEND_URL=https://your-actual-domain.vercel.app`
+3. Redeploy the project (Vercel will auto-redeploy on env changes)
 
 ---
 
-## 🆘 NEED HELP?
+## Step 7: Setup Admin User
 
-If you get stuck:
-1. Check Vercel deployment logs
-2. Check browser console for errors
-3. Verify all environment variables
-4. Make sure MongoDB allows Vercel connections
+1. Go to MongoDB Atlas
+2. Open your database → Collections → users
+3. Find your user (kartikpundir231@gmail.com)
+4. Edit the document and set: `"role": "admin"`
+5. Save the changes
 
 ---
 
-**Your project is ready to deploy! Just follow the steps above.** 🚀
+## Troubleshooting
+
+### 404 Error on Homepage
+- Check that `vercel.json` is in the root directory
+- Verify the build completed successfully in Vercel logs
+- Make sure `frontend/build` directory was created
+
+### API Calls Failing
+- Check environment variables are set correctly
+- Verify MongoDB connection string is correct
+- Check Vercel function logs for backend errors
+
+### Google OAuth Not Working
+- Verify callback URLs in Google Console match your Vercel domain
+- Check `GOOGLE_CALLBACK_URL` environment variable
+- Ensure `FRONTEND_URL` is set correctly
+
+### Build Failures
+- Check Vercel build logs for specific errors
+- Verify all dependencies are in package.json files
+- Make sure Node version is compatible (14.x or higher)
+
+---
+
+## File Structure
+
+Your deployment uses these configuration files:
+
+```
+/
+├── vercel.json              # Main Vercel config (routes both frontend & backend)
+├── package.json             # Root dependencies
+├── frontend/
+│   ├── vercel.json         # Frontend build config
+│   ├── package.json        # Frontend dependencies
+│   └── .env.production     # Frontend production env vars
+└── backend/
+    ├── vercel.json         # Backend serverless config
+    ├── package.json        # Backend dependencies
+    └── server.js           # Backend entry point
+```
+
+---
+
+## How It Works
+
+1. Vercel builds the frontend React app into static files
+2. Vercel deploys the backend as serverless functions
+3. All `/api/*` requests are routed to the backend
+4. All other requests serve the React app
+5. Both frontend and backend run on the same domain
+
+---
+
+## Redeployment
+
+To redeploy after making changes:
+
+1. Commit and push to GitHub:
+```bash
+git add -A
+git commit -m "Your changes"
+git push origin main
+```
+
+2. Vercel will automatically detect the push and redeploy
+
+Or manually redeploy from Vercel dashboard:
+- Go to your project → Deployments
+- Click "Redeploy" on the latest deployment
+
+---
+
+## Custom Domain (Optional)
+
+To use cssfinserve.com:
+
+1. Go to Vercel project → Settings → Domains
+2. Add your domain: `cssfinserve.com`
+3. Follow Vercel's DNS configuration instructions
+4. Update environment variables with new domain
+5. Update Google OAuth callback URLs
+
+---
+
+## Support
+
+If you encounter issues:
+1. Check Vercel build logs
+2. Check Vercel function logs (for backend errors)
+3. Verify all environment variables are set
+4. Check MongoDB Atlas network access (allow all IPs: 0.0.0.0/0)
+
+---
+
+## Success Checklist
+
+- [ ] Project deployed successfully
+- [ ] Homepage loads without 404 error
+- [ ] Can navigate to different pages
+- [ ] API calls work (test login/signup)
+- [ ] Google OAuth works
+- [ ] Admin dashboard accessible
+- [ ] Email notifications working
+- [ ] File uploads working
+- [ ] MongoDB connection stable
+
+---
+
+**Your project is now live! 🎉**

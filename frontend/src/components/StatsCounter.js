@@ -55,6 +55,7 @@ const StatsCounter = () => {
       }, 16);
 
       return () => clearInterval(timer);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isVisible, end]);
 
     return (

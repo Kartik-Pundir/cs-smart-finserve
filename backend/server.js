@@ -56,12 +56,28 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('✅ MongoDB Connected'))
-.catch(err => console.error('❌ MongoDB Connection Error:', err));
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) {
+    return;
+  }
+  
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    isConnected = true;
+    console.log('✅ MongoDB Connected');
+  } catch (err) {
+    console.error('❌ MongoDB Connection Error:', err);
+    throw err;
+  }
+};
+
+// Connect to MongoDB
+connectDB().catch(err => console.error('Initial MongoDB connection failed:', err));
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));

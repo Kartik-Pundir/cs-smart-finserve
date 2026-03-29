@@ -8,8 +8,8 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "build": "cd frontend && npm install && npm run build",
-    "install-all": "npm install && cd frontend && npm install",
-    "vercel-build": "cd frontend && npm install && npm run build"
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "vercel-build": "npm install && cd backend && npm install && cd ../frontend && npm install && npm run build"
   },
   "keywords": [
     "fintech",

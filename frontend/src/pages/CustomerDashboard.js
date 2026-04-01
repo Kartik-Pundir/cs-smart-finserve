@@ -8,7 +8,7 @@ import {
   FaClock, FaTimesCircle, FaRupeeSign
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
+import axios from 'axios';
 
 /* ── status pill config ── */
 const STATUS = {
@@ -95,7 +95,7 @@ const CustomerDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const res = await api.get('/user/dashboard');
+      const res = await axios.get('/api/user/dashboard');
       setData(res.data.data);
     } catch {
       toast.error('Failed to load dashboard');
@@ -153,11 +153,11 @@ const CustomerDashboard = () => {
               className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg flex-shrink-0"
                 style={{ background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
-                {user?.name?.charAt(0).toUpperCase()}
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
               </div>
               <div>
                 <p className="text-white/70 text-sm mb-0.5">Welcome back</p>
-                <h1 className="text-2xl font-heading font-bold text-white">{user?.name}</h1>
+                <h1 className="text-2xl font-heading font-bold text-white">{user?.name || 'User'}</h1>
                 <p className="text-white/60 text-xs mt-0.5">{user?.email}</p>
               </div>
             </motion.div>

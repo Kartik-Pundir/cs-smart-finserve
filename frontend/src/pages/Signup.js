@@ -1,213 +1,335 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FaCheckCircle, FaShieldAlt, FaBell, FaFileAlt, FaCalculator, FaStar } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
+import { FaFileAlt, FaCalculator, FaGift, FaLock, FaHeadset, FaChartLine, FaStar } from 'react-icons/fa';
 
-const benefits = [
-  { icon: <FaFileAlt />, title: 'Track Applications', desc: 'Real-time status of every loan you apply for.' },
-  { icon: <FaCalculator />, title: 'Saved EMI Calculations', desc: 'Compare multiple EMI scenarios side by side.' },
-  { icon: <FaBell />, title: 'Personalised Offers', desc: 'Loan offers matched to your profile and needs.' },
-  { icon: <FaShieldAlt />, title: 'Secure Document Vault', desc: 'Upload once, reuse across all applications.' },
-  { icon: <FaStar />, title: 'Priority Support', desc: 'Faster response from our relationship managers.' },
-  { icon: <FaCheckCircle />, title: 'CIBIL Score History', desc: 'Track your credit score and get tips to improve.' },
-];
-
-const GoogleIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 48 48">
-    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-    <path fill="none" d="M0 0h48v48H0z"/>
-  </svg>
-);
-
-const Signup = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '', confirmPassword: '' });
-  const [loading, setLoading] = useState(false);
-  const { signup } = useAuth();
+const SignUp = () => {
   const navigate = useNavigate();
+  const { register, isAuthenticated } = useAuth();
+  const { isDark } = useTheme();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const benefits = [
+    { icon: <FaFileAlt />, title: 'Track Applications', desc: 'Real-time status of every loan you apply for' },
+    { icon: <FaCalculator />, title: 'Saved EMI Calculations', desc: 'Compare multiple EMI scenarios side by side' },
+    { icon: <FaGift />, title: 'Personalised Offers', desc: 'Loan offers matched to your profile and needs' },
+    { icon: <FaLock />, title: 'Secure Document Vault', desc: 'Upload once, reuse across all applications' },
+    { icon: <FaHeadset />, title: 'Priority Support', desc: 'Direct access to our relationship managers' },
+    { icon: <FaChartLine />, title: 'CIBIL Score History', desc: 'Track your credit score and get tips to improve' },
+  ];
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match');
       return;
     }
-    setLoading(true);
-    try {
-      await signup(formData);
-      toast.success('Welcome to CS Smart Finserve!');
-      navigate('/');
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Signup failed');
-    } finally {
-      setLoading(false);
+
+    if (formData.password.length < 6) {
+      toast.error('Password must be at least 6 characters');
+      return;
     }
+
+    setLoading(true);
+
+    const result = await register(formData.fullName, formData.email, formData.password, formData.phone);
+    
+    if (result.success) {
+      toast.success('Account created successfully!');
+      navigate('/dashboard');
+    } else {
+      toast.error(result.message || 'Sign up failed');
+    }
+    
+    setLoading(false);
+  };
+
+  const handleGoogleSignUp = () => {
+    window.location.href = '/api/auth/google';
   };
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: 'var(--bg-base)' }}>
-
-      {/* Full-page two-column layout */}
-      <div className="min-h-[calc(100vh-80px)] grid grid-cols-1 lg:grid-cols-2">
-
-        {/* LEFT — Brand panel */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden"
-          style={{ background: 'linear-gradient(145deg, #1a1a2e 0%, #2d1b1b 50%, #c0392b 100%)' }}
-        >
-          {/* Decorative blobs */}
-          <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-3xl opacity-20" style={{ background: '#e74c3c' }} />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl opacity-15" style={{ background: '#c0392b' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full blur-3xl opacity-10" style={{ background: '#ff6b6b' }} />
-
-          {/* Top — Logo area */}
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-12">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">CS</span>
-              </div>
-              <span className="text-white font-bold text-lg">CS Smart Finserve</span>
+    <div className="min-h-screen flex" style={{ background: isDark ? '#111111' : '#f8f9fa', paddingTop: '80px' }}>
+      
+      {/* Left Side - Dark with gradient background */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
+        style={{ 
+          background: isDark 
+            ? 'linear-gradient(135deg, rgba(26, 26, 46, 1) 0%, rgba(45, 27, 46, 1) 35%, rgba(61, 26, 26, 1) 70%, rgba(192, 57, 43, 0.8) 100%)'
+            : 'linear-gradient(135deg, rgba(26, 26, 46, 1) 0%, rgba(45, 27, 46, 1) 35%, rgba(61, 26, 26, 1) 70%, rgba(192, 57, 43, 0.8) 100%)'
+        }}>
+        
+        <div className="relative z-10 flex flex-col p-10 text-white w-full">
+          
+          {/* Logo and Company Name */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold bg-white text-gray-900">
+              CS
             </div>
+            <span className="text-base font-semibold">CS Smart Finserve</span>
+          </div>
 
-            <h2 className="text-4xl font-heading font-bold text-white leading-tight mb-4">
+          {/* Main Heading */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold mb-3 leading-tight">
               Your financial journey<br />starts here.
-            </h2>
-            <p className="text-white/60 text-sm leading-relaxed max-w-sm">
+            </h1>
+            <p className="text-gray-300 text-xs leading-relaxed max-w-sm">
               Join thousands of customers who trust us for home loans, car loans, business loans and more — all in one place.
             </p>
           </div>
 
-          {/* Middle — Benefits */}
-          <div className="relative z-10 space-y-4 my-8">
-            {benefits.map((b, i) => (
-              <motion.div key={i}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + i * 0.08 }}
-                className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 text-accent text-sm"
-                  style={{ background: 'rgba(255,255,255,0.1)' }}>
-                  {b.icon}
+          {/* Benefits List */}
+          <div className="space-y-3 mb-auto">
+            {benefits.map((benefit, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(192, 57, 43, 0.25)' }}>
+                  <span className="text-red-400 text-sm">{benefit.icon}</span>
                 </div>
                 <div>
-                  <p className="text-white text-sm font-semibold">{b.title}</p>
-                  <p className="text-white/50 text-xs">{b.desc}</p>
+                  <h3 className="font-semibold text-white text-xs mb-0.5">{benefit.title}</h3>
+                  <p className="text-gray-400 text-xs leading-snug">{benefit.desc}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
-          {/* Bottom — Trust badge */}
-          <div className="relative z-10 flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm border border-white/10">
+          {/* Customer Testimonial at Bottom */}
+          <div className="mt-8 flex items-center gap-3">
             <div className="flex -space-x-2">
-              {['👨‍💼','👩‍💼','👨‍🔧','👩‍💻'].map((e, i) => (
-                <div key={i} className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm border-2 border-white/10">{e}</div>
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} 
+                  className="w-9 h-9 rounded-full border-2 border-gray-800 flex items-center justify-center text-xs font-bold"
+                  style={{ background: `hsl(${i * 60}, 70%, 60%)` }}>
+                  {String.fromCharCode(65 + i)}
+                </div>
               ))}
             </div>
             <div>
-              <p className="text-white text-xs font-semibold">10,000+ happy customers</p>
-              <div className="flex gap-0.5 mt-0.5">
-                {[1,2,3,4,5].map(s => <FaStar key={s} size={10} className="text-yellow-400" />)}
+              <div className="flex items-center gap-0.5 mb-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar key={i} size={10} className="text-yellow-400" />
+                ))}
               </div>
+              <p className="text-xs text-gray-300">10,000+ happy customers</p>
             </div>
           </div>
-        </motion.div>
+        </div>
+      </div>
 
-        {/* RIGHT — Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1 }}
-          className="signup-panel flex items-center justify-center p-6 lg:p-12"
-        >
-          <div className="w-full max-w-md">
-
-            {/* Mobile header */}
-            <div className="lg:hidden text-center mb-8">
-              <h1 className="text-2xl font-heading font-bold text-gray-900">Create Free Account</h1>
-              <p className="text-gray-500 text-sm mt-1">Join CS Smart Finserve today</p>
-            </div>
-
-            {/* Desktop header */}
-            <div className="hidden lg:block mb-8">
-              <h2 className="text-2xl font-heading font-bold text-gray-900">Create your account</h2>
-              <p className="text-gray-500 text-sm mt-1">Free forever. No credit card required.</p>
-            </div>
-
-            {/* Google Button — top */}
-            <a href="http://localhost:5001/api/auth/google"
-              className="w-full flex items-center justify-center gap-3 py-3 bg-white border border-gray-200 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 hover:border-gray-300 hover:shadow-sm transition-all mb-5">
-              <GoogleIcon />
-              Continue with Google
-            </a>
-
-            <div className="flex items-center gap-3 mb-5">
-              <div className="flex-1 h-px bg-gray-200" />
-              <span className="text-xs text-gray-400 font-medium">or sign up with email</span>
-              <div className="flex-1 h-px bg-gray-200" />
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                  <label className="block text-gray-700 mb-1.5 font-medium text-sm">Full Name *</label>
-                  <input type="text" value={formData.name}
-                    onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    required placeholder="Rahul Sharma" className="input-field" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-gray-700 mb-1.5 font-medium text-sm">Email Address *</label>
-                  <input type="email" value={formData.email}
-                    onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    required placeholder="you@example.com" className="input-field" />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-gray-700 mb-1.5 font-medium text-sm">Phone Number *</label>
-                  <input type="tel" value={formData.phone}
-                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                    required pattern="[0-9]{10}" placeholder="10-digit mobile number" className="input-field" />
-                </div>
-                <div>
-                  <label className="block text-gray-700 mb-1.5 font-medium text-sm">Password *</label>
-                  <input type="password" value={formData.password}
-                    onChange={e => setFormData({ ...formData, password: e.target.value })}
-                    required minLength="6" placeholder="Min. 6 characters" className="input-field" />
-                </div>
-                <div>
-                  <label className="block text-gray-700 mb-1.5 font-medium text-sm">Confirm Password *</label>
-                  <input type="password" value={formData.confirmPassword}
-                    onChange={e => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    required placeholder="Re-enter password" className="input-field" />
-                </div>
-              </div>
-
-              <button type="submit" disabled={loading}
-                className="w-full py-3 text-white rounded-xl font-bold text-base hover:shadow-lg transition-all disabled:opacity-50 hover:scale-[1.01] mt-2"
+      {/* Right Side - White with Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8" style={{ background: isDark ? '#1a1a1a' : 'white' }}>
+        <div className="w-full max-w-md">
+          
+          {/* Mobile Logo */}
+          <div className="lg:hidden mb-8 text-center">
+            <Link to="/" className="inline-flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
                 style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
-                {loading ? 'Creating Account...' : 'Create Free Account →'}
-              </button>
-            </form>
+                CS
+              </div>
+              <span className="text-xl font-bold" style={{ color: isDark ? 'white' : '#1a1a1a' }}>CS Smart Finserve</span>
+            </Link>
+          </div>
 
-            <p className="text-center mt-5 text-gray-500 text-sm">
-              Already have an account?{' '}
-              <Link to="/login" className="text-accent hover:underline font-semibold">Log in</Link>
-            </p>
-
-            <p className="text-center mt-4 text-xs text-gray-400">
-              🔒 Your data is encrypted and never shared with third parties.
+          {/* Title */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-1" style={{ color: isDark ? 'white' : '#1a1a1a' }}>
+              Create your account
+            </h2>
+            <p className="text-sm" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+              Free forever. No credit card required.
             </p>
           </div>
-        </motion.div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* Google Sign Up */}
+            <button
+              type="button"
+              onClick={handleGoogleSignUp}
+              className="w-full flex items-center justify-center gap-3 px-4 py-3 border rounded-lg transition-all font-medium text-sm"
+              style={{
+                background: isDark ? '#111111' : 'white',
+                borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                color: isDark ? 'white' : '#374151'
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.64 9.20454C17.64 8.56636 17.5827 7.95272 17.4764 7.36363H9V10.845H13.8436C13.635 11.97 13.0009 12.9231 12.0477 13.5613V15.8195H14.9564C16.6582 14.2527 17.64 11.9454 17.64 9.20454Z" fill="#4285F4"/>
+                <path d="M9 18C11.43 18 13.4673 17.1941 14.9564 15.8195L12.0477 13.5613C11.2418 14.1013 10.2109 14.4204 9 14.4204C6.65591 14.4204 4.67182 12.8372 3.96409 10.71H0.957275V13.0418C2.43818 15.9831 5.48182 18 9 18Z" fill="#34A853"/>
+                <path d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 9C3.68182 8.40682 3.78409 7.83 3.96409 7.29V4.95818H0.957275C0.347727 6.17318 0 7.54772 0 9C0 10.4523 0.347727 11.8268 0.957275 13.0418L3.96409 10.71Z" fill="#FBBC05"/>
+                <path d="M9 3.57955C10.3214 3.57955 11.5077 4.03364 12.4405 4.92545L15.0218 2.34409C13.4632 0.891818 11.4259 0 9 0C5.48182 0 2.43818 2.01682 0.957275 4.95818L3.96409 7.29C4.67182 5.16273 6.65591 3.57955 9 3.57955Z" fill="#EA4335"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t" style={{ borderColor: isDark ? '#3a3a3a' : '#d1d5db' }}></div>
+              </div>
+              <div className="relative flex justify-center text-xs">
+                <span className="px-3 text-xs" style={{ 
+                  background: isDark ? '#1a1a1a' : 'white',
+                  color: isDark ? '#6b7280' : '#9ca3af'
+                }}>or sign up with email</span>
+              </div>
+            </div>
+
+            {/* Full Name */}
+            <div>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                placeholder="Rahul Sharma"
+                required
+                className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                style={{
+                  background: isDark ? '#111111' : 'white',
+                  borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                  color: isDark ? 'white' : '#1a1a1a'
+                }}
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                Email Address <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                required
+                className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                style={{
+                  background: isDark ? '#111111' : 'white',
+                  borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                  color: isDark ? 'white' : '#1a1a1a'
+                }}
+              />
+            </div>
+
+            {/* Phone Number */}
+            <div>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                Phone Number <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="10-digit mobile number"
+                required
+                className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                style={{
+                  background: isDark ? '#111111' : 'white',
+                  borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                  color: isDark ? 'white' : '#1a1a1a'
+                }}
+              />
+            </div>
+
+            {/* Password Fields */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                  Password <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Min. 6 characters"
+                  required
+                  minLength={6}
+                  className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                  style={{
+                    background: isDark ? '#111111' : 'white',
+                    borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                    color: isDark ? 'white' : '#1a1a1a'
+                  }}
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                  Confirm Password <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Re-enter password"
+                  required
+                  className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
+                  style={{
+                    background: isDark ? '#111111' : 'white',
+                    borderColor: isDark ? '#3a3a3a' : '#d1d5db',
+                    color: isDark ? 'white' : '#1a1a1a'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Create Account Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-lg font-semibold text-white text-sm transition-all hover:shadow-lg disabled:opacity-50"
+              style={{ background: 'linear-gradient(to right, #c0392b, #e74c3c)' }}
+            >
+              {loading ? 'Creating Account...' : 'Create Free Account →'}
+            </button>
+
+            {/* Login Link */}
+            <p className="text-center text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+              Already have an account?{' '}
+              <Link to="/login" className="font-semibold hover:underline" style={{ color: '#c0392b' }}>
+                Log in
+              </Link>
+            </p>
+          </form>
+
+          {/* Security Note */}
+          <p className="text-center text-xs mt-4" style={{ color: isDark ? '#6b7280' : '#9ca3af' }}>
+            🔒 Your data is encrypted and never shared with third parties.
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default SignUp;

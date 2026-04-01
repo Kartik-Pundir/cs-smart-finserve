@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import StickyCallButton from './components/StickyCallButton';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
 import Home from './pages/Home';
@@ -26,13 +27,11 @@ import EMICalculator from './pages/EMICalculator';
 import CibilCheck from './pages/CibilCheck';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import GoogleAuthSuccess from './pages/GoogleAuthSuccess';
 import AdminDashboard from './pages/AdminDashboard';
 import Feedback from './pages/Feedback';
-import GoogleAuthSuccess from './pages/GoogleAuthSuccess';
 import BookAppointment from './pages/BookAppointment';
 import CustomerDashboard from './pages/CustomerDashboard';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -56,13 +55,25 @@ function App() {
               <Route path="/cibil-check" element={<CibilCheck />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/feedback" element={<Feedback />} />
               <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
+              <Route 
+                path="/admin" 
+                element={
+                  <ProtectedRoute requiredRole="admin">
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="/feedback" element={<Feedback />} />
               <Route path="/book-appointment" element={<BookAppointment />} />
-              <Route path="/dashboard" element={<CustomerDashboard />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route 
+                path="/dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <CustomerDashboard />
+                  </ProtectedRoute>
+                } 
+              />
             </Routes>
             <Footer />
             <Chatbot />

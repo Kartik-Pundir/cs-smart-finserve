@@ -4,9 +4,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
-require('dotenv').config();
-
 const passport = require('./config/passport');
+require('dotenv').config();
 
 const path = require('path');
 
@@ -52,7 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Passport
+// Passport Middleware
 app.use(passport.initialize());
 
 // MongoDB Connection

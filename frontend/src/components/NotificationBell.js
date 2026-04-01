@@ -12,13 +12,7 @@ const NotificationBell = () => {
   // Fetch notifications
   const fetchNotifications = async () => {
     try {
-      const token = localStorage.getItem('token');
-      if (!token) return;
-
-      const { data } = await axios.get('http://localhost:5001/api/notifications', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
+      const { data } = await axios.get('/api/notifications');
       setNotifications(data.data);
       setUnreadCount(data.unreadCount);
     } catch (error) {
@@ -29,10 +23,7 @@ const NotificationBell = () => {
   // Mark as read
   const markAsRead = async (id) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5001/api/notifications/${id}/read`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.put(`/api/notifications/${id}/read`);
       fetchNotifications();
     } catch (error) {
       console.error('Failed to mark as read:', error);
@@ -43,10 +34,7 @@ const NotificationBell = () => {
   const markAllAsRead = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      await axios.put('http://localhost:5001/api/notifications/read-all', {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.put('/api/notifications/read-all');
       fetchNotifications();
     } catch (error) {
       console.error('Failed to mark all as read:', error);
@@ -58,10 +46,7 @@ const NotificationBell = () => {
   // Delete notification
   const deleteNotification = async (id) => {
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5001/api/notifications/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.delete(`/api/notifications/${id}`);
       fetchNotifications();
     } catch (error) {
       console.error('Failed to delete notification:', error);

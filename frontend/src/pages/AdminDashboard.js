@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaStar, FaTrash, FaEye, FaTimes, FaSearch, FaDownload } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
+import axios from 'axios';
 
 const moodLabels = ['😞 Very Unhappy', '😕 Unhappy', '😐 Neutral', '😊 Happy', '😄 Very Happy'];
 
@@ -124,14 +124,14 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       const [s, l, a, ap, u, f, c, d] = await Promise.all([
-        api.get('/admin/stats'),
-        api.get('/leads'),
-        api.get('/appointments'),
-        api.get('/applications'),
-        api.get('/admin/users'),
-        api.get('/admin/feedback'),
-        api.get('/cibil'),
-        api.get('/documents'),
+        axios.get('/api/admin/stats'),
+        axios.get('/api/leads'),
+        axios.get('/api/appointments'),
+        axios.get('/api/applications'),
+        axios.get('/api/admin/users'),
+        axios.get('/api/admin/feedback'),
+        axios.get('/api/cibil'),
+        axios.get('/api/documents'),
       ]);
       setStats(s.data.data);
       setLeads(l.data.data || []);
@@ -151,7 +151,7 @@ const AdminDashboard = () => {
   const deleteItem = async (endpoint, id, label) => {
     if (!window.confirm(`Delete this ${label}? This cannot be undone.`)) return;
     try {
-      await api.delete(`${endpoint}/${id}`);
+      await axios.delete(`${endpoint}/${id}`);
       toast.success(`${label} deleted`);
       fetchData();
     } catch { toast.error(`Failed to delete ${label}`); }
@@ -160,7 +160,7 @@ const AdminDashboard = () => {
   const promoteToAdmin = async (id, name) => {
     if (!window.confirm(`Promote ${name} to admin?`)) return;
     try {
-      await api.put(`/admin/users/${id}/promote`);
+      await axios.put(`/api/admin/users/${id}/promote`);
       toast.success(`${name} is now an admin`);
       fetchData();
     } catch { toast.error('Failed to promote user'); }
@@ -168,19 +168,19 @@ const AdminDashboard = () => {
 
   const confirmAppointment = async (id, name) => {
     try {
-      await api.put(`/appointments/${id}/confirm`);
+      await axios.put(`/api/appointments/${id}/confirm`);
       toast.success(`Confirmed — email sent to ${name}`);
       fetchData();
     } catch { toast.error('Failed to confirm appointment'); }
   };
 
   const updateLeadStatus = async (id, status) => {
-    try { await api.put(`/leads/${id}`, { status }); fetchData(); }
+    try { await axios.put(`/api/leads/${id}`, { status }); fetchData(); }
     catch { toast.error('Failed to update status'); }
   };
 
   const updateAppStatus = async (id, status) => {
-    try { await api.put(`/applications/${id}`, { status }); fetchData(); }
+    try { await axios.put(`/api/applications/${id}`, { status }); fetchData(); }
     catch { toast.error('Failed to update status'); }
   };
 
@@ -188,7 +188,7 @@ const AdminDashboard = () => {
     const score = editingScore[id];
     if (!score || score < 300 || score > 900) { toast.error('Enter a valid score 300-900'); return; }
     try {
-      await api.put(`/cibil/${id}`, { score: Number(score), status: 'completed' });
+      await axios.put(`/api/cibil/${id}`, { score: Number(score), status: 'completed' });
       toast.success('CIBIL score saved');
       setEditingScore(prev => { const n = { ...prev }; delete n[id]; return n; });
       fetchData();
@@ -197,7 +197,7 @@ const AdminDashboard = () => {
 
   const downloadDocument = async (docId, filename, originalName) => {
     try {
-      const response = await api.get(`/documents/${docId}/download/${filename}`, {
+      const response = await axios.get(`/api/documents/${docId}/download/${filename}`, {
         responseType: 'blob',
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));

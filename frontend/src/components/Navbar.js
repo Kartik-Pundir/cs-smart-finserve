@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import { FiMenu, FiX, FiChevronDown, FiUser, FiLogOut } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import Logo from './Logo';
@@ -11,7 +11,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
@@ -20,6 +21,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   const services = [
     { name: 'Home Loan', path: '/home-loan' },
@@ -30,11 +36,6 @@ const Navbar = () => {
     { name: 'Used Car Loan', path: '/used-car-loan' },
     { name: 'Loan Against Property', path: '/loan-against-property' },
   ];
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
 
   const navLink = 'hover:text-accent transition-colors font-medium text-sm';
 
@@ -102,10 +103,10 @@ const Navbar = () => {
               {isDark ? '☀️' : '🌙'}
             </button>
 
-            {user ? (
+            {isAuthenticated ? (
               <>
                 <NotificationBell />
-                {user.role === 'admin' && (
+                {user?.role === 'admin' && (
                   <Link to="/admin"
                     className="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all"
                     style={{ color: '#c0392b', borderColor: 'rgba(192,57,43,0.3)', background: 'rgba(192,57,43,0.08)' }}>
@@ -117,12 +118,38 @@ const Navbar = () => {
                   style={{ color: 'var(--nav-text)', borderColor: 'var(--border)' }}>
                   My Dashboard
                 </Link>
-                <span className="text-sm font-medium" style={{ color: 'var(--nav-text)' }}>{user.name}</span>
-                <button onClick={handleLogout}
-                  className="px-4 py-2 text-sm font-medium border rounded-lg transition-all hover:text-accent"
-                  style={{ color: 'var(--text-secondary)', borderColor: 'var(--border)' }}>
-                  Logout
-                </button>
+                
+                {/* User Menu */}
+                <div className="relative"
+                  onMouseEnter={() => setIsUserMenuOpen(true)}
+                  onMouseLeave={() => setIsUserMenuOpen(false)}>
+                  <button className="w-9 h-9 rounded-full flex items-center justify-center font-semibold text-white"
+                    style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                    {user?.name?.charAt(0).toUpperCase() || 'U'}
+                  </button>
+                  <AnimatePresence>
+                    {isUserMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        className="absolute top-full right-0 mt-3 w-48 rounded-xl shadow-xl py-2"
+                        style={{ background: 'var(--dropdown-bg)', border: '1px solid var(--dropdown-border)' }}>
+                        <div className="px-4 py-2 border-b" style={{ borderColor: 'var(--border)' }}>
+                          <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{user?.name}</p>
+                          <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{user?.email}</p>
+                        </div>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-2 px-4 py-2.5 text-sm transition-colors hover:text-accent"
+                          style={{ color: 'var(--dropdown-text)' }}>
+                          <FiLogOut size={16} />
+                          Logout
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </>
             ) : (
               <>
@@ -191,10 +218,10 @@ const Navbar = () => {
               <Link to="/book-appointment" className="block py-2 text-sm font-medium" style={{ color: 'var(--nav-text)' }} onClick={() => setIsMobileMenuOpen(false)}>Book Appointment</Link>
               <Link to="/feedback" className="block py-2 text-sm font-medium" style={{ color: 'var(--nav-text)' }} onClick={() => setIsMobileMenuOpen(false)}>Feedback</Link>
 
-              <div className="flex items-center gap-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
-                {user ? (
+              <div className="flex flex-col gap-3 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
+                {isAuthenticated ? (
                   <>
-                    {user.role === 'admin' && (
+                    {user?.role === 'admin' && (
                       <Link to="/admin"
                         className="px-3 py-1.5 text-xs font-semibold rounded-lg"
                         style={{ color: '#c0392b', background: 'rgba(192,57,43,0.1)' }}
@@ -208,8 +235,13 @@ const Navbar = () => {
                       onClick={() => setIsMobileMenuOpen(false)}>
                       My Dashboard
                     </Link>
-                    <button onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
-                      className="px-4 py-2 text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="px-3 py-1.5 text-xs font-semibold rounded-lg border text-left"
+                      style={{ color: 'var(--nav-text)', borderColor: 'var(--border)' }}>
                       Logout
                     </button>
                   </>

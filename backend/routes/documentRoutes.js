@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { submitDocuments, getDocuments, deleteDocument, downloadDocument } = require('../controllers/documentController');
-const { protect, authorize } = require('../middleware/auth');
+const { protect, admin } = require('../middleware/auth');
 
 // Ensure uploads folder exists
 const uploadDir = path.join(__dirname, '../uploads');
@@ -38,8 +38,8 @@ const fields = [
 ];
 
 router.post('/', upload.fields(fields), submitDocuments);
-router.get('/', protect, authorize('admin'), getDocuments);
-router.get('/:id/download/:filename', protect, authorize('admin'), downloadDocument);
-router.delete('/:id', protect, authorize('admin'), deleteDocument);
+router.get('/', protect, admin, getDocuments);
+router.get('/:id/download/:filename', protect, admin, downloadDocument);
+router.delete('/:id', protect, admin, deleteDocument);
 
 module.exports = router;

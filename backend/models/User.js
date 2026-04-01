@@ -15,19 +15,13 @@ const userSchema = new mongoose.Schema({
     trim: true,
     match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email']
   },
-  phone: {
-    type: String,
-    match: [/^[0-9]{10}$/, 'Please provide a valid 10-digit phone number'],
-    default: null
-  },
   password: {
     type: String,
-    minlength: 6,
-    select: false
+    minlength: [6, 'Password must be at least 6 characters']
   },
-  googleId: {
+  phone: {
     type: String,
-    default: null
+    default: ''
   },
   avatar: {
     type: String,
@@ -35,8 +29,13 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
+    enum: ['customer', 'admin'],
+    default: 'customer'
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true
   },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
@@ -46,10 +45,19 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Hash password before saving (only if password is set)
+// Hash password before saving
 userSchema.pre('save', async function(next) {
-  if (!this.isModified('password') || !this.password) return next();
-  this.password = await bcrypt.hash(this.password, 12);
+  if (!this.isModified('password') || !this.password) {
+    return next();
+  }
+  
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Compare password method

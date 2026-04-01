@@ -1,30 +1,33 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const GoogleAuthSuccess = () => {
-  const [searchParams] = useSearchParams();
-  const { loginWithToken } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const token = searchParams.get('token');
+    
     if (token) {
-      loginWithToken(token);
-      toast.success('Signed in with Google successfully!');
-      navigate('/');
+      // Store token
+      localStorage.setItem('token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      toast.success('Successfully signed in with Google!');
+      navigate('/dashboard', { replace: true });
     } else {
-      toast.error('Google sign-in failed. Please try again.');
-      navigate('/login');
+      toast.error('Authentication failed');
+      navigate('/login', { replace: true });
     }
-  }, [searchParams, loginWithToken, navigate]);
+  }, [searchParams, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-base)' }}>
       <div className="text-center">
-        <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-gray-500">Completing sign-in...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+        <p style={{ color: 'var(--text-primary)' }}>Completing sign in...</p>
       </div>
     </div>
   );

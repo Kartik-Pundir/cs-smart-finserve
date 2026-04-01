@@ -74,8 +74,8 @@ const BookAppointment = () => {
 
         {/* Left — Info */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-          <div>
-            <h2 className="text-xl font-heading font-bold text-gray-900 mb-4">Why meet us?</h2>
+          <div className="bg-white rounded-2xl shadow-lg p-8 border border-purple-100">
+            <h2 className="text-xl font-heading font-bold text-gray-900 mb-6">Why meet us?</h2>
             {[
               { icon: '🎯', title: 'Personalised Advice', desc: 'Get loan recommendations tailored to your profile and needs.' },
               { icon: '⚡', title: 'Fast Processing', desc: 'Our experts help you get approvals faster with the right documents.' },

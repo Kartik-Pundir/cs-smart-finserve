@@ -6,7 +6,7 @@ const StickyCallButton = () => {
       href="tel:+919267953513"
       style={{
         position: 'fixed',
-        bottom: '100px',
+        bottom: '90px',
         right: '24px',
         width: '50px',
         height: '50px',
@@ -20,8 +20,7 @@ const StickyCallButton = () => {
         fontSize: '20px',
         zIndex: 9998,
         cursor: 'pointer',
-        transition: 'transform 0.3s, box-shadow 0.3s',
-        animation: 'pulse 2s infinite'
+        transition: 'transform 0.3s, box-shadow 0.3s'
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'scale(1.1)';
@@ -33,22 +32,7 @@ const StickyCallButton = () => {
       }}
       aria-label="Call us now"
     >
-      <FaPhone style={{ animation: 'ring 1.5s infinite' }} />
-      <style>{`
-        @keyframes pulse {
-          0%, 100% {
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7);
-          }
-          50% {
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0);
-          }
-        }
-        @keyframes ring {
-          0%, 100% { transform: rotate(0deg); }
-          10%, 30% { transform: rotate(-15deg); }
-          20%, 40% { transform: rotate(15deg); }
-        }
-      `}</style>
+      <FaPhone />
     </a>
   );
 };

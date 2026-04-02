@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
@@ -14,6 +14,7 @@ const Login = () => {
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -42,254 +43,84 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = '/api/auth/google';
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+    window.location.href = `${apiUrl}/api/auth/google`;
   };
 
   return (
-    <div 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden" 
-      style={{ 
-        background: isDark ? '#111111' : '#f8f9fa',
-        paddingTop: '80px',
-        paddingBottom: '40px'
-      }}
-    >
+    <div className="min-h-screen flex" style={{ background: isDark ? '#111111' : '#f8f9fa', paddingTop: '80px' }}>
       
-      {/* Decorative Elements - Left Side */}
-      <div className="absolute left-0 top-1/2 transform -translate-y-1/2" style={{ width: '300px' }}>
-        {/* Document illustration */}
-        <div className="absolute" style={{ top: '-80px', left: '60px' }}>
-          <div className="relative">
-            <div 
-              className="w-24 h-32 rounded-lg border-4 transform -rotate-12"
-              style={{ 
-                background: isDark ? '#1e1e1e' : 'white',
-                borderColor: '#c0392b',
-                boxShadow: '4px 4px 0px rgba(192, 57, 43, 0.2)' 
-              }}
-            >
-              <div className="p-3 space-y-2">
-                <div className="h-2 rounded w-3/4" style={{ background: '#e74c3c' }}></div>
-                <div className="h-2 rounded w-full" style={{ background: '#e74c3c' }}></div>
-                <div className="h-2 rounded w-2/3" style={{ background: '#e74c3c' }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Abstract squiggle line */}
-        <svg className="absolute" style={{ top: '20px', left: '40px', width: '120px', height: '80px' }}>
-          <path d="M10,40 Q30,20 50,40 T90,40" stroke="#c0392b" strokeWidth="2" fill="none" opacity="0.5"/>
-        </svg>
-
-        {/* Dotted shape */}
-        <div 
-          className="absolute rounded-3xl transform rotate-12"
-          style={{ 
-            top: '100px', 
-            left: '80px',
-            width: '100px', 
-            height: '120px',
-            background: 'linear-gradient(135deg, #c0392b, #e74c3c)',
-            backgroundImage: isDark 
-              ? 'radial-gradient(circle, rgba(0,0,0,0.3) 2px, transparent 2px)'
-              : 'radial-gradient(circle, rgba(255,255,255,0.3) 2px, transparent 2px)',
-            backgroundSize: '15px 15px'
-          }}
-        />
-
-        {/* Small circle */}
-        <div 
-          className="absolute rounded-full border-3"
-          style={{ 
-            top: '-20px', 
-            left: '180px', 
-            width: '40px', 
-            height: '40px', 
-            borderColor: '#c0392b', 
-            borderWidth: '3px' 
-          }}
-        />
-      </div>
-
-      {/* Decorative Elements - Right Side */}
-      <div className="absolute right-0 top-1/2 transform -translate-y-1/2" style={{ width: '300px' }}>
-        {/* Person illustration */}
-        <div className="absolute" style={{ top: '-60px', right: '100px' }}>
-          <svg width="100" height="120" viewBox="0 0 100 120">
-            {/* Simple person sitting */}
-            <ellipse cx="50" cy="30" rx="20" ry="25" fill="#c0392b"/>
-            <rect x="35" y="50" width="30" height="40" rx="5" fill="#e74c3c"/>
-            <rect x="30" y="85" width="15" height="30" rx="3" fill="#c0392b"/>
-            <rect x="55" y="85" width="15" height="30" rx="3" fill="#c0392b"/>
-          </svg>
-        </div>
-
-        {/* Document with lines */}
-        <div className="absolute" style={{ top: '40px', right: '60px' }}>
-          <div 
-            className="w-20 h-24 rounded-lg border-4 transform rotate-6"
-            style={{ 
-              background: isDark ? '#1e1e1e' : 'white',
-              borderColor: '#e74c3c',
-              boxShadow: '4px 4px 0px rgba(231, 76, 60, 0.2)' 
-            }}
-          >
-            <div className="p-2 space-y-1.5">
-              <div className="h-1.5 rounded" style={{ background: '#c0392b' }}></div>
-              <div className="h-1.5 rounded" style={{ background: '#c0392b' }}></div>
-              <div className="h-1.5 rounded w-3/4" style={{ background: '#c0392b' }}></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Dotted shape */}
-        <div 
-          className="absolute rounded-3xl transform -rotate-12"
-          style={{ 
-            bottom: '20px', 
-            right: '120px',
-            width: '90px', 
-            height: '110px',
-            background: 'linear-gradient(135deg, #c0392b, #e74c3c)',
-            backgroundImage: isDark 
-              ? 'radial-gradient(circle, rgba(0,0,0,0.3) 2px, transparent 2px)'
-              : 'radial-gradient(circle, rgba(255,255,255,0.3) 2px, transparent 2px)',
-            backgroundSize: '15px 15px'
-          }}
-        />
-
-        {/* Abstract squiggle */}
-        <svg className="absolute" style={{ bottom: '80px', right: '40px', width: '100px', height: '60px' }}>
-          <path d="M10,30 Q30,10 50,30 T90,30" stroke="#e74c3c" strokeWidth="2" fill="none" opacity="0.5"/>
-        </svg>
-
-        {/* Small rectangle */}
-        <div 
-          className="absolute border-3 transform rotate-45"
-          style={{ 
-            bottom: '10px', 
-            right: '200px', 
-            width: '35px', 
-            height: '35px', 
-            borderColor: '#c0392b', 
-            borderWidth: '3px' 
-          }}
-        />
-      </div>
-
-      {/* Login Card */}
-      <div className="relative z-10 w-full max-w-md mx-4">
-        <div 
-          className="rounded-3xl shadow-lg p-10 border-4"
-          style={{
-            background: isDark ? '#1e1e1e' : 'white',
-            borderColor: isDark ? '#3a3a3a' : '#c0392b',
-            boxShadow: '8px 8px 0px rgba(192, 57, 43, 0.15)',
-          }}
-        >
+      {/* Left Side - Dark with gradient background */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
+        style={{ 
+          background: 'linear-gradient(135deg, rgba(26, 26, 46, 1) 0%, rgba(45, 27, 46, 1) 35%, rgba(61, 26, 26, 1) 70%, rgba(192, 57, 43, 0.8) 100%)'
+        }}>
+        
+        <div className="relative z-10 flex flex-col justify-center items-center p-10 text-white w-full">
           
-          {/* Title */}
+          {/* Logo and Company Name */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold bg-white text-gray-900">
+              CS
+            </div>
+            <span className="text-base font-semibold">CS Smart Finserve</span>
+          </div>
+
+          {/* Main Heading */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-2" style={{ color: isDark ? 'white' : '#1a1a1a' }}>
-              Login
-            </h2>
-            <p className="text-sm" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-              Hey, Enter your details to get sign in<br />to your account
+            <h1 className="text-4xl font-bold mb-3 leading-tight">
+              Welcome Back!
+            </h1>
+            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
+              Sign in to access your dashboard, track applications, and manage your loans.
             </p>
+          </div>
+
+          {/* Illustration or decorative element */}
+          <div className="mt-8">
+            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.2)" strokeWidth="2"/>
+              <circle cx="100" cy="100" r="60" stroke="rgba(255,255,255,0.3)" strokeWidth="2"/>
+              <circle cx="100" cy="100" r="40" fill="rgba(192, 57, 43, 0.3)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side - White with Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8" style={{ background: isDark ? '#1a1a1a' : 'white' }}>
+        <div className="w-full max-w-md">
+          
+          {/* Mobile Logo */}
+          <div className="lg:hidden mb-8 text-center">
+            <Link to="/" className="inline-flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
+                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                CS
+              </div>
+              <span className="text-xl font-bold" style={{ color: isDark ? 'white' : '#1a1a1a' }}>CS Smart Finserve</span>
+            </Link>
+          </div>
+
+          {/* Title */}
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold mb-2" style={{ color: isDark ? 'white' : '#1a1a1a' }}>
+              Login with
+            </h2>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             
-            {/* Email Field */}
-            <div>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Enter Email / Phone No"
-                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-red-500 transition-all"
-                style={{
-                  background: isDark ? '#111111' : '#f9fafb',
-                  borderColor: isDark ? '#3a3a3a' : '#d1d5db',
-                  color: isDark ? 'white' : '#1a1a1a'
-                }}
-              />
-            </div>
-
-            {/* Password Field */}
-            <div className="relative">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Passcode"
-                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-red-500 transition-all"
-                style={{
-                  background: isDark ? '#111111' : '#f9fafb',
-                  borderColor: isDark ? '#3a3a3a' : '#d1d5db',
-                  color: isDark ? 'white' : '#1a1a1a'
-                }}
-              />
-            </div>
-
-            {/* Forgot Password */}
-            <div className="text-left">
-              <Link 
-                to="/forgot-password" 
-                className="text-sm hover:underline"
-                style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
-              >
-                Having trouble in sign in?
-              </Link>
-            </div>
-
-            {/* Login Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg disabled:opacity-50"
-              style={{
-                background: 'linear-gradient(135deg, #c0392b, #e74c3c)',
-              }}
-            >
-              {isLoading ? 'Signing in...' : 'Sign in'}
-            </button>
-
-            {/* Divider */}
-            <div className="relative my-6">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t" style={{ borderColor: isDark ? '#3a3a3a' : '#d1d5db' }}></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span 
-                  className="px-4" 
-                  style={{ 
-                    background: isDark ? '#1e1e1e' : 'white',
-                    color: isDark ? '#6b7280' : '#9ca3af'
-                  }}
-                >
-                  Or Sign in with
-                </span>
-              </div>
-            </div>
-
-            {/* Google Login Button */}
+            {/* Google Login Button - Top */}
             <button
               type="button"
               onClick={handleGoogleLogin}
-              className="w-full py-3 px-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-3 border-2"
+              className="w-full py-3 px-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-3 border-2 hover:bg-gray-50"
               style={{
-                background: isDark ? '#111111' : 'white',
-                borderColor: isDark ? '#3a3a3a' : '#d1d5db',
-                color: isDark ? 'white' : '#374151'
+                background: 'white',
+                borderColor: '#dadce0',
+                color: '#3c4043'
               }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -300,13 +131,88 @@ const Login = () => {
               </svg>
               Google
             </button>
+
+            {/* Email Address */}
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Sufiyan@email.com"
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-blue-500 transition-all"
+                style={{
+                  background: isDark ? '#111111' : '#f9fafb',
+                  borderColor: isDark ? '#3a3a3a' : '#e5e7eb',
+                  color: isDark ? 'white' : '#1a1a1a'
+                }}
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: isDark ? '#d1d5db' : '#374151' }}>
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password@123"
+                  className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:border-blue-500 transition-all"
+                  style={{
+                    background: isDark ? '#111111' : '#f9fafb',
+                    borderColor: isDark ? '#3a3a3a' : '#e5e7eb',
+                    color: isDark ? 'white' : '#1a1a1a'
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-lg hover:opacity-70 transition-opacity"
+                  style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
+                >
+                  {showPassword ? '👁️' : '👁️‍🗨️'}
+                </button>
+              </div>
+              <div className="text-right mt-2">
+                <Link 
+                  to="/forgot-password" 
+                  className="text-sm hover:underline"
+                  style={{ color: '#4285F4' }}
+                >
+                  Forget password?
+                </Link>
+              </div>
+            </div>
+
+            {/* Login Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg disabled:opacity-50"
+              style={{
+                background: '#4285F4',
+              }}
+            >
+              {isLoading ? 'Logging in...' : 'Login'}
+            </button>
           </form>
 
           {/* Sign Up Link */}
           <p className="mt-6 text-center text-sm" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
             Don't have an account?{' '}
-            <Link to="/signup" className="font-semibold hover:underline" style={{ color: '#c0392b' }}>
-              Request Now
+            <Link to="/signup" className="font-semibold hover:underline" style={{ color: '#4285F4' }}>
+              Register Now
             </Link>
           </p>
         </div>

@@ -9,8 +9,8 @@ import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
-import StickyCallButton from './components/StickyCallButton';
 import ProtectedRoute from './components/ProtectedRoute';
+import LenisScroll from './components/LenisScroll';
 
 // Pages
 import Home from './pages/Home';
@@ -38,6 +38,7 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
+          <LenisScroll />
           <div className="min-h-screen transition-colors duration-300" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
             <Navbar />
             <Routes>
@@ -77,7 +78,6 @@ function App() {
             </Routes>
             <Footer />
             <Chatbot />
-            <StickyCallButton />
             <ToastContainer
               position="top-right"
               autoClose={3000}

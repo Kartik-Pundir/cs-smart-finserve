@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
 import PopularLoans from '../components/PopularLoans';
 import RecentlyViewedLoans from '../components/RecentlyViewedLoans';
+import AnimatedSection from '../components/AnimatedSection';
+import ZoomImage from '../components/ZoomImage';
 
 /* ── Dark luxury theme ───────────────────────────────────────
    Base:      #111111  (near black)
@@ -363,7 +365,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <AnimatedSection yOffset={50} duration={0.7}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Auto Loan</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Drive Home Your Dream Car — Today.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
@@ -377,12 +379,15 @@ const Home = () => {
               <Link to="/auto-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
                 Apply for Car Loan →
               </Link>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
-              <motion.img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=85" alt="Car Loan"
+            </AnimatedSection>
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+              <ZoomImage 
+                src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=85" 
+                alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
-                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
-            </motion.div>
+                zoomScale={1.08}
+              />
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -391,12 +396,15 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
-              <motion.img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" alt="Home Loan"
+            <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
+              <ZoomImage 
+                src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" 
+                alt="Home Loan"
                 className="w-full max-w-md object-cover h-80"
-                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="order-1 lg:order-2">
+                zoomScale={1.08}
+              />
+            </AnimatedSection>
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="order-1 lg:order-2">
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Home Loan</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Dream Home Is One Step Away.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
@@ -410,7 +418,7 @@ const Home = () => {
               <Link to="/home-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
                 Apply for Home Loan →
               </Link>
-            </motion.div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -419,7 +427,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <AnimatedSection yOffset={50} duration={0.7}>
               <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>General Insurance</span>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Protect What You've Built. Insure What You Love.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
@@ -433,12 +441,15 @@ const Home = () => {
               <Link to="/insurance" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
                 Explore Insurance Plans →
               </Link>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
-              <motion.img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" alt="Insurance"
+            </AnimatedSection>
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+              <ZoomImage 
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" 
+                alt="Insurance"
                 className="w-full max-w-md object-cover h-80"
-                whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }} />
-            </motion.div>
+                zoomScale={1.08}
+              />
+            </AnimatedSection>
           </div>
         </div>
       </section>

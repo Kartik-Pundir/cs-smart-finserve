@@ -8,6 +8,19 @@
   box-sizing: border-box;
 }
 
+/* ── Smooth Scroll ─────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Custom smooth scrolling with easing */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* ── Light theme (default) ─────────────────────────────── */
 :root {
   --accent: #c0392b;

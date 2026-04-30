@@ -1,10 +1,11 @@
 // Keep-alive utility to prevent backend from sleeping
-// Pings the backend health endpoint every 10 minutes
+// Pings the backend health endpoint every 5 minutes
 
 const BACKEND_URL = process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5001';
-const PING_INTERVAL = 10 * 60 * 1000; // 10 minutes
+const PING_INTERVAL = 5 * 60 * 1000; // 5 minutes (more aggressive)
 
 let pingInterval = null;
+let lastPingTime = 0;
 
 const pingBackend = async () => {
   try {
@@ -14,7 +15,8 @@ const pingBackend = async () => {
     });
     
     if (response.ok) {
-      console.log('[KeepAlive] Backend ping successful');
+      lastPingTime = Date.now();
+      console.log('[KeepAlive] Backend ping successful at', new Date().toLocaleTimeString());
     } else {
       console.warn('[KeepAlive] Backend ping returned non-OK status:', response.status);
     }
@@ -23,18 +25,32 @@ const pingBackend = async () => {
   }
 };
 
+// Wake up backend immediately (useful when user is about to submit a form)
+export const wakeUpBackend = async () => {
+  const timeSinceLastPing = Date.now() - lastPingTime;
+  
+  // If we pinged recently (within 30 seconds), don't ping again
+  if (timeSinceLastPing < 30000) {
+    console.log('[KeepAlive] Backend was pinged recently, skipping wake-up');
+    return;
+  }
+  
+  console.log('[KeepAlive] Waking up backend...');
+  await pingBackend();
+};
+
 export const startKeepAlive = () => {
   if (pingInterval) {
     console.log('[KeepAlive] Already running');
     return;
   }
   
-  console.log('[KeepAlive] Starting keep-alive pings every 10 minutes');
+  console.log('[KeepAlive] Starting keep-alive pings every 5 minutes');
   
   // Ping immediately on start
   pingBackend();
   
-  // Then ping every 10 minutes
+  // Then ping every 5 minutes
   pingInterval = setInterval(pingBackend, PING_INTERVAL);
 };
 

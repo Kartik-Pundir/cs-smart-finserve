@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCheckCircle, FaHome } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
+import { wakeUpBackend } from '../utils/keepAlive';
 import DocumentUpload from '../components/DocumentUpload';
 import LoanCTABanner from '../components/LoanCTABanner';
 import ApplyNowCTA from '../components/ApplyNowCTA';
@@ -25,6 +26,7 @@ const HomeLoan = () => {
   });
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [backendWarmed, setBackendWarmed] = useState(false);
   const stepRefs = useRef([]);
   const sectionRef = useRef(null);
   const isVisible = useRef(false);
@@ -41,6 +43,15 @@ const HomeLoan = () => {
       link: '/home-loan'
     });
   }, []);
+
+  // Wake up backend when user starts interacting with form
+  const handleFormFocus = async () => {
+    if (!backendWarmed) {
+      console.log('[HomeLoan] User started filling form, waking up backend...');
+      setBackendWarmed(true);
+      await wakeUpBackend();
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -208,7 +219,14 @@ const HomeLoan = () => {
               {[{ label: 'Full Name', key: 'fullName', type: 'text' }, { label: 'Email', key: 'email', type: 'email' }, { label: 'Phone', key: 'phone', type: 'tel' }, { label: 'Loan Amount (₹)', key: 'loanAmount', type: 'number' }, { label: 'Monthly Income (₹)', key: 'monthlyIncome', type: 'number' }, { label: 'City', key: 'city', type: 'text' }].map(({ label, key, type }) => (
                 <div key={key}>
                   <label className="block text-gray-700 mb-2 font-medium text-sm">{label} *</label>
-                  <input type={type} value={formData[key]} onChange={(e) => setFormData({ ...formData, [key]: e.target.value })} required className="input-field" />
+                  <input 
+                    type={type} 
+                    value={formData[key]} 
+                    onChange={(e) => setFormData({ ...formData, [key]: e.target.value })} 
+                    onFocus={handleFormFocus}
+                    required 
+                    className="input-field" 
+                  />
                 </div>
               ))}
               <div className="md:col-span-2">

@@ -11,12 +11,12 @@ const api = axios.create({
     'Content-Type': 'application/json'
   },
   withCredentials: true,
-  timeout: 60000 // 60 seconds timeout for cold starts
+  timeout: 120000 // 120 seconds timeout for cold starts (Render free tier can be slow)
 });
 
 // Retry configuration
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 2000; // 2 seconds
+const MAX_RETRIES = 2; // Reduced to 2 retries since we increased timeout
+const RETRY_DELAY = 3000; // 3 seconds between retries
 
 // Helper function to wait
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -24,9 +24,13 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Helper function to check if error is retryable
 const isRetryableError = (error) => {
   // Retry on network errors, timeouts, or 5xx server errors
+  // But don't retry if we've already waited too long
+  if (error.code === 'ECONNABORTED' && error.message.includes('timeout')) {
+    // For timeout errors, only retry if it's the first attempt
+    return error.config?.retryCount === 0;
+  }
   return (
     !error.response || 
-    error.code === 'ECONNABORTED' ||
     error.code === 'ERR_NETWORK' ||
     (error.response && error.response.status >= 500)
   );
@@ -97,6 +101,16 @@ api.interceptors.response.use(
     // If all retries failed, return a user-friendly error
     if (config.retryCount >= MAX_RETRIES) {
       console.error('[API] All retries failed');
+      
+      // Check if it's a timeout error
+      if (error.code === 'ECONNABORTED' && error.message.includes('timeout')) {
+        return Promise.reject({
+          ...error,
+          message: 'Server is waking up (this can take up to 2 minutes on free hosting). Please wait a moment and try again.',
+          isTimeout: true
+        });
+      }
+      
       return Promise.reject({
         ...error,
         message: 'Server is taking longer than expected. Please try again in a moment.',

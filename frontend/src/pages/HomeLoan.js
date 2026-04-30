@@ -75,13 +75,29 @@ const HomeLoan = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
+    console.log('Submitting application:', formData);
+    
     try {
       const res = await api.post('/applications', formData);
-      toast.success(res.data.message);
+      console.log('Application response:', res.data);
+      toast.success(res.data.message || 'Application submitted successfully!');
       setFormData({ fullName: '', email: '', phone: '', serviceType: 'Home Loan', loanAmount: '', employmentType: 'salaried', monthlyIncome: '', city: '' });
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Something went wrong');
-    } finally { setLoading(false); }
+      console.error('Application error:', err);
+      console.error('Error response:', err.response);
+      console.error('Error message:', err.message);
+      
+      if (err.response?.data?.message) {
+        toast.error(err.response.data.message);
+      } else if (err.message) {
+        toast.error(err.message);
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } finally { 
+      setLoading(false); 
+    }
   };
 
   return (

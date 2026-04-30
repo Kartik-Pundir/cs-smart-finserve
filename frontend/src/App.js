@@ -5,12 +5,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 
+// Keep backend alive
+import './utils/keepAlive';
+
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import ProtectedRoute from './components/ProtectedRoute';
 import LenisScroll from './components/LenisScroll';
+import BackendStatus from './components/BackendStatus';
 
 // Pages
 import Home from './pages/Home';
@@ -39,6 +43,7 @@ function App() {
       <AuthProvider>
         <Router>
           <LenisScroll />
+          <BackendStatus />
           <div className="min-h-screen transition-colors duration-300" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
             <Navbar />
             <Routes>

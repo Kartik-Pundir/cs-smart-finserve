@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
 
+console.log('[API] Initializing with base URL:', API_BASE_URL);
+console.log('[API] Build timestamp:', new Date().toISOString());
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -40,6 +43,15 @@ api.interceptors.request.use(
     // Add retry count to config
     config.retryCount = config.retryCount || 0;
     
+    // Log API requests for debugging
+    console.log(`[API] ${config.method?.toUpperCase()} ${config.baseURL}${config.url}`);
+    console.log('[API] Request data:', config.data);
+    
+    // Dispatch event for UI feedback
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('api-request-start'));
+    }
+    
     return config;
   },
   (error) => {
@@ -49,9 +61,19 @@ api.interceptors.request.use(
 
 // Handle response errors with retry logic
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('[API] Response received:', response.status, response.data);
+    return response;
+  },
   async (error) => {
     const config = error.config;
+    
+    console.log('[API] Error occurred:', {
+      status: error.response?.status,
+      message: error.message,
+      code: error.code,
+      retryCount: config.retryCount
+    });
     
     // Handle 401 Unauthorized
     if (error.response?.status === 401) {
@@ -64,7 +86,7 @@ api.interceptors.response.use(
     if (isRetryableError(error) && config.retryCount < MAX_RETRIES) {
       config.retryCount += 1;
       
-      console.log(`Retrying request (${config.retryCount}/${MAX_RETRIES})...`);
+      console.log(`[API] Retrying request (${config.retryCount}/${MAX_RETRIES})...`);
       
       // Wait before retrying (exponential backoff)
       await wait(RETRY_DELAY * config.retryCount);
@@ -74,6 +96,7 @@ api.interceptors.response.use(
     
     // If all retries failed, return a user-friendly error
     if (config.retryCount >= MAX_RETRIES) {
+      console.error('[API] All retries failed');
       return Promise.reject({
         ...error,
         message: 'Server is taking longer than expected. Please try again in a moment.',

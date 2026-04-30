@@ -21,22 +21,33 @@ app.use(cors({
   origin: function(origin, callback) {
     // Allow requests with no origin (mobile apps, curl, etc.)
     if (!origin) return callback(null, true);
-    const allowed = [
+    
+    const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:8000',
+      'https://cssfinserve.com',
+      'https://www.cssfinserve.com',
+      'https://cs-smart-finserve.vercel.app',
       process.env.CLIENT_URL,
       process.env.FRONTEND_URL
     ].filter(Boolean);
     
-    // In production, allow same-origin requests (Vercel deployment)
-    if (process.env.NODE_ENV === 'production') {
+    // Check if origin is allowed
+    if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
     
-    if (allowed.includes(origin)) return callback(null, true);
+    // In production, be more permissive for Vercel preview deployments
+    if (process.env.NODE_ENV === 'production' && origin.includes('vercel.app')) {
+      return callback(null, true);
+    }
+    
+    console.log('CORS blocked origin:', origin);
     callback(new Error('Not allowed by CORS'));
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Rate Limiting — relaxed in dev, strict in production

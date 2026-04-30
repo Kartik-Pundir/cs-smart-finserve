@@ -27,12 +27,33 @@ const BookAppointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
     try {
+      // Show loading toast for slow connections
+      const loadingToast = toast.info('Submitting your appointment... This may take a moment.', {
+        autoClose: false
+      });
+      
       await api.post('/appointments', formData);
+      
+      // Dismiss loading toast
+      toast.dismiss(loadingToast);
+      
       setSubmitted(true);
       toast.success('Appointment booked successfully!');
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
+      console.error('Appointment booking error:', error);
+      
+      // Handle different error types
+      if (error.isTimeout) {
+        toast.error('Server is waking up. Please try again in 30 seconds.', { autoClose: 8000 });
+      } else if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else if (error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

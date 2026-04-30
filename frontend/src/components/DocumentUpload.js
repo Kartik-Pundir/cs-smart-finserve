@@ -2,9 +2,7 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaUpload, FaFilePdf, FaFileImage, FaFileAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import axios from 'axios';
-
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+import api from '../utils/api';
 
 const ACCEPTED = '.pdf,.jpg,.jpeg,.png,.doc,.docx';
 
@@ -60,7 +58,13 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
     if (!contactInfo.name) { toast.error('Please enter your name'); return; }
 
     setUploading(true);
+    
     try {
+      // Show loading toast for slow connections
+      const loadingToast = toast.info('Uploading documents... This may take a moment.', {
+        autoClose: false
+      });
+      
       const formData = new FormData();
       formData.append('name', contactInfo.name);
       formData.append('phone', contactInfo.phone);
@@ -68,9 +72,13 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
       formData.append('loanType', loanType);
       uploaded.forEach(id => formData.append(id, files[id]));
 
-      await axios.post(`${API_BASE}/documents`, formData, {
+      await api.post('/documents', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 120000 // 2 minutes for file uploads
       });
+
+      // Dismiss loading toast
+      toast.dismiss(loadingToast);
 
       toast.success('Documents submitted! We will review and contact you within 24 hours.');
       setFiles({});
@@ -78,7 +86,18 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Upload failed. Please try again.');
+      console.error('Document upload error:', err);
+      
+      // Handle different error types
+      if (err.isTimeout) {
+        toast.error('Server is waking up. Please try again in 30 seconds.', { autoClose: 8000 });
+      } else if (err.response?.data?.message) {
+        toast.error(err.response.data.message);
+      } else if (err.message) {
+        toast.error(err.message);
+      } else {
+        toast.error('Upload failed. Please try again.');
+      }
     } finally {
       setUploading(false);
     }

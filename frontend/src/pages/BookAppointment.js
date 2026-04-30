@@ -29,16 +29,7 @@ const BookAppointment = () => {
     setLoading(true);
     
     try {
-      // Show loading toast for slow connections
-      const loadingToast = toast.info('Submitting your appointment... This may take a moment.', {
-        autoClose: false
-      });
-      
       await api.post('/appointments', formData);
-      
-      // Dismiss loading toast
-      toast.dismiss(loadingToast);
-      
       setSubmitted(true);
       toast.success('Appointment booked successfully!');
     } catch (error) {

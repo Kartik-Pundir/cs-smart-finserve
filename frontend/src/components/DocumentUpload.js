@@ -60,11 +60,6 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
     setUploading(true);
     
     try {
-      // Show loading toast for slow connections
-      const loadingToast = toast.info('Uploading documents... This may take a moment.', {
-        autoClose: false
-      });
-      
       const formData = new FormData();
       formData.append('name', contactInfo.name);
       formData.append('phone', contactInfo.phone);
@@ -76,9 +71,6 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: 120000 // 2 minutes for file uploads
       });
-
-      // Dismiss loading toast
-      toast.dismiss(loadingToast);
 
       toast.success('Documents submitted! We will review and contact you within 24 hours.');
       setFiles({});

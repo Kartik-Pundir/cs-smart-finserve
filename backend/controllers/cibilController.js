@@ -31,7 +31,7 @@ exports.submitCibilCheck = async (req, res) => {
 
     // Customer confirmation
     try {
-      await sendEmail({
+      sendEmail({
         email,
         subject: 'CIBIL Check Request Received — CS Smart Finserve',
         html: `
@@ -50,12 +50,12 @@ exports.submitCibilCheck = async (req, res) => {
             </div>
           </div>
         `
-      });
-    } catch (e) { console.error('CIBIL customer email failed:', e.message); }
+      }).catch(err => console.error('CIBIL customer email failed:', err.message));
+    } catch (e) { console.error('CIBIL customer email preparation failed:', e.message); }
 
     // Admin notification
     try {
-      await sendEmail({
+      sendEmail({
         email: process.env.ADMIN_EMAIL,
         subject: `New CIBIL Request: ${name} — PAN ${pan}`,
         html: `
@@ -78,8 +78,8 @@ exports.submitCibilCheck = async (req, res) => {
             </div>
           </div>
         `
-      });
-    } catch (e) { console.error('CIBIL admin email failed:', e.message); }
+      }).catch(err => console.error('CIBIL admin email failed:', err.message));
+    } catch (e) { console.error('CIBIL admin email preparation failed:', e.message); }
   } catch (error) {
     res.status(500).json({
       success: false,

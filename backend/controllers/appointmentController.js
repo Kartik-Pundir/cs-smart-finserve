@@ -23,18 +23,18 @@ exports.createAppointment = async (req, res) => {
       const formattedDate = new Date(preferredDate).toLocaleDateString('en-IN', {
         weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
       });
-      await sendEmail({
+      sendEmail({
         email: email,
         subject: 'Appointment Booked — CS Smart Finserve',
         html: appointmentConfirmation(fullName, formattedDate, preferredTime)
-      });
+      }).catch(err => console.error('Email sending failed:', err));
     } catch (emailError) {
-      console.error('Email sending failed:', emailError);
+      console.error('Email preparation failed:', emailError);
     }
 
     // Notify admin
     try {
-      await sendEmail({
+      sendEmail({
         email: process.env.ADMIN_EMAIL,
         subject: `New Appointment: ${fullName} — ${service}`,
         html: `
@@ -59,8 +59,8 @@ exports.createAppointment = async (req, res) => {
             </div>
           </div>
         `
-      });
-    } catch (e) { console.error('Admin notification failed:', e.message); }
+      }).catch(err => console.error('Admin notification failed:', err.message));
+    } catch (e) { console.error('Admin notification preparation failed:', e.message); }
 
     res.status(201).json({
       success: true,

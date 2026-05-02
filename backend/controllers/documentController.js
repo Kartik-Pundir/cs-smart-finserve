@@ -35,7 +35,7 @@ exports.submitDocuments = async (req, res) => {
     // Notify admin
     try {
       const fileList = files.map(f => `<li>${f.label}: ${f.originalName} (${(f.size/1024).toFixed(0)} KB)</li>`).join('');
-      await sendEmail({
+      sendEmail({
         email: process.env.ADMIN_EMAIL,
         subject: `New Document Submission — ${loanType || 'Loan'} — ${name}`,
         html: `
@@ -48,9 +48,9 @@ exports.submitDocuments = async (req, res) => {
           <ul>${fileList}</ul>
           <p>Login to the Admin Dashboard to review.</p>
         `,
-      });
+      }).catch(err => console.error('Admin notification email failed:', err.message));
     } catch (e) {
-      console.error('Admin notification email failed:', e.message);
+      console.error('Admin notification preparation failed:', e.message);
     }
 
     res.status(201).json({ success: true, message: 'Documents submitted successfully! We will review and contact you within 24 hours.', data: doc });

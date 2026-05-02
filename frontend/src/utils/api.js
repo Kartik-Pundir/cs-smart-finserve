@@ -10,7 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json'
   },
-  withCredentials: true,
+  withCredentials: false, // Changed to false to avoid CORS/SSL issues
   timeout: 120000 // 120 seconds timeout for cold starts (Render free tier can be slow)
 });
 

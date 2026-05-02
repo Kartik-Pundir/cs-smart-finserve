@@ -11,18 +11,18 @@ exports.createApplication = async (req, res) => {
 
     // Send confirmation email to customer
     try {
-      await sendEmail({
+      sendEmail({
         email: req.body.email,
         subject: 'Application Received — CS Smart Finserve',
         html: applicationReceived(req.body.fullName, req.body.serviceType)
-      });
+      }).catch(err => console.error('Email sending failed:', err));
     } catch (emailError) {
-      console.error('Email sending failed:', emailError);
+      console.error('Email preparation failed:', emailError);
     }
 
     // Notify admin
     try {
-      await sendEmail({
+      sendEmail({
         email: process.env.ADMIN_EMAIL,
         subject: `New Loan Application: ${req.body.fullName} — ${req.body.serviceType}`,
         html: `
@@ -48,8 +48,8 @@ exports.createApplication = async (req, res) => {
             </div>
           </div>
         `
-      });
-    } catch (e) { console.error('Admin notification failed:', e.message); }
+      }).catch(err => console.error('Admin notification failed:', err.message));
+    } catch (e) { console.error('Admin notification preparation failed:', e.message); }
 
     res.status(201).json({
       success: true,

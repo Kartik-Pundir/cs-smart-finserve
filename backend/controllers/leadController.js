@@ -26,18 +26,18 @@ exports.createLead = async (req, res) => {
 
     // Send confirmation email to customer
     try {
-      await sendEmail({
+      sendEmail({
         email: email,
         subject: 'Thank you for contacting CS Smart Finserve',
         html: callbackConfirmation(fullName)
-      });
+      }).catch(err => console.error('Auto-reply email failed (non-critical):', err.message));
     } catch (emailError) {
-      console.error('Auto-reply email failed (non-critical):', emailError.message);
+      console.error('Auto-reply email preparation failed:', emailError.message);
     }
 
     // Send notification email to admin
     try {
-      await sendEmail({
+      sendEmail({
         email: process.env.ADMIN_EMAIL,
         subject: `New Lead: ${fullName} — ${serviceInterested}`,
         html: `
@@ -61,9 +61,9 @@ exports.createLead = async (req, res) => {
             </div>
           </div>
         `
-      });
+      }).catch(err => console.error('Admin notification email failed (non-critical):', err.message));
     } catch (emailError) {
-      console.error('Admin notification email failed (non-critical):', emailError.message);
+      console.error('Admin notification email preparation failed:', emailError.message);
     }
 
     res.status(201).json({

@@ -5,7 +5,7 @@ const sendEmail = async (options) => {
     // If we're in development, use the local frontend server
     // If in production, use the live frontend URL
     const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://cssfinserve.com' 
+      ? 'https://www.cssfinserve.com' 
       : (process.env.CLIENT_URL || 'http://localhost:8000');
     
     const apiUrl = `${baseUrl.replace(/\/$/, '')}/api/sendEmail`;

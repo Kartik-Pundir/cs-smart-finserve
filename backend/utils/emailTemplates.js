@@ -16,8 +16,10 @@ exports.callbackConfirmation = (name) => {
               <!-- Header -->
               <tr>
                 <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
-                  <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;letter-spacing:-0.5px;">CS Smart Finserve</h1>
-                  <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;letter-spacing:1px;text-transform:uppercase;">Smart Finance. Trusted Partners.</p>
+                  <div style="background:#ffffff; padding:12px 20px; border-radius:12px; display:inline-block; margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                    <img src="https://www.cssfinserve.com/logo.jpg" alt="CS Smart Finserve" height="40" style="display:block; border:none; max-width:100%;" />
+                  </div>
+                  <p style="margin:0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Smart Finance. Trusted Partners.</p>
                 </td>
               </tr>
 
@@ -105,8 +107,10 @@ exports.appointmentConfirmation = (name, date, time) => {
             <!-- Header -->
             <tr>
               <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
-                <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;letter-spacing:-0.5px;">CS Smart Finserve</h1>
-                <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;letter-spacing:1px;text-transform:uppercase;">Smart Finance. Trusted Partners.</p>
+                <div style="background:#ffffff; padding:12px 20px; border-radius:12px; display:inline-block; margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                  <img src="https://www.cssfinserve.com/logo.jpg" alt="CS Smart Finserve" height="40" style="display:block; border:none; max-width:100%;" />
+                </div>
+                <p style="margin:0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Smart Finance. Trusted Partners.</p>
               </td>
             </tr>
 
@@ -183,8 +187,10 @@ exports.applicationReceived = (name, serviceType) => {
             <!-- Header -->
             <tr>
               <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
-                <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;letter-spacing:-0.5px;">CS Smart Finserve</h1>
-                <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;letter-spacing:1px;text-transform:uppercase;">Smart Finance. Trusted Partners.</p>
+                <div style="background:#ffffff; padding:12px 20px; border-radius:12px; display:inline-block; margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                  <img src="https://www.cssfinserve.com/logo.jpg" alt="CS Smart Finserve" height="40" style="display:block; border:none; max-width:100%;" />
+                </div>
+                <p style="margin:0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Smart Finance. Trusted Partners.</p>
               </td>
             </tr>
 
@@ -262,8 +268,10 @@ exports.appointmentConfirmed = (name, date, time, service) => {
           <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
             <tr>
               <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
-                <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;">CS Smart Finserve</h1>
-                <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;text-transform:uppercase;letter-spacing:1px;">Smart Finance. Trusted Partners.</p>
+                <div style="background:#ffffff; padding:12px 20px; border-radius:12px; display:inline-block; margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                  <img src="https://www.cssfinserve.com/logo.jpg" alt="CS Smart Finserve" height="40" style="display:block; border:none; max-width:100%;" />
+                </div>
+                <p style="margin:0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Smart Finance. Trusted Partners.</p>
               </td>
             </tr>
             <tr>
@@ -325,8 +333,10 @@ exports.resetPasswordEmail = (name, resetUrl) => {
           <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
             <tr>
               <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
-                <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;">CS Smart Finserve</h1>
-                <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;letter-spacing:1px;text-transform:uppercase;">Smart Finance. Trusted Partners.</p>
+                <div style="background:#ffffff; padding:12px 20px; border-radius:12px; display:inline-block; margin-bottom:16px; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                  <img src="https://www.cssfinserve.com/logo.jpg" alt="CS Smart Finserve" height="40" style="display:block; border:none; max-width:100%;" />
+                </div>
+                <p style="margin:0;color:rgba(255,255,255,0.9);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:600;">Smart Finance. Trusted Partners.</p>
               </td>
             </tr>
             <tr>

@@ -95,37 +95,76 @@ exports.callbackConfirmation = (name) => {
 exports.appointmentConfirmation = (name, date, time) => {
   return `
     <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
-        .content { background: #f8fafc; padding: 30px; border-radius: 0 0 10px 10px; }
-        .appointment-box { background: white; padding: 20px; border-left: 4px solid #0ea5e9; margin: 20px 0; }
-        .footer { text-align: center; margin-top: 30px; color: #64748b; font-size: 14px; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>Appointment Confirmed!</h1>
-        </div>
-        <div class="content">
-          <p>Dear ${name},</p>
-          <p>Your appointment with CS Smart Finserve has been successfully scheduled.</p>
-          <div class="appointment-box">
-            <h3>Appointment Details:</h3>
-            <p><strong>Date:</strong> ${date}</p>
-            <p><strong>Time:</strong> ${time}</p>
-          </div>
-          <p>Our financial advisor will be ready to assist you. Please bring any relevant documents for a smooth consultation.</p>
-          <p>Looking forward to meeting you!</p>
-        </div>
-        <div class="footer">
-          <p>&copy; ${new Date().getFullYear()} CS Smart Finserve Private Limited</p>
-        </div>
-      </div>
+    <html lang="en">
+    <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head>
+    <body style="margin:0;padding:0;background:#f4f1ff;font-family:'Segoe UI',Arial,sans-serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ff;padding:40px 0;">
+        <tr><td align="center">
+          <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+
+            <!-- Header -->
+            <tr>
+              <td style="background:linear-gradient(135deg,#1a1a2e 0%,#c0392b 100%);padding:36px 40px;text-align:center;">
+                <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:700;letter-spacing:-0.5px;">CS Smart Finserve</h1>
+                <p style="margin:6px 0 0;color:rgba(255,255,255,0.75);font-size:13px;letter-spacing:1px;text-transform:uppercase;">Smart Finance. Trusted Partners.</p>
+              </td>
+            </tr>
+
+            <!-- Title -->
+            <tr>
+              <td style="background:#faf8ff;padding:32px 40px 0;text-align:center;">
+                <h2 style="margin:0 0 6px;color:#1a1a2e;font-size:22px;font-weight:700;">Appointment Request Received!</h2>
+                <p style="margin:0;color:#6b7280;font-size:14px;">We'll get back to you shortly to confirm your slot.</p>
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="background:#faf8ff;padding:28px 40px 36px;">
+                <p style="color:#374151;font-size:15px;line-height:1.7;margin:0 0 16px;">Dear <strong>${name}</strong>,</p>
+                <p style="color:#374151;font-size:15px;line-height:1.7;margin:0 0 20px;">
+                  We have successfully received your appointment request. Our team is reviewing it and will contact you to confirm the schedule soon.
+                </p>
+
+                <!-- Details box -->
+                <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0eeff;border-radius:12px;margin-bottom:24px;">
+                  <tr><td style="padding:20px 24px;">
+                    <p style="margin:0 0 12px;color:#1a1a2e;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Requested Details</p>
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📅 &nbsp;<strong>Date:</strong> &nbsp;${date}</td></tr>
+                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">🕐 &nbsp;<strong>Time:</strong> &nbsp;${time}</td></tr>
+                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📍 &nbsp;<strong>Location:</strong> &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
+                    </table>
+                  </td></tr>
+                </table>
+
+                <p style="color:#374151;font-size:15px;line-height:1.7;margin:0 0 24px;">
+                  Our financial advisor will be ready to assist you. Please bring any relevant documents for a smooth consultation once confirmed.
+                </p>
+
+                <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 20px;"/>
+
+                <p style="color:#6b7280;font-size:13px;margin:0 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Need help?</p>
+                <table cellpadding="0" cellspacing="0">
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/919267953513" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 92679 53513</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:kartikpundir231@gmail.com" style="color:#c0392b;text-decoration:none;">kartikpundir231@gmail.com</a></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="background:#1a1a2e;padding:20px 40px;text-align:center;">
+                <p style="margin:0;color:rgba(255,255,255,0.5);font-size:12px;">
+                  &copy; ${new Date().getFullYear()} CS Smart Finserve Private Limited. All rights reserved.<br/>
+                  This is an automated confirmation email. Please do not reply.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+        </td></tr>
+      </table>
     </body>
     </html>
   `;

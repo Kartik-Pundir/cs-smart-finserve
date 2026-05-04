@@ -3,16 +3,16 @@ import React from 'react';
 const logos = [
   { name: 'HDFC Bank', logo: '/assets/hdfc-logo.svg' },
   { name: 'ICICI Bank', logo: '/assets/icici-logo.svg' },
-  { name: 'Axis Bank', logo: '/assets/axis-logo.svg' },
-  { name: 'State Bank of India', logo: '/assets/sbi-logo.svg' },
-  { name: 'Bajaj Finserv', logo: '/assets/bajaj-logo.svg' },
+  { name: 'Axis Bank', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Axis_Bank_logo.svg' },
+  { name: 'Bajaj Finserv', logo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bajaj_Finserv_Logo.svg' },
+  { name: 'IDFC First Bank', logo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_IDFC_First_Bank.svg' },
   { name: 'Yes Bank', logo: '/assets/yesbank-logo.svg' },
-  { name: 'IDFC First Bank', logo: '/assets/idfc-logo.svg' },
+  { name: 'LIC', logo: '/assets/lic-logo.png' },
+  { name: 'Indian Bank', logo: '/assets/indianbank-logo.png' },
   { name: 'Bank of Baroda', logo: '/assets/bob-logo.svg' },
-  { name: 'LIC Housing Finance', logo: '/assets/lic-logo.svg' },
-  { name: 'Tata Capital', logo: '/assets/tata-logo.svg' },
-  { name: 'Cholamandalam', logo: '/assets/chola-logo.svg' },
-  { name: 'Indian Bank', logo: '/assets/indianbank-logo.svg' },
+  { name: 'Tata Capital', logo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tata_Capital_Logo-01.jpg' },
+  { name: 'Poonawalla Fincorp', logo: '/assets/poonawalla-logo.png' },
+  { name: 'Chola Finance', logo: '/assets/chola-logo.png' },
 ];
 
 const BankCard = ({ bank }) => {

@@ -152,17 +152,20 @@ exports.getMe = async (req, res) => {
 // @access  Public (called by Passport)
 exports.googleAuthSuccess = async (req, res) => {
   try {
+    const clientUrl = process.env.NODE_ENV === 'production' ? 'https://cssfinserve.com' : (process.env.CLIENT_URL || 'http://localhost:8000');
+    
     if (!req.user) {
-      return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
+      return res.redirect(`${clientUrl}/login?error=auth_failed`);
     }
 
     const token = generateToken(req.user._id);
     
     // Redirect to frontend with token
-    res.redirect(`${process.env.CLIENT_URL}/auth/google/success?token=${token}`);
+    res.redirect(`${clientUrl}/auth/google/success?token=${token}`);
   } catch (error) {
     console.error('Google auth success error:', error);
-    res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
+    const clientUrl = process.env.NODE_ENV === 'production' ? 'https://cssfinserve.com' : (process.env.CLIENT_URL || 'http://localhost:8000');
+    res.redirect(`${clientUrl}/login?error=auth_failed`);
   }
 };
 

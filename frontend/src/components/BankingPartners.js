@@ -66,7 +66,7 @@ const BankingPartners = () => (
 
     <style>{`
       .marquee-track {
-        animation: seamless-marquee 14s linear infinite;
+        animation: seamless-marquee 35s linear infinite;
       }
       @keyframes seamless-marquee {
         0%   { transform: translateX(0); }

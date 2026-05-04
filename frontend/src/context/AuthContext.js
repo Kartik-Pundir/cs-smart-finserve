@@ -90,12 +90,33 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common['Authorization'];
   };
 
+  const handleGoogleLoginSuccess = async (newToken) => {
+    setLoading(true);
+    localStorage.setItem('token', newToken);
+    setToken(newToken);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+    try {
+      const response = await axios.get('/api/auth/me');
+      if (response.data.success) {
+        setUser(response.data.user);
+        return { success: true, user: response.data.user };
+      }
+    } catch (error) {
+      console.error('Load user error:', error);
+      logout();
+    } finally {
+      setLoading(false);
+    }
+    return { success: false };
+  };
+
   const value = {
     user,
     loading,
     login,
     register,
     logout,
+    handleGoogleLoginSuccess,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin'
   };

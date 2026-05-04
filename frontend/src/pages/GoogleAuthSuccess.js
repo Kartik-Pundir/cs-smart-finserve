@@ -3,25 +3,37 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
+import { useAuth } from '../context/AuthContext';
+
 const GoogleAuthSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { handleGoogleLoginSuccess } = useAuth();
 
   useEffect(() => {
-    const token = searchParams.get('token');
-    
-    if (token) {
-      // Store token
-      localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const processLogin = async () => {
+      const token = searchParams.get('token');
       
-      toast.success('Successfully signed in with Google!');
-      navigate('/dashboard', { replace: true });
-    } else {
-      toast.error('Authentication failed');
-      navigate('/login', { replace: true });
-    }
-  }, [searchParams, navigate]);
+      if (token) {
+        const result = await handleGoogleLoginSuccess(token);
+        
+        if (result.success) {
+          toast.success('Successfully signed in with Google!');
+          // Redirect based on role if needed, or default to dashboard
+          const destination = result.user?.role === 'admin' ? '/admin' : '/dashboard';
+          navigate(destination, { replace: true });
+        } else {
+          toast.error('Failed to load user profile');
+          navigate('/login', { replace: true });
+        }
+      } else {
+        toast.error('Authentication failed: No token received');
+        navigate('/login', { replace: true });
+      }
+    };
+
+    processLogin();
+  }, [searchParams, navigate, handleGoogleLoginSuccess]);
 
   return (
     <div className="min-h-screen flex items-center justify-center" style={{ background: 'var(--bg-base)' }}>

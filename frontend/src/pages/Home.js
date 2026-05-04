@@ -23,12 +23,12 @@ const partnerLogos = [
   { name: 'Bajaj Finserv', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bajaj_Finserv_Logo.svg', color: '#003399' },
   { name: 'IDFC First Bank', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Logo_of_IDFC_First_Bank.svg', color: '#9B1B30' },
   { name: 'Yes Bank', img: '/assets/yesbank-logo.svg', color: '#00529B' },
-  { name: 'LIC', img: 'https://en.wikipedia.org/wiki/Special:FilePath/Life_Insurance_Corporation_of_India_logo.svg', color: '#006400' },
-  { name: 'Indian Bank', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Indian_Bank_logo.svg', color: '#1a5490' },
+  { name: 'LIC', img: '/assets/lic-logo.png', color: '#006400' },
+  { name: 'Indian Bank', img: '/assets/indianbank-logo.png', color: '#1a5490' },
   { name: 'Bank of Baroda', img: '/assets/bob-logo.svg', color: '#F7941D' },
   { name: 'Tata Capital', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tata_Capital_Logo-01.jpg', color: '#1D3557' },
-  { name: 'Poonawalla Fincorp', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Poonawalla_Fincorp_Logo.png', color: '#0057a8' },
-  { name: 'Chola Finance', img: '/assets/chola-logo.svg', color: '#e63329' },
+  { name: 'Poonawalla Fincorp', img: '/assets/poonawalla-logo.png', color: '#0057a8' },
+  { name: 'Chola Finance', img: '/assets/chola-logo.png', color: '#e63329' },
 ];
 
 const heroSlides = [

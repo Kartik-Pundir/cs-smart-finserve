@@ -19,7 +19,7 @@ const BankCard = ({ bank }) => {
   return (
     <div
       className="flex-shrink-0 mx-4 flex flex-col items-center justify-center group"
-      style={{ minWidth: '160px' }}
+      style={{ width: '160px' }}
     >
       <div
         className="flex items-center justify-center px-5 py-4 rounded-2xl bg-white shadow-sm border border-gray-100 group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300"
@@ -58,7 +58,7 @@ const BankingPartners = () => (
         style={{ background: 'linear-gradient(to left, #f5f0ff, transparent)' }} />
 
       <div className="marquee-track flex items-center w-max" style={{ willChange: 'transform' }}>
-        {[...logos, ...logos].map((bank, i) => (
+        {[...logos, ...logos, ...logos, ...logos].map((bank, i) => (
           <BankCard key={i} bank={bank} />
         ))}
       </div>
@@ -70,7 +70,7 @@ const BankingPartners = () => (
       }
       @keyframes seamless-marquee {
         0%   { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        100% { transform: translateX(-25%); }
       }
     `}</style>
   </section>

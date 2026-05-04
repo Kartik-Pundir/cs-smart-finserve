@@ -17,18 +17,18 @@ import ZoomImage from '../components/ZoomImage';
 
 // Bank logos - using colored initials
 const partnerLogos = [
-  { name: 'HDFC Bank', color: '#004C8F' },
-  { name: 'ICICI Bank', color: '#F58220' },
-  { name: 'Axis Bank', color: '#97144D' },
-  { name: 'Bajaj Finserv', color: '#003399' },
-  { name: 'IDFC First Bank', color: '#9B1B30' },
-  { name: 'Yes Bank', color: '#00529B' },
-  { name: 'LIC', color: '#006400' },
-  { name: 'Indian Bank', color: '#1a5490' },
-  { name: 'Bank of Baroda', color: '#F7941D' },
-  { name: 'Tata Capital', color: '#1D3557' },
-  { name: 'Poonawalla Fincorp', color: '#0057a8' },
-  { name: 'Chola Finance', color: '#e63329' },
+  { name: 'HDFC Bank', img: '/assets/hdfc-logo.svg', color: '#004C8F' },
+  { name: 'ICICI Bank', img: '/assets/icici-logo.svg', color: '#F58220' },
+  { name: 'Axis Bank', img: '/assets/axis-logo.svg', color: '#97144D' },
+  { name: 'Bajaj Finserv', img: '/assets/bajaj-logo.svg', color: '#003399' },
+  { name: 'IDFC First Bank', img: '/assets/idfc-logo.svg', color: '#9B1B30' },
+  { name: 'Yes Bank', img: '/assets/yesbank-logo.svg', color: '#00529B' },
+  { name: 'LIC', img: '/assets/lic-logo.svg', color: '#006400' },
+  { name: 'Indian Bank', img: '/assets/indianbank-logo.svg', color: '#1a5490' },
+  { name: 'Bank of Baroda', img: '/assets/bob-logo.svg', color: '#F7941D' },
+  { name: 'Tata Capital', img: '/assets/tata-logo.svg', color: '#1D3557' },
+  { name: 'Poonawalla Fincorp', img: 'https://logo.clearbit.com/poonawallafincorp.com', color: '#0057a8' },
+  { name: 'Chola Finance', img: '/assets/chola-logo.svg', color: '#e63329' },
 ];
 
 const heroSlides = [
@@ -674,13 +674,25 @@ const Home = () => {
                   viewport={{ once: true }} transition={{ delay: index * 0.05 }}
                   className="rounded-xl flex flex-col items-center justify-center p-6 hover:shadow-lg transition-all group"
                   style={{ minHeight: '120px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
+                  {bank.img ? (
+                    <img 
+                      src={bank.img.startsWith('http') ? bank.img : process.env.PUBLIC_URL + bank.img} 
+                      alt={bank.name} 
+                      className="w-16 h-16 object-contain transition-all duration-300 group-hover:scale-110 mb-2"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
                   <div
-                    className="flex items-center justify-center rounded-xl font-black text-white text-lg transition-all duration-300 group-hover:scale-110 mb-2"
-                    style={{ width: '56px', height: '56px', background: bank.color, letterSpacing: '-1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                    className="items-center justify-center rounded-xl font-black text-white text-lg transition-all duration-300 group-hover:scale-110 mb-2"
+                    style={{ display: bank.img ? 'none' : 'flex', width: '56px', height: '56px', background: bank.color, letterSpacing: '-1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
                   >
                     {initials}
                   </div>
-                  <span className="text-xs font-semibold text-gray-500 text-center">{bank.name}</span>
+                  <span className="text-xs font-semibold text-gray-500 text-center mt-2">{bank.name}</span>
                 </motion.div>
               );
             })}

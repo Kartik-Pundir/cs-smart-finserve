@@ -665,20 +665,20 @@ const Home = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
             <h2 className="text-4xl font-heading font-bold" style={{ color: "var(--text-primary)" }}>Our Partners from Across the Industry</h2>
           </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
             {partnerLogos.map((bank, index) => {
               const initials = bank.name.split(' ').slice(0, 2).map(w => w[0]).join('');
               return (
                 <motion.div key={index}
                   initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ delay: index * 0.05 }}
-                  className="rounded-xl flex flex-col items-center justify-center p-6 hover:shadow-lg transition-all group"
-                  style={{ minHeight: '120px', background: '#ffffff', border: '1px solid #e5e7eb' }}>
+                  className="rounded-xl flex items-center justify-center p-4 hover:shadow-lg transition-all group bg-white cursor-pointer"
+                  style={{ height: '90px', border: '1px solid #eaeaea', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
                   {bank.img ? (
                     <img 
                       src={bank.img.startsWith('http') ? bank.img : process.env.PUBLIC_URL + bank.img} 
                       alt={bank.name} 
-                      className="w-16 h-16 object-contain transition-all duration-300 group-hover:scale-110 mb-2"
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.style.display = 'none';
@@ -687,12 +687,11 @@ const Home = () => {
                     />
                   ) : null}
                   <div
-                    className="items-center justify-center rounded-xl font-black text-white text-lg transition-all duration-300 group-hover:scale-110 mb-2"
-                    style={{ display: bank.img ? 'none' : 'flex', width: '56px', height: '56px', background: bank.color, letterSpacing: '-1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}
+                    className="items-center justify-center rounded-xl font-black text-white text-lg transition-transform duration-300 group-hover:scale-105"
+                    style={{ display: bank.img ? 'none' : 'flex', width: '48px', height: '48px', background: bank.color, letterSpacing: '-1px' }}
                   >
                     {initials}
                   </div>
-                  <span className="text-xs font-semibold text-gray-500 text-center mt-2">{bank.name}</span>
                 </motion.div>
               );
             })}

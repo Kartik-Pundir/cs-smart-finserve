@@ -57,7 +57,7 @@ const BankingPartners = () => (
       <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
         style={{ background: 'linear-gradient(to left, #f5f0ff, transparent)' }} />
 
-      <div className="marquee-track flex items-center" style={{ willChange: 'transform' }}>
+      <div className="marquee-track flex items-center w-max" style={{ willChange: 'transform' }}>
         {[...logos, ...logos].map((bank, i) => (
           <BankCard key={i} bank={bank} />
         ))}

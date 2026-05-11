@@ -175,10 +175,10 @@ const Chatbot = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              exit={{ opacity: 0 }}
+              transition={{ enter: { type: 'spring', stiffness: 380, damping: 30 }, exit: { duration: 0.1 } }}
               style={{ width: 380, height: 600, background: 'white', borderRadius: 24, boxShadow: '0 24px 80px rgba(0,0,0,0.22)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
               {/* Header */}

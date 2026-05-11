@@ -1,316 +1,289 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
-import { FaCalculator, FaHome, FaCar, FaUserTie, FaBriefcase, FaArrowRight, FaInfoCircle } from 'react-icons/fa';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const loanPresets = [
-  { label: 'Home Loan',     icon: <FaHome />,     amount: 3000000, rate: 8.5,  tenure: 240, color: '#c0392b', gradient: 'linear-gradient(135deg,#c0392b,#e74c3c)' },
-  { label: 'Car Loan',      icon: <FaCar />,      amount: 700000,  rate: 9.0,  tenure: 60,  color: '#2980b9', gradient: 'linear-gradient(135deg,#2980b9,#3498db)' },
-  { label: 'Personal Loan', icon: <FaUserTie />,  amount: 500000,  rate: 12.0, tenure: 36,  color: '#8e44ad', gradient: 'linear-gradient(135deg,#8e44ad,#9b59b6)' },
-  { label: 'Business Loan', icon: <FaBriefcase />,amount: 2000000, rate: 11.0, tenure: 60,  color: '#27ae60', gradient: 'linear-gradient(135deg,#27ae60,#2ecc71)' },
-];
-
 const fmt = (n) => `₹${Number(n).toLocaleString('en-IN')}`;
 
-const SliderField = ({ label, value, min, max, step, onChange, display, leftLabel, rightLabel, accentColor }) => {
+const loanTypes = [
+  { label: 'Home Loan',     emoji: '🏠', amount: 3000000, rate: 8.5,  tenure: 240 },
+  { label: 'Car Loan',      emoji: '🚗', amount: 800000,  rate: 9.0,  tenure: 84  },
+  { label: 'Personal Loan', emoji: '👤', amount: 500000,  rate: 12.0, tenure: 36  },
+  { label: 'Business Loan', emoji: '💼', amount: 2000000, rate: 11.0, tenure: 60  },
+];
+
+const ACCENT = '#c0392b';
+
+const Slider = ({ label, value, min, max, step, onChange, displayVal, leftTick, rightTick }) => {
   const pct = ((value - min) / (max - min)) * 100;
   return (
-    <div>
-      <div className="flex justify-between items-center mb-3">
-        <label className="text-gray-700 font-semibold text-sm">{label}</label>
-        <span className="text-sm font-bold px-3 py-1 rounded-full text-white" style={{ background: accentColor }}>{display}</span>
+    <div className="mb-7">
+      <div className="flex justify-between items-baseline mb-3">
+        <span className="text-gray-500 text-sm">{label}</span>
+        <span className="text-lg font-bold text-gray-900">{displayVal}</span>
       </div>
-      <div className="relative">
+      <div className="relative h-5 flex items-center">
+        <div className="w-full h-1 rounded-full bg-gray-200 absolute" />
+        <div
+          className="h-1 rounded-full absolute"
+          style={{ width: `${pct}%`, background: ACCENT }}
+        />
         <input
           type="range" min={min} max={max} step={step} value={value}
           onChange={e => onChange(Number(e.target.value))}
-          className="w-full h-2 rounded-full appearance-none cursor-pointer"
-          style={{
-            background: `linear-gradient(to right, ${accentColor} 0%, ${accentColor} ${pct}%, #e5e7eb ${pct}%, #e5e7eb 100%)`,
-            WebkitAppearance: 'none',
-          }}
+          className="w-full absolute cursor-pointer"
+          style={{ opacity: 0, height: '20px', zIndex: 2 }}
+        />
+        <div
+          className="w-5 h-5 rounded-full bg-white border-2 shadow-md absolute pointer-events-none transition-all"
+          style={{ left: `calc(${pct}% - 10px)`, borderColor: ACCENT, boxShadow: `0 0 0 3px rgba(192,57,43,0.12)` }}
         />
       </div>
-      <div className="flex justify-between text-xs text-gray-400 mt-2">
-        <span>{leftLabel}</span>
-        <span>{rightLabel}</span>
+      <div className="flex justify-between mt-2 text-xs text-gray-400">
+        <span>{leftTick}</span>
+        <span>{rightTick}</span>
       </div>
     </div>
   );
 };
 
 const EMICalculator = () => {
-  const [loanAmount, setLoanAmount]   = useState(1000000);
+  const [loanAmount,   setLoanAmount]   = useState(1500000);
   const [interestRate, setInterestRate] = useState(8.5);
-  const [tenure, setTenure]           = useState(60);
-  const [emi, setEmi]                 = useState(0);
+  const [tenure,       setTenure]       = useState(120);
+  const [emi,          setEmi]          = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
-  const [totalPayment, setTotalPayment]   = useState(0);
-  const [activePreset, setActivePreset]   = useState(null);
-  const [accentColor, setAccentColor] = useState('#c0392b');
-  const [accentGradient, setAccentGradient] = useState('linear-gradient(135deg,#c0392b,#e74c3c)');
+  const [totalPayment,  setTotalPayment]  = useState(0);
+  const [activeType,    setActiveType]    = useState(null);
 
-  const calculateEMI = useCallback(() => {
-    const p = parseFloat(loanAmount);
-    const r = parseFloat(interestRate) / 12 / 100;
-    const n = parseFloat(tenure);
-    if (p && r && n) {
-      const e = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-      const tp = e * n;
-      setEmi(Math.round(e));
-      setTotalInterest(Math.round(tp - p));
-      setTotalPayment(Math.round(tp));
-    }
+  const calculate = useCallback(() => {
+    const p = loanAmount, r = interestRate / 12 / 100, n = tenure;
+    if (!p || !r || !n) return;
+    const e = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    const tp = e * n;
+    setEmi(Math.round(e));
+    setTotalPayment(Math.round(tp));
+    setTotalInterest(Math.round(tp - p));
   }, [loanAmount, interestRate, tenure]);
 
-  useEffect(() => { calculateEMI(); }, [calculateEMI]);
+  useEffect(() => { calculate(); }, [calculate]);
 
-  const applyPreset = (preset, idx) => {
-    setLoanAmount(preset.amount);
-    setInterestRate(preset.rate);
-    setTenure(preset.tenure);
-    setActivePreset(idx);
-    setAccentColor(preset.color);
-    setAccentGradient(preset.gradient);
+  const applyType = (lt, i) => {
+    setLoanAmount(lt.amount);
+    setInterestRate(lt.rate);
+    setTenure(lt.tenure);
+    setActiveType(i);
   };
 
-  const principalPct = totalPayment > 0 ? Math.round((loanAmount / totalPayment) * 100) : 0;
-  const interestPct  = 100 - principalPct;
+  const principalPct  = totalPayment > 0 ? Math.round((loanAmount / totalPayment) * 100) : 0;
+  const interestPct   = 100 - principalPct;
 
-  const chartData = {
-    labels: ['Principal', 'Interest'],
-    datasets: [{
-      data: [loanAmount, totalInterest],
-      backgroundColor: [accentColor, '#f1c40f'],
-      borderColor: ['white', 'white'],
-      borderWidth: 4,
-      hoverOffset: 8,
-    }]
-  };
-
-  const chartOptions = {
-    responsive: true,
-    cutout: '70%',
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => ` ${ctx.label}: ${fmt(ctx.raw)}`
-        }
-      }
-    }
-  };
-
-  const amortization = [];
+  const amort = [];
   if (emi > 0) {
     let bal = loanAmount;
     const r = interestRate / 12 / 100;
-    for (let i = 1; i <= Math.min(tenure, 12); i++) {
+    for (let m = 1; m <= Math.min(tenure, 12); m++) {
       const int = Math.round(bal * r);
       const prin = Math.round(emi - int);
       bal = Math.max(0, Math.round(bal - prin));
-      amortization.push({ month: i, emi: Math.round(emi), interest: int, principal: prin, balance: bal });
+      amort.push({ m, emi: Math.round(emi), int, prin, bal });
     }
   }
 
   return (
-    <div className="min-h-screen" style={{ background: '#f0eeff', paddingTop: '80px' }}>
-      <style>{`
-        input[type=range]::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          width: 20px; height: 20px;
-          border-radius: 50%;
-          background: white;
-          border: 3px solid ${accentColor};
-          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-          cursor: pointer;
-          transition: transform 0.2s;
-        }
-        input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-      `}</style>
+    <div style={{ background: '#f7f8fa', minHeight: '100vh', paddingTop: '80px' }}>
 
-      {/* Hero */}
-      <section className="relative py-16 overflow-hidden" style={{ background: `linear-gradient(135deg, #1a1a2e 0%, #2d1b2e 40%, rgba(192,57,43,0.9) 100%)` }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-20 w-64 h-64 rounded-full" style={{ background: 'radial-gradient(circle, #fff, transparent)' }} />
-          <div className="absolute bottom-0 right-20 w-96 h-96 rounded-full" style={{ background: 'radial-gradient(circle, #f39c12, transparent)' }} />
-        </div>
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold mb-5">
-              <FaCalculator /> Smart EMI Calculator
-            </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
-              Plan Your Loan <span style={{ color: '#ffd700' }}>Smartly</span>
-            </h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Instantly calculate your monthly EMI, total interest payable, and complete amortization schedule. No guesswork — just clarity.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Loan Presets */}
-      <div className="max-w-5xl mx-auto px-4 -mt-6 relative z-20 mb-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {loanPresets.map((p, i) => (
-            <motion.button
-              key={i} onClick={() => applyPreset(p, i)}
-              whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-              className="flex flex-col items-center gap-2 py-4 px-3 rounded-2xl font-semibold text-sm transition-all shadow-md"
-              style={{
-                background: activePreset === i ? p.gradient : 'white',
-                color: activePreset === i ? 'white' : '#374151',
-                border: activePreset === i ? 'none' : '2px solid #e5e7eb',
-              }}>
-              <span className="text-xl">{p.icon}</span>
-              {p.label}
-            </motion.button>
-          ))}
+      {/* ── Page Header ── */}
+      <div style={{ background: 'white', borderBottom: '1px solid #eaecf0', padding: '36px 0 28px' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 24px' }}>
+          <p style={{ color: ACCENT, fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>Tools</p>
+          <h1 style={{ fontSize: 32, fontWeight: 800, color: '#111', margin: 0, lineHeight: 1.2 }}>EMI Calculator</h1>
+          <p style={{ color: '#6b7280', marginTop: 8, fontSize: 15 }}>
+            Find out your monthly instalment amount before you apply.
+          </p>
         </div>
       </div>
 
-      {/* Main Calculator */}
-      <div className="max-w-5xl mx-auto px-4 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div style={{ maxWidth: 960, margin: '0 auto', padding: '28px 24px 60px' }}>
 
-          {/* Left: Inputs */}
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3 bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-            <h2 className="text-xl font-heading font-bold text-gray-900 mb-7 flex items-center gap-2">
-              <FaCalculator style={{ color: accentColor }} /> Loan Details
-            </h2>
-            <div className="space-y-8">
-              <SliderField
-                label="Loan Amount"
-                value={loanAmount} min={100000} max={10000000} step={50000}
-                onChange={setLoanAmount}
-                display={fmt(loanAmount)}
-                leftLabel="₹1 L" rightLabel="₹1 Cr"
-                accentColor={accentColor}
-              />
-              <SliderField
-                label="Interest Rate (% p.a.)"
-                value={interestRate} min={5} max={24} step={0.1}
-                onChange={setInterestRate}
-                display={`${interestRate}%`}
-                leftLabel="5%" rightLabel="24%"
-                accentColor={accentColor}
-              />
-              <SliderField
-                label="Loan Tenure"
-                value={tenure} min={6} max={360} step={6}
-                onChange={setTenure}
-                display={`${tenure} months (${(tenure / 12).toFixed(1).replace('.0','')} yrs)`}
-                leftLabel="6 months" rightLabel="30 years"
-                accentColor={accentColor}
-              />
-            </div>
+        {/* ── Loan Type Quick-select ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12, marginBottom: 24 }}>
+          {loanTypes.map((lt, i) => (
+            <button
+              key={i}
+              onClick={() => applyType(lt, i)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 10,
+                padding: '12px 16px', borderRadius: 12, cursor: 'pointer',
+                border: activeType === i ? `2px solid ${ACCENT}` : '2px solid #e5e7eb',
+                background: activeType === i ? '#fff5f5' : 'white',
+                fontWeight: 600, fontSize: 13, color: activeType === i ? ACCENT : '#374151',
+                transition: 'all .2s',
+              }}
+            >
+              <span style={{ fontSize: 20 }}>{lt.emoji}</span>
+              {lt.label}
+            </button>
+          ))}
+        </div>
 
-            {/* Direct Inputs */}
-            <div className="mt-8 pt-7 border-t border-gray-100 grid grid-cols-3 gap-3">
+        {/* ── Main Grid ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20 }}>
+
+          {/* Left — Inputs */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            style={{ background: 'white', borderRadius: 20, padding: '32px 36px', border: '1px solid #eaecf0' }}>
+
+            <Slider
+              label="Loan Amount"
+              value={loanAmount} min={100000} max={10000000} step={50000}
+              onChange={setLoanAmount}
+              displayVal={fmt(loanAmount)}
+              leftTick="₹1 L" rightTick="₹1 Cr"
+            />
+            <Slider
+              label="Interest Rate (% p.a.)"
+              value={interestRate} min={5} max={24} step={0.1}
+              onChange={setInterestRate}
+              displayVal={`${Number(interestRate).toFixed(1)}%`}
+              leftTick="5%" rightTick="24%"
+            />
+            <Slider
+              label="Loan Tenure"
+              value={tenure} min={6} max={360} step={6}
+              onChange={setTenure}
+              displayVal={`${tenure} months${tenure >= 12 ? ` · ${Math.floor(tenure/12)} yr${Math.floor(tenure/12)>1?'s':''}` : ''}`}
+              leftTick="6 months" rightTick="30 years"
+            />
+
+            {/* Fine-tune inputs */}
+            <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 24, marginTop: 4, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}>
               {[
                 { label: 'Amount (₹)', val: loanAmount, set: setLoanAmount, min: 100000, max: 10000000 },
-                { label: 'Rate (%)',   val: interestRate, set: setInterestRate, min: 5, max: 24, step: 0.1 },
+                { label: 'Rate (%)',   val: interestRate, set: setInterestRate, min: 5, max: 24, decimal: true },
                 { label: 'Months',    val: tenure, set: setTenure, min: 6, max: 360 },
               ].map((f, i) => (
                 <div key={i}>
-                  <label className="text-xs text-gray-500 font-medium mb-1 block">{f.label}</label>
+                  <label style={{ fontSize: 11, color: '#9ca3af', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5, display: 'block', marginBottom: 5 }}>
+                    {f.label}
+                  </label>
                   <input
-                    type="number" value={f.val} min={f.min} max={f.max} step={f.step || 1}
+                    type="number" value={f.val} min={f.min} max={f.max} step={f.decimal ? 0.1 : 1}
                     onChange={e => f.set(Math.min(f.max, Math.max(f.min, Number(e.target.value))))}
-                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-red-400 text-gray-800 bg-gray-50"
+                    style={{
+                      width: '100%', padding: '9px 12px', border: '1.5px solid #e5e7eb', borderRadius: 10,
+                      fontSize: 14, fontWeight: 600, color: '#111', outline: 'none', background: '#fafafa', boxSizing: 'border-box',
+                    }}
+                    onFocus={e => e.target.style.borderColor = ACCENT}
+                    onBlur={e => e.target.style.borderColor = '#e5e7eb'}
                   />
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right: Results */}
-          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} className="lg:col-span-2 flex flex-col gap-5">
+          {/* Right — Results */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
 
-            {/* EMI Highlight */}
-            <div className="rounded-3xl p-7 text-white relative overflow-hidden shadow-xl" style={{ background: accentGradient }}>
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10" style={{ background: 'white', transform: 'translate(30%, -30%)' }} />
-              <p className="text-white/80 text-sm font-semibold uppercase tracking-widest mb-2">Monthly EMI</p>
-              <AnimatePresence mode="wait">
-                <motion.p key={emi} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                  className="text-5xl font-heading font-bold mb-4">
-                  {fmt(emi)}
-                </motion.p>
-              </AnimatePresence>
-              <div className="h-1 rounded-full bg-white/20 mb-4" />
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="bg-white/15 rounded-xl p-3 backdrop-blur-sm">
-                  <p className="opacity-70 text-xs mb-1">Principal</p>
-                  <p className="font-bold">{fmt(loanAmount)}</p>
-                </div>
-                <div className="bg-white/15 rounded-xl p-3 backdrop-blur-sm">
-                  <p className="opacity-70 text-xs mb-1">Total Interest</p>
-                  <p className="font-bold">{fmt(totalInterest)}</p>
-                </div>
-                <div className="bg-white/15 rounded-xl p-3 backdrop-blur-sm col-span-2">
-                  <p className="opacity-70 text-xs mb-1">Total Payment</p>
-                  <p className="font-bold text-lg">{fmt(totalPayment)}</p>
-                </div>
+            {/* EMI card */}
+            <div style={{ background: ACCENT, borderRadius: 20, padding: '28px 28px 24px', color: 'white' }}>
+              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', opacity: 0.7, marginBottom: 6 }}>Monthly EMI</p>
+              <p style={{ fontSize: 42, fontWeight: 800, lineHeight: 1.1, marginBottom: 20 }}>{fmt(emi)}</p>
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.2)', paddingTop: 18, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  { label: 'Principal', val: fmt(loanAmount) },
+                  { label: 'Total Interest', val: fmt(totalInterest) },
+                  { label: 'Total Payment', val: fmt(totalPayment), bold: true },
+                ].map((row, i) => (
+                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: 13, opacity: 0.75 }}>{row.label}</span>
+                    <span style={{ fontSize: row.bold ? 15 : 13, fontWeight: row.bold ? 800 : 600 }}>{row.val}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Donut Chart */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 flex-1">
-              <h3 className="text-base font-bold text-gray-900 mb-5">Payment Breakdown</h3>
-              <div className="relative max-w-[180px] mx-auto">
-                <Doughnut data={chartData} options={chartOptions} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <p className="text-xs text-gray-400">Principal</p>
-                  <p className="text-xl font-bold" style={{ color: accentColor }}>{principalPct}%</p>
+            {/* Donut */}
+            <div style={{ background: 'white', borderRadius: 20, padding: '24px', border: '1px solid #eaecf0' }}>
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#374151', marginBottom: 16 }}>Payment Split</p>
+              <div style={{ position: 'relative', width: 150, margin: '0 auto 16px' }}>
+                <Doughnut
+                  data={{
+                    labels: ['Principal', 'Interest'],
+                    datasets: [{ data: [loanAmount, totalInterest], backgroundColor: [ACCENT, '#fbbf24'], borderColor: ['white','white'], borderWidth: 3, hoverOffset: 5 }]
+                  }}
+                  options={{ responsive: true, cutout: '68%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)}` } } } }}
+                />
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                  <p style={{ fontSize: 10, color: '#9ca3af', margin: 0 }}>Principal</p>
+                  <p style={{ fontSize: 18, fontWeight: 800, color: ACCENT, margin: 0 }}>{principalPct}%</p>
                 </div>
               </div>
-              <div className="flex justify-center gap-6 mt-5">
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="w-3 h-3 rounded-full" style={{ background: accentColor }} />
-                  <span className="text-gray-500">Principal <strong className="text-gray-800">{principalPct}%</strong></span>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <span className="text-gray-500">Interest <strong className="text-gray-800">{interestPct}%</strong></span>
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {[
+                  { label: 'Principal', pct: principalPct, color: ACCENT },
+                  { label: 'Interest',  pct: interestPct,  color: '#fbbf24' },
+                ].map((r, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ width: 10, height: 10, borderRadius: '50%', background: r.color, display: 'inline-block' }} />
+                      <span style={{ fontSize: 13, color: '#6b7280' }}>{r.label}</span>
+                    </div>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#111' }}>{r.pct}%</span>
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* CTA */}
+            <Link to="/book-appointment" style={{
+              display: 'block', padding: '14px', background: '#111', borderRadius: 14, textAlign: 'center',
+              color: 'white', fontWeight: 700, fontSize: 14, textDecoration: 'none', transition: 'background .2s',
+            }}
+              onMouseEnter={e => e.currentTarget.style.background = ACCENT}
+              onMouseLeave={e => e.currentTarget.style.background = '#111'}
+            >
+              Apply for this Loan →
+            </Link>
           </motion.div>
         </div>
 
-        {/* Amortization Table */}
-        {amortization.length > 0 && (
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="mt-8 bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="px-8 py-6 border-b border-gray-100 flex items-center justify-between">
-              <h3 className="text-lg font-heading font-bold text-gray-900 flex items-center gap-2">
-                <FaInfoCircle style={{ color: accentColor }} /> First 12 Months — Payment Schedule
-              </h3>
-              <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">Monthly breakdown</span>
+        {/* ── Amortization Table ── */}
+        {amort.length > 0 && (
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            style={{ background: 'white', borderRadius: 20, border: '1px solid #eaecf0', marginTop: 20, overflow: 'hidden' }}>
+            <div style={{ padding: '22px 28px', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <p style={{ fontWeight: 700, fontSize: 15, color: '#111', margin: 0 }}>Monthly Breakdown</p>
+                <p style={{ fontSize: 12, color: '#9ca3af', margin: '3px 0 0' }}>First 12 months</p>
+              </div>
+              <span style={{ background: '#f3f4f6', padding: '5px 12px', borderRadius: 20, fontSize: 12, fontWeight: 600, color: '#6b7280' }}>
+                {tenure} months total
+              </span>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead style={{ background: '#faf8ff' }}>
-                  <tr>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+                <thead>
+                  <tr style={{ background: '#fafafa' }}>
                     {['Month', 'EMI', 'Principal', 'Interest', 'Balance'].map(h => (
-                      <th key={h} className="text-left px-6 py-4 text-gray-500 font-semibold text-xs uppercase tracking-wide">{h}</th>
+                      <th key={h} style={{ padding: '12px 24px', textAlign: 'left', fontWeight: 600, color: '#9ca3af', fontSize: 11, textTransform: 'uppercase', letterSpacing: 0.5 }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {amortization.map((row, i) => (
-                    <tr key={i} className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 font-bold text-gray-800">{row.month}</td>
-                      <td className="px-6 py-4 font-semibold" style={{ color: accentColor }}>{fmt(row.emi)}</td>
-                      <td className="px-6 py-4 text-green-600 font-medium">{fmt(row.principal)}</td>
-                      <td className="px-6 py-4 text-yellow-600 font-medium">{fmt(row.interest)}</td>
-                      <td className="px-6 py-4 text-gray-500">{fmt(row.balance)}</td>
+                  {amort.map((row, i) => (
+                    <tr key={i} style={{ borderTop: '1px solid #f3f4f6' }}
+                      onMouseEnter={e => e.currentTarget.style.background = '#fafafa'}
+                      onMouseLeave={e => e.currentTarget.style.background = 'white'}>
+                      <td style={{ padding: '13px 24px', fontWeight: 700, color: '#374151' }}>{row.m}</td>
+                      <td style={{ padding: '13px 24px', fontWeight: 600, color: ACCENT }}>{fmt(row.emi)}</td>
+                      <td style={{ padding: '13px 24px', color: '#059669', fontWeight: 500 }}>{fmt(row.prin)}</td>
+                      <td style={{ padding: '13px 24px', color: '#d97706', fontWeight: 500 }}>{fmt(row.int)}</td>
+                      <td style={{ padding: '13px 24px', color: '#6b7280' }}>{fmt(row.bal)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -319,30 +292,14 @@ const EMICalculator = () => {
           </motion.div>
         )}
 
-        {/* CTA */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="mt-10 rounded-3xl p-8 text-center text-white shadow-xl relative overflow-hidden"
-          style={{ background: accentGradient }}>
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full" style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }} />
-          </div>
-          <div className="relative z-10">
-            <h3 className="text-2xl font-heading font-bold mb-2">Ready to Apply?</h3>
-            <p className="text-white/80 mb-6">Get your loan sanctioned in 48 hours. Our experts will find you the best deal.</p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/book-appointment"
-                className="px-7 py-3 bg-white rounded-xl font-bold text-gray-900 hover:scale-105 transition-all shadow-lg flex items-center gap-2"
-                style={{ textDecoration: 'none' }}>
-                Book Free Consultation <FaArrowRight />
-              </Link>
-              <Link to="/services"
-                className="px-7 py-3 rounded-xl font-bold text-white border-2 border-white/40 hover:bg-white/10 transition-all flex items-center gap-2"
-                style={{ textDecoration: 'none' }}>
-                View All Loan Products <FaArrowRight />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
+        {/* ── Info chips ── */}
+        <div style={{ marginTop: 16, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {['Rates shown are indicative. Actual rates vary by lender and profile.', '₹0 fee to use this calculator.'].map((t, i) => (
+            <span key={i} style={{ fontSize: 12, color: '#9ca3af', background: 'white', border: '1px solid #e5e7eb', padding: '6px 14px', borderRadius: 20 }}>
+              ℹ️ {t}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -71,7 +71,7 @@ const BusinessLoan = () => {
   return (
     <div className="min-h-screen" style={{ background: '#faf8ff' }}>
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(192,57,43,0.88) 100%), url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1400&q=80)' }}>
+        style={{ backgroundImage: 'linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(192,57,43,0.82) 100%), url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=85)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Business Loan</span>

@@ -41,10 +41,10 @@ const Insurance = () => {
     <div style={{ background: '#f8f7f4', minHeight: '100vh', paddingTop: 80, fontFamily: "'Inter', sans-serif" }}>
 
       {/* Hero */}
-      <div style={{ position: 'relative', overflow: 'hidden', minHeight: 300 }}>
-        <img src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=1400&q=85" alt="Insurance" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.93) 0%, rgba(10,10,20,0.75) 60%, rgba(10,10,20,0.4) 100%)' }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '56px 28px' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', minHeight: 420 }}>
+        <img src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=1400&q=85" alt="Insurance" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.95) 0%, rgba(192,57,43,0.75) 60%, rgba(10,10,20,0.5) 100%)' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '80px 28px' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2.5, color: '#fca5a5', textTransform: 'uppercase', marginBottom: 10 }}>General Insurance</p>
             <h1 style={{ fontSize: 40, fontWeight: 900, color: 'white', margin: 0, letterSpacing: -1.2, lineHeight: 1.15 }}>
@@ -70,13 +70,13 @@ const Insurance = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {plans.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                style={{ background: 'white', borderRadius: 18, padding: '24px 22px', boxShadow: '0 2px 12px rgba(15,23,42,0.06)', border: '1px solid #f1f5f9' }}>
-                <div style={{ fontSize: 32, marginBottom: 12 }}>{p.icon}</div>
-                <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', margin: '0 0 8px' }}>{p.title}</h3>
-                <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: '0 0 14px' }}>{p.desc}</p>
+                style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e', borderRadius: 18, padding: '28px 22px', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ fontSize: 34, marginBottom: 14 }}>{p.icon}</div>
+                <h3 style={{ fontSize: 15, fontWeight: 800, color: 'white', margin: '0 0 8px' }}>{p.title}</h3>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: '0 0 14px' }}>{p.desc}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {p.tags.map((t, j) => (
-                    <span key={j} style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: '#fff1f0', color: '#c0392b', border: '1px solid rgba(192,57,43,0.15)' }}>{t}</span>
+                    <span key={j} style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.85)', border: '1px solid rgba(255,255,255,0.18)' }}>{t}</span>
                   ))}
                 </div>
               </motion.div>

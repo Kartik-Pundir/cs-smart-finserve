@@ -29,16 +29,8 @@ const LoanCTABanner = ({ loanType = 'Loan' }) => {
             </p>
             <div className="flex items-center gap-3 flex-shrink-0">
               <a
-                href="https://wa.me/919267953513?text=Hi%2C%20I%20want%20to%20apply%20for%20a%20loan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold text-sm transition-all"
-              >
-                <FaWhatsapp className="text-lg" /> WhatsApp Us
-              </a>
-              <a
                 href="#apply"
-                className="flex items-center gap-2 px-4 py-2 bg-white text-accent rounded-lg font-semibold text-sm hover:shadow-lg transition-all"
+                className="flex items-center gap-2 px-5 py-2 bg-white text-accent rounded-lg font-semibold text-sm hover:shadow-lg transition-all"
               >
                 Apply Now →
               </a>

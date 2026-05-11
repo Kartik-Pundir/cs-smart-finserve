@@ -366,7 +366,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Auto Loan</span>
+              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Auto Loan</p>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Drive Home Your Dream Car — Today.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Why wait? With CS Smart Finserve, getting a car loan is faster than ever. We compare 50+ lenders to get you the lowest EMI with zero hidden charges.
@@ -382,7 +382,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=700&q=85" 
                 alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -398,14 +398,14 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=85" 
                 alt="Home Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
               />
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="order-1 lg:order-2">
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Home Loan</span>
+              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Home Loan</p>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Dream Home Is One Step Away.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Stop paying rent and start building equity. Our home loan experts guide you through every step — from eligibility to disbursement — making the process smooth and stress-free.
@@ -428,7 +428,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>General Insurance</span>
+              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>General Insurance</p>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Protect What You've Built. Insure What You Love.</h2>
               <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
                 Life is unpredictable — your protection shouldn't be. From vehicle insurance to health and property coverage, we connect you with India's top insurers at the best premiums.
@@ -444,7 +444,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=85" 
                 alt="Insurance"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}

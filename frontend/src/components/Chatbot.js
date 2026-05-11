@@ -103,7 +103,7 @@ const Chatbot = () => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      setTimeout(() => addBot("Hi! 👋 I'm Arya, your CS Smart Finserve assistant.\n\nHow can I help you today?",
+      setTimeout(() => addBot("Hi! 👋 Welcome to CS Smart Finserve.\n\nHow can I help you today?",
         ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us']), 400);
     }
     if (isOpen) setUnread(0);
@@ -192,7 +192,7 @@ const Chatbot = () => {
                     <div style={{ position: 'absolute', bottom: 1, right: 1, width: 11, height: 11, borderRadius: '50%', background: '#22c55e', border: '2px solid white' }} />
                   </div>
                   <div>
-                    <div style={{ fontWeight: 800, color: 'white', fontSize: 15, letterSpacing: -0.3 }}>Arya — CS Smart</div>
+                    <div style={{ fontWeight: 800, color: 'white', fontSize: 15, letterSpacing: -0.3 }}>CS Smart Support</div>
                     <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', gap: 5 }}>
                       <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22c55e', display: 'inline-block', animation: 'chatbotPulse 2s infinite' }} />
                       Online · Typically replies instantly
@@ -210,8 +210,8 @@ const Chatbot = () => {
                 {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}
               </div>
 
-              {/* Messages */}
-              <div style={{ flex: 1, overflowY: 'auto', padding: '16px 16px 8px', background: '#f8f7f4', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {/* Messages area - flex:1 + minHeight:0 ensures scrolling works */}
+              <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 8px', background: '#f8f7f4', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {messages.map((msg, idx) => (
                   <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
                     {/* Bot message */}

@@ -463,10 +463,10 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400', link: '/auto-loan' },
-              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Loans up to ₹5 Cr with tenure up to 30 years.', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400', link: '/home-loan' },
-              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400', link: '/business-loan' },
-              { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400', link: '/insurance' },
+              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0729?w=600&q=85', link: '/auto-loan' },
+              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Loans up to ₹5 Cr with tenure up to 30 years.', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=85', link: '/home-loan' },
+              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85', link: '/business-loan' },
+              { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1521791055366-0d553872952f?w=600&q=85', link: '/insurance' },
             ].map((service, index) => (
               <motion.div key={index}
                 initial={{ opacity: 0, y: 40 }}

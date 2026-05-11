@@ -36,7 +36,7 @@ const heroSlides = [
     line2: 'Starts Here.',
     sub: 'From home loans to car loans — we find the best rates, fastest approvals, and simplest process.',
     tag: 'Smart Finance. Trusted Partners.',
-    img: 'https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=85',
     label: 'Smart Finance',
     rate: 'Your Trusted Partner',
     link: '/contact',
@@ -140,7 +140,7 @@ const Home = () => {
       <section className="relative min-h-[600px] mt-20 overflow-hidden">
         {/* Background — always the dark car image */}
         <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }} />
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=90)' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.92) 0%, rgba(10,10,20,0.80) 50%, rgba(10,10,20,0.50) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
@@ -302,10 +302,7 @@ const Home = () => {
 
           {/* Header */}
           <div className="text-center mb-10">
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-3"
-              style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>
-              Why Choose Us
-            </span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3" style={{ color: "var(--text-primary)" }}>
               Why CS Smart Finserve?
             </h2>
@@ -501,7 +498,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4" style={{ background: "var(--badge-bg)", color: "var(--badge-color)", border: "1px solid var(--badge-border)" }}>Simple Process</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Simple Process</p>
             <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: "var(--text-primary)" }}>Get Your Loan in 3 Simple Steps</h2>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
           </motion.div>

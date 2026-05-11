@@ -1,48 +1,139 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaShieldAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 
+const CheckIcon = () => (
+  <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#c0392b', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+    <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+  </div>
+);
+
+const plans = [
+  { icon: '🚗', title: 'Motor Insurance', desc: 'Car, bike & commercial vehicle. Third-party & comprehensive plans with instant issuance.', tags: ['Cars & Bikes', 'Commercial', 'Third-Party'] },
+  { icon: '❤️', title: 'Health Insurance', desc: 'Individual, family floater & senior citizen plans. Cashless hospitalisation at 10,000+ hospitals.', tags: ['Individual', 'Family Floater', 'Senior Citizen'] },
+  { icon: '🏠', title: 'Home Insurance', desc: 'Protect your home and contents against fire, flood, theft and natural calamities.', tags: ['Fire & Flood', 'Theft Cover', 'Contents'] },
+  { icon: '✈️', title: 'Travel Insurance', desc: 'Single trip & annual multi-trip plans. Medical emergency, trip cancellation, and baggage loss.', tags: ['Medical Cover', 'Trip Cancel', 'Baggage'] },
+  { icon: '💼', title: 'Life Insurance', desc: 'Term plans to secure your family\'s future at the most affordable premiums.', tags: ['Term Plans', 'High Cover', 'Tax Benefit'] },
+  { icon: '🏢', title: 'Business Insurance', desc: 'Liability, fire, and burglary cover for shops, offices and commercial establishments.', tags: ['Liability', 'Fire Cover', 'Burglary'] },
+];
+
 const Insurance = () => {
-  const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', serviceType: 'General Insurance', loanAmount: '', employmentType: 'salaried', monthlyIncome: '', city: '' });
+  const [form, setForm] = useState({ fullName: '', email: '', phone: '', city: '', insuranceType: 'Motor Insurance', message: '' });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/applications', formData);
-      toast.success('Application submitted successfully!');
-      setFormData({ fullName: '', email: '', phone: '', serviceType: 'General Insurance', loanAmount: '', employmentType: 'salaried', monthlyIncome: '', city: '' });
-    } catch (error) {
-      toast.error('Something went wrong');
+      await api.post('/applications', { ...form, serviceType: 'General Insurance' });
+      toast.success('Request submitted! Our team will contact you within 24 hours.');
+      setForm({ fullName: '', email: '', phone: '', city: '', insuranceType: 'Motor Insurance', message: '' });
+    } catch {
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <section className="bg-gradient-to-br from-red-600 to-pink-500 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FaShieldAlt className="text-6xl mx-auto mb-6" />
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">General Insurance</h1>
-          <p className="text-xl md:text-2xl mb-6">Protect What Matters Most</p>
-          <a href="#apply" className="inline-block px-8 py-4 bg-white text-red-600 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-xl">Get Quote</a>
-        </div>
-      </section>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div id="apply" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="text-3xl font-heading font-bold text-center text-gray-900 dark:text-white mb-12">Get Insurance Quote</h2>
-          <form onSubmit={handleSubmit} className="card max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div><label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Full Name *</label><input type="text" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} required className="input-field" /></div>
-              <div><label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Email *</label><input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="input-field" /></div>
-              <div><label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Phone *</label><input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required pattern="[0-9]{10}" className="input-field" /></div>
-              <div><label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium">City *</label><input type="text" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} required className="input-field" /></div>
+    <div style={{ background: '#f8f7f4', minHeight: '100vh', paddingTop: 80, fontFamily: "'Inter', sans-serif" }}>
+
+      {/* Hero */}
+      <div style={{ position: 'relative', overflow: 'hidden', minHeight: 300 }}>
+        <img src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=1400&q=85" alt="Insurance" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.93) 0%, rgba(10,10,20,0.75) 60%, rgba(10,10,20,0.4) 100%)' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '56px 28px' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2.5, color: '#fca5a5', textTransform: 'uppercase', marginBottom: 10 }}>General Insurance</p>
+            <h1 style={{ fontSize: 40, fontWeight: 900, color: 'white', margin: 0, letterSpacing: -1.2, lineHeight: 1.15 }}>
+              Protect What You've Built.<br />Insure What You Love.
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: 15, marginTop: 12, maxWidth: 440, lineHeight: 1.65 }}>
+              From health to motor to home — we connect you with India's top insurers at the best premiums. Instant policy issuance.
+            </p>
+            <div style={{ display: 'flex', gap: 14, marginTop: 28, flexWrap: 'wrap' }}>
+              <a href="#get-quote" style={{ padding: '13px 28px', background: '#c0392b', color: 'white', borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(192,57,43,0.35)' }}>Get a Quote →</a>
+              <Link to="/contact" style={{ padding: '13px 28px', background: 'rgba(255,255,255,0.12)', color: 'white', borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.25)' }}>Talk to an Expert</Link>
             </div>
-            <button type="submit" disabled={loading} className="w-full mt-6 btn-primary disabled:opacity-50">{loading ? 'Submitting...' : 'Submit Request'}</button>
+          </motion.div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 980, margin: '0 auto', padding: '40px 28px 72px' }}>
+
+        {/* Plan cards */}
+        <div style={{ marginBottom: 48 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 8 }}>Coverage Options</p>
+          <h2 style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', margin: '0 0 24px', letterSpacing: -0.5 }}>Insurance Plans We Offer</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+            {plans.map((p, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+                style={{ background: 'white', borderRadius: 18, padding: '24px 22px', boxShadow: '0 2px 12px rgba(15,23,42,0.06)', border: '1px solid #f1f5f9' }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>{p.icon}</div>
+                <h3 style={{ fontSize: 15, fontWeight: 800, color: '#0f172a', margin: '0 0 8px' }}>{p.title}</h3>
+                <p style={{ fontSize: 13, color: '#64748b', lineHeight: 1.6, margin: '0 0 14px' }}>{p.desc}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {p.tags.map((t, j) => (
+                    <span key={j} style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: '#fff1f0', color: '#c0392b', border: '1px solid rgba(192,57,43,0.15)' }}>{t}</span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Why us */}
+        <div style={{ background: 'white', borderRadius: 24, padding: '36px 40px', marginBottom: 28, boxShadow: '0 2px 16px rgba(15,23,42,0.05)' }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 8 }}>Why CS Smart Finserve</p>
+          <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0f172a', margin: '0 0 24px' }}>Why get insurance through us?</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
+            {['Compare 20+ insurers instantly', 'Lowest premiums guaranteed', 'Instant policy issuance online', 'Dedicated claim support team', 'Cashless hospitalisation at 10,000+ hospitals', 'Tax benefits under Section 80D'].map((pt, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <CheckIcon />
+                <span style={{ fontSize: 13, color: '#475569', fontWeight: 500 }}>{pt}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quote form */}
+        <motion.div id="get-quote" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          style={{ background: 'white', borderRadius: 24, overflow: 'hidden', boxShadow: '0 4px 32px rgba(15,23,42,0.08)' }}>
+          <div style={{ padding: '32px 40px 24px', borderBottom: '1px solid #f1f5f9' }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 6 }}>Free Quote</p>
+            <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0f172a', margin: 0 }}>Get your insurance quote today</h2>
+            <p style={{ color: '#94a3b8', fontSize: 13, marginTop: 4 }}>Our team will reach out within 24 hours with the best plan for you.</p>
+          </div>
+          <form onSubmit={handleSubmit} style={{ padding: '28px 40px 36px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+              {[
+                { label: 'Full Name *', key: 'fullName', type: 'text' },
+                { label: 'Phone Number *', key: 'phone', type: 'tel' },
+                { label: 'Email Address *', key: 'email', type: 'email' },
+                { label: 'City *', key: 'city', type: 'text' },
+              ].map((f) => (
+                <div key={f.key}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 6 }}>{f.label}</label>
+                  <input type={f.type} value={form[f.key]} required onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                    style={{ width: '100%', padding: '11px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#0f172a', background: '#f8f7f4', outline: 'none', boxSizing: 'border-box' }}
+                    onFocus={e => e.target.style.borderColor = '#c0392b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'} />
+                </div>
+              ))}
+            </div>
+            <div style={{ marginBottom: 16 }}>
+              <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 6 }}>Insurance Type *</label>
+              <select value={form.insuranceType} onChange={e => setForm({ ...form, insuranceType: e.target.value })}
+                style={{ width: '100%', padding: '11px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#0f172a', background: '#f8f7f4', outline: 'none' }}>
+                {plans.map(p => <option key={p.title}>{p.title}</option>)}
+              </select>
+            </div>
+            <button type="submit" disabled={loading}
+              style={{ width: '100%', padding: '14px 0', background: loading ? '#e2e8f0' : '#c0392b', color: loading ? '#94a3b8' : 'white', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer', letterSpacing: 0.3 }}>
+              {loading ? 'Submitting...' : 'Request Free Quote →'}
+            </button>
           </form>
         </motion.div>
       </div>

@@ -115,7 +115,7 @@ const HomeLoan = () => {
     <div className="min-h-screen" style={{ background: '#f8f7f4' }}>
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(192,57,43,0.88) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
+        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(192,57,43,0.60) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Home Loan</span>

@@ -1,0 +1,310 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  FaHome, FaCar, FaUserTie, FaBriefcase, FaCarSide,
+  FaBuilding, FaShieldAlt, FaArrowRight, FaChartLine,
+  FaCheckCircle, FaPhoneAlt
+} from 'react-icons/fa';
+
+const services = [
+  {
+    icon: <FaHome />,
+    title: 'Home Loan',
+    desc: 'Turn your dream home into reality with competitive rates starting from 8.5% p.a., loan amounts up to ₹5 Crore, and tenure up to 30 years.',
+    rate: '8.5%',
+    amount: 'Up to ₹5 Cr',
+    tenure: '30 Years',
+    badge: 'Most Popular',
+    link: '/home-loan',
+    color: '#c0392b',
+    gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+    features: ['Zero prepayment charges', 'Balance transfer facility', 'Tax benefits u/s 80C'],
+    bgLight: '#fff5f5',
+  },
+  {
+    icon: <FaCar />,
+    title: 'Auto Loan',
+    desc: 'Drive home your new car today. Quick approval, minimal paperwork, and flexible EMIs for all vehicle types.',
+    rate: '8.7%',
+    amount: 'Up to ₹1 Cr',
+    tenure: '7 Years',
+    badge: 'Quick Approval',
+    link: '/auto-loan',
+    color: '#2980b9',
+    gradient: 'linear-gradient(135deg, #2980b9, #3498db)',
+    features: ['New & used vehicles', '24-hour approval', 'Doorstep delivery'],
+    bgLight: '#f0f7ff',
+  },
+  {
+    icon: <FaUserTie />,
+    title: 'Personal Loan',
+    desc: 'Meet your personal goals — weddings, travel, medical emergencies — with instant personal loans with no collateral required.',
+    rate: '10.5%',
+    amount: 'Up to ₹40 L',
+    tenure: '5 Years',
+    badge: 'No Collateral',
+    link: '/personal-loan',
+    color: '#8e44ad',
+    gradient: 'linear-gradient(135deg, #8e44ad, #9b59b6)',
+    features: ['No collateral needed', 'Disbursal in 48 hrs', 'Minimal documentation'],
+    bgLight: '#fdf5ff',
+  },
+  {
+    icon: <FaBriefcase />,
+    title: 'Business Loan',
+    desc: 'Fuel your business growth with customised business loans for working capital, expansion, and equipment purchase.',
+    rate: '11%',
+    amount: 'Up to ₹50 L',
+    tenure: '5 Years',
+    badge: 'Trending',
+    link: '/business-loan',
+    color: '#27ae60',
+    gradient: 'linear-gradient(135deg, #27ae60, #2ecc71)',
+    features: ['Collateral-free options', 'Flexi repayment', 'For all business types'],
+    bgLight: '#f0fff5',
+  },
+  {
+    icon: <FaCarSide />,
+    title: 'Used Car Loan',
+    desc: 'Buy a pre-owned vehicle with ease. We finance all certified used cars with transparent pricing and fast approvals.',
+    rate: '9.5%',
+    amount: 'Up to ₹30 L',
+    tenure: '5 Years',
+    badge: 'Best Value',
+    link: '/used-car-loan',
+    color: '#e67e22',
+    gradient: 'linear-gradient(135deg, #e67e22, #f39c12)',
+    features: ['All brands covered', 'Free RC transfer help', 'Up to 100% financing'],
+    bgLight: '#fff8f0',
+  },
+  {
+    icon: <FaBuilding />,
+    title: 'Loan Against Property',
+    desc: 'Unlock the value in your property for business expansion, personal needs, or debt consolidation at the best rates.',
+    rate: '9%',
+    amount: 'Up to ₹5 Cr',
+    tenure: '15 Years',
+    badge: 'High Amount',
+    link: '/loan-against-property',
+    color: '#16a085',
+    gradient: 'linear-gradient(135deg, #16a085, #1abc9c)',
+    features: ['Residential & commercial', 'Overdraft facility', 'High LTV ratio'],
+    bgLight: '#f0fffc',
+  },
+  {
+    icon: <FaShieldAlt />,
+    title: 'General Insurance',
+    desc: 'Protect what matters most. Comprehensive insurance plans for your health, vehicle, home, and business at the best premiums.',
+    rate: 'Best Rates',
+    amount: 'Customised Plans',
+    tenure: 'Flexible',
+    badge: 'Protection',
+    link: '/insurance',
+    color: '#c0392b',
+    gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+    features: ['Health & life cover', 'Vehicle insurance', 'Property protection'],
+    bgLight: '#fff5f5',
+  },
+];
+
+const stats = [
+  { value: '₹500 Cr+', label: 'Loans Disbursed' },
+  { value: '10,000+', label: 'Happy Customers' },
+  { value: '30+', label: 'Banking Partners' },
+  { value: '48 Hrs', label: 'Avg. Approval Time' },
+];
+
+const Services = () => {
+  return (
+    <div className="min-h-screen" style={{ background: '#faf8ff' }}>
+
+      {/* Hero */}
+      <section className="relative pt-40 pb-24"
+        style={{ background: 'linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(61,26,26,0.92) 50%, rgba(192,57,43,0.90) 100%)' }}>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #e74c3c, transparent)' }} />
+          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #3498db, transparent)' }} />
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="inline-block px-4 py-1.5 bg-white/15 rounded-full text-sm font-semibold mb-5 backdrop-blur-sm border border-white/20">
+              All Financial Services
+            </span>
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-5 leading-tight">
+              Every Loan You Need,<br />
+              <span style={{ color: '#f9a8a8' }}>All in One Place</span>
+            </h1>
+            <p className="text-white/75 text-lg max-w-2xl mx-auto mb-10">
+              From home loans to business finance — we offer the complete range of loan products and insurance solutions tailored to your needs.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/book-appointment"
+                className="px-8 py-4 rounded-xl font-bold text-gray-900 bg-white hover:scale-105 transition-all shadow-lg"
+                style={{ textDecoration: 'none' }}>
+                Book Free Consultation →
+              </Link>
+              <Link to="/emi-calculator"
+                className="px-8 py-4 rounded-xl font-bold text-white border-2 border-white/40 hover:bg-white/10 transition-all"
+                style={{ textDecoration: 'none' }}>
+                Calculate EMI
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="py-10 border-b border-gray-100" style={{ background: 'white' }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="text-center">
+                <p className="text-3xl font-heading font-bold" style={{ color: '#c0392b' }}>{s.value}</p>
+                <p className="text-gray-500 text-sm mt-1">{s.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+            <span className="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-4">Our Products</span>
+            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-3">All Loan Products & Services</h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Explore our complete range of financial products designed to meet every life stage and business need.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((s, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07 }}
+                className="group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
+
+                {/* Card Top Accent */}
+                <div style={{ height: '4px', background: s.gradient }} />
+
+                <div className="p-7 flex flex-col flex-1">
+                  {/* Badge & Icon Row */}
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-md"
+                      style={{ background: s.gradient }}>
+                      {s.icon}
+                    </div>
+                    <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: s.gradient }}>
+                      {s.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-heading font-bold text-gray-900 mb-2">{s.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">{s.desc}</p>
+
+                  {/* Key Numbers */}
+                  <div className="grid grid-cols-3 gap-2 mb-5 p-3 rounded-xl" style={{ background: s.bgLight }}>
+                    <div className="text-center">
+                      <p className="text-xs text-gray-400 mb-1">Rate</p>
+                      <p className="font-bold text-sm" style={{ color: s.color }}>{s.rate}*</p>
+                    </div>
+                    <div className="text-center border-x border-gray-200">
+                      <p className="text-xs text-gray-400 mb-1">Amount</p>
+                      <p className="font-bold text-sm text-gray-800">{s.amount}</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-xs text-gray-400 mb-1">Tenure</p>
+                      <p className="font-bold text-sm text-gray-800">{s.tenure}</p>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-2 mb-6 flex-1">
+                    {s.features.map((f, j) => (
+                      <li key={j} className="flex items-center gap-2 text-sm text-gray-600">
+                        <FaCheckCircle style={{ color: s.color, flexShrink: 0, fontSize: '12px' }} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <Link to={s.link}
+                    className="flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-white transition-all hover:scale-105 hover:shadow-lg"
+                    style={{ background: s.gradient, textDecoration: 'none' }}>
+                    Apply Now
+                    <FaArrowRight style={{ fontSize: '12px' }} />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why CS Smart Finserve */}
+      <section className="py-20" style={{ background: '#f0eeff' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
+            <span className="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-4">Why Us</span>
+            <h2 className="text-4xl font-heading font-bold text-gray-900 mb-3">Why Choose CS Smart Finserve?</h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              We're more than a loan aggregator — we're your personal finance partner.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: '🏦', title: '30+ Banking Partners', desc: 'Access to the best rates from leading banks and NBFCs across India.' },
+              { icon: '⚡', title: 'Fast 48-Hour Approval', desc: 'Get your loan sanctioned within 48 hours with our streamlined process.' },
+              { icon: '🎯', title: 'Personalised Matching', desc: 'We match you with the right lender based on your profile and requirements.' },
+              { icon: '📄', title: 'Zero Paperwork Hassle', desc: 'Upload documents digitally. No branch visits, no running around.' },
+              { icon: '🤝', title: 'Dedicated Manager', desc: 'A dedicated relationship manager handles your case from start to finish.' },
+              { icon: '🔒', title: '100% Secure & Confidential', desc: 'Your data is encrypted and never shared without your consent.' },
+            ].map((item, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07 }}
+                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h4 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-20" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #3d1a1a 50%, rgba(192,57,43,0.95) 100%)' }}>
+        <div className="max-w-3xl mx-auto px-4 text-center text-white">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <FaChartLine className="text-5xl mx-auto mb-5 opacity-80" />
+            <h2 className="text-4xl font-heading font-bold mb-4">Ready to Get Started?</h2>
+            <p className="text-white/75 text-lg mb-10">Talk to our experts for free. Get the best loan deal tailored to your needs — no commitment, no fees.</p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link to="/book-appointment"
+                className="px-8 py-4 bg-white rounded-xl font-bold text-gray-900 hover:scale-105 transition-all shadow-lg flex items-center gap-2"
+                style={{ textDecoration: 'none' }}>
+                <FaPhoneAlt /> Book Free Consultation
+              </Link>
+              <Link to="/emi-calculator"
+                className="px-8 py-4 rounded-xl font-bold text-white border-2 border-white/40 hover:bg-white/10 transition-all"
+                style={{ textDecoration: 'none' }}>
+                Calculate Your EMI →
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+    </div>
+  );
+};
+
+export default Services;

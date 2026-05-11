@@ -32,6 +32,7 @@ import CibilCheck from './pages/CibilCheck';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import GoogleAuthSuccess from './pages/GoogleAuthSuccess';
+import Services from './pages/Services';
 import AdminDashboard from './pages/AdminDashboard';
 import Feedback from './pages/Feedback';
 import BookAppointment from './pages/BookAppointment';
@@ -61,6 +62,7 @@ function App() {
               <Route path="/cibil-check" element={<CibilCheck />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
               <Route 
                 path="/admin" 

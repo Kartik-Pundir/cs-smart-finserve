@@ -56,7 +56,7 @@ const heroSlides = [
     line2: 'Car Loans.',
     sub: 'Zero to keys in 24 hours. Finance up to 100% on-road price across 50+ lenders.',
     tag: 'Fastest Approval',
-    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=85',
     label: 'Car Loan',
     rate: 'from 7.5% p.a.',
     link: '/auto-loan',
@@ -382,7 +382,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=700&q=85" 
                 alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}

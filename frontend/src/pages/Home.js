@@ -140,7 +140,7 @@ const Home = () => {
       <section className="relative min-h-[600px] mt-20 overflow-hidden">
         {/* Background — always the dark car image */}
         <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=90)' }} />
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.92) 0%, rgba(10,10,20,0.80) 50%, rgba(10,10,20,0.50) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">

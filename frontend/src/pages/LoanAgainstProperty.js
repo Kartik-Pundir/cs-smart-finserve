@@ -91,11 +91,13 @@ const LoanAgainstProperty = () => {
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our LAP?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {['Loan up to 70% of Property Value', 'Rates Starting from 8.5%', 'Tenure up to 15 Years', 'Residential & Commercial Property', 'Balance Transfer Available', 'Minimal Documentation'].map((f, i) => (
+            {['Loan up to 70% of Property Value', 'Rates Starting from 8.5%', 'Tenure up to 15 Years', 'Residential & Commercial Property', 'Balance Transfer Available', 'Minimal Documentation'].map((feature, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-4 rounded-xl p-5 border border-gray-100" style={{ background: '#faf8ff' }}>
-                <FaCheckCircle className="text-accent text-xl flex-shrink-0" />
-                <p className="text-gray-700 font-medium">{f}</p>
+                className="rounded-xl p-5" style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FaCheckCircle style={{ color: 'rgba(255,255,255,0.85)', fontSize: 18, flexShrink: 0 }} />
+                  <p style={{ color: 'white', fontWeight: 600, margin: 0 }}>{feature}</p>
+                </div>
               </motion.div>
             ))}
           </div>

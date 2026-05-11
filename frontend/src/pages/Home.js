@@ -46,7 +46,7 @@ const heroSlides = [
     line2: 'Home Loans.',
     sub: 'Stop paying rent. Loans up to ₹5 Crore at the lowest rates with tenure up to 30 years.',
     tag: 'Lowest Interest Rates',
-    img: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=85',
     label: 'Home Loan',
     rate: 'from 8.5% p.a.',
     link: '/home-loan',
@@ -56,7 +56,7 @@ const heroSlides = [
     line2: 'Car Loans.',
     sub: 'Zero to keys in 24 hours. Finance up to 100% on-road price across 50+ lenders.',
     tag: 'Fastest Approval',
-    img: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=85',
     label: 'Car Loan',
     rate: 'from 7.5% p.a.',
     link: '/auto-loan',
@@ -382,7 +382,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=700&q=85" 
                 alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -398,7 +398,7 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=85" 
                 alt="Home Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -444,7 +444,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&q=85" 
                 alt="Insurance"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}

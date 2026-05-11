@@ -444,7 +444,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=700&q=85" 
                 alt="Insurance"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaBell, FaTimes, FaCheckDouble } from 'react-icons/fa';
-import axios from 'axios';
+import api from '../utils/api';
 
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
@@ -12,7 +12,7 @@ const NotificationBell = () => {
   // Fetch notifications
   const fetchNotifications = async () => {
     try {
-      const { data } = await axios.get('/api/notifications');
+      const { data } = await api.get('/notifications');
       setNotifications(data.data);
       setUnreadCount(data.unreadCount);
     } catch (error) {
@@ -23,7 +23,7 @@ const NotificationBell = () => {
   // Mark as read
   const markAsRead = async (id) => {
     try {
-      await axios.put(`/api/notifications/${id}/read`);
+      await api.put(`/notifications/${id}/read`);
       fetchNotifications();
     } catch (error) {
       console.error('Failed to mark as read:', error);
@@ -34,7 +34,7 @@ const NotificationBell = () => {
   const markAllAsRead = async () => {
     try {
       setLoading(true);
-      await axios.put('/api/notifications/read-all');
+      await api.put('/notifications/read-all');
       fetchNotifications();
     } catch (error) {
       console.error('Failed to mark all as read:', error);
@@ -46,7 +46,7 @@ const NotificationBell = () => {
   // Delete notification
   const deleteNotification = async (id) => {
     try {
-      await axios.delete(`/api/notifications/${id}`);
+      await api.delete(`/notifications/${id}`);
       fetchNotifications();
     } catch (error) {
       console.error('Failed to delete notification:', error);

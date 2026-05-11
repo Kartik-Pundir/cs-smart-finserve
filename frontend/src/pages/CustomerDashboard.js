@@ -8,7 +8,7 @@ import {
   FaClock, FaTimesCircle, FaRupeeSign
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import api from '../utils/api';
 
 /* ── status pill config ── */
 const STATUS = {
@@ -95,7 +95,7 @@ const CustomerDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get('/api/user/dashboard');
+      const res = await api.get('/user/dashboard');
       setData(res.data.data);
     } catch {
       toast.error('Failed to load dashboard');

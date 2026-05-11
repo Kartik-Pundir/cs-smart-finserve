@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+
 
 import { useAuth } from '../context/AuthContext';
 
@@ -10,8 +10,13 @@ const GoogleAuthSuccess = () => {
   const [searchParams] = useSearchParams();
   const { handleGoogleLoginSuccess } = useAuth();
 
+  const hasProcessed = React.useRef(false);
+
   useEffect(() => {
     const processLogin = async () => {
+      if (hasProcessed.current) return;
+      hasProcessed.current = true;
+
       const token = searchParams.get('token');
       
       if (token) {

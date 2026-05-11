@@ -124,8 +124,15 @@ exports.login = async (req, res) => {
 // @access  Private
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password');
+    const user = req.user;
     
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
     res.json({
       success: true,
       user: {
@@ -155,10 +162,17 @@ exports.googleAuthSuccess = async (req, res) => {
     const clientUrl = process.env.NODE_ENV === 'production' ? 'https://cssfinserve.com' : (process.env.CLIENT_URL || 'http://localhost:8000');
     
     if (!req.user) {
+      console.error('No req.user found in googleAuthSuccess');
       return res.redirect(`${clientUrl}/login?error=auth_failed`);
     }
 
-    const token = generateToken(req.user._id);
+    const userId = req.user.id || req.user._id;
+    if (!userId) {
+      console.error('req.user missing id/ _id', req.user);
+      return res.redirect(`${clientUrl}/login?error=auth_failed`);
+    }
+
+    const token = generateToken(userId);
     
     // Redirect to frontend with token
     res.redirect(`${clientUrl}/auth/google/success?token=${token}`);

@@ -72,7 +72,7 @@ const AutoLoan = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen" style={{ background: '#f8f7f4' }}>
 
       {/* Hero */}
       <section
@@ -92,10 +92,10 @@ const AutoLoan = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Why Choose Us</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Auto Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,10 +120,10 @@ const AutoLoan = () => {
       </section>
 
       {/* How to Apply */}
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Simple Process</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Simple Process</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Applying for a Car Loan was never this easy</h2>
           </motion.div>
 
@@ -177,10 +177,10 @@ const AutoLoan = () => {
       </section>
 
       {/* Eligibility */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Eligibility</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Eligibility</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Who Can Apply?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -189,7 +189,7 @@ const AutoLoan = () => {
               { type: 'Self-Employed', items: ['Age: 21 to 65 years', 'Minimum Income: ₹50,000/month', 'Business Vintage: 3 years', 'CIBIL Score: 650+'] },
             ].map((cat, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="rounded-2xl p-6 border-l-4 border-accent shadow-md" style={{ background: '#faf8ff' }}>
+                className="rounded-2xl p-6 border-l-4 border-accent shadow-md" style={{ background: '#f8f7f4' }}>
                 <h3 className="text-lg font-bold text-gray-900 mb-4">{cat.type}</h3>
                 <ul className="space-y-2">
                   {cat.items.map((item, j) => (
@@ -209,10 +209,10 @@ const AutoLoan = () => {
       <DocumentUpload loanType="Auto Loan" />
 
       {/* Application Form */}
-      <section id="apply" className="py-20" style={{ background: '#f0eeff' }}>
+      <section id="apply" className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Apply Now</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Apply Now</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Apply for Auto Loan</h2>
           </motion.div>
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">

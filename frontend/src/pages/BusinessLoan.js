@@ -69,7 +69,7 @@ const BusinessLoan = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen" style={{ background: '#f8f7f4' }}>
       <section className="relative pt-40 pb-24 bg-cover bg-center"
         style={{ backgroundImage: 'linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(192,57,43,0.82) 100%), url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=85)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
@@ -82,10 +82,10 @@ const BusinessLoan = () => {
         </div>
       </section>
 
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Why Choose Us</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Business Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -102,10 +102,10 @@ const BusinessLoan = () => {
         </div>
       </section>
 
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Simple Process</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Simple Process</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Applying for a Business Loan was never this easy</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -154,10 +154,10 @@ const BusinessLoan = () => {
 
       <DocumentUpload loanType="Business Loan" />
 
-      <section id="apply" className="py-20" style={{ background: '#f0eeff' }}>
+      <section id="apply" className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Apply Now</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Apply Now</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Apply for Business Loan</h2>
           </motion.div>
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">

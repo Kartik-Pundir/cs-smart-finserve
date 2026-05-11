@@ -112,7 +112,7 @@ const HomeLoan = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: '#faf8ff' }}>
+    <div className="min-h-screen" style={{ background: '#f8f7f4' }}>
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-cover bg-center"
         style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(192,57,43,0.88) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
@@ -127,18 +127,20 @@ const HomeLoan = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20" style={{ background: '#f0eeff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Why Choose Us</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Home Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {['Interest Rates Starting from 6.5%', 'Loan Amount up to ₹5 Crores', 'Tenure up to 30 Years', 'Balance Transfer Facility', 'Top-Up Loan Available', 'Tax Benefits under Section 80C'].map((f, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-4 rounded-xl p-5 border border-gray-100" style={{ background: '#faf8ff' }}>
-                <FaCheckCircle className="text-accent text-xl flex-shrink-0" />
-                <p className="text-gray-700 font-medium">{f}</p>
+                className="rounded-xl p-5" style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <FaCheckCircle style={{ color: 'rgba(255,255,255,0.85)', fontSize: 18, flexShrink: 0 }} />
+                  <p style={{ color: 'white', fontWeight: 600, margin: 0 }}>{f}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -146,10 +148,10 @@ const HomeLoan = () => {
       </section>
 
       {/* How to Apply */}
-      <section className="py-20" style={{ background: '#faf8ff' }}>
+      <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Simple Process</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Simple Process</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Applying for a Home Loan was never this easy</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -208,10 +210,10 @@ const HomeLoan = () => {
       <DocumentUpload loanType="Home Loan" />
 
       {/* Form */}
-      <section id="apply" className="py-20" style={{ background: '#f0eeff' }}>
+      <section id="apply" className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">Apply Now</span>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Apply Now</p>
             <h2 className="text-3xl font-heading font-bold text-gray-900">Apply for Home Loan</h2>
           </motion.div>
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">

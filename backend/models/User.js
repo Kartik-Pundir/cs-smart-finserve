@@ -37,6 +37,18 @@ const userSchema = new mongoose.Schema({
     unique: true,
     sparse: true
   },
+  recentlyViewed: {
+    type: [{
+      title: String,
+      rate: String,
+      icon: String,
+      color: String,
+      gradient: String,
+      link: String,
+      viewedAt: { type: Date, default: Date.now }
+    }],
+    default: []
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {

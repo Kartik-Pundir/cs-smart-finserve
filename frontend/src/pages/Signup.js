@@ -18,6 +18,29 @@ const SignUp = () => {
     confirmPassword: ''
   });
 
+  const getPasswordStrength = (password) => {
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    return strength;
+  };
+
+  const getStrengthColor = (strength) => {
+    if (strength === 0) return 'transparent';
+    if (strength <= 2) return '#ef4444'; // red
+    if (strength === 3) return '#eab308'; // yellow
+    return '#22c55e'; // green
+  };
+
+  const getStrengthLabel = (strength) => {
+    if (strength === 0) return '';
+    if (strength <= 2) return 'Weak';
+    if (strength === 3) return 'Medium';
+    return 'Strong';
+  };
+
   const benefits = [
     { icon: <FaFileAlt />, title: 'Track Applications', desc: 'Real-time status of every loan you apply for' },
     { icon: <FaCalculator />, title: 'Saved EMI Calculations', desc: 'Compare multiple EMI scenarios side by side' },
@@ -45,8 +68,23 @@ const SignUp = () => {
       return;
     }
 
-    if (formData.password.length < 6) {
-      toast.error('Password must be at least 6 characters');
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters');
+      return;
+    }
+
+    if (!/[A-Z]/.test(formData.password)) {
+      toast.error('Password must contain at least one uppercase letter');
+      return;
+    }
+
+    if (!/[0-9]/.test(formData.password)) {
+      toast.error('Password must contain at least one number');
+      return;
+    }
+
+    if (!/[^A-Za-z0-9]/.test(formData.password)) {
+      toast.error('Password must contain at least one special character');
       return;
     }
 
@@ -272,9 +310,9 @@ const SignUp = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Min. 6 characters"
+                  placeholder="Min. 8 characters"
                   required
-                  minLength={6}
+                  minLength={8}
                   className="w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-colors"
                   style={{
                     background: isDark ? '#111111' : 'white',
@@ -282,6 +320,32 @@ const SignUp = () => {
                     color: isDark ? 'white' : '#1a1a1a'
                   }}
                 />
+                {formData.password && (
+                  <div className="mt-2">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-medium" style={{ color: isDark ? '#d1d5db' : '#4b5563' }}>Password Strength:</span>
+                      <span className="text-[10px] font-bold" style={{ color: getStrengthColor(getPasswordStrength(formData.password)) }}>
+                        {getStrengthLabel(getPasswordStrength(formData.password))}
+                      </span>
+                    </div>
+                    <div className="flex gap-1 h-1">
+                      {[1, 2, 3, 4].map((level) => (
+                        <div
+                          key={level}
+                          className="flex-1 rounded-full transition-all duration-300"
+                          style={{
+                            backgroundColor: getPasswordStrength(formData.password) >= level 
+                              ? getStrengthColor(getPasswordStrength(formData.password))
+                              : (isDark ? '#374151' : '#e5e7eb')
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-1.5 text-[10px] leading-tight" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+                      Requires: 8+ chars, 1 uppercase, 1 number, 1 special.
+                    </div>
+                  </div>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: isDark ? '#d1d5db' : '#374151' }}>

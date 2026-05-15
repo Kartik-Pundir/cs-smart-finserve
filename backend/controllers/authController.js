@@ -47,7 +47,8 @@ exports.register = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
-        avatar: user.avatar
+        avatar: user.avatar,
+        recentlyViewed: user.recentlyViewed || []
       }
     });
   } catch (error) {
@@ -106,7 +107,8 @@ exports.login = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
-        avatar: user.avatar
+        avatar: user.avatar,
+        recentlyViewed: user.recentlyViewed || []
       }
     });
   } catch (error) {
@@ -141,7 +143,8 @@ exports.getMe = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
-        avatar: user.avatar
+        avatar: user.avatar,
+        recentlyViewed: user.recentlyViewed || []
       }
     });
   } catch (error) {
@@ -304,4 +307,34 @@ exports.logout = async (req, res) => {
     success: true,
     message: 'Logout successful'
   });
+};
+
+// @desc    Update recently viewed loans
+// @route   POST /api/auth/recently-viewed
+// @access  Private
+exports.updateRecentlyViewed = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    
+    const loanData = req.body.loanData;
+    if (!loanData) return res.status(400).json({ success: false, message: 'Loan data required' });
+    
+    // Remove if already exists
+    user.recentlyViewed = user.recentlyViewed.filter(item => item.title !== loanData.title);
+    
+    // Add to beginning
+    user.recentlyViewed.unshift({ ...loanData, viewedAt: Date.now() });
+    
+    // Keep only last 5
+    if (user.recentlyViewed.length > 5) {
+      user.recentlyViewed = user.recentlyViewed.slice(0, 5);
+    }
+    
+    await user.save();
+    res.json({ success: true, recentlyViewed: user.recentlyViewed });
+  } catch (error) {
+    console.error('Update recently viewed error:', error);
+    res.status(500).json({ success: false, message: 'Failed to update recently viewed' });
+  }
 };

@@ -9,12 +9,12 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  // Default to dark theme
-  const [isDark, setIsDark] = useState(true);
+  // Default to light theme
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
-    const dark = saved ? saved === 'dark' : true; // default dark
+    const dark = saved ? saved === 'dark' : false; // default light
     setIsDark(dark);
     if (dark) {
       document.documentElement.classList.add('dark');

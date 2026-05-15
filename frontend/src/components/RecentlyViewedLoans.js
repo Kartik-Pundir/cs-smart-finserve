@@ -1,14 +1,34 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaClock } from 'react-icons/fa';
+import api from '../utils/api';
 
 const RecentlyViewedLoans = () => {
   const [recentLoans, setRecentLoans] = useState([]);
 
   useEffect(() => {
-    // Get recently viewed loans from localStorage
-    const viewed = JSON.parse(localStorage.getItem('recentlyViewedLoans') || '[]');
-    setRecentLoans(viewed.slice(0, 3)); // Show only last 3
+    const fetchLoans = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          // If token is in localStorage, AuthContext might be setting default header,
+          // but to be safe, we can just call /auth/me or use the token explicitly.
+          const res = await api.get('/auth/me');
+          if (res.data.success && res.data.user.recentlyViewed) {
+            setRecentLoans(res.data.user.recentlyViewed.slice(0, 3));
+            return;
+          }
+        } catch (err) {
+          console.error('Failed to load recently viewed from backend', err);
+        }
+      }
+      
+      // Get recently viewed loans from localStorage
+      const viewed = JSON.parse(localStorage.getItem('recentlyViewedLoans') || '[]');
+      setRecentLoans(viewed.slice(0, 3)); // Show only last 3
+    };
+    
+    fetchLoans();
   }, []);
 
   if (recentLoans.length === 0) return null;
@@ -131,7 +151,7 @@ const RecentlyViewedLoans = () => {
 };
 
 // Helper function to track viewed loans (call this from loan pages)
-export const trackLoanView = (loanData) => {
+export const trackLoanView = async (loanData) => {
   const viewed = JSON.parse(localStorage.getItem('recentlyViewedLoans') || '[]');
   
   // Remove if already exists
@@ -144,6 +164,18 @@ export const trackLoanView = (loanData) => {
   const updated = filtered.slice(0, 5);
   
   localStorage.setItem('recentlyViewedLoans', JSON.stringify(updated));
+
+  // Sync with backend if logged in
+  const token = localStorage.getItem('token');
+  if (token) {
+    try {
+      await api.post('/auth/recently-viewed', { loanData }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+    } catch (err) {
+      console.error('Failed to sync recently viewed loans', err);
+    }
+  }
 };
 
 export default RecentlyViewedLoans;

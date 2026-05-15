@@ -8,7 +8,8 @@ const {
   googleAuthSuccess,
   forgotPassword,
   resetPassword,
-  logout
+  logout,
+  updateRecentlyViewed
 } = require('../controllers/authController');
 const { protect } = require('../middleware/auth');
 
@@ -19,6 +20,7 @@ router.get('/me', protect, getMe);
 router.post('/logout', protect, logout);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
+router.post('/recently-viewed', protect, updateRecentlyViewed);
 
 // Google OAuth routes
 router.get(

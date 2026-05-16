@@ -10,7 +10,7 @@ I'm interested in learning more about your loan services.
 
 Please help me with information about:
 
-🏠 Home Loan - Up to ₹5 Cr, 30 years tenure
+🏠 Home Loan - Flexible amounts, customized tenure
 🚗 Car Loan - New & Used, 100% financing
 💼 Business Loan - Working capital & term loans
 💰 Personal Loan - No collateral, instant approval

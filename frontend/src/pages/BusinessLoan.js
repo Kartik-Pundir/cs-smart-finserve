@@ -76,7 +76,7 @@ const BusinessLoan = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Business Loan</span>
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">Fuel Your Ambition.</h1>
-            <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Fast working capital and term loans for businesses of every size. No collateral for loans up to ₹50 Lakhs.</p>
+            <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Fast working capital and term loans for businesses of every size. Flexible, premium collateral-free options available.</p>
             <a href="#apply" className="inline-block px-8 py-4 bg-white text-accent rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">Apply Now →</a>
           </motion.div>
         </div>
@@ -89,7 +89,7 @@ const BusinessLoan = () => {
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Business Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {['Loans from ₹5 Lakhs to ₹5 Crores', 'No Collateral up to ₹50 Lakhs', 'Approval in 24–48 Hours', 'Flexible Repayment Options', 'Minimal Documentation', 'Overdraft & Term Loan Options'].map((f, i) => (
+            {['Flexible Loan Amounts Based on Needs', 'Premium Collateral-free Options', 'Approval in 24–48 Hours', 'Flexible Repayment Options', 'Minimal Documentation', 'Overdraft & Term Loan Options'].map((f, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 className="rounded-xl p-5" style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>

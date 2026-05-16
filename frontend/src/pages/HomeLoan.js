@@ -120,7 +120,7 @@ const HomeLoan = () => {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Home Loan</span>
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">Your Dream Home Is One Step Away.</h1>
-            <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Loans up to ₹5 Cr, tenure up to 30 years, and rates starting at 6.5%. We handle everything.</p>
+            <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Flexible financing based on your requirements with rates starting at 8.5%. We handle everything.</p>
             <a href="#apply" className="inline-block px-8 py-4 bg-white text-accent rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">Apply Now →</a>
           </motion.div>
         </div>
@@ -134,7 +134,7 @@ const HomeLoan = () => {
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Home Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {['Interest Rates Starting from 6.5%', 'Loan Amount up to ₹5 Crores', 'Tenure up to 30 Years', 'Balance Transfer Facility', 'Top-Up Loan Available', 'Tax Benefits under Section 80C'].map((f, i) => (
+            {['Interest Rates Starting from 8.5%', 'Flexible Financing Based on Requirements', 'Customised Tenure Options', 'Balance Transfer Facility', 'Top-Up Loan Available', 'Tax Benefits under Section 80C'].map((f, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                 className="rounded-xl p-5" style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>

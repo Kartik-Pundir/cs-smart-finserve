@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import {
   FaFileAlt, FaCalendarAlt, FaChartBar, FaArrowRight,
   FaHome, FaCar, FaUserTie, FaBriefcase, FaCheckCircle,
-  FaClock, FaTimesCircle, FaRupeeSign
+  FaClock, FaTimesCircle, FaRupeeSign, FaEdit, FaCamera, FaTrash
 } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
@@ -84,8 +84,24 @@ const CustomerDashboard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('applications');
-  const { user, loading: authLoading } = useAuth();
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [profileData, setProfileData] = useState({ name: '', phone: '', email: '' });
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [profileSaving, setProfileSaving] = useState(false);
+  const { user, updateUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        name: user.name || '',
+        phone: user.phone || '',
+        email: user.email || ''
+      });
+      setAvatarPreview(user.avatar ? `http://localhost:5000${user.avatar}` : null);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (authLoading) return;
@@ -112,6 +128,44 @@ const CustomerDashboard = () => {
       </div>
     </div>
   );
+
+  const handleProfileSave = async (e) => {
+    e.preventDefault();
+    setProfileSaving(true);
+    try {
+      const formData = new FormData();
+      formData.append('name', profileData.name);
+      formData.append('phone', profileData.phone);
+      formData.append('email', profileData.email);
+      if (avatarFile) formData.append('avatar', avatarFile);
+      else if (avatarPreview === null && user.avatar) formData.append('removeAvatar', 'true');
+
+      const res = await api.put('/user/profile', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      
+      if (res.data.success) {
+        updateUser(res.data.user);
+        toast.success('Profile updated successfully');
+        setIsEditingProfile(false);
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to update profile');
+    } finally {
+      setProfileSaving(false);
+    }
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        return toast.error('Image must be less than 5MB');
+      }
+      setAvatarFile(file);
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  };
 
   const { applications = [], appointments = [], cibilChecks = [] } = data || {};
   const latestScore = cibilChecks.find(c => c.score)?.score;
@@ -150,14 +204,25 @@ const CustomerDashboard = () => {
 
             {/* User info */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg flex-shrink-0"
+              className="flex items-center gap-4 relative group cursor-pointer"
+              onClick={() => setIsEditingProfile(true)}>
+              <div className="relative w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg flex-shrink-0 overflow-hidden"
                 style={{ background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
-                {user?.name?.charAt(0).toUpperCase() || 'U'}
+                {user?.avatar ? (
+                  <img src={`http://localhost:5000${user.avatar}`} alt="Profile" className="w-full h-full object-cover" crossOrigin="anonymous" />
+                ) : (
+                  user?.name?.charAt(0).toUpperCase() || 'U'
+                )}
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <FaEdit size={18} />
+                </div>
               </div>
               <div>
                 <p className="text-white/70 text-sm mb-0.5">Welcome back</p>
-                <h1 className="text-2xl font-heading font-bold text-white">{user?.name || 'User'}</h1>
+                <h1 className="text-2xl font-heading font-bold text-white flex items-center gap-2">
+                  {user?.name || 'User'}
+                  <button className="text-white/50 hover:text-white transition-colors opacity-0 group-hover:opacity-100"><FaEdit size={14}/></button>
+                </h1>
                 <p className="text-white/60 text-xs mt-0.5">{user?.email}</p>
               </div>
             </motion.div>
@@ -385,6 +450,76 @@ const CustomerDashboard = () => {
         </motion.div>
 
       </div>
+
+      {/* ── Edit Profile Modal ── */}
+      <AnimatePresence>
+        {isEditingProfile && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+            onClick={() => setIsEditingProfile(false)}>
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden"
+              onClick={e => e.stopPropagation()}>
+              <div className="p-5 border-b border-gray-100 flex justify-between items-center">
+                <h3 className="font-heading font-bold text-lg text-gray-900">Edit Profile</h3>
+                <button onClick={() => setIsEditingProfile(false)} className="text-gray-400 hover:text-gray-600">
+                  <FaTimesCircle size={20} />
+                </button>
+              </div>
+              
+              <form onSubmit={handleProfileSave} className="p-5 space-y-4">
+                <div className="flex flex-col items-center gap-3 mb-6">
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-100 bg-gray-50 flex items-center justify-center text-3xl font-bold text-gray-400">
+                    {avatarPreview ? (
+                      <img src={avatarPreview} alt="Preview" className="w-full h-full object-cover" crossOrigin="anonymous" />
+                    ) : (
+                      user?.name?.charAt(0).toUpperCase() || 'U'
+                    )}
+                    <label className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer text-white">
+                      <FaCamera size={24} />
+                      <input type="file" className="hidden" accept="image/png, image/jpeg" onChange={handleAvatarChange} />
+                    </label>
+                  </div>
+                  {avatarPreview && (
+                    <button type="button" onClick={() => { setAvatarPreview(null); setAvatarFile(null); }}
+                      className="text-xs text-red-500 hover:text-red-600 flex items-center gap-1 font-medium">
+                      <FaTrash size={10} /> Remove Photo
+                    </button>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Full Name</label>
+                  <input type="text" value={profileData.name} onChange={e => setProfileData({...profileData, name: e.target.value})} required
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/20" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Email / Gmail</label>
+                  <input type="email" value={profileData.email} onChange={e => setProfileData({...profileData, email: e.target.value})} required
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/20" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 mb-1">Phone Number</label>
+                  <input type="text" value={profileData.phone} onChange={e => setProfileData({...profileData, phone: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/20" />
+                </div>
+
+                <div className="pt-4 flex gap-3">
+                  <button type="button" onClick={() => setIsEditingProfile(false)}
+                    className="flex-1 py-2.5 rounded-lg border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition-colors">
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={profileSaving}
+                    className="flex-1 py-2.5 rounded-lg text-white font-semibold transition-all shadow-sm hover:shadow"
+                    style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                    {profileSaving ? 'Saving...' : 'Save Changes'}
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

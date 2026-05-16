@@ -10,10 +10,10 @@ const services = [
   {
     icon: <FaHome />,
     title: 'Home Loan',
-    desc: 'Turn your dream home into reality with competitive rates starting from 8.5% p.a., loan amounts up to ₹5 Crore, and tenure up to 30 years.',
+    desc: 'Turn your dream home into reality with competitive rates starting from 8.5% p.a., with flexible financing based on your requirements.',
     rate: '8.5%',
-    amount: 'Up to ₹5 Cr',
-    tenure: '30 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'Most Popular',
     link: '/home-loan',
     color: '#c0392b',
@@ -24,10 +24,10 @@ const services = [
   {
     icon: <FaCar />,
     title: 'Auto Loan',
-    desc: 'Drive home your new car today. Quick approval, minimal paperwork, and flexible EMIs for all vehicle types.',
+    desc: 'Drive home your new car today. Quick approval, minimal paperwork, and customized loan solutions for all vehicle types.',
     rate: '8.7%',
-    amount: 'Up to ₹1 Cr',
-    tenure: '7 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'Quick Approval',
     link: '/auto-loan',
     color: '#2980b9',
@@ -38,10 +38,10 @@ const services = [
   {
     icon: <FaUserTie />,
     title: 'Personal Loan',
-    desc: 'Meet your personal goals — weddings, travel, medical emergencies — with instant personal loans with no collateral required.',
+    desc: 'Meet your personal goals — weddings, travel, medical emergencies — with premium loans without fixed limits.',
     rate: '10.5%',
-    amount: 'Up to ₹40 L',
-    tenure: '5 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'No Collateral',
     link: '/personal-loan',
     color: '#8e44ad',
@@ -52,10 +52,10 @@ const services = [
   {
     icon: <FaBriefcase />,
     title: 'Business Loan',
-    desc: 'Fuel your business growth with customised business loans for working capital, expansion, and equipment purchase.',
+    desc: 'Fuel your business growth with customized business loans for working capital, expansion, and equipment purchase.',
     rate: '11%',
-    amount: 'Up to ₹50 L',
-    tenure: '5 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'Trending',
     link: '/business-loan',
     color: '#27ae60',
@@ -66,10 +66,10 @@ const services = [
   {
     icon: <FaCarSide />,
     title: 'Used Car Loan',
-    desc: 'Buy a pre-owned vehicle with ease. We finance all certified used cars with transparent pricing and fast approvals.',
+    desc: 'Buy a pre-owned vehicle with ease. We finance all certified used cars with transparent pricing and flexible amounts.',
     rate: '9.5%',
-    amount: 'Up to ₹30 L',
-    tenure: '5 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'Best Value',
     link: '/used-car-loan',
     color: '#e67e22',
@@ -80,10 +80,10 @@ const services = [
   {
     icon: <FaBuilding />,
     title: 'Loan Against Property',
-    desc: 'Unlock the value in your property for business expansion, personal needs, or debt consolidation at the best rates.',
+    desc: 'Unlock the value in your property for business expansion or personal needs at the best rates with flexible limits.',
     rate: '9%',
-    amount: 'Up to ₹5 Cr',
-    tenure: '15 Years',
+    amount: 'Flexible',
+    tenure: 'Customised',
     badge: 'High Amount',
     link: '/loan-against-property',
     color: '#16a085',
@@ -119,8 +119,9 @@ const Services = () => {
     <div className="min-h-screen" style={{ background: '#faf8ff' }}>
 
       {/* Hero */}
-      <section className="relative pt-40 pb-24"
-        style={{ background: 'linear-gradient(135deg, rgba(26,26,46,0.95) 0%, rgba(61,26,26,0.92) 50%, rgba(192,57,43,0.90) 100%)' }}>
+      <section className="relative pt-40 pb-24 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/assets/premium-bg.png)' }}>
+        <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #e74c3c, transparent)' }} />
           <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #3498db, transparent)' }} />

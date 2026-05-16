@@ -44,7 +44,7 @@ const heroSlides = [
   },
   {
     line2: 'Home Loans.',
-    sub: 'Stop paying rent. Loans up to ₹5 Crore at the lowest rates with tenure up to 30 years.',
+    sub: 'Stop paying rent. Flexible home loans tailored to your requirements.',
     tag: 'Lowest Interest Rates',
     img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=85',
     label: 'Home Loan',
@@ -408,7 +408,7 @@ const Home = () => {
                 Stop paying rent and start building equity. Our home loan experts guide you through every step — from eligibility to disbursement — making the process smooth and stress-free.
               </p>
               <div className="space-y-4 mb-8">
-                {['Loans up to ₹5 Crore at lowest rates','Tenure up to 30 years for easy EMIs','Balance transfer with top-up facility','Tax benefits under Section 80C & 24B'].map((point, i) => (
+                {['Flexible financing limits based on your requirements','Customised tenure for easy EMIs','Balance transfer with top-up facility','Tax benefits under Section 80C & 24B'].map((point, i) => (
                   <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: "var(--text-secondary)" }}>{point}</p></div>
                 ))}
               </div>
@@ -461,7 +461,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&q=85', link: '/auto-loan' },
-              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Loans up to ₹5 Cr with tenure up to 30 years.', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=85', link: '/home-loan' },
+              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Flexible financing based on your requirements.', img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=600&q=85', link: '/home-loan' },
               { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85', link: '/business-loan' },
               { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=85', link: '/insurance' },
             ].map((service, index) => (

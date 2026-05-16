@@ -9,7 +9,7 @@ const getBotResponse = (userInput) => {
   const inp = userInput.toLowerCase().trim();
 
   if (inp === 'home loan' || (inp.includes('home') && inp.includes('loan')))
-    return { text: "🏠 *Home Loan*\n\n• Loan up to ₹5 Crore\n• Interest from 8.5% p.a.\n• Tenure up to 30 years\n• Minimal documentation\n• Quick sanction in 48 hrs", quickReplies: ['Apply Now', 'Calculate EMI', 'Check Eligibility', 'Contact Us'] };
+    return { text: "🏠 *Home Loan*\n\n• Flexible loan limits\n• Interest from 8.5% p.a.\n• Customised tenure\n• Minimal documentation\n• Quick sanction in 48 hrs", quickReplies: ['Apply Now', 'Calculate EMI', 'Check Eligibility', 'Contact Us'] };
 
   if (inp === 'car loan' || inp === 'auto loan' || ((inp.includes('car') || inp.includes('auto')) && inp.includes('loan') && !inp.includes('used')))
     return { text: "🚗 *Car Loan*\n\n• New & used cars\n• Interest from 8.7% p.a.\n• Up to 100% on-road price\n• Approval in 24 hours\n• Flexible tenure", quickReplies: ['Apply Now', 'Check Rates', 'Calculate EMI', 'Contact Us'] };
@@ -18,10 +18,10 @@ const getBotResponse = (userInput) => {
     return { text: "🚙 *Used Car Loan*\n\n• Finance pre-owned cars\n• Interest from 9.5% p.a.\n• Up to 80% of car value\n• Quick processing", quickReplies: ['Apply Now', 'Check Eligibility', 'Contact Us'] };
 
   if (inp === 'personal loan' || (inp.includes('personal') && inp.includes('loan')))
-    return { text: "💰 *Personal Loan*\n\n• Up to ₹40 Lakhs\n• Interest from 10.5% p.a.\n• No collateral needed\n• Instant approval\n• Flexible tenure", quickReplies: ['Apply Now', 'Check Eligibility', 'Calculate EMI', 'Contact Us'] };
+    return { text: "💰 *Personal Loan*\n\n• Flexible loan limits\n• Interest from 10.5% p.a.\n• No collateral needed\n• Instant approval\n• Flexible tenure", quickReplies: ['Apply Now', 'Check Eligibility', 'Calculate EMI', 'Contact Us'] };
 
   if (inp === 'business loan' || (inp.includes('business') && inp.includes('loan')))
-    return { text: "🏢 *Business Loan*\n\n• Up to ₹50 Lakhs\n• Rates from 11% p.a.\n• Flexible repayment\n• Quick processing\n• Minimal docs", quickReplies: ['Apply Now', 'Documents Required', 'Calculate EMI', 'Contact Us'] };
+    return { text: "🏢 *Business Loan*\n\n• Flexible loan limits\n• Rates from 11% p.a.\n• Flexible repayment\n• Quick processing\n• Minimal docs", quickReplies: ['Apply Now', 'Documents Required', 'Calculate EMI', 'Contact Us'] };
 
   if (inp === 'insurance' || inp.includes('insurance'))
     return { text: "🛡️ *General Insurance*\n\n• Health Insurance\n• Life Insurance\n• Vehicle Insurance\n• Home Insurance\n• Travel Insurance", quickReplies: ['Get Quote', 'Contact Us', 'Back to Menu'] };

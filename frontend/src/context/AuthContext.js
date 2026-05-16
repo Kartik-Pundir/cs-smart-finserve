@@ -110,6 +110,10 @@ export const AuthProvider = ({ children }) => {
     return { success: false };
   };
 
+  const updateUser = (userData) => {
+    setUser(userData);
+  };
+
   const value = {
     user,
     loading,
@@ -117,6 +121,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     handleGoogleLoginSuccess,
+    updateUser,
     isAuthenticated: !!user,
     isAdmin: user?.role === 'admin'
   };

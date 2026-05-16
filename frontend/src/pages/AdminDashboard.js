@@ -236,6 +236,12 @@ const AdminDashboard = () => {
   const fCibil = cibilChecks.filter(c => !q || c.name?.toLowerCase().includes(q) || c.pan?.toLowerCase().includes(q) || c.mobile?.includes(q));
   const fDocs  = documents.filter(d => !q || d.name?.toLowerCase().includes(q) || d.phone?.includes(q) || d.email?.toLowerCase().includes(q));
 
+  const allConsolidatedLeads = [
+    ...fLeads.map(l => ({ ...l, _sourceType: 'Lead', _service: l.serviceInterested || 'Other', _message: l.message || '—', _endpoint: '/leads' })),
+    ...fApts.map(a => ({ ...a, _sourceType: 'Appointment', _service: a.service || 'Other', _message: `Date: ${new Date(a.preferredDate).toLocaleDateString('en-IN', { timeZone: 'UTC' })} Time: ${a.preferredTime}`, _endpoint: '/appointments' })),
+    ...fApps.map(a => ({ ...a, _sourceType: 'Application', _service: a.serviceType || 'Other', _message: `Amt: ${a.loanAmount ? '\u20B9'+a.loanAmount : '—'}, Inc: ${a.monthlyIncome ? '\u20B9'+a.monthlyIncome : '—'}`, _endpoint: '/applications' }))
+  ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   if (authLoading || loading) return (
     <div className="min-h-screen pt-24 flex items-center justify-center">
       <div className="text-center">
@@ -247,8 +253,8 @@ const AdminDashboard = () => {
 
   const statCards = [
     { label: 'Total Leads',      value: stats?.totalLeads ?? 0,        sub: `${stats?.newLeads ?? 0} new`,                color: 'from-blue-500 to-blue-600',     tab: 'leads' },
-    { label: 'Appointments',     value: stats?.totalAppointments ?? 0,  sub: `${stats?.pendingAppointments ?? 0} pending`,  color: 'from-green-500 to-green-600',   tab: 'appointments' },
-    { label: 'Applications',     value: stats?.totalApplications ?? 0,  sub: `${stats?.submittedApplications ?? 0} submitted`, color: 'from-purple-500 to-purple-600', tab: 'applications' },
+    { label: 'Appointments',     value: stats?.totalAppointments ?? 0,  sub: `${stats?.pendingAppointments ?? 0} pending`,  color: 'from-green-500 to-green-600',   tab: 'leads' },
+    { label: 'Applications',     value: stats?.totalApplications ?? 0,  sub: `${stats?.submittedApplications ?? 0} submitted`, color: 'from-purple-500 to-purple-600', tab: 'leads' },
     { label: 'CIBIL Checks',     value: stats?.totalCibilChecks ?? 0,   sub: 'total requests',                             color: 'from-orange-500 to-orange-600', tab: 'cibil' },
     { label: 'Registered Users', value: users.length,                   sub: 'signed up',                                  color: 'from-pink-500 to-rose-500',     tab: 'users' },
     { label: 'Feedback',         value: feedback.length,                sub: feedback.length ? `avg ${(feedback.reduce((a, f) => a + f.rating, 0) / feedback.length).toFixed(1)}\u2605` : 'none yet', color: 'from-yellow-500 to-amber-500', tab: 'feedback' },
@@ -257,11 +263,11 @@ const AdminDashboard = () => {
   // Filter today's leads
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const todayLeads = fLeads.filter(l => new Date(l.createdAt) >= today);
+  const todayLeads = allConsolidatedLeads.filter(l => new Date(l.createdAt) >= today);
   
   // Group today's leads by service
   const todayByService = todayLeads.reduce((acc, lead) => {
-    const service = lead.serviceInterested || 'Other';
+    const service = lead._service;
     if (!acc[service]) acc[service] = [];
     acc[service].push(lead);
     return acc;
@@ -269,9 +275,7 @@ const AdminDashboard = () => {
 
   const tabs = [
     { key: 'today',        label: "Today's Leads", count: todayLeads.length, highlight: true },
-    { key: 'leads',        label: 'All Leads',     count: fLeads.length },
-    { key: 'appointments', label: 'Appointments',  count: fApts.length },
-    { key: 'applications', label: 'Applications',  count: fApps.length },
+    { key: 'leads',        label: 'All Leads',     count: allConsolidatedLeads.length },
     { key: 'cibil',        label: 'CIBIL Checks',  count: fCibil.length },
     { key: 'documents',    label: 'Documents',     count: fDocs.length },
     { key: 'users',        label: 'Users',         count: fUsers.length },
@@ -279,10 +283,8 @@ const AdminDashboard = () => {
   ];
 
   const exportMap = {
-    today:        () => exportCSV(todayLeads.map(l => ({ Name: l.fullName, Phone: l.phone, Email: l.email, Service: l.serviceInterested, Message: l.message || '', Status: l.status, Time: new Date(l.createdAt).toLocaleTimeString() })), 'todays-leads.csv'),
-    leads:        () => exportCSV(fLeads.map(l => ({ Name: l.fullName, Phone: l.phone, Email: l.email, Service: l.serviceInterested, Message: l.message || '', Status: l.status, Date: new Date(l.createdAt).toLocaleDateString() })), 'leads.csv'),
-    appointments: () => exportCSV(fApts.map(a => ({ Name: a.fullName, Phone: a.phone, Email: a.email, Service: a.service, Date: new Date(a.preferredDate).toLocaleDateString(), Time: a.preferredTime, Status: a.status })), 'appointments.csv'),
-    applications: () => exportCSV(fApps.map(a => ({ Name: a.fullName, Phone: a.phone, Email: a.email, Service: a.serviceType, LoanAmount: a.loanAmount || '', MonthlyIncome: a.monthlyIncome || '', Employment: a.employmentType || '', City: a.city || '', Status: a.status, Date: new Date(a.createdAt).toLocaleDateString() })), 'applications.csv'),
+    today:        () => exportCSV(todayLeads.map(l => ({ Type: l._sourceType, Name: l.fullName, Phone: l.phone, Email: l.email, Service: l._service, Details: l._message, Status: l.status, Time: new Date(l.createdAt).toLocaleTimeString() })), 'todays-leads.csv'),
+    leads:        () => exportCSV(allConsolidatedLeads.map(l => ({ Type: l._sourceType, Name: l.fullName, Phone: l.phone, Email: l.email, Service: l._service, Details: l._message, Status: l.status, Date: new Date(l.createdAt).toLocaleDateString() })), 'all-leads.csv'),
     cibil:        () => exportCSV(fCibil.map(c => ({ Name: c.name, PAN: c.pan, DOB: new Date(c.dob).toLocaleDateString(), Mobile: c.mobile, Email: c.email, Score: c.score ?? 'Pending', Status: c.status, Date: new Date(c.createdAt).toLocaleDateString() })), 'cibil.csv'),
     documents:    () => exportCSV(fDocs.map(d => ({ Name: d.name, Phone: d.phone || '', Email: d.email || '', LoanType: d.loanType || '', Files: d.files?.map(f => f.label).join(', ') || '', Status: d.status, Date: new Date(d.createdAt).toLocaleDateString() })), 'documents.csv'),
     users:        () => exportCSV(fUsers.map(u => ({ Name: u.name, Email: u.email, Phone: u.phone || '', Role: u.role, Joined: new Date(u.createdAt).toLocaleDateString() })), 'users.csv'),
@@ -364,7 +366,7 @@ const AdminDashboard = () => {
                         <table className="w-full text-sm">
                           <thead className="bg-gray-50 border-b border-gray-100">
                             <tr>
-                              {['Time','Name','Phone','Email','Message','Status','Actions'].map(h => 
+                              {['Time','Type','Name','Phone','Email','Service','Details','Status','Actions'].map(h => 
                                 <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>
                               )}
                             </tr>
@@ -375,20 +377,34 @@ const AdminDashboard = () => {
                                 <td className="px-4 py-3 text-gray-500 whitespace-nowrap">
                                   {new Date(l.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
                                 </td>
+                                <td className="px-4 py-3 whitespace-nowrap">
+                                  <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${l._sourceType === 'Lead' ? 'bg-blue-100 text-blue-700' : l._sourceType === 'Appointment' ? 'bg-purple-100 text-purple-700' : 'bg-amber-100 text-amber-700'}`}>{l._sourceType}</span>
+                                </td>
                                 <td className="px-4 py-3 font-medium whitespace-nowrap">{l.fullName}</td>
                                 <td className="px-4 py-3 whitespace-nowrap">{l.phone}</td>
                                 <td className="px-4 py-3 text-gray-500">{l.email}</td>
-                                <td className="px-4 py-3 text-gray-500 max-w-[160px] truncate">{l.message || '—'}</td>
+                                <td className="px-4 py-3 whitespace-nowrap">{l._service}</td>
+                                <td className="px-4 py-3 text-gray-500 max-w-[160px] truncate" title={l._message}>{l._message}</td>
                                 <td className="px-4 py-3">
-                                  <select value={l.status} onChange={e => updateLeadStatus(l._id, e.target.value)}
-                                    className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
-                                    {['new','contacted','qualified','converted','closed'].map(s => <option key={s} value={s}>{s}</option>)}
-                                  </select>
+                                  {l._sourceType === 'Lead' ? (
+                                    <select value={l.status} onChange={e => updateLeadStatus(l._id, e.target.value)} className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
+                                      {['new','contacted','qualified','converted','closed'].map(s => <option key={s} value={s}>{s}</option>)}
+                                    </select>
+                                  ) : l._sourceType === 'Application' ? (
+                                    <select value={l.status} onChange={e => updateAppStatus(l._id, e.target.value)} className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
+                                      {['submitted','processing','approved','rejected','disbursed'].map(s => <option key={s} value={s}>{s}</option>)}
+                                    </select>
+                                  ) : (
+                                    <Badge status={l.status} />
+                                  )}
                                 </td>
                                 <td className="px-4 py-3">
-                                  <div className="flex gap-1">
+                                  <div className="flex gap-1 items-center">
                                     <ViewBtn onClick={() => setViewItem(l)} />
-                                    <DelBtn onClick={() => deleteItem('/leads', l._id, 'lead')} />
+                                    {l._sourceType === 'Appointment' && l.status === 'pending' && (
+                                      <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>Confirm</button>
+                                    )}
+                                    <DelBtn onClick={() => deleteItem(l._endpoint, l._id, l._sourceType.toLowerCase())} />
                                   </div>
                                 </td>
                               </tr>
@@ -406,90 +422,43 @@ const AdminDashboard = () => {
           {activeTab === 'leads' && (
             <table className="w-full text-sm">
               <thead className="bg-gray-50 border-b border-gray-100">
-                <tr>{['Name','Phone','Email','Service','Message','Status','Date','Actions'].map(h => <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>)}</tr>
+                <tr>{['Type','Name','Phone','Email','Service','Details','Status','Date','Actions'].map(h => <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>)}</tr>
               </thead>
               <tbody>
-                {fLeads.length === 0 ? <tr><td colSpan={8} className="text-center py-10 text-gray-400">No leads yet</td></tr> :
-                fLeads.map(l => (
+                {allConsolidatedLeads.length === 0 ? <tr><td colSpan={9} className="text-center py-10 text-gray-400">No leads yet</td></tr> :
+                allConsolidatedLeads.map(l => (
                   <tr key={l._id} className="border-b border-gray-50 hover:bg-gray-50">
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${l._sourceType === 'Lead' ? 'bg-blue-100 text-blue-700' : l._sourceType === 'Appointment' ? 'bg-purple-100 text-purple-700' : 'bg-amber-100 text-amber-700'}`}>{l._sourceType}</span>
+                    </td>
                     <td className="px-4 py-3 font-medium whitespace-nowrap">{l.fullName}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{l.phone}</td>
                     <td className="px-4 py-3 text-gray-500">{l.email}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{l.serviceInterested}</td>
-                    <td className="px-4 py-3 text-gray-500 max-w-[160px] truncate">{l.message || '—'}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{l._service}</td>
+                    <td className="px-4 py-3 text-gray-500 max-w-[160px] truncate" title={l._message}>{l._message}</td>
                     <td className="px-4 py-3">
-                      <select value={l.status} onChange={e => updateLeadStatus(l._id, e.target.value)}
-                        className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
-                        {['new','contacted','qualified','converted','closed'].map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
+                      {l._sourceType === 'Lead' ? (
+                        <select value={l.status} onChange={e => updateLeadStatus(l._id, e.target.value)} className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
+                          {['new','contacted','qualified','converted','closed'].map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      ) : l._sourceType === 'Application' ? (
+                        <select value={l.status} onChange={e => updateAppStatus(l._id, e.target.value)} className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
+                          {['submitted','processing','approved','rejected','disbursed'].map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      ) : (
+                        <Badge status={l.status} />
+                      )}
                     </td>
                     <td className="px-4 py-3 text-gray-400 whitespace-nowrap">{new Date(l.createdAt).toLocaleDateString()}</td>
-                    <td className="px-4 py-3"><div className="flex gap-1"><ViewBtn onClick={() => setViewItem(l)} /><DelBtn onClick={() => deleteItem('/leads', l._id, 'lead')} /></div></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-
-          {activeTab === 'appointments' && (
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-100">
-                <tr>{['Name','Phone','Email','Service','Date','Time','Status','Actions'].map(h => <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>)}</tr>
-              </thead>
-              <tbody>
-                {fApts.length === 0 ? <tr><td colSpan={8} className="text-center py-10 text-gray-400">No appointments yet</td></tr> :
-                fApts.map(a => (
-                  <tr key={a._id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium whitespace-nowrap">{a.fullName}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.phone}</td>
-                    <td className="px-4 py-3 text-gray-500">{a.email}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.service}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{new Date(a.preferredDate).toLocaleDateString('en-IN', { timeZone: 'UTC' })}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.preferredTime}</td>
-                    <td className="px-4 py-3"><Badge status={a.status} /></td>
                     <td className="px-4 py-3">
                       <div className="flex gap-1 items-center">
-                        <ViewBtn onClick={() => setViewItem(a)} />
-                        {a.status === 'pending' && (
-                          <button onClick={() => confirmAppointment(a._id, a.fullName)}
-                            className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap"
-                            style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
-                            Confirm
-                          </button>
+                        <ViewBtn onClick={() => setViewItem(l)} />
+                        {l._sourceType === 'Appointment' && l.status === 'pending' && (
+                          <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>Confirm</button>
                         )}
-                        <DelBtn onClick={() => deleteItem('/appointments', a._id, 'appointment')} />
+                        <DelBtn onClick={() => deleteItem(l._endpoint, l._id, l._sourceType.toLowerCase())} />
                       </div>
                     </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-
-          {activeTab === 'applications' && (
-            <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-100">
-                <tr>{['Name','Phone','Email','Service','Loan Amt','Income','City','Status','Date','Actions'].map(h => <th key={h} className="text-left px-4 py-3 font-semibold text-gray-600 whitespace-nowrap">{h}</th>)}</tr>
-              </thead>
-              <tbody>
-                {fApps.length === 0 ? <tr><td colSpan={10} className="text-center py-10 text-gray-400">No applications yet</td></tr> :
-                fApps.map(a => (
-                  <tr key={a._id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium whitespace-nowrap">{a.fullName}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.phone}</td>
-                    <td className="px-4 py-3 text-gray-500">{a.email}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.serviceType}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.loanAmount ? '\u20b9' + a.loanAmount.toLocaleString() : '—'}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{a.monthlyIncome ? '\u20b9' + a.monthlyIncome.toLocaleString() : '—'}</td>
-                    <td className="px-4 py-3">{a.city || '—'}</td>
-                    <td className="px-4 py-3">
-                      <select value={a.status} onChange={e => updateAppStatus(a._id, e.target.value)}
-                        className="px-2 py-1 rounded-lg border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-accent">
-                        {['submitted','processing','approved','rejected','disbursed'].map(s => <option key={s} value={s}>{s}</option>)}
-                      </select>
-                    </td>
-                    <td className="px-4 py-3 text-gray-400 whitespace-nowrap">{new Date(a.createdAt).toLocaleDateString()}</td>
-                    <td className="px-4 py-3"><div className="flex gap-1"><ViewBtn onClick={() => setViewItem(a)} /><DelBtn onClick={() => deleteItem('/applications', a._id, 'application')} /></div></td>
                   </tr>
                 ))}
               </tbody>

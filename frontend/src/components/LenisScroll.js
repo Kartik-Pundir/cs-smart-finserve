@@ -24,6 +24,8 @@ const LenisScroll = () => {
       infinite: false,
     });
 
+    window.lenis = lenis;
+
     // Animation frame loop
     function raf(time) {
       lenis.raf(time);
@@ -34,6 +36,7 @@ const LenisScroll = () => {
 
     // Cleanup
     return () => {
+      window.lenis = null;
       lenis.destroy();
     };
   }, []);

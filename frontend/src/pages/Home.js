@@ -379,7 +379,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=700&q=85" 
+                src="/assets/fortuner.png" 
                 alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -395,7 +395,7 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=85" 
+                src="/assets/indian-home.png" 
                 alt="Home Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}

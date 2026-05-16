@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-
   useEffect(() => {
+    if (window.lenis) {
+      window.lenis.scrollTo('top', { immediate: true });
+    }
     setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTo({ top: 0, left: 0, behavior: 'instant' });

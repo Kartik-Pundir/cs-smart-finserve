@@ -86,8 +86,6 @@ const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState('applications');
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [profileData, setProfileData] = useState({ name: '', phone: '', email: '' });
-  const [avatarFile, setAvatarFile] = useState(null);
-  const [avatarPreview, setAvatarPreview] = useState(null);
   const [profileSaving, setProfileSaving] = useState(false);
   const { user, updateUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
@@ -99,7 +97,6 @@ const CustomerDashboard = () => {
         phone: user.phone || '',
         email: user.email || ''
       });
-      setAvatarPreview(user.avatar ? `http://localhost:5000${user.avatar}` : null);
     }
   }, [user]);
 
@@ -133,16 +130,13 @@ const CustomerDashboard = () => {
     e.preventDefault();
     setProfileSaving(true);
     try {
-      const formData = new FormData();
-      formData.append('name', profileData.name);
-      formData.append('phone', profileData.phone);
-      formData.append('email', profileData.email);
-      if (avatarFile) formData.append('avatar', avatarFile);
-      else if (avatarPreview === null && user.avatar) formData.append('removeAvatar', 'true');
+      const payload = {
+        name: profileData.name,
+        phone: profileData.phone,
+        email: profileData.email
+      };
 
-      const res = await api.put('/user/profile', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+      const res = await api.put('/user/profile', payload);
       
       if (res.data.success) {
         updateUser(res.data.user);
@@ -153,17 +147,6 @@ const CustomerDashboard = () => {
       toast.error(err.response?.data?.message || 'Failed to update profile');
     } finally {
       setProfileSaving(false);
-    }
-  };
-
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        return toast.error('Image must be less than 5MB');
-      }
-      setAvatarFile(file);
-      setAvatarPreview(URL.createObjectURL(file));
     }
   };
 
@@ -207,12 +190,8 @@ const CustomerDashboard = () => {
               className="flex items-center gap-4 relative group cursor-pointer"
               onClick={() => setIsEditingProfile(true)}>
               <div className="relative w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg flex-shrink-0 overflow-hidden"
-                style={{ background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)' }}>
-                {user?.avatar ? (
-                  <img src={`http://localhost:5000${user.avatar}`} alt="Profile" className="w-full h-full object-cover" crossOrigin="anonymous" />
-                ) : (
-                  user?.name?.charAt(0).toUpperCase() || 'U'
-                )}
+                style={{ background: 'linear-gradient(135deg, #e74c3c, #c0392b)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <FaEdit size={18} />
                 </div>
@@ -469,23 +448,10 @@ const CustomerDashboard = () => {
               
               <form onSubmit={handleProfileSave} className="p-5 space-y-4">
                 <div className="flex flex-col items-center gap-3 mb-6">
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gray-100 bg-gray-50 flex items-center justify-center text-3xl font-bold text-gray-400">
-                    {avatarPreview ? (
-                      <img src={avatarPreview} alt="Preview" className="w-full h-full object-cover" crossOrigin="anonymous" />
-                    ) : (
-                      user?.name?.charAt(0).toUpperCase() || 'U'
-                    )}
-                    <label className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer text-white">
-                      <FaCamera size={24} />
-                      <input type="file" className="hidden" accept="image/png, image/jpeg" onChange={handleAvatarChange} />
-                    </label>
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-gray-50 flex items-center justify-center text-4xl font-bold text-white shadow-md"
+                    style={{ background: 'linear-gradient(135deg, #e74c3c, #c0392b)' }}>
+                    {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
-                  {avatarPreview && (
-                    <button type="button" onClick={() => { setAvatarPreview(null); setAvatarFile(null); }}
-                      className="text-xs text-red-500 hover:text-red-600 flex items-center gap-1 font-medium">
-                      <FaTrash size={10} /> Remove Photo
-                    </button>
-                  )}
                 </div>
 
                 <div>

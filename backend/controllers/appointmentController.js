@@ -6,7 +6,7 @@ const { appointmentConfirmation } = require('../utils/emailTemplates');
 // @route   POST /api/appointments
 exports.createAppointment = async (req, res) => {
   try {
-    const { fullName, phone, email, preferredDate, preferredTime, service, message } = req.body;
+    const { fullName, phone, email, preferredDate, preferredTime, service, branch, message } = req.body;
 
     const appointment = await Appointment.create({
       fullName,
@@ -15,6 +15,7 @@ exports.createAppointment = async (req, res) => {
       preferredDate,
       preferredTime,
       service,
+      branch,
       message
     });
 
@@ -49,6 +50,7 @@ exports.createAppointment = async (req, res) => {
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Phone</td><td style="padding:8px 0;font-weight:600;"><a href="tel:${phone}" style="color:#c0392b;">${phone}</a></td></tr>
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Email</td><td style="padding:8px 0;font-weight:600;"><a href="mailto:${email}" style="color:#c0392b;">${email}</a></td></tr>
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Service</td><td style="padding:8px 0;font-weight:600;color:#111827;">${service}</td></tr>
+                <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Branch</td><td style="padding:8px 0;font-weight:600;color:#111827;">${branch}</td></tr>
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Date</td><td style="padding:8px 0;color:#374151;">${new Date(preferredDate).toLocaleDateString('en-IN', { timeZone: 'UTC', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</td></tr>
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Time</td><td style="padding:8px 0;color:#374151;">${preferredTime}</td></tr>
                 <tr><td style="padding:8px 0;color:#6b7280;font-size:13px;">Message</td><td style="padding:8px 0;color:#374151;">${message || '—'}</td></tr>

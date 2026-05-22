@@ -107,8 +107,23 @@ const BookAppointment = () => {
           <div className="bg-white rounded-xl p-5 border border-purple-100 shadow-sm">
             <p className="text-sm font-semibold text-gray-700 mb-3">Office Hours</p>
             <p className="text-xs text-gray-500">Mon – Sat: 10:00 AM – 6:00 PM</p>
-            <p className="text-xs text-gray-500 mt-1">Sunday: Closed</p>
-            <p className="text-xs text-gray-400 mt-3">102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon, Haryana 122001</p>
+            <p className="text-xs text-gray-500 mt-1 mb-4">Sunday: Closed</p>
+            
+            <p className="text-sm font-semibold text-gray-700 mb-2">Our Branches</p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs font-semibold text-gray-800">Gurugram (Head Office)</p>
+                <p className="text-xs text-gray-500 mt-0.5">Sco- 45, 2nd Floor, Vyapar Sadan, Sector-14, Gurgaon-122001</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-800">Faridabad Branch</p>
+                <p className="text-xs text-gray-500 mt-0.5">2546, 2nd Floor, Opp: Sagar Cinema, Main Road, Sector-16, Faridabad, HR - 121002</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-gray-800">Delhi Branch</p>
+                <p className="text-xs text-gray-500 mt-0.5">Karol Bagh, New Delhi</p>
+              </div>
+            </div>
           </div>
         </motion.div>
 

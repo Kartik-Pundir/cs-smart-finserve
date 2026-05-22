@@ -116,7 +116,7 @@ const Contact = () => {
                       <FaMapMarkerAlt className="text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-1">Gurugram (Head Office)</h4>
+                      <h4 className="font-bold text-gray-900 mb-1">Gurugram</h4>
                       <p className="text-gray-500 text-sm">Sco- 45, 2nd Floor, Vyapar Sadan</p>
                       <p className="text-gray-500 text-sm">Sector-14, Gurgaon, Haryana 122001</p>
                       <p className="text-gray-500 text-sm mt-1">+91 92679 53513</p>

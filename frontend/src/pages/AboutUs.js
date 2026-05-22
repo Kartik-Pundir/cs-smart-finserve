@@ -40,7 +40,7 @@ const AboutUs = () => {
             {/* MD Placeholder */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-6 shadow-xl border border-purple-50 text-center">
               <div className="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 bg-gray-200 border-4 border-white shadow-lg flex items-center justify-center">
-                <div className="text-5xl">👨‍💼</div>
+                <img src="/assets/md.jpg" alt="Sushil Singh" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-2xl font-heading font-bold text-gray-900">Sushil Singh</h3>
               <p className="text-accent font-semibold mb-4">Managing Director & Founder</p>
@@ -52,9 +52,7 @@ const AboutUs = () => {
             {/* Director */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white rounded-3xl p-6 shadow-xl border border-purple-50 text-center">
               <div className="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 bg-gray-200 border-4 border-white shadow-lg flex items-center justify-center">
-                <img src="/assets/director.jpg" alt="Krishan Pal Singh" className="w-full h-full object-cover" 
-                     onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
-                <div className="text-5xl hidden">👨‍💼</div>
+                <img src="/assets/director.jpg" alt="Krishan Pal Singh" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-2xl font-heading font-bold text-gray-900">Krishan Pal Singh</h3>
               <p className="text-accent font-semibold mb-4">Director & Co-Founder</p>
@@ -68,15 +66,19 @@ const AboutUs = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h3 className="text-2xl font-heading font-bold text-gray-900 text-center mb-10">Our Team & Office</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {[1, 2, 3].map((_, i) => (
+              {[
+                { img: '/assets/team1.jpg', title: 'Customer Support Team' },
+                { img: '/assets/team2.jpg', title: 'Loan Processing Operations' },
+                { img: '/assets/team3.jpg', title: 'Financial Advisory Desk' }
+              ].map((team, i) => (
                 <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-md border border-purple-50 group">
-                  <div className="h-48 bg-gray-200 flex items-center justify-center relative">
-                    <span className="text-gray-400 text-sm font-medium">Image Placeholder</span>
+                  <div className="h-48 bg-gray-200 relative overflow-hidden">
+                    <img src={team.img} alt={team.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="p-5 text-center">
-                    <h4 className="text-lg font-bold text-gray-900 mb-1">Team Member</h4>
-                    <p className="text-sm text-gray-500">Financial Advisor</p>
+                    <h4 className="text-lg font-bold text-gray-900 mb-1">{team.title}</h4>
+                    <p className="text-sm text-gray-500">CS Smart Finserve</p>
                   </div>
                 </div>
               ))}

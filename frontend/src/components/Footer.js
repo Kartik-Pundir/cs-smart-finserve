@@ -127,7 +127,7 @@ const Footer = () => {
               <li className="flex items-start">
                 <FaMapMarkerAlt className="mt-1 mr-3 text-sky-400 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400 font-semibold mb-1">Gurugram (Head Office)</p>
+                  <p className="text-gray-400 font-semibold mb-1">Gurugram</p>
                   <p className="text-white text-sm mb-3">Sco- 45, 2nd Floor, Vyapar Sadan<br/>Sector-14, Gurgaon-122001</p>
                   
                   <p className="text-gray-400 font-semibold mb-1">Faridabad Branch</p>

@@ -29,6 +29,10 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Service selection is required']
   },
+  branch: {
+    type: String,
+    required: [true, 'Branch selection is required']
+  },
   message: {
     type: String,
     trim: true

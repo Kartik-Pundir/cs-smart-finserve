@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import Logo from './Logo';
 
 const Footer = () => {
@@ -21,40 +21,6 @@ const Footer = () => {
             <p className="text-gray-400 text-sm mb-6">
               Your trusted partner for all financial needs. We provide customized loan and insurance solutions.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"
-              >
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"
-              >
-                <FaTwitter />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"
-              >
-                <FaLinkedinIn />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"
-              >
-                <FaInstagram />
-              </a>
-            </div>
           </div>
 
           {/* Column 2: Services */}
@@ -159,11 +125,16 @@ const Footer = () => {
                 </div>
               </li>
               <li className="flex items-start">
-                <FaMapMarkerAlt className="mt-1 mr-3 text-sky-400" />
+                <FaMapMarkerAlt className="mt-1 mr-3 text-sky-400 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">Address</p>
-                  <p className="text-white">102, Lala Ram Market, Sector 17</p>
-                  <p className="text-white">Sukhrali, Gurgaon, Haryana 122001</p>
+                  <p className="text-gray-400 font-semibold mb-1">Gurugram (Head Office)</p>
+                  <p className="text-white text-sm mb-3">Sco- 45, 2nd Floor, Vyapar Sadan<br/>Sector-14, Gurgaon-122001</p>
+                  
+                  <p className="text-gray-400 font-semibold mb-1">Faridabad Branch</p>
+                  <p className="text-white text-sm mb-3">2546, 2nd Floor, Opp: Sagar Cinema<br/>Main Road, Sector-16, Faridabad, HR - 121002</p>
+
+                  <p className="text-gray-400 font-semibold mb-1">Delhi Branch</p>
+                  <p className="text-white text-sm">Karol Bagh, New Delhi</p>
                 </div>
               </li>
             </ul>

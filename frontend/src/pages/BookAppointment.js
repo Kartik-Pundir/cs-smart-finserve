@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
-import { FaCalendarAlt, FaClock, FaUser, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import api from '../utils/api';
 
 const services = [
@@ -17,7 +17,7 @@ const timeSlots = [
 
 const BookAppointment = () => {
   const [formData, setFormData] = useState({
-    fullName: '', phone: '', email: '', service: '', preferredDate: '', preferredTime: '', message: ''
+    fullName: '', phone: '', email: '', service: '', branch: '', preferredDate: '', preferredTime: '', message: ''
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -146,6 +146,18 @@ const BookAppointment = () => {
                     required className="input-field">
                     <option value="">Select a service</option>
                     {services.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-gray-700 mb-1.5 font-medium text-sm flex items-center gap-1.5">
+                    <FaMapMarkerAlt className="text-accent text-xs" /> Preferred Branch *
+                  </label>
+                  <select name="branch" value={formData.branch} onChange={handleChange}
+                    required className="input-field">
+                    <option value="">Select a branch</option>
+                    <option value="Gurugram">Gurugram</option>
+                    <option value="Faridabad">Faridabad</option>
+                    <option value="Karol Bagh, New Delhi">Karol Bagh, New Delhi</option>
                   </select>
                 </div>
                 <div>

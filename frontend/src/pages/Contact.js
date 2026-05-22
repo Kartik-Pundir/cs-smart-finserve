@@ -105,20 +105,47 @@ const Contact = () => {
                   Our Office
                 </span>
                 <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Find Us Here</h2>
-                <p className="text-gray-500 text-sm">Visit us at our Gurugram office for a face-to-face consultation.</p>
+                <p className="text-gray-500 text-sm">Visit any of our branches for a face-to-face consultation.</p>
               </div>
 
-              {/* Location Card */}
-              <div className="bg-white rounded-2xl p-6 shadow-md border-l-4 border-accent">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <FaMapMarkerAlt className="text-accent" />
+              {/* Location Cards */}
+              <div className="space-y-4">
+                <div className="bg-white rounded-2xl p-6 shadow-md border-l-4 border-accent">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaMapMarkerAlt className="text-accent" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-1">Gurugram (Head Office)</h4>
+                      <p className="text-gray-500 text-sm">Sco- 45, 2nd Floor, Vyapar Sadan</p>
+                      <p className="text-gray-500 text-sm">Sector-14, Gurgaon, Haryana 122001</p>
+                      <p className="text-gray-500 text-sm mt-1">+91 92679 53513</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Gurugram</h4>
-                    <p className="text-gray-500 text-sm">102, Lala Ram Market, Sector 17</p>
-                    <p className="text-gray-500 text-sm">Sukhrali, Gurgaon, Haryana 122001</p>
-                    <p className="text-gray-500 text-sm mt-1">+91 92679 53513</p>
+                </div>
+
+                <div className="bg-white rounded-2xl p-6 shadow-md border-l-4 border-gray-300">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaMapMarkerAlt className="text-gray-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-1">Faridabad Branch</h4>
+                      <p className="text-gray-500 text-sm">2546, 2nd Floor, Opp: Sagar Cinema</p>
+                      <p className="text-gray-500 text-sm">Main Road, Sector-16, Faridabad, HR - 121002</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-6 shadow-md border-l-4 border-gray-300">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <FaMapMarkerAlt className="text-gray-500" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900 mb-1">Delhi Branch</h4>
+                      <p className="text-gray-500 text-sm">Karol Bagh, New Delhi</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -127,9 +154,9 @@ const Contact = () => {
               <div className="rounded-2xl overflow-hidden shadow-md h-56 bg-gray-100 flex items-center justify-center border border-gray-200">
                 <div className="text-center text-gray-400">
                   <FaMapMarkerAlt className="text-4xl mx-auto mb-2 text-accent" />
-                  <p className="text-sm font-medium">102, Lala Ram Market, Sector 17, Sukhrali</p>
+                  <p className="text-sm font-medium">Sco- 45, Vyapar Sadan, Sector-14, Gurgaon</p>
                   <a
-                    href="https://maps.google.com/?q=102+Lala+Ram+Market+Sector+17+Sukhrali+Gurgaon+Haryana+122001"
+                    href="https://maps.google.com/?q=Sco+45+Vyapar+Sadan+Sector+14+Gurgaon+122001"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block text-xs text-accent underline"

@@ -25,55 +25,61 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Our Story */}
+      {/* Our Team */}
       <section className="py-20" style={{ background: '#faf8ff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Sushil Singh */}
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-32">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-100 bg-white">
-              <div className="w-full h-80 flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #1a1a2e, #2d1b1b)' }}>
-                <div className="text-9xl">👨‍💼</div>
-              </div>
-              <div className="px-6 py-5 text-center">
-                <p className="text-xl font-heading font-bold text-gray-900">Sushil Singh</p>
-                <p className="text-sm font-semibold mt-1" style={{ color: '#c0392b' }}>MD & Founder</p>
-              </div>
-            </div>
-            <div className="pt-4">
-              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-8">Sushil Singh</h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                Sushil Singh is the Managing Director and Founder of CS Smart Finserve Private Limited. With a deep understanding of the financial services industry, he laid the foundation of the company with a vision to make loans and insurance accessible to every Indian household.
-              </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                His leadership and strategic thinking have been instrumental in building strong partnerships with 50+ banks and NBFCs, enabling the company to serve thousands of customers across Faridabad and the NCR region.
-              </p>
-            </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Meet Our Leadership & Team</h2>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              The dedicated experts working behind the scenes to get you the best financial solutions.
+            </p>
           </motion.div>
 
-          {/* Krishan Pal Singh */}
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border border-purple-100 bg-white lg:order-2">
-              <div className="w-full h-80 flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
-                <div className="text-9xl">👨‍💼</div>
+          {/* Leadership */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            {/* MD Placeholder */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-6 shadow-xl border border-purple-50 text-center">
+              <div className="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 bg-gray-200 border-4 border-white shadow-lg flex items-center justify-center">
+                <div className="text-5xl">👨‍💼</div>
               </div>
-              <div className="px-6 py-5 text-center">
-                <p className="text-xl font-heading font-bold text-gray-900">Krishan Pal Singh</p>
-                <p className="text-sm font-semibold mt-1" style={{ color: '#c0392b' }}>Director & Co-Founder</p>
+              <h3 className="text-2xl font-heading font-bold text-gray-900">Sushil Singh</h3>
+              <p className="text-accent font-semibold mb-4">Managing Director & Founder</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                With a deep understanding of the financial services industry, he laid the foundation of the company with a vision to make loans and insurance accessible to every Indian household.
+              </p>
+            </motion.div>
+
+            {/* Director */}
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white rounded-3xl p-6 shadow-xl border border-purple-50 text-center">
+              <div className="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 bg-gray-200 border-4 border-white shadow-lg flex items-center justify-center">
+                <img src="/assets/director.jpg" alt="Krishan Pal Singh" className="w-full h-full object-cover" 
+                     onError={(e) => { e.target.onerror = null; e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+                <div className="text-5xl hidden">👨‍💼</div>
               </div>
-            </div>
-            <div className="lg:order-1 pt-4">
-              <h2 className="text-3xl font-heading font-bold text-gray-900 mb-8">Krishan Pal Singh</h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                Krishan Pal Singh is the Director and Co-Founder of CS Smart Finserve Private Limited. Based in Gurugram, he brings years of expertise in financial consulting and customer relationship management to the company.
+              <h3 className="text-2xl font-heading font-bold text-gray-900">Krishan Pal Singh</h3>
+              <p className="text-accent font-semibold mb-4">Director & Co-Founder</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Based in Gurugram, he brings years of expertise in financial consulting. His commitment to transparency and a customer-first approach has helped build a reputation of trust across the NCR.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                His commitment to transparency and customer-first approach has helped CS Smart Finserve build a reputation of trust across the NCR. He oversees day-to-day operations and ensures every client receives personalised, honest financial guidance.
-              </p>
+            </motion.div>
+          </div>
+
+          {/* Team Members */}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h3 className="text-2xl font-heading font-bold text-gray-900 text-center mb-10">Our Team & Office</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((_, i) => (
+                <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-md border border-purple-50 group">
+                  <div className="h-48 bg-gray-200 flex items-center justify-center relative">
+                    <span className="text-gray-400 text-sm font-medium">Image Placeholder</span>
+                    <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="p-5 text-center">
+                    <h4 className="text-lg font-bold text-gray-900 mb-1">Team Member</h4>
+                    <p className="text-sm text-gray-500">Financial Advisor</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 

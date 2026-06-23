@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="frontend/public/assets/github_banner.png" alt="CS Smart Finserve Banner" width="100%">
-</p>
-
 <h1 align="center">🏦 CS Smart Finserve</h1>
 
 <p align="center">

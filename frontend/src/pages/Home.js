@@ -379,7 +379,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="/assets/toyota_fortuner.png" 
+                src="/assets/real_toyota_fortuner.png" 
                 alt="Car Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -395,7 +395,7 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
               <ZoomImage 
-                src="/assets/indian_luxury_house.png" 
+                src="/assets/real_indian_luxury_house.png" 
                 alt="Home Loan"
                 className="w-full max-w-md object-cover h-80"
                 zoomScale={1.08}
@@ -460,8 +460,8 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: '/assets/mahindra_scorpio.png', link: '/auto-loan' },
-              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Flexible financing based on your requirements.', img: '/assets/indian_luxury_house.png', link: '/home-loan' },
+              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: '/assets/real_mahindra_scorpio.png', link: '/auto-loan' },
+              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Flexible financing based on your requirements.', img: '/assets/real_indian_luxury_house.png', link: '/home-loan' },
               { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85', link: '/business-loan' },
               { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=85', link: '/insurance' },
             ].map((service, index) => (

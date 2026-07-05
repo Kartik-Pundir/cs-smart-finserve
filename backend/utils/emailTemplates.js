@@ -67,8 +67,8 @@ exports.callbackConfirmation = (name) => {
                   <!-- Contact info -->
                   <p style="color:#6b7280;font-size:13px;margin:0 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Need immediate help?</p>
                   <table cellpadding="0" cellspacing="0">
-                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/919267953513" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 92679 53513</a></td></tr>
-                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:kartikpundir231@gmail.com" style="color:#c0392b;text-decoration:none;">kartikpundir231@gmail.com</a></td></tr>
+                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
+                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
                     <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
                     <tr><td style="padding:4px 0;color:#374151;font-size:14px;">🕐 &nbsp;Mon – Sat, 9 AM – 7 PM</td></tr>
                   </table>
@@ -150,8 +150,8 @@ exports.appointmentConfirmation = (name, date, time) => {
 
                 <p style="color:#6b7280;font-size:13px;margin:0 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Need help?</p>
                 <table cellpadding="0" cellspacing="0">
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/919267953513" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 92679 53513</a></td></tr>
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:kartikpundir231@gmail.com" style="color:#c0392b;text-decoration:none;">kartikpundir231@gmail.com</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
                 </table>
               </td>
             </tr>
@@ -232,8 +232,8 @@ exports.applicationReceived = (name, serviceType) => {
 
                 <p style="color:#6b7280;font-size:13px;margin:0 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Need help?</p>
                 <table cellpadding="0" cellspacing="0">
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/919267953513" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 92679 53513</a></td></tr>
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:kartikpundir231@gmail.com" style="color:#c0392b;text-decoration:none;">kartikpundir231@gmail.com</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
                   <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
                 </table>
               </td>
@@ -302,8 +302,8 @@ exports.appointmentConfirmed = (name, date, time, service) => {
                 <hr style="border:none;border-top:1px solid #e5e7eb;margin:0 0 20px;"/>
                 <p style="color:#6b7280;font-size:13px;margin:0 0 8px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Need to reschedule?</p>
                 <table cellpadding="0" cellspacing="0">
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/919267953513" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 92679 53513</a></td></tr>
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:kartikpundir231@gmail.com" style="color:#c0392b;text-decoration:none;">kartikpundir231@gmail.com</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
                 </table>
               </td>
             </tr>

@@ -416,7 +416,7 @@ const CustomerDashboard = () => {
           {[
             { icon: <FaCheckCircle className="text-green-500" />, title: 'Secure & Encrypted', desc: 'Your data is protected with bank-grade security.' },
             { icon: <FaClock className="text-blue-500" />, title: '24-hr Processing', desc: 'Most applications are reviewed within one business day.' },
-            { icon: <FaTimesCircle className="text-accent" />, title: 'Need Help?', desc: <a href="https://wa.me/919267953513" className="text-accent hover:underline font-medium">Chat with us on WhatsApp</a> },
+            { icon: <FaTimesCircle className="text-accent" />, title: 'Need Help?', desc: <a href="https://wa.me/917838825521" className="text-accent hover:underline font-medium">Chat with us on WhatsApp</a> },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
               <div className="text-lg mt-0.5 flex-shrink-0">{item.icon}</div>

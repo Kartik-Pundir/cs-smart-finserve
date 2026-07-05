@@ -9,22 +9,22 @@ const Contact = () => {
       icon: <FaPhone className="text-white text-lg" />,
       bg: 'bg-accent',
       label: 'Call Us',
-      value: '+91 92679 53513',
-      href: 'tel:+919267953513',
+      value: '+91 78388 25521',
+      href: 'tel:+917838825521',
     },
     {
       icon: <FaWhatsapp className="text-white text-lg" />,
       bg: 'bg-green-500',
       label: 'WhatsApp',
-      value: '+91 92679 53513',
-      href: 'https://wa.me/919267953513',
+      value: '+91 78388 25521',
+      href: 'https://wa.me/917838825521',
     },
     {
       icon: <FaEnvelope className="text-white text-lg" />,
       bg: 'bg-accent',
       label: 'Email Us',
-      value: 'kartikpundir231@gmail.com',
-      href: 'mailto:kartikpundir231@gmail.com',
+      value: 'krishan.pal1986@gmail.com',
+      href: 'mailto:krishan.pal1986@gmail.com',
     },
     {
       icon: <FaClock className="text-white text-lg" />,
@@ -119,7 +119,7 @@ const Contact = () => {
                       <h4 className="font-bold text-gray-900 mb-1">Gurugram</h4>
                       <p className="text-gray-500 text-sm">Sco- 45, 2nd Floor, Vyapar Sadan</p>
                       <p className="text-gray-500 text-sm">Sector-14, Gurgaon, Haryana 122001</p>
-                      <p className="text-gray-500 text-sm mt-1">+91 92679 53513</p>
+                      <p className="text-gray-500 text-sm mt-1">+91 78388 25521</p>
                     </div>
                   </div>
                 </div>
@@ -144,7 +144,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900 mb-1">Delhi Branch</h4>
-                      <p className="text-gray-500 text-sm">Karol Bagh, New Delhi</p>
+                      <p className="text-gray-500 text-sm">3A, 3B, 2nd Floor, 5/34, Pusa Road</p>
+                      <p className="text-gray-500 text-sm">Karol Bagh, New Delhi - 110005</p>
                     </div>
                   </div>
                 </div>
@@ -171,7 +172,7 @@ const Contact = () => {
                 <h4 className="font-bold text-gray-900 mb-4">Quick Actions</h4>
                 <div className="space-y-3">
                   <a
-                    href="https://wa.me/919267953513"
+                    href="https://wa.me/917838825521"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 bg-green-50 rounded-xl hover:bg-green-100 transition-colors"
@@ -180,14 +181,14 @@ const Contact = () => {
                     <span className="text-sm font-semibold text-gray-700">Chat on WhatsApp</span>
                   </a>
                   <a
-                    href="tel:+919267953513"
+                    href="tel:+917838825521"
                     className="flex items-center gap-3 p-3 bg-red-50 rounded-xl hover:bg-red-100 transition-colors"
                   >
                     <FaPhone className="text-accent text-lg" />
                     <span className="text-sm font-semibold text-gray-700">Call Now</span>
                   </a>
                   <a
-                    href="mailto:kartikpundir231@gmail.com"
+                    href="mailto:krishan.pal1986@gmail.com"
                     className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
                   >
                     <FaEnvelope className="text-gray-500 text-lg" />

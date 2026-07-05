@@ -35,7 +35,7 @@ const LoanCTABanner = ({ loanType = 'Loan' }) => {
                 Apply Now →
               </a>
               <a
-                href="tel:+919267953513"
+                href="tel:+917838825521"
                 className="flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-all"
               >
                 <FaPhone />

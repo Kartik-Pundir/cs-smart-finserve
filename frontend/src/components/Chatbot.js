@@ -39,19 +39,19 @@ const getBotResponse = (userInput) => {
     return { text: "🧮 *EMI Calculator*\n\nVisit our EMI Calculator to plan your finances! Calculate monthly EMI for any loan amount, tenure and rate.", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
 
   if (inp === 'apply now' || inp.includes('apply'))
-    return { text: "🎯 *Ready to Apply?*\n\nYou can:\n1. Fill our online form\n2. Upload documents\n3. Get instant approval\n\nOr call us: *+91 92679 53513*", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
+    return { text: "🎯 *Ready to Apply?*\n\nYou can:\n1. Fill our online form\n2. Upload documents\n3. Get instant approval\n\nOr call us: *+91 78388 25521*", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
 
   if (inp === 'contact us' || inp === 'contact' || inp.includes('contact') || inp.includes('call') || inp.includes('phone'))
-    return { text: "📞 *Contact Us*\n\n📱 +91 92679 53513\n📧 kartikpundir231@gmail.com\n📍 102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon\n\n⏰ Mon–Sat: 9 AM – 6 PM", quickReplies: ['Book Appointment', 'Back to Menu'] };
+    return { text: "📞 *Contact Us*\n\n📱 +91 78388 25521\n📧 krishan.pal1986@gmail.com\n📍 102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon\n\n⏰ Mon–Sat: 9 AM – 6 PM", quickReplies: ['Book Appointment', 'Back to Menu'] };
 
   if (inp === 'book appointment' || inp.includes('appointment'))
-    return { text: "📅 *Book a Free Consultation*\n\nOur loan experts are available Mon–Sat, 9 AM – 6 PM.\n\nCall: +91 92679 53513\nOr book online from the website.", quickReplies: ['Contact Us', 'Back to Menu'] };
+    return { text: "📅 *Book a Free Consultation*\n\nOur loan experts are available Mon–Sat, 9 AM – 6 PM.\n\nCall: +91 78388 25521\nOr book online from the website.", quickReplies: ['Contact Us', 'Back to Menu'] };
 
   if (inp === 'cibil score' || inp.includes('cibil') || inp.includes('credit score'))
     return { text: "📊 *CIBIL Score*\n\nA score of 750+ gets you:\n✓ Lower interest rates\n✓ Faster approval\n✓ Higher loan amounts\n\nCheck yours on our website!", quickReplies: ['Check Eligibility', 'Contact Us', 'Back to Menu'] };
 
   if (inp === 'get quote' || inp === 'compare plans')
-    return { text: "📋 *Get an Insurance Quote*\n\nCall us: +91 92679 53513\nOr email: kartikpundir231@gmail.com\n\nOur experts compare plans and get you the best coverage.", quickReplies: ['Contact Us', 'Back to Menu'] };
+    return { text: "📋 *Get an Insurance Quote*\n\nCall us: +91 78388 25521\nOr email: krishan.pal1986@gmail.com\n\nOur experts compare plans and get you the best coverage.", quickReplies: ['Contact Us', 'Back to Menu'] };
 
   if (inp === 'back to menu' || inp === 'menu' || inp === 'back')
     return { text: "What would you like help with today?", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us'] };

@@ -121,7 +121,7 @@ const BookAppointment = () => {
               </div>
               <div>
                 <p className="text-xs font-semibold text-gray-800">Delhi Branch</p>
-                <p className="text-xs text-gray-500 mt-0.5">Karol Bagh, New Delhi</p>
+                <p className="text-xs text-gray-500 mt-0.5">3A, 3B, 2nd Floor, 5/34, Pusa Road, Karol Bagh, New Delhi - 110005</p>
               </div>
             </div>
           </div>

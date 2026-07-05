@@ -364,13 +364,45 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Auto Loan</p>
-              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Drive Home Your Dream Car — Today.</h2>
-              <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
-                Why wait? With CS Smart Finserve, getting a car loan is faster than ever. We compare 50+ lenders to get you the lowest EMI with zero hidden charges.
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Next Car, Funded Simple & Fast</h2>
+              <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
+                Navigating car loans shouldn't keep you from the excitement of a new ride. We compare options from 50+ trusted lenders to secure the most competitive interest rates for you, with no hidden charges and full transparency at every step.
               </p>
-              <div className="space-y-4 mb-8">
-                {['Finance up to 100% of on-road price','Approval in as little as 2 hours','Flexible tenure from 1 to 7 years','Rates starting at just 7.5% p.a.'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: "var(--text-secondary)" }}>{point}</p></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  {
+                    title: '100% Funding Options',
+                    desc: 'Get up to 100% of the on-road price funded for select new and pre-owned cars.'
+                  },
+                  {
+                    title: 'Quick Approvals',
+                    desc: 'Fast digital processing allows you to secure approval in as little as 2 hours.'
+                  },
+                  {
+                    title: 'Flexible Repayments',
+                    desc: 'Tailor your loan tenure from 1 to 7 years to align with your personal savings plan.'
+                  },
+                  {
+                    title: 'Honest Interest Rates',
+                    desc: 'Enjoy transparency with competitive interest rates starting at just 7.5% p.a.'
+                  }
+                ].map((point, i) => (
+                  <div 
+                    key={i} 
+                    className="p-4 rounded-2xl border transition-all duration-300 hover:shadow-md hover:scale-[1.02] flex flex-col justify-between"
+                    style={{ 
+                      background: 'var(--bg-card)', 
+                      borderColor: 'var(--border)' 
+                    }}
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <CheckIcon />
+                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
+                      </div>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{point.desc}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
               <Link to="/auto-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
@@ -403,13 +435,45 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="order-1 lg:order-2">
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Home Loan</p>
-              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Dream Home Is One Step Away.</h2>
-              <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
-                Stop paying rent and start building equity. Our home loan experts guide you through every step — from eligibility to disbursement — making the process smooth and stress-free.
+              <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Step Into Your Own Home With Confidence</h2>
+              <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
+                Buying a home is one of life’s most meaningful steps, and we’re here to help you get the keys. From calculating your maximum loan eligibility to final disbursement, our experienced advisors handle the heavy lifting so you can focus on moving in.
               </p>
-              <div className="space-y-4 mb-8">
-                {['Flexible financing limits based on your requirements','Customised tenure for easy EMIs','Balance transfer with top-up facility','Tax benefits under Section 80C & 24B'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: "var(--text-secondary)" }}>{point}</p></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  {
+                    title: 'Customized Limits',
+                    desc: 'Access funding limits specifically tailored to match your profile and requirements.'
+                  },
+                  {
+                    title: 'Structured Tenures',
+                    desc: 'Plan for the long-term with repayment schedules customized for comfortable monthly EMIs.'
+                  },
+                  {
+                    title: 'Balance Transfers',
+                    desc: 'Easily transition your existing home loan at lower rates and get a top-up facility.'
+                  },
+                  {
+                    title: 'Tax Planning Support',
+                    desc: 'Maximize your annual savings with full support on claims under Section 80C and 24B.'
+                  }
+                ].map((point, i) => (
+                  <div 
+                    key={i} 
+                    className="p-4 rounded-2xl border transition-all duration-300 hover:shadow-md hover:scale-[1.02] flex flex-col justify-between"
+                    style={{ 
+                      background: 'var(--bg-card)', 
+                      borderColor: 'var(--border)' 
+                    }}
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <CheckIcon />
+                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
+                      </div>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{point.desc}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
               <Link to="/home-loan" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">

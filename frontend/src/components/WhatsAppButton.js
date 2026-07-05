@@ -29,8 +29,8 @@ Thank you!`
   // Use api.whatsapp.com for desktop (opens WhatsApp Web)
   // Use wa.me for mobile (opens WhatsApp App)
   const whatsappUrl = isMobile 
-    ? `https://wa.me/919267953513?text=${message}`
-    : `https://web.whatsapp.com/send?phone=919267953513&text=${message}`;
+    ? `https://wa.me/917838825521?text=${message}`
+    : `https://web.whatsapp.com/send?phone=917838825521&text=${message}`;
 
   return (
     <motion.a

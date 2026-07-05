@@ -110,8 +110,8 @@ const Footer = () => {
                 <FaEnvelope className="mt-1 mr-3 text-sky-400" />
                 <div>
                   <p className="text-gray-400">Email</p>
-                  <a href="mailto:kartikpundir231@gmail.com" className="text-white hover:text-sky-400">
-                    kartikpundir231@gmail.com
+                  <a href="mailto:krishan.pal1986@gmail.com" className="text-white hover:text-sky-400">
+                    krishan.pal1986@gmail.com
                   </a>
                 </div>
               </li>
@@ -119,8 +119,8 @@ const Footer = () => {
                 <FaPhone className="mt-1 mr-3 text-sky-400" />
                 <div>
                   <p className="text-gray-400">Phone / WhatsApp</p>
-                  <a href="https://wa.me/919267953513" className="text-white hover:text-sky-400">
-                    +91 92679 53513
+                  <a href="https://wa.me/917838825521" className="text-white hover:text-sky-400">
+                    +91 78388 25521
                   </a>
                 </div>
               </li>
@@ -134,7 +134,10 @@ const Footer = () => {
                   <p className="text-white text-sm mb-3">2546, 2nd Floor, Opp: Sagar Cinema<br/>Main Road, Sector-16, Faridabad, HR - 121002</p>
 
                   <p className="text-gray-400 font-semibold mb-1">Delhi Branch</p>
-                  <p className="text-white text-sm">Karol Bagh, New Delhi</p>
+                  <p className="text-white text-sm">
+                    3A, 3B, 2nd Floor, 5/34, Pusa Road,<br/>
+                    Karol Bagh, New Delhi - 110005
+                  </p>
                 </div>
               </li>
             </ul>

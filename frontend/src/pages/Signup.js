@@ -103,8 +103,9 @@ const SignUp = () => {
   };
 
   const handleGoogleSignUp = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
-    window.location.href = `${apiUrl}/api/auth/google`;
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
+    const cleanApiUrl = apiUrl.endsWith('/api') ? apiUrl : `${apiUrl}/api`;
+    window.location.href = `${cleanApiUrl}/auth/google`;
   };
 
   return (

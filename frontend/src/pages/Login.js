@@ -43,10 +43,13 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
-    const cleanApiUrl = apiUrl.endsWith('/api') ? apiUrl : `${apiUrl}/api`;
-    window.location.href = `${cleanApiUrl}/auth/google`;
+    const apiUrl = (process.env.REACT_APP_API_URL || 'http://localhost:5001/api').trim();
+    const baseApiUrl = apiUrl.replace(/\/+$/, ''); // remove trailing slash
+    const cleanApiUrl = baseApiUrl.endsWith('/api') ? baseApiUrl : `${baseApiUrl}/api`;
+    const finalApiUrl = cleanApiUrl.replace(/\/api\/api$/, '/api'); // avoid duplicate /api/api
+    window.location.href = `${finalApiUrl}/auth/google`;
   };
+
 
   return (
     <div className="min-h-screen flex" style={{ background: isDark ? '#111111' : '#f8f9fa', paddingTop: '80px' }}>

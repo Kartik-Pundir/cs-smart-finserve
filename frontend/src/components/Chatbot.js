@@ -1,80 +1,334 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaTimes, FaPaperPlane, FaHeadset, FaComments, FaChevronDown } from 'react-icons/fa';
+import { FaTimes, FaPaperPlane, FaHeadset, FaComments, FaChevronDown, FaFileAlt, FaCheckCircle, FaChartLine, FaShieldAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ACCENT = '#c0392b';
 
-/* ── Bot knowledge base (unchanged logic) ── */
+/* ── Extended Intent Knowledge Base ── */
+const INTENTS = [
+  {
+    id: 'greetings',
+    keywords: ['hi', 'hello', 'hey', 'greetings', 'namaste', 'morning', 'afternoon', 'evening', 'yo', 'halo', 'hlo'],
+    phrases: ['good morning', 'good afternoon', 'good evening', 'howdy'],
+    response: {
+      text: "Hello! 😊 Welcome to *CS Smart Finserve*.\n\nI am your AI financial assistant. How can I help you with your loans, insurance, or interest rates today?",
+      quickReplies: ['Home Loan', 'Car Loan', 'Check Rates', 'Contact Us']
+    }
+  },
+  {
+    id: 'goodbyes',
+    keywords: ['bye', 'goodbye', 'seeya', 'exit', 'quit', 'stop', 'bye-bye', 'tata', 'close'],
+    phrases: ['see you later', 'have a good day', 'talk to you later'],
+    response: {
+      text: "Goodbye! 👋 Thank you for chatting with CS Smart Finserve. Have a wonderful day, and feel free to reach back out if you need anything else!",
+      quickReplies: ['Back to Menu']
+    }
+  },
+  {
+    id: 'thanks',
+    keywords: ['thank', 'thanks', 'thx', 'grateful', 'appreciate', 'helpful', 'thankyou'],
+    phrases: ['thank you', 'thank you so much', 'thanks a lot'],
+    response: {
+      text: "You're very welcome! 😊 It is my pleasure to assist you. Let me know if you have any other questions about our loan services or interest rates.",
+      quickReplies: ['Check Rates', 'Eligibility', 'Back to Menu']
+    }
+  },
+  {
+    id: 'welcome',
+    keywords: ['welcome', 'mention', 'pleasure', 'problem', 'no worries', 'anytime'],
+    phrases: ['you\'re welcome', 'my pleasure', 'no problem', 'no worries', 'don\'t mention it'],
+    response: {
+      text: "Indeed! 😊 We strive to provide the best financial guidance. What can we look into next?",
+      quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan']
+    }
+  },
+  {
+    id: 'how_are_you',
+    keywords: ['how', 'doing', 'going', 'up', 'status', 'fine', 'good', 'well'],
+    phrases: ['how are you', 'how is it going', 'how are you doing', 'what is up', 'whats up'],
+    response: {
+      text: "I'm doing great, thank you for asking! 🤖 Ready to help you calculate your EMI, check loan interest rates, or find the best insurance coverage. How are you doing today?",
+      quickReplies: ['Home Loan', 'Check Rates', 'Calculate EMI']
+    }
+  },
+  {
+    id: 'sorry_apology',
+    keywords: ['sorry', 'apologize', 'apologies', 'bad', 'oops', 'mistake'],
+    phrases: ['my bad', 'i am sorry'],
+    response: {
+      text: "No need to apologize at all! 😊 I am here to help you. Let's start fresh. What financial services are you interested in?",
+      quickReplies: ['Home Loan', 'Check Rates', 'Contact Us']
+    }
+  },
+  {
+    id: 'home_loan',
+    keywords: ['home', 'house', 'property', 'flat', 'construction', 'plot', 'housing', 'mortgage', 'villa', 'apartments', 'homes', 'houses'],
+    phrases: ['home loan', 'house loan', 'property loan', 'buy house', 'buy home'],
+    response: {
+      text: "🏠 *Home Loan*\n\nDreaming of your own home? We make it easy:\n\n• *Interest Rates*: From 8.5% p.a. onwards\n• *Flexible Tenure*: Up to 30 years\n• *Loan limits*: Based on eligibility & property value\n• *Processing*: Quick sanction in 48 hours\n• *Minimal Documentation*: Simple and hassle-free",
+      quickReplies: ['Apply Now', 'Calculate EMI', 'Check Eligibility', 'Contact Us']
+    }
+  },
+  {
+    id: 'car_loan',
+    keywords: ['car', 'auto', 'vehicle', 'four-wheeler', 'sedan', 'suv', 'new car', 'cars', 'vehicles'],
+    phrases: ['car loan', 'auto loan', 'vehicle loan', 'new car loan', 'buy car'],
+    response: {
+      text: "🚗 *Car Loan*\n\nGet behind the wheel of your dream car:\n\n• *Interest Rates*: From 8.7% p.a. onwards\n• *Finance*: Up to 100% on-road price\n• *Tenure*: Flexible options up to 7 years\n• *Processing*: Approval in 24 hours\n• *Prepayment*: Zero foreclosure options available",
+      quickReplies: ['Apply Now', 'Used Car Loan', 'Calculate EMI', 'Contact Us']
+    }
+  },
+  {
+    id: 'used_car_loan',
+    keywords: ['used', 'pre-owned', 'second-hand', 'preowned', 'secondhand', 'old car'],
+    phrases: ['used car loan', 'second hand car', 'pre owned car'],
+    response: {
+      text: "🚙 *Used Car Loan*\n\nFinance a pre-owned car with ease:\n\n• *Interest Rates*: From 9.5% p.a. onwards\n• *Finance Limit*: Up to 80% of the car's current valuation\n• *Repayment*: Tenures up to 5 years\n• *Processing*: Swift valuation and disbursal",
+      quickReplies: ['Apply Now', 'Car Loan', 'Check Eligibility', 'Contact Us']
+    }
+  },
+  {
+    id: 'personal_loan',
+    keywords: ['personal', 'private', 'cash', 'emergency', 'unsecured', 'travel', 'wedding', 'medical', 'personel'],
+    phrases: ['personal loan', 'cash loan', 'instant loan', 'need money'],
+    response: {
+      text: "💰 *Personal Loan*\n\nQuick cash for any personal requirement:\n\n• *Interest Rates*: From 10.5% p.a. onwards\n• *Collateral*: No security or collateral needed\n• *Disbursal*: Instant approval and fast payout\n• *Tenure*: Flexible repayment options (1 to 5 years)\n• *Purpose*: Medical emergencies, travel, weddings, education, etc.",
+      quickReplies: ['Apply Now', 'Check Eligibility', 'Calculate EMI', 'Contact Us']
+    }
+  },
+  {
+    id: 'business_loan',
+    keywords: ['business', 'company', 'startup', 'shop', 'msme', 'commercial', 'machinery', 'working capital', 'firm', 'businesses', 'companies'],
+    phrases: ['business loan', 'startup loan', 'company loan', 'grow business'],
+    response: {
+      text: "🏢 *Business Loan*\n\nFuel the growth of your enterprise:\n\n• *Interest Rates*: From 11.0% p.a. onwards\n• *Collateral*: Options for collateral-free MSME loans\n• *Usage*: Working capital, expansion, equipment purchase\n• *Repayment*: Flexible structured repayments\n• *Processing*: Fast track reviews for running businesses",
+      quickReplies: ['Apply Now', 'Documents Required', 'Calculate EMI', 'Contact Us']
+    }
+  },
+  {
+    id: 'loan_against_property',
+    keywords: ['lap', 'against', 'residential', 'commercial property', 'land'],
+    phrases: ['loan against property', 'property loan', 'mortgage loan'],
+    response: {
+      text: "🏡 *Loan Against Property (LAP)*\n\nUnlock the value of your property for major expenses:\n\n• *Interest Rates*: From 9.0% p.a. onwards\n• *High Loan Limit*: Get up to 60-70% of property market value\n• *Usage*: Higher education, business expansion, debt consolidation\n• *Tenure*: Repayment periods up to 15 years",
+      quickReplies: ['Apply Now', 'Check Eligibility', 'Contact Us']
+    }
+  },
+  {
+    id: 'insurance',
+    keywords: ['insurance', 'insure', 'policy', 'premium', 'health', 'life', 'medical insurance', 'term life', 'motor insurance', 'insurances', 'policies'],
+    phrases: ['get insurance', 'life insurance', 'health insurance', 'car insurance', 'policy quote'],
+    response: {
+      text: "🛡️ *General & Life Insurance*\n\nProtect what matters most. We match you with leading insurance policies:\n\n• *Health Insurance*: Cashless hospitalisation, critical illness riders\n• *Life & Term Insurance*: Secure your family's financial future\n• *Motor Insurance*: Third-party and comprehensive covers for cars/bikes\n• *Home & Travel Insurance*: Secure your home or hassle-free international travel",
+      quickReplies: ['Get Quote', 'Contact Us', 'Back to Menu']
+    }
+  },
+  {
+    id: 'check_rates',
+    keywords: ['rate', 'rates', 'interest', 'percentage', 'charges', 'roi', 'percent', 'cost', 'fee', 'fees'],
+    phrases: ['interest rates', 'current rates', 'rate sheet', 'loan cost', 'how much interest'],
+    response: {
+      text: "💹 *Current Loan Interest Rates*\n\nHere are our starting interest rates:\n\n🏠 *Home Loan* — 8.50% p.a. onwards\n🚗 *Car Loan* — 8.70% p.a. onwards\n🚙 *Used Car Loan* — 9.50% p.a. onwards\n💰 *Personal Loan* — 10.50% p.a. onwards\n🏢 *Business Loan* — 11.00% p.a. onwards\n🏡 *Loan Against Property* — 9.00% p.a. onwards\n\n*Note: Final rates depend on your CIBIL score, income, and overall profile.*",
+      quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan']
+    }
+  },
+  {
+    id: 'check_eligibility',
+    keywords: ['eligibility', 'eligible', 'qualify', 'qualified', 'salary', 'income', 'age', 'criteria'],
+    phrases: ['am i eligible', 'check eligibility', 'minimum salary', 'age limit'],
+    response: {
+      text: "✅ *Basic Eligibility Criteria*\n\nTo qualify for a loan, you must generally meet the following:\n\n• *Age*: 21 to 65 years\n• *Income*: Min monthly net salary of ₹25,000 (varies by city & loan type)\n• *Employment*: Salaried (min 1 yr experience) or Self-Employed (min 2 yrs business continuity)\n• *CIBIL Credit Score*: 650+ preferred (750+ gets the best rates)\n• *Citizenship*: Resident Indian citizen",
+      quickReplies: ['Check Rates', 'CIBIL Score', 'Documents Required', 'Contact Us']
+    }
+  },
+  {
+    id: 'documents_required',
+    keywords: ['document', 'documents', 'required', 'papers', 'proof', 'aadhaar', 'pan', 'itr', 'salary slip', 'bank statement', 'photos', 'proofs'],
+    phrases: ['documents required', 'papers needed', 'what documents', 'what papers'],
+    response: {
+      text: "📄 *Required Documents Checklist*\n\nKeep these documents ready for a fast-track application:\n\n• *KYC Proofs*: Aadhaar Card, PAN Card, and Voter ID / Passport\n• *Income Proof (Salaried)*: Last 3 months' salary slips, Form 16, and 6 months' bank statements\n• *Income Proof (Self-Employed)*: Last 2-3 years' IT Returns with Balance Sheet, and 6-12 months' business bank statements\n• *Address Proof*: Utility bills, rent agreement, or passport\n• *Photos*: 2 passport-size photographs",
+      quickReplies: ['Apply Now', 'Contact Us', 'Back to Menu']
+    }
+  },
+  {
+    id: 'calculate_emi',
+    keywords: ['emi', 'calculator', 'calculate', 'monthly', 'installment', 'payment', 'emis', 'calculation'],
+    phrases: ['calculate emi', 'emi calculator', 'monthly payment', 'how much emi'],
+    response: {
+      text: "🧮 *EMI Calculation & Planning*\n\nWe recommend using our online *EMI Calculator* to plan your finances:\n\n1. Go to the *EMI Calculator* page in the menu.\n2. Input your desired Loan Amount, Interest Rate, and Tenure.\n3. View your instant monthly breakups, interest splits, and amortization schedule.",
+      quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Check Rates']
+    }
+  },
+  {
+    id: 'apply_now',
+    keywords: ['apply', 'applying', 'online application', 'start application', 'process', 'submit', 'applies'],
+    phrases: ['apply now', 'how to apply', 'start loan', 'apply loan'],
+    response: {
+      text: "🎯 *Ready to Start Your Application?*\n\nYou can easily apply through our platform:\n\n1. Register or Log in to your *CS Smart Finserve* account.\n2. Go to the dashboard and click *New Application*.\n3. Choose your loan type, fill details, and upload your documents.\n\n*Need live assistance?* Call our loan expert: *+91 78388 25521*",
+      quickReplies: ['Login / Signup', 'Home Loan', 'Personal Loan', 'Contact Us']
+    }
+  },
+  {
+    id: 'contact_us',
+    keywords: ['contact', 'call', 'phone', 'mobile', 'email', 'support', 'helpdesk', 'office', 'gurgaon', 'gurugram', 'address', 'location', 'number', 'mail'],
+    phrases: ['contact us', 'phone number', 'email address', 'where are you located', 'call support'],
+    response: {
+      text: "📞 *Contact Support & Location Details*\n\nWe are here to assist you!\n\n• *Phone Support*: +91 78388 25521\n• *Email*: krishan.pal1986@gmail.com\n• *Head Office*: 102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon, Haryana 122001\n• *Working Hours*: Monday to Saturday: 9:00 AM – 6:00 PM (Sunday Closed)",
+      quickReplies: ['Book Appointment', 'Back to Menu']
+    }
+  },
+  {
+    id: 'timings_working_hours',
+    keywords: ['hours', 'timings', 'timing', 'time', 'open', 'schedule', 'sunday', 'saturday', 'close', 'days'],
+    phrases: ['working hours', 'office timings', 'are you open', 'when do you close'],
+    response: {
+      text: "⏰ *Office & Support Timings*\n\n• *Monday to Saturday*: 9:00 AM – 6:00 PM\n• *Sunday*: Closed\n\nFor urgent loan assistance during off-hours, you can leave a request on our contact page, and we will get back to you first thing on Monday morning!",
+      quickReplies: ['Contact Us', 'Book Appointment', 'Back to Menu']
+    }
+  },
+  {
+    id: 'book_appointment',
+    keywords: ['appointment', 'consultation', 'consult', 'meet', 'schedule', 'book', 'slot', 'appointments'],
+    phrases: ['book appointment', 'schedule call', 'meet manager'],
+    response: {
+      text: "📅 *Book a Free Consultation*\n\nGet a 1-on-1 session with our loan advisor:\n\n1. Visit the *Book Appointment* tab in our menu.\n2. Choose your preferred date, time slot, and loan category.\n3. Our executive will call you to confirm your schedule.\n\n*Or call immediately*: +91 78388 25521",
+      quickReplies: ['Contact Us', 'Back to Menu']
+    }
+  },
+  {
+    id: 'cibil_score',
+    keywords: ['cibil', 'credit', 'score', 'report', 'history', 'scores', 'cibils'],
+    phrases: ['cibil score', 'check cibil', 'credit score rating', 'what is cibil'],
+    response: {
+      text: "📊 *CIBIL / Credit Score Check*\n\nYour credit score represents your creditworthiness:\n\n• *Excellent*: 750+ (Fast approval & lowest interest rates)\n• *Good*: 650–749 (Smooth approvals, standard rates)\n• *Fair*: 550–649 (May require collateral or co-applicant)\n\nYou can perform a CIBIL check on our *Cibil Check* page!",
+      quickReplies: ['Check Eligibility', 'Check Rates', 'Back to Menu']
+    }
+  },
+  {
+    id: 'track_application',
+    keywords: ['track', 'status', 'progress', 'tracking', 'applications'],
+    phrases: ['track application', 'check loan status', 'where is my application'],
+    response: {
+      text: "🔍 *Track Application Status*\n\nTo view the real-time progress of your applications:\n\n1. Log in to your account.\n2. Access the *Dashboard*.\n3. Under \"My Applications\", you'll see steps (Documents Uploaded $\rightarrow$ Verification $\rightarrow$ Approved $\rightarrow$ Disbursed) and live updates.",
+      quickReplies: ['Login / Signup', 'Contact Us', 'Back to Menu']
+    }
+  },
+  {
+    id: 'login_signup_help',
+    keywords: ['login', 'signup', 'register', 'sign-in', 'signin', 'sign-up', 'password', 'reset', 'account', 'accounts'],
+    phrases: ['how to login', 'cannot login', 'sign up account', 'create account'],
+    response: {
+      text: "🔐 *Account & Access Support*\n\n• *Login / Sign Up*: Go to the *Log In* or *Sign Up* links in the top header.\n• *Errors*: If you encounter a login issue, clear browser cache or try private mode.\n• *Forgotten Passwords*: Click \"Forgot Password?\" on the login page to send a reset link to your registered email.",
+      quickReplies: ['Login / Signup', 'Contact Us', 'Back to Menu']
+    }
+  },
+  {
+    id: 'fallback_menu',
+    keywords: ['menu', 'back to menu', 'back', 'help', 'options', 'start over'],
+    phrases: ['go back', 'main menu', 'show options'],
+    response: {
+      text: "What would you like help with today?",
+      quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us']
+    }
+  }
+];
+
 const getBotResponse = (userInput) => {
   const inp = userInput.toLowerCase().trim();
 
-  if (inp === 'home loan' || (inp.includes('home') && inp.includes('loan')))
-    return { text: "🏠 *Home Loan*\n\n• Flexible loan limits\n• Interest from 8.5% p.a.\n• Customised tenure\n• Minimal documentation\n• Quick sanction in 48 hrs", quickReplies: ['Apply Now', 'Calculate EMI', 'Check Eligibility', 'Contact Us'] };
+  if (!inp) {
+    return {
+      text: "I didn't catch that. Could you please ask something about loans, interest rates, or insurance?",
+      quickReplies: ['Home Loan', 'Check Rates', 'Contact Us', 'Back to Menu']
+    };
+  }
 
-  if (inp === 'car loan' || inp === 'auto loan' || ((inp.includes('car') || inp.includes('auto')) && inp.includes('loan') && !inp.includes('used')))
-    return { text: "🚗 *Car Loan*\n\n• New & used cars\n• Interest from 8.7% p.a.\n• Up to 100% on-road price\n• Approval in 24 hours\n• Flexible tenure", quickReplies: ['Apply Now', 'Check Rates', 'Calculate EMI', 'Contact Us'] };
+  // 1. Check for exact phrase matches first
+  for (const intent of INTENTS) {
+    if (intent.phrases) {
+      for (const phrase of intent.phrases) {
+        if (inp.includes(phrase)) {
+          return intent.response;
+        }
+      }
+    }
+  }
 
-  if (inp === 'used car loan' || (inp.includes('used') && inp.includes('car')))
-    return { text: "🚙 *Used Car Loan*\n\n• Finance pre-owned cars\n• Interest from 9.5% p.a.\n• Up to 80% of car value\n• Quick processing", quickReplies: ['Apply Now', 'Check Eligibility', 'Contact Us'] };
+  // 2. Score intents based on keyword hits
+  let bestIntent = null;
+  let highestScore = 0;
 
-  if (inp === 'personal loan' || (inp.includes('personal') && inp.includes('loan')))
-    return { text: "💰 *Personal Loan*\n\n• Flexible loan limits\n• Interest from 10.5% p.a.\n• No collateral needed\n• Instant approval\n• Flexible tenure", quickReplies: ['Apply Now', 'Check Eligibility', 'Calculate EMI', 'Contact Us'] };
+  // Split input into words and remove symbols
+  const words = inp.replace(/[^\w\s]/g, '').split(/\s+/);
 
-  if (inp === 'business loan' || (inp.includes('business') && inp.includes('loan')))
-    return { text: "🏢 *Business Loan*\n\n• Flexible loan limits\n• Rates from 11% p.a.\n• Flexible repayment\n• Quick processing\n• Minimal docs", quickReplies: ['Apply Now', 'Documents Required', 'Calculate EMI', 'Contact Us'] };
+  for (const intent of INTENTS) {
+    let score = 0;
+    
+    // Check keyword hits
+    for (const keyword of intent.keywords) {
+      if (words.includes(keyword)) {
+        score += 2; // Exact word match
+      } else if (inp.includes(keyword)) {
+        score += 1; // Substring match
+      }
+    }
 
-  if (inp === 'insurance' || inp.includes('insurance'))
-    return { text: "🛡️ *General Insurance*\n\n• Health Insurance\n• Life Insurance\n• Vehicle Insurance\n• Home Insurance\n• Travel Insurance", quickReplies: ['Get Quote', 'Contact Us', 'Back to Menu'] };
+    if (score > highestScore) {
+      highestScore = score;
+      bestIntent = intent;
+    }
+  }
 
-  if (inp === 'check rates' || inp.includes('rate') || inp.includes('interest'))
-    return { text: "💹 *Current Interest Rates*\n\n🏠 Home Loan — 8.5% onwards\n🚗 Car Loan — 8.7% onwards\n🚙 Used Car — 9.5% onwards\n💰 Personal — 10.5% onwards\n🏢 Business — 11% onwards\n\n*Subject to eligibility", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Contact Us'] };
+  // 3. Return the best intent if score is high enough
+  if (bestIntent && highestScore >= 2) {
+    return bestIntent.response;
+  }
 
-  if (inp === 'check eligibility' || inp.includes('eligib') || inp.includes('qualify'))
-    return { text: "✅ *Basic Eligibility*\n\n• Age: 21–65 years\n• Income: Min ₹25,000/month\n• Employment: Salaried / Self-employed\n• CIBIL: 650+ preferred\n• Indian citizen", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
+  // 4. Default fallback: Search for nearby topics based on single keyword matches, or generic menu
+  const matches = [];
+  for (const intent of INTENTS) {
+    // Skip greetings and gestures for matches
+    if (['greetings', 'goodbyes', 'thanks', 'welcome', 'how_are_you', 'sorry_apology', 'fallback_menu'].includes(intent.id)) continue;
+    
+    for (const keyword of intent.keywords) {
+      if (inp.includes(keyword)) {
+        matches.push(intent);
+        break;
+      }
+    }
+  }
 
-  if (inp === 'documents required' || inp.includes('document') || inp.includes('papers'))
-    return { text: "📄 *Documents Required*\n\n• Aadhar / PAN card\n• Address proof\n• Salary slips / ITR (3 yrs)\n• Bank statements (6 months)\n• Passport size photos", quickReplies: ['Apply Now', 'Contact Us', 'Back to Menu'] };
+  if (matches.length > 0) {
+    // Construct response with closest matches
+    const topics = matches.map(m => m.id.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()));
+    return {
+      text: `I noticed you might be asking about *${topics.slice(0, 2).join(' or ')}*.\n\nCould you please clarify your question, or choose one of these options?`,
+      quickReplies: matches.slice(0, 3).map(m => m.id.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))
+    };
+  }
 
-  if (inp === 'calculate emi' || inp === 'emi calculator' || inp.includes('emi'))
-    return { text: "🧮 *EMI Calculator*\n\nVisit our EMI Calculator to plan your finances! Calculate monthly EMI for any loan amount, tenure and rate.", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
-
-  if (inp === 'apply now' || inp.includes('apply'))
-    return { text: "🎯 *Ready to Apply?*\n\nYou can:\n1. Fill our online form\n2. Upload documents\n3. Get instant approval\n\nOr call us: *+91 78388 25521*", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan'] };
-
-  if (inp === 'contact us' || inp === 'contact' || inp.includes('contact') || inp.includes('call') || inp.includes('phone'))
-    return { text: "📞 *Contact Us*\n\n📱 +91 78388 25521\n📧 krishan.pal1986@gmail.com\n📍 102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon\n\n⏰ Mon–Sat: 9 AM – 6 PM", quickReplies: ['Book Appointment', 'Back to Menu'] };
-
-  if (inp === 'book appointment' || inp.includes('appointment'))
-    return { text: "📅 *Book a Free Consultation*\n\nOur loan experts are available Mon–Sat, 9 AM – 6 PM.\n\nCall: +91 78388 25521\nOr book online from the website.", quickReplies: ['Contact Us', 'Back to Menu'] };
-
-  if (inp === 'cibil score' || inp.includes('cibil') || inp.includes('credit score'))
-    return { text: "📊 *CIBIL Score*\n\nA score of 750+ gets you:\n✓ Lower interest rates\n✓ Faster approval\n✓ Higher loan amounts\n\nCheck yours on our website!", quickReplies: ['Check Eligibility', 'Contact Us', 'Back to Menu'] };
-
-  if (inp === 'get quote' || inp === 'compare plans')
-    return { text: "📋 *Get an Insurance Quote*\n\nCall us: +91 78388 25521\nOr email: krishan.pal1986@gmail.com\n\nOur experts compare plans and get you the best coverage.", quickReplies: ['Contact Us', 'Back to Menu'] };
-
-  if (inp === 'back to menu' || inp === 'menu' || inp === 'back')
-    return { text: "What would you like help with today?", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us'] };
-
-  if (inp.includes('hi') || inp.includes('hello') || inp.includes('hey') || inp.includes('namaste'))
-    return { text: "Hello! 😊 Welcome to CS Smart Finserve.\n\nI'm here to help you with all your loan and finance needs. What are you looking for?", quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us'] };
-
-  if (inp.includes('thank'))
-    return { text: "You're welcome! 😊\n\nIs there anything else I can help you with?", quickReplies: ['Home Loan', 'Car Loan', 'Contact Us', 'Back to Menu'] };
-
+  // Generic menu fallback
   return {
-    text: "I can help you with:\n\n🏠 Home Loans  🚗 Car Loans\n💰 Personal Loans  🏢 Business Loans\n🛡️ Insurance  📊 CIBIL Check\n🧮 EMI Calculator  📞 Contact\n\nWhat would you like to know?",
-    quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Business Loan', 'Insurance', 'Contact Us']
+    text: "I'm not sure I fully understand that question. 🤖\n\nI can help you with:\n\n🏠 *Home Loans* · 🚗 *Car Loans*\n💰 *Personal Loans* · 🏢 *Business Loans*\n🛡️ *General Insurance* · 💹 *Interest Rates*\n📋 *Basic Eligibility* · 📄 *Required Documents*\n\nWhat would you like to know?",
+    quickReplies: ['Home Loan', 'Car Loan', 'Personal Loan', 'Check Rates', 'Contact Us']
   };
 };
 
-/* ── Format bot text with *bold* ── */
+/* ── Format bot text with bold formatting ── */
 const formatText = (text) => {
   return text.split('\n').map((line, i) => {
-    const parts = line.split(/\*([^*]+)\*/g);
+    // Split by either ** or * to allow formatting
+    const parts = line.split(/(\*\*?[^*]+\*\*?)/g);
     return (
       <span key={i}>
-        {parts.map((p, j) => j % 2 === 1 ? <strong key={j}>{p}</strong> : p)}
+        {parts.map((p, j) => {
+          if (p.startsWith('**') && p.endsWith('**')) {
+            return <strong key={j}>{p.slice(2, -2)}</strong>;
+          } else if (p.startsWith('*') && p.endsWith('*')) {
+            return <strong key={j}>{p.slice(1, -1)}</strong>;
+          }
+          return p;
+        })}
         {i < text.split('\n').length - 1 && <br />}
       </span>
     );
@@ -129,7 +383,10 @@ const Chatbot = () => {
     setIsTyping(true);
     const delay = 600 + Math.min(text.length * 15, 800);
     setTimeout(() => {
-      const r = getBotResponse(text);
+      // Map display name to intent parameter
+      let query = text;
+      if (text === 'Login / Signup') query = 'login signup help';
+      const r = getBotResponse(query);
       setIsTyping(false);
       addBot(r.text, r.quickReplies);
     }, delay);
@@ -141,9 +398,36 @@ const Chatbot = () => {
         @keyframes chatbotBounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
         @keyframes chatbotPulse  { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.35)} }
         @keyframes chatbotRing   { 0%,100%{transform:rotate(0)} 10%,30%,50%,70%{transform:rotate(-8deg)} 20%,40%,60%,80%{transform:rotate(8deg)} }
+        
+        .cs-chatbot-window {
+          width: 380px;
+          height: 600px;
+          max-height: calc(100vh - 100px);
+        }
+        @media (max-width: 480px) {
+          .cs-chatbot-container {
+            bottom: 0 !important;
+            right: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            pointer-events: none;
+          }
+          .cs-chatbot-container > * {
+            pointer-events: auto;
+          }
+          .cs-chatbot-window {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
+            border-radius: 0 !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            position: fixed !important;
+          }
+        }
       `}</style>
 
-      <div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 99999 }}>
+      <div className="cs-chatbot-container" style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 99999 }}>
 
         {/* ── Floating button ── */}
         <AnimatePresence>
@@ -178,7 +462,8 @@ const Chatbot = () => {
               initial={{ opacity: 0, scale: 0.95, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 380, damping: 30 } }}
               exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.05 } }}
-              style={{ width: 380, height: 600, background: 'white', borderRadius: 24, boxShadow: '0 24px 80px rgba(0,0,0,0.22)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+              className="cs-chatbot-window"
+              style={{ background: 'white', borderRadius: 24, boxShadow: '0 24px 80px rgba(0,0,0,0.22)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
               {/* Header */}
               <div style={{ background: `linear-gradient(135deg, #1a0a0a 0%, ${ACCENT} 100%)`, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>

@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { FaFileAlt, FaCheckCircle, FaChartLine, FaShieldAlt } from 'react-icons/fa';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -55,38 +56,115 @@ const Login = () => {
     <div className="min-h-screen flex" style={{ background: isDark ? '#111111' : '#f8f9fa', paddingTop: '80px' }}>
       
       {/* Left Side - Dark with gradient background */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden"
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col justify-between p-12 text-white"
         style={{ 
-          background: 'linear-gradient(135deg, rgba(26, 26, 46, 1) 0%, rgba(45, 27, 46, 1) 35%, rgba(61, 26, 26, 1) 70%, rgba(192, 57, 43, 0.8) 100%)'
+          background: 'linear-gradient(135deg, rgba(17, 17, 28, 1) 0%, rgba(28, 17, 28, 1) 35%, rgba(46, 20, 20, 1) 70%, rgba(192, 57, 43, 0.95) 100%)'
         }}>
         
-        <div className="relative z-10 flex flex-col justify-center items-center p-10 text-white w-full">
-          
-          {/* Logo and Company Name */}
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold bg-white text-gray-900">
+        {/* Animated background glows */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full filter blur-[120px] opacity-30 pointer-events-none" 
+          style={{ background: 'radial-gradient(circle, rgba(192, 57, 43, 0.8) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full filter blur-[120px] opacity-40 pointer-events-none" 
+          style={{ background: 'radial-gradient(circle, rgba(26, 26, 46, 1) 0%, transparent 70%)' }} />
+        <div className="absolute top-[30%] right-[10%] w-[40%] h-[40%] rounded-full filter blur-[100px] opacity-20 pointer-events-none" 
+          style={{ background: 'radial-gradient(circle, rgba(192, 57, 43, 0.5) 0%, transparent 70%)' }} />
+
+        {/* Logo and Company Name */}
+        <div className="relative z-10 flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl font-bold bg-white text-gray-900 shadow-lg shadow-black/10 transition-transform duration-300 group-hover:scale-105">
               CS
             </div>
-            <span className="text-base font-semibold">CS Smart Finserve</span>
-          </div>
+            <div>
+              <span className="text-lg font-bold tracking-tight block">CS Smart Finserve</span>
+              <span className="text-[10px] text-gray-400 font-medium tracking-widest uppercase">Smart Finance Solutions</span>
+            </div>
+          </Link>
+        </div>
 
+        {/* Center Content: Main Heading & Features Mock */}
+        <div className="relative z-10 my-auto flex flex-col items-center w-full">
           {/* Main Heading */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-3 leading-tight">
+          <div className="text-center mb-10 max-w-md">
+            <h1 className="text-4xl font-extrabold mb-4 leading-tight tracking-tight">
               Welcome Back!
             </h1>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
-              Sign in to access your dashboard, track applications, and manage your loans.
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Sign in to access your dashboard, track applications, and manage your loans with smart, real-time analytics.
             </p>
           </div>
 
-          {/* Illustration or decorative element */}
-          <div className="mt-8">
-            <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.2)" strokeWidth="2"/>
-              <circle cx="100" cy="100" r="60" stroke="rgba(255,255,255,0.3)" strokeWidth="2"/>
-              <circle cx="100" cy="100" r="40" fill="rgba(192, 57, 43, 0.3)"/>
-            </svg>
+          {/* Premium Glassmorphic Mock Card */}
+          <div className="w-full max-w-sm p-6 transition-all duration-500 hover:scale-[1.02] border"
+            style={{
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(20px)',
+              borderImage: 'linear-gradient(to bottom right, rgba(255,255,255,0.12), rgba(255,255,255,0.02)) 1',
+              borderRadius: '24px',
+              borderStyle: 'solid',
+              borderWidth: '1px',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+            }}>
+            
+            {/* Mock Header */}
+            <div className="flex justify-between items-center mb-6">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" /> Live Tracker
+              </span>
+              <span className="px-2 py-0.5 text-[9px] font-bold rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                Verified
+              </span>
+            </div>
+
+            {/* Application Mock */}
+            <div className="space-y-4">
+              <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                <div className="flex justify-between items-center text-xs font-semibold mb-2">
+                  <span className="flex items-center gap-2 text-white">
+                    <FaFileAlt className="text-red-400" /> Home Loan Status
+                  </span>
+                  <span className="text-emerald-400 flex items-center gap-1">
+                    <FaCheckCircle /> 80%
+                  </span>
+                </div>
+                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full transition-all duration-1000" style={{ width: '80%' }}></div>
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-gray-400 mt-2">
+                  <span>ID: #CS-89240</span>
+                  <span>Est. Approval: 24h</span>
+                </div>
+              </div>
+
+              {/* Stats Highlights */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+                  <div className="text-[9px] text-gray-400 uppercase font-bold tracking-wider flex items-center gap-1">
+                    <FaChartLine className="text-emerald-400" /> Best Rate
+                  </div>
+                  <div className="text-base font-bold text-white mt-1">
+                    8.40% <span className="text-[10px] font-normal text-emerald-400">p.a.</span>
+                  </div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+                  <div className="text-[9px] text-gray-400 uppercase font-bold tracking-wider flex items-center gap-1">
+                    <FaShieldAlt className="text-red-400" /> Security
+                  </div>
+                  <div className="text-base font-bold text-white mt-1">
+                    AES-256
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer info/details */}
+        <div className="relative z-10 flex justify-between items-center text-[10px] text-gray-400 border-t border-white/10 pt-6">
+          <span>© 2026 CS Smart Finserve</span>
+          <div className="flex gap-4">
+            <span className="hover:text-white transition-colors cursor-pointer">Privacy</span>
+            <span className="hover:text-white transition-colors cursor-pointer">Support</span>
           </div>
         </div>
       </div>

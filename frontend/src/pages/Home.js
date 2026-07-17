@@ -541,7 +541,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80" 
+                src="https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&q=80" 
                 alt="Insurance"
                 className="w-full h-full object-cover"
                 containerClassName="w-full h-full"

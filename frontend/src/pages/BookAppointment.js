@@ -113,7 +113,7 @@ const BookAppointment = () => {
             <div className="space-y-3">
               <div>
                 <p className="text-xs font-semibold text-gray-800">Gurugram</p>
-                <p className="text-xs text-gray-500 mt-0.5">Sco- 45, 2nd Floor, Vyapar Sadan, Sector-14, Gurgaon-122001</p>
+                <p className="text-xs text-gray-500 mt-0.5">Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</p>
               </div>
               <div>
                 <p className="text-xs font-semibold text-gray-800">Faridabad Branch</p>

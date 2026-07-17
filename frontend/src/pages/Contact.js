@@ -117,8 +117,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900 mb-1">Gurugram</h4>
-                      <p className="text-gray-500 text-sm">Sco- 45, 2nd Floor, Vyapar Sadan</p>
-                      <p className="text-gray-500 text-sm">Sector-14, Gurgaon, Haryana 122001</p>
+                      <p className="text-gray-500 text-sm">Sco 45, 2nd Floor, Vyapar Sadan</p>
+                      <p className="text-gray-500 text-sm">Sector 14, Gurgaon, Haryana 122001</p>
                       <p className="text-gray-500 text-sm mt-1">+91 78388 25521</p>
                     </div>
                   </div>
@@ -155,9 +155,9 @@ const Contact = () => {
               <div className="rounded-2xl overflow-hidden shadow-md h-56 bg-gray-100 flex items-center justify-center border border-gray-200">
                 <div className="text-center text-gray-400">
                   <FaMapMarkerAlt className="text-4xl mx-auto mb-2 text-accent" />
-                  <p className="text-sm font-medium">Sco- 45, Vyapar Sadan, Sector-14, Gurgaon</p>
+                  <p className="text-sm font-medium">Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</p>
                   <a
-                    href="https://maps.google.com/?q=Sco+45+Vyapar+Sadan+Sector+14+Gurgaon+122001"
+                    href="https://maps.google.com/?q=Sco+45+2nd+floor+vyapar+sadan+sector+14+gurgaon+haryana+122001"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block text-xs text-accent underline"

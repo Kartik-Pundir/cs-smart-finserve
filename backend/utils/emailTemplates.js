@@ -69,7 +69,7 @@ exports.callbackConfirmation = (name) => {
                   <table cellpadding="0" cellspacing="0">
                     <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
                     <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
-                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
+                    <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</td></tr>
                     <tr><td style="padding:4px 0;color:#374151;font-size:14px;">🕐 &nbsp;Mon – Sat, 9 AM – 7 PM</td></tr>
                   </table>
                 </td>
@@ -137,7 +137,7 @@ exports.appointmentConfirmation = (name, date, time) => {
                     <table cellpadding="0" cellspacing="0" width="100%">
                       <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📅 &nbsp;<strong>Date:</strong> &nbsp;${date}</td></tr>
                       <tr><td style="padding:6px 0;color:#374151;font-size:14px;">🕐 &nbsp;<strong>Time:</strong> &nbsp;${time}</td></tr>
-                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📍 &nbsp;<strong>Location:</strong> &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
+                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📍 &nbsp;<strong>Location:</strong> &nbsp;Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</td></tr>
                     </table>
                   </td></tr>
                 </table>
@@ -234,7 +234,7 @@ exports.applicationReceived = (name, serviceType) => {
                 <table cellpadding="0" cellspacing="0">
                   <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📱 &nbsp;<a href="https://wa.me/917838825521" style="color:#c0392b;text-decoration:none;">WhatsApp: +91 78388 25521</a></td></tr>
                   <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📧 &nbsp;<a href="mailto:krishan.pal1986@gmail.com" style="color:#c0392b;text-decoration:none;">krishan.pal1986@gmail.com</a></td></tr>
-                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
+                  <tr><td style="padding:4px 0;color:#374151;font-size:14px;">📍 &nbsp;Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</td></tr>
                 </table>
               </td>
             </tr>
@@ -292,7 +292,7 @@ exports.appointmentConfirmed = (name, date, time, service) => {
                       <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📅 &nbsp;<strong>Date:</strong> &nbsp;${date}</td></tr>
                       <tr><td style="padding:6px 0;color:#374151;font-size:14px;">🕐 &nbsp;<strong>Time:</strong> &nbsp;${time}</td></tr>
                       <tr><td style="padding:6px 0;color:#374151;font-size:14px;">🏦 &nbsp;<strong>Service:</strong> &nbsp;${service}</td></tr>
-                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📍 &nbsp;<strong>Location:</strong> &nbsp;102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon 122001</td></tr>
+                      <tr><td style="padding:6px 0;color:#374151;font-size:14px;">📍 &nbsp;<strong>Location:</strong> &nbsp;Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001</td></tr>
                     </table>
                   </td></tr>
                 </table>

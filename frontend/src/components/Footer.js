@@ -128,7 +128,7 @@ const Footer = () => {
                 <FaMapMarkerAlt className="mt-1 mr-3 text-sky-400 flex-shrink-0" />
                 <div>
                   <p className="text-gray-400 font-semibold mb-1">Gurugram</p>
-                  <p className="text-white text-sm mb-3">Sco- 45, 2nd Floor, Vyapar Sadan<br/>Sector-14, Gurgaon-122001</p>
+                  <p className="text-white text-sm mb-3">Sco 45, 2nd Floor, Vyapar Sadan<br/>Sector 14, Gurgaon, Haryana 122001</p>
                   
                   <p className="text-gray-400 font-semibold mb-1">Faridabad Branch</p>
                   <p className="text-white text-sm mb-3">2546, 2nd Floor, Opp: Sagar Cinema<br/>Main Road, Sector-16, Faridabad, HR - 121002</p>

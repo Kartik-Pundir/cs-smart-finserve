@@ -173,7 +173,7 @@ const INTENTS = [
     keywords: ['contact', 'call', 'phone', 'mobile', 'email', 'support', 'helpdesk', 'office', 'gurgaon', 'gurugram', 'address', 'location', 'number', 'mail'],
     phrases: ['contact us', 'phone number', 'email address', 'where are you located', 'call support'],
     response: {
-      text: "📞 *Contact Support & Location Details*\n\nWe are here to assist you!\n\n• *Phone Support*: +91 78388 25521\n• *Email*: krishan.pal1986@gmail.com\n• *Head Office*: 102, Lala Ram Market, Sector 17, Sukhrali, Gurgaon, Haryana 122001\n• *Working Hours*: Monday to Saturday: 9:00 AM – 6:00 PM (Sunday Closed)",
+      text: "📞 *Contact Support & Location Details*\n\nWe are here to assist you!\n\n• *Phone Support*: +91 78388 25521\n• *Email*: krishan.pal1986@gmail.com\n• *Head Office*: Sco 45, 2nd Floor, Vyapar Sadan, Sector 14, Gurgaon, Haryana 122001\n• *Working Hours*: Monday to Saturday: 9:00 AM – 6:00 PM (Sunday Closed)",
       quickReplies: ['Book Appointment', 'Back to Menu']
     }
   },

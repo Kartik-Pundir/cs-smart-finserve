@@ -122,6 +122,14 @@ const CheckIcon = () => (
   </div>
 );
 
+const PremiumCheckIcon = () => (
+  <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(192, 57, 43, 0.08)', border: '1px solid rgba(192, 57, 43, 0.15)' }}>
+    <svg className="w-4 h-4" style={{ color: '#c0392b' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
+    </svg>
+  </div>
+);
+
 const Home = () => {
   const [openFaq, setOpenFaq] = useState(null);
   const [heroIdx, setHeroIdx] = useState(0);
@@ -361,14 +369,14 @@ const Home = () => {
       {/* ── Car Loan ─────────────────────────────────────── */}
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Auto Loan</p>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Next Car, Funded Simple & Fast</h2>
               <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Navigating car loans shouldn't keep you from the excitement of a new ride. We compare options from 50+ trusted lenders to secure the most competitive interest rates for you, with no hidden charges and full transparency at every step.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
                 {[
                   {
                     title: '100% Funding Options',
@@ -389,17 +397,15 @@ const Home = () => {
                 ].map((point, i) => (
                   <div 
                     key={i} 
-                    className="p-4 rounded-2xl border transition-all duration-300 hover:shadow-md hover:scale-[1.02] flex flex-col justify-between"
+                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
                     style={{ 
                       background: 'var(--bg-card)', 
                       borderColor: 'var(--border)' 
                     }}
                   >
+                    <PremiumCheckIcon />
                     <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <CheckIcon />
-                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
-                      </div>
+                      <h4 className="font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
                       <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{point.desc}</p>
                     </div>
                   </div>
@@ -409,11 +415,12 @@ const Home = () => {
                 Apply for Car Loan →
               </Link>
             </AnimatedSection>
-            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
               <ZoomImage 
                 src="/assets/real_toyota_fortuner.png" 
                 alt="Car Loan"
-                className="w-full max-w-md object-cover h-80"
+                className="w-full h-full object-cover"
+                containerClassName="w-full h-full"
                 zoomScale={1.08}
               />
             </AnimatedSection>
@@ -424,12 +431,13 @@ const Home = () => {
       {/* ── Home Loan ────────────────────────────────────── */}
       <section className="py-20" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <AnimatedSection yOffset={50} duration={0.7} className="flex justify-center order-2 lg:order-1 overflow-hidden rounded-2xl shadow-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection yOffset={50} duration={0.7} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20 order-2 lg:order-1">
               <ZoomImage 
                 src="/assets/real_indian_luxury_house.png" 
                 alt="Home Loan"
-                className="w-full max-w-md object-cover h-80"
+                className="w-full h-full object-cover"
+                containerClassName="w-full h-full"
                 zoomScale={1.08}
               />
             </AnimatedSection>
@@ -439,7 +447,7 @@ const Home = () => {
               <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Buying a home is one of life’s most meaningful steps, and we’re here to help you get the keys. From calculating your maximum loan eligibility to final disbursement, our experienced advisors handle the heavy lifting so you can focus on moving in.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
                 {[
                   {
                     title: 'Customized Limits',
@@ -460,17 +468,15 @@ const Home = () => {
                 ].map((point, i) => (
                   <div 
                     key={i} 
-                    className="p-4 rounded-2xl border transition-all duration-300 hover:shadow-md hover:scale-[1.02] flex flex-col justify-between"
+                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
                     style={{ 
                       background: 'var(--bg-card)', 
                       borderColor: 'var(--border)' 
                     }}
                   >
+                    <PremiumCheckIcon />
                     <div>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <CheckIcon />
-                        <h4 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
-                      </div>
+                      <h4 className="font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
                       <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{point.desc}</p>
                     </div>
                   </div>
@@ -487,27 +493,58 @@ const Home = () => {
       {/* ── Insurance ────────────────────────────────────── */}
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>General Insurance</p>
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Protect What You've Built. Insure What You Love.</h2>
-              <p className="text-lg mb-8" style={{ color: "var(--text-secondary)" }}>
+              <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Life is unpredictable — your protection shouldn't be. From vehicle insurance to health and property coverage, we connect you with India's top insurers at the best premiums.
               </p>
-              <div className="space-y-4 mb-8">
-                {['Car, bike & commercial vehicle insurance','Health & family floater plans','Home & property insurance','Instant policy issuance online'].map((point, i) => (
-                  <div key={i} className="flex items-center gap-3"><CheckIcon /><p style={{ color: "var(--text-secondary)" }}>{point}</p></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+                {[
+                  {
+                    title: 'Vehicle Insurance',
+                    desc: 'Comprehensive & third-party cover for cars, bikes & commercial vehicles.'
+                  },
+                  {
+                    title: 'Health Insurance',
+                    desc: 'Flexible health & family floater plans with cashless hospitalization.'
+                  },
+                  {
+                    title: 'Property Insurance',
+                    desc: 'Protect your home & property against fire, theft, and natural disasters.'
+                  },
+                  {
+                    title: 'Instant Online Policy',
+                    desc: 'Quick digital processing and instant policy issuance online without hassle.'
+                  }
+                ].map((point, i) => (
+                  <div 
+                    key={i} 
+                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
+                    style={{ 
+                      background: 'var(--bg-card)', 
+                      borderColor: 'var(--border)' 
+                    }}
+                  >
+                    <PremiumCheckIcon />
+                    <div>
+                      <h4 className="font-bold text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{point.title}</h4>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{point.desc}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
               <Link to="/insurance" className="inline-block px-8 py-3 bg-accent text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
                 Explore Insurance Plans →
               </Link>
             </AnimatedSection>
-            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="flex justify-center overflow-hidden rounded-2xl shadow-xl">
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=700&q=85" 
+                src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80" 
                 alt="Insurance"
-                className="w-full max-w-md object-cover h-80"
+                className="w-full h-full object-cover"
+                containerClassName="w-full h-full"
                 zoomScale={1.08}
               />
             </AnimatedSection>

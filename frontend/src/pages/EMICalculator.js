@@ -113,7 +113,7 @@ export default function EMICalculator() {
       {/* ── HERO with house photo ── */}
       <div style={{ position: 'relative', overflow: 'hidden', minHeight: 280 }}>
         <img
-          src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80"
+          src="/assets/premium_property.png"
           alt="Dream home"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />

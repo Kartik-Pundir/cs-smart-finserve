@@ -96,7 +96,7 @@ const heroSlides = [
     line2: 'Loan Against Property.',
     sub: "Unlock your property's value. Get high-value loans against residential or commercial property.",
     tag: 'High Value Loans',
-    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=85',
+    img: '/assets/premium_property.png',
     label: 'Loan Against Property',
     rate: 'from 9.5% p.a.',
     link: '/loan-against-property',
@@ -541,7 +541,7 @@ const Home = () => {
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
               <ZoomImage 
-                src="https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&q=80" 
+                src="/assets/insurance_hero.png" 
                 alt="Insurance"
                 className="w-full h-full object-cover"
                 containerClassName="w-full h-full"

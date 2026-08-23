@@ -46,7 +46,7 @@ const Insurance = () => {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.95) 0%, rgba(192,57,43,0.75) 60%, rgba(10,10,20,0.5) 100%)' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '80px 28px' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2.5, color: '#fca5a5', textTransform: 'uppercase', marginBottom: 10 }}>General Insurance</p>
+
             <h1 style={{ fontSize: 40, fontWeight: 900, color: 'white', margin: 0, letterSpacing: -1.2, lineHeight: 1.15 }}>
               Protect What You've Built.<br />Insure What You Love.
             </h1>
@@ -65,7 +65,7 @@ const Insurance = () => {
 
         {/* Plan cards */}
         <div style={{ marginBottom: 48 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 8 }}>Coverage Options</p>
+
           <h2 style={{ fontSize: 28, fontWeight: 900, color: '#0f172a', margin: '0 0 24px', letterSpacing: -0.5 }}>Insurance Plans We Offer</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {plans.map((p, i) => (
@@ -86,7 +86,7 @@ const Insurance = () => {
 
         {/* Why us */}
         <div style={{ background: 'white', borderRadius: 24, padding: '36px 40px', marginBottom: 28, boxShadow: '0 2px 16px rgba(15,23,42,0.05)' }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 8 }}>Why CS Smart Finserve</p>
+
           <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0f172a', margin: '0 0 24px' }}>Why get insurance through us?</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14 }}>
             {['Compare 20+ insurers instantly', 'Lowest premiums guaranteed', 'Instant policy issuance online', 'Dedicated claim support team', 'Cashless hospitalisation at 10,000+ hospitals', 'Tax benefits under Section 80D'].map((pt, i) => (
@@ -102,7 +102,7 @@ const Insurance = () => {
         <motion.div id="get-quote" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           style={{ background: 'white', borderRadius: 24, overflow: 'hidden', boxShadow: '0 4px 32px rgba(15,23,42,0.08)' }}>
           <div style={{ padding: '32px 40px 24px', borderBottom: '1px solid #f1f5f9' }}>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 6 }}>Free Quote</p>
+
             <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0f172a', margin: 0 }}>Get your insurance quote today</h2>
             <p style={{ color: '#94a3b8', fontSize: 13, marginTop: 4 }}>Our team will reach out within 24 hours with the best plan for you.</p>
           </div>

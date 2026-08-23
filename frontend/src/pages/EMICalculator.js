@@ -120,7 +120,7 @@ export default function EMICalculator() {
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.75) 50%, rgba(15,23,42,0.4) 100%)' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '52px 28px' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2.5, color: '#fca5a5', textTransform: 'uppercase', marginBottom: 10 }}>Financial Tools</p>
+
             <h1 style={{ fontSize: 42, fontWeight: 900, color: 'white', margin: 0, letterSpacing: -1.5, lineHeight: 1.15 }}>
               Know Your EMI<br />Before You Apply
             </h1>

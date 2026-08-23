@@ -299,7 +299,7 @@ const Home = () => {
 
           {/* Header */}
           <div className="text-center mb-10">
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
+
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3" style={{ color: "var(--text-primary)" }}>
               Why CS Smart Finserve?
             </h2>
@@ -360,7 +360,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
-              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Auto Loan</p>
+
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Your Next Car, Funded Simple & Fast</h2>
               <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Navigating car loans shouldn't keep you from the excitement of a new ride. We compare options from 50+ trusted lenders to secure the most competitive interest rates for you, with no hidden charges and full transparency at every step.
@@ -431,7 +431,7 @@ const Home = () => {
               />
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="order-1 lg:order-2">
-              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Home Loan</p>
+
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Step Into Your Own Home With Confidence</h2>
               <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Buying a home is one of life’s most meaningful steps, and we’re here to help you get the keys. From calculating your maximum loan eligibility to final disbursement, our experienced advisors handle the heavy lifting so you can focus on moving in.
@@ -484,7 +484,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection yOffset={50} duration={0.7}>
-              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>General Insurance</p>
+
               <h2 className="text-4xl font-heading font-bold mb-6" style={{ color: "var(--text-primary)" }}>Protect What You've Built. Insure What You Love.</h2>
               <p className="text-lg mb-8 font-light" style={{ color: "var(--text-secondary)" }}>
                 Life is unpredictable — your protection shouldn't be. From vehicle insurance to health and property coverage, we connect you with India's top insurers at the best premiums.
@@ -588,7 +588,7 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-base)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 12 }}>Simple Process</p>
+
             <h2 className="text-4xl font-heading font-bold mb-4" style={{ color: "var(--text-primary)" }}>Get Your Loan in 3 Simple Steps</h2>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
           </motion.div>

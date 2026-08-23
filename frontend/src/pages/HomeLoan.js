@@ -130,7 +130,7 @@ const HomeLoan = () => {
       <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Why Choose Us</p>
+
             <h2 className="text-3xl font-heading font-bold text-gray-900">Why Choose Our Home Loan?</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,7 +151,7 @@ const HomeLoan = () => {
       <section className="py-20" style={{ background: '#f8f7f4' }}>
         <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Simple Process</p>
+
             <h2 className="text-3xl font-heading font-bold text-gray-900">Applying for a Home Loan was never this easy</h2>
           </motion.div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -213,7 +213,7 @@ const HomeLoan = () => {
       <section id="apply" className="py-20" style={{ background: '#f8f7f4' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#c0392b', textTransform: 'uppercase', marginBottom: 10 }}>Apply Now</p>
+
             <h2 className="text-3xl font-heading font-bold text-gray-900">Apply for Home Loan</h2>
           </motion.div>
           <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8">

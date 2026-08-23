@@ -118,7 +118,7 @@ const HomeLoan = () => {
         style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(192,57,43,0.60) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Home Loan</span>
+
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">Your Dream Home Is One Step Away.</h1>
             <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Flexible financing based on your requirements with rates starting at 8.5%. We handle everything.</p>
             <a href="#apply" className="inline-block px-8 py-4 bg-white text-accent rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">Apply Now →</a>

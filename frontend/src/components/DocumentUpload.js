@@ -99,9 +99,7 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
     <section className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-          <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">
-            Document Submission
-          </span>
+
           <h2 className="text-3xl font-heading font-bold text-gray-900 mb-2">
             Upload Your Documents
           </h2>

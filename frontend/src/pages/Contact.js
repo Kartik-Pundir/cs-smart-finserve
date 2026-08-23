@@ -48,9 +48,7 @@ const Contact = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1 bg-white/20 text-white rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">
-              We'd love to hear from you
-            </span>
+
             <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">
               Get in Touch
             </h1>
@@ -101,9 +99,7 @@ const Contact = () => {
               className="lg:col-span-2 space-y-6"
             >
               <div>
-                <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">
-                  Our Office
-                </span>
+
                 <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Find Us Here</h2>
                 <p className="text-gray-500 text-sm">Visit any of our branches for a face-to-face consultation.</p>
               </div>
@@ -206,9 +202,7 @@ const Contact = () => {
               className="lg:col-span-3"
             >
               <div className="bg-white rounded-2xl shadow-md p-8">
-                <span className="inline-block px-4 py-1 bg-red-100 text-accent rounded-full text-sm font-semibold mb-3">
-                  Send a Message
-                </span>
+
                 <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">We'll get back to you</h2>
                 <p className="text-gray-500 text-sm mb-6">Fill in the form and our team will reach out within 24 hours.</p>
                 <CallbackForm />

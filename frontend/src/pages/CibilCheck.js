@@ -94,9 +94,7 @@ const CibilCheck = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <span className="inline-block px-3 py-1 bg-red-50 text-accent rounded-full text-xs font-semibold mb-3 border border-red-100">
-            Real-Time Analysis
-          </span>
+
           <h1 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-3">
             CIBIL <span className="gradient-text">Score Check</span>
           </h1>

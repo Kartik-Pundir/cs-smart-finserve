@@ -128,9 +128,7 @@ const Services = () => {
         </div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1.5 bg-white/15 rounded-full text-sm font-semibold mb-5 backdrop-blur-sm border border-white/20">
-              All Financial Services
-            </span>
+
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-5 leading-tight">
               Every Loan You Need,<br />
               <span style={{ color: '#f9a8a8' }}>All in One Place</span>
@@ -173,7 +171,7 @@ const Services = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-4">Our Products</span>
+
             <h2 className="text-4xl font-heading font-bold text-gray-900 mb-3">All Loan Products & Services</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
               Explore our complete range of financial products designed to meet every life stage and business need.
@@ -251,7 +249,7 @@ const Services = () => {
       <section className="py-20" style={{ background: '#f0eeff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-            <span className="inline-block px-4 py-1.5 bg-red-100 text-red-700 rounded-full text-sm font-semibold mb-4">Why Us</span>
+
             <h2 className="text-4xl font-heading font-bold text-gray-900 mb-3">Why Choose CS Smart Finserve?</h2>
             <p className="text-gray-500 text-lg max-w-2xl mx-auto">
               We're more than a loan aggregator — we're your personal finance partner.

@@ -74,7 +74,7 @@ const BusinessLoan = () => {
         style={{ backgroundImage: 'linear-gradient(135deg, rgba(10,10,20,0.65) 0%, rgba(192,57,43,0.55) 100%), url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=85)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Business Loan</span>
+
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">Fuel Your Ambition.</h1>
             <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Fast working capital and term loans for businesses of every size. Flexible, premium collateral-free options available.</p>
             <a href="#apply" className="inline-block px-8 py-4 bg-white text-accent rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">Apply Now →</a>

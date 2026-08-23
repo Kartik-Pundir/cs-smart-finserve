@@ -81,7 +81,7 @@ const AutoLoan = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center text-white">
-            <span className="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm">Auto Loan</span>
+
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">Zero to Keys in 24 Hours.</h1>
             <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">Drive your dream car today. We compare 50+ lenders to get you the lowest EMI with zero hidden charges.</p>
             <a href="#apply" className="inline-block px-8 py-4 bg-white text-accent rounded-xl font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">

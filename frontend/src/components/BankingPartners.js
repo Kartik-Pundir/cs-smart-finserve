@@ -42,10 +42,7 @@ const BankCard = ({ bank }) => {
 const BankingPartners = () => (
   <section style={{ background: 'linear-gradient(135deg, #faf8ff 0%, #f0eeff 50%, #f5f0ff 100%)' }} className="py-16 border-y border-purple-100">
     <div className="text-center mb-12">
-      <span className="inline-block px-5 py-2 rounded-full text-xs font-semibold tracking-widest uppercase"
-        style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>
-        Our Trusted Lending Partners
-      </span>
+
       <h2 className="text-gray-900 text-3xl font-heading font-bold mt-4">
         Backed by India's Leading Banks & NBFCs
       </h2>

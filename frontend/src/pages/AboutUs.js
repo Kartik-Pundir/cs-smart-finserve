@@ -11,10 +11,7 @@ const AboutUs = () => {
       <section className="pt-32 pb-16" style={{ background: '#f0eeff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-              style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>
-              Who We Are
-            </span>
+
             <h1 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
               About <span className="text-accent">CS Smart Finserve</span>
             </h1>

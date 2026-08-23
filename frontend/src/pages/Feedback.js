@@ -58,10 +58,7 @@ const Feedback = () => {
         style={{ background: 'linear-gradient(135deg, #8b0000 0%, #c0392b 50%, #e74c3c 100%)' }}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <span className="inline-block px-4 py-1 rounded-full text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)' }}>
-            Share Your Experience
-          </span>
+
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">We'd Love Your Feedback</h1>
           <p className="text-lg opacity-90 max-w-xl mx-auto">
             Your experience helps us serve you better. Tell us how we did.

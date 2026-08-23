@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaTimes, FaPaperPlane, FaHeadset, FaComments, FaChevronDown, FaFileAlt, FaCheckCircle, FaChartLine, FaShieldAlt } from 'react-icons/fa';
+import { FaTimes, FaPaperPlane, FaHeadset, FaComments, FaChevronDown, FaFileAlt, FaCheckCircle, FaChartLine, FaShieldAlt, FaRobot } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ACCENT = '#c0392b';
+const ACCENT = '#a8823a';
 
 /* ── Extended Intent Knowledge Base ── */
 const INTENTS = [
@@ -339,7 +339,7 @@ const formatText = (text) => {
 const TypingDots = () => (
   <div style={{ display: 'flex', gap: 4, padding: '12px 16px', background: 'white', borderRadius: '18px 18px 18px 4px', boxShadow: '0 1px 6px rgba(0,0,0,0.08)', width: 'fit-content' }}>
     {[0, 0.25, 0.5].map((delay, i) => (
-      <div key={i} style={{ width: 7, height: 7, borderRadius: '50%', background: '#c0392b', animation: `chatbotBounce 1s ease-in-out ${delay}s infinite` }} />
+      <div key={i} style={{ width: 7, height: 7, borderRadius: '50%', background: '#a8823a', animation: `chatbotBounce 1s ease-in-out ${delay}s infinite` }} />
     ))}
   </div>
 );
@@ -352,6 +352,7 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [unread, setUnread]     = useState(0);
   const endRef = useRef(null);
+  const messagesRef = useRef(null);
 
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, isTyping]);
 
@@ -443,13 +444,13 @@ const Chatbot = () => {
               )}
 
               <button onClick={() => setIsOpen(true)}
-                style={{ position: 'relative', width: 60, height: 60, borderRadius: '50%', background: `linear-gradient(135deg, ${ACCENT}, #e74c3c)`, border: 'none', boxShadow: '0 8px 32px rgba(192,57,43,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 24 }}>
+                style={{ position: 'relative', width: 60, height: 60, borderRadius: '50%', background: `linear-gradient(135deg, ${ACCENT}, #8d6b2c)`, border: 'none', boxShadow: '0 8px 32px rgba(168,130,58,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 24 }}>
                 <FaHeadset style={{ animation: unread ? 'chatbotRing 1.2s ease-in-out' : 'none' }} />
                 {unread > 0 && (
                   <span style={{ position: 'absolute', top: -4, right: -4, width: 18, height: 18, background: '#22c55e', borderRadius: '50%', border: '2px solid white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: 'white' }}>1</span>
                 )}
                 {/* Pulse ring */}
-                <span style={{ position: 'absolute', inset: -6, borderRadius: '50%', border: '2px solid rgba(192,57,43,0.35)', animation: 'chatbotPulse 2s ease-in-out infinite' }} />
+                <span style={{ position: 'absolute', inset: -6, borderRadius: '50%', border: '2px solid rgba(168,130,58,0.35)', animation: 'chatbotPulse 2s ease-in-out infinite' }} />
               </button>
             </motion.div>
           )}
@@ -466,13 +467,13 @@ const Chatbot = () => {
               style={{ background: 'white', borderRadius: 24, boxShadow: '0 24px 80px rgba(0,0,0,0.22)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
               {/* Header */}
-              <div style={{ background: `linear-gradient(135deg, #1a0a0a 0%, ${ACCENT} 100%)`, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+              <div style={{ background: `linear-gradient(135deg, #8d6b2c 0%, ${ACCENT} 100%)`, padding: '16px 18px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   {/* Avatar */}
-                  <div style={{ position: 'relative' }}>
-                    <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, border: '2px solid rgba(255,255,255,0.3)' }}>
-                      🤖
-                    </div>
+                    <div style={{ position: 'relative' }}>
+                      <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, border: '2px solid rgba(255,255,255,0.3)', color: 'white' }}>
+                        <FaRobot />
+                      </div>
                     <div style={{ position: 'absolute', bottom: 1, right: 1, width: 11, height: 11, borderRadius: '50%', background: '#22c55e', border: '2px solid white' }} />
                   </div>
                   <div>
@@ -494,14 +495,17 @@ const Chatbot = () => {
                 {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'short' })}
               </div>
 
-              {/* Messages area - flex:1 + minHeight:0 ensures scrolling works */}
-              <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 8px', background: '#f8f7f4', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {/* Messages area - scroll isolated to widget only */}
+              <div
+                ref={messagesRef}
+                onWheel={(e) => { e.stopPropagation(); }}
+                style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 16px 8px', background: '#f8f7f4', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {messages.map((msg, idx) => (
                   <motion.div key={msg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
                     {/* Bot message */}
                     {msg.type === 'bot' && (
                       <div style={{ display: 'flex', gap: 9, alignItems: 'flex-end' }}>
-                        <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #1a0a0a, ${ACCENT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0, marginBottom: 2 }}>🤖</div>
+                        <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #8d6b2c, ${ACCENT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0, marginBottom: 2, color: 'white' }}><FaRobot /></div>
                         <div style={{ maxWidth: '78%' }}>
                           <div style={{ background: 'white', padding: '11px 15px', borderRadius: '18px 18px 18px 4px', fontSize: 13.5, lineHeight: 1.6, color: '#1e293b', boxShadow: '0 1px 6px rgba(0,0,0,0.07)', whiteSpace: 'pre-line' }}>
                             {formatText(msg.text)}
@@ -526,7 +530,7 @@ const Chatbot = () => {
                     {/* User message */}
                     {msg.type === 'user' && (
                       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <div style={{ maxWidth: '78%', background: `linear-gradient(135deg, ${ACCENT}, #e74c3c)`, padding: '11px 15px', borderRadius: '18px 18px 4px 18px', fontSize: 13.5, lineHeight: 1.6, color: 'white', boxShadow: '0 2px 10px rgba(192,57,43,0.25)' }}>
+                        <div style={{ maxWidth: '78%', background: `linear-gradient(135deg, ${ACCENT}, #8d6b2c)`, padding: '11px 15px', borderRadius: '18px 18px 4px 18px', fontSize: 13.5, lineHeight: 1.6, color: 'white', boxShadow: '0 2px 10px rgba(168,130,58,0.25)' }}>
                           {msg.text}
                         </div>
                       </div>
@@ -537,7 +541,7 @@ const Chatbot = () => {
                 {/* Typing indicator */}
                 {isTyping && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ display: 'flex', gap: 9, alignItems: 'flex-end' }}>
-                    <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #1a0a0a, ${ACCENT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0 }}>🤖</div>
+                    <div style={{ width: 30, height: 30, borderRadius: '50%', background: `linear-gradient(135deg, #8d6b2c, ${ACCENT})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0, color: 'white' }}><FaRobot /></div>
                     <TypingDots />
                   </motion.div>
                 )}
@@ -565,7 +569,7 @@ const Chatbot = () => {
                     style={{ flex: 1, background: 'none', border: 'none', outline: 'none', fontSize: 13.5, color: '#0f172a', fontFamily: 'inherit' }}
                   />
                   <button onClick={() => input.trim() && respond(input)} disabled={!input.trim()}
-                    style={{ width: 38, height: 38, borderRadius: '50%', background: input.trim() ? `linear-gradient(135deg, ${ACCENT}, #e74c3c)` : '#e2e8f0', border: 'none', color: input.trim() ? 'white' : '#94a3b8', cursor: input.trim() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, transition: 'all .2s', flexShrink: 0 }}>
+                    style={{ width: 38, height: 38, borderRadius: '50%', background: input.trim() ? `linear-gradient(135deg, ${ACCENT}, #8d6b2c)` : '#e2e8f0', border: 'none', color: input.trim() ? 'white' : '#94a3b8', cursor: input.trim() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, transition: 'all .2s', flexShrink: 0 }}>
                     <FaPaperPlane />
                   </button>
                 </div>

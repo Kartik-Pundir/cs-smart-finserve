@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaBullseye, FaBolt, FaLock, FaUniversity, FaPhone, FaCalendarAlt, FaClock, FaUser, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { FaCalendarAlt, FaClock, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import api from '../utils/api';
 
 const services = [
@@ -57,7 +57,7 @@ const BookAppointment = () => {
     <div className="min-h-screen pt-20 flex items-center justify-center" style={{ background: '#faf8ff' }}>
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
         className="bg-white rounded-3xl shadow-xl p-12 text-center max-w-md mx-4">
-        <div className="text-6xl mb-4">✅</div>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style={{ background: "rgba(168,130,58,0.1)", color: "#a8823a" }}><span>✓</span></div>
         <h2 className="text-2xl font-heading font-bold text-gray-900 mb-3">Appointment Booked!</h2>
         <p className="text-gray-500 mb-2">We've received your appointment request.</p>
         <p className="text-gray-500 text-sm">Our team will confirm your slot within <strong>2–4 hours</strong>.</p>
@@ -73,7 +73,7 @@ const BookAppointment = () => {
     <div className="min-h-screen pt-20" style={{ background: '#faf8ff' }}>
       {/* Hero */}
       <div className="py-12 text-center text-white"
-        style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #c0392b 100%)' }}>
+        style={{ background: 'linear-gradient(135deg, #fdf6e8 0%, #a8823a 100%)' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-3xl md:text-4xl font-heading font-bold mb-2">Book an Appointment</h1>
           <p className="text-white/80 text-base max-w-xl mx-auto">
@@ -89,13 +89,16 @@ const BookAppointment = () => {
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-purple-100">
             <h2 className="text-xl font-heading font-bold text-gray-900 mb-6">Why meet us?</h2>
             {[
-              { icon: '🎯', title: 'Personalised Advice', desc: 'Get loan recommendations tailored to your profile and needs.' },
-              { icon: '⚡', title: 'Fast Processing', desc: 'Our experts help you get approvals faster with the right documents.' },
-              { icon: '🔒', title: 'Completely Free', desc: 'No charges for consultation.' },
-              { icon: '🏦', title: '20+ Bank Partners', desc: 'We compare across banks to get you the best rate.' },
+              { icon: <FaBullseye />, title: 'Personalised Advice', desc: 'Get loan recommendations tailored to your profile and needs.' },
+              { icon: <FaBolt />, title: 'Fast Processing', desc: 'Our experts help you get approvals faster with the right documents.' },
+              { icon: <FaLock />, title: 'Completely Free', desc: 'No charges for consultation.' },
+              { icon: <FaUniversity />, title: '20+ Bank Partners', desc: 'We compare across banks to get you the best rate.' },
             ].map((item, i) => (
               <div key={i} className="flex gap-3 mb-4">
-                <div className="text-2xl">{item.icon}</div>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'var(--badge-bg)', color: 'var(--accent)' }}>
+                  {item.icon}
+                </div>
                 <div>
                   <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
                   <p className="text-gray-500 text-xs mt-0.5">{item.desc}</p>
@@ -203,12 +206,12 @@ const BookAppointment = () => {
 
               <button type="submit" disabled={loading}
                 className="w-full py-3 text-white rounded-xl font-bold text-base hover:shadow-lg transition-all disabled:opacity-50 hover:scale-[1.01]"
-                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
                 {loading ? 'Booking...' : 'Book Appointment →'}
               </button>
 
               <p className="text-center text-xs text-gray-400">
-                📞 We'll call you to confirm your appointment slot.
+                <FaPhone className="inline mr-2" style={{ color: '#a8823a' }} /> We\'ll call you to confirm your appointment slot.
               </p>
             </form>
           </div>

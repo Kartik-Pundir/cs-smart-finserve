@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaBell, FaTimes, FaCheckDouble } from 'react-icons/fa';
+import { FaBell, FaTimes, FaCheckDouble, FaFileAlt, FaCalendarAlt, FaPaperclip, FaChartBar } from 'react-icons/fa';
 import api from '../utils/api';
 
 const NotificationBell = () => {
@@ -87,13 +87,13 @@ const NotificationBell = () => {
   // Get icon based on notification type
   const getIcon = (type) => {
     const icons = {
-      application: '📄',
-      appointment: '📅',
-      document: '📎',
-      cibil: '📊',
-      general: '🔔'
+      application: <FaFileAlt />,
+      appointment: <FaCalendarAlt />,
+      document: <FaPaperclip />,
+      cibil: <FaChartBar />,
+      general: <FaBell />
     };
-    return icons[type] || '🔔';
+    return icons[type] || <FaBell />;
   };
 
   return (
@@ -120,7 +120,7 @@ const NotificationBell = () => {
             position: 'absolute',
             top: '4px',
             right: '4px',
-            background: '#c0392b',
+            background: '#a8823a',
             color: 'white',
             borderRadius: '50%',
             width: '18px',
@@ -171,7 +171,7 @@ const NotificationBell = () => {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: '#c0392b',
+                  color: '#a8823a',
                   cursor: 'pointer',
                   fontSize: '13px',
                   fontWeight: '600',
@@ -238,7 +238,7 @@ const NotificationBell = () => {
                             width: '8px',
                             height: '8px',
                             borderRadius: '50%',
-                            background: '#c0392b',
+                            background: '#a8823a',
                             flexShrink: 0
                           }} />
                         )}

@@ -3,20 +3,21 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
+import { FaCar, FaHeartbeat, FaHome, FaPlane, FaBriefcase, FaBuilding } from 'react-icons/fa';
 
 const CheckIcon = () => (
-  <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#c0392b', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+  <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#a8823a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
     <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
   </div>
 );
 
 const plans = [
-  { icon: '🚗', title: 'Motor Insurance', desc: 'Car, bike & commercial vehicle. Third-party & comprehensive plans with instant issuance.', tags: ['Cars & Bikes', 'Commercial', 'Third-Party'] },
-  { icon: '❤️', title: 'Health Insurance', desc: 'Individual, family floater & senior citizen plans. Cashless hospitalisation at 10,000+ hospitals.', tags: ['Individual', 'Family Floater', 'Senior Citizen'] },
-  { icon: '🏠', title: 'Home Insurance', desc: 'Protect your home and contents against fire, flood, theft and natural calamities.', tags: ['Fire & Flood', 'Theft Cover', 'Contents'] },
-  { icon: '✈️', title: 'Travel Insurance', desc: 'Single trip & annual multi-trip plans. Medical emergency, trip cancellation, and baggage loss.', tags: ['Medical Cover', 'Trip Cancel', 'Baggage'] },
-  { icon: '💼', title: 'Life Insurance', desc: 'Term plans to secure your family\'s future at the most affordable premiums.', tags: ['Term Plans', 'High Cover', 'Tax Benefit'] },
-  { icon: '🏢', title: 'Business Insurance', desc: 'Liability, fire, and burglary cover for shops, offices and commercial establishments.', tags: ['Liability', 'Fire Cover', 'Burglary'] },
+  { icon: <FaCar />, title: 'Motor Insurance', desc: 'Car, bike & commercial vehicle. Third-party & comprehensive plans with instant issuance.', tags: ['Cars & Bikes', 'Commercial', 'Third-Party'] },
+  { icon: <FaHeartbeat />, title: 'Health Insurance', desc: 'Individual, family floater & senior citizen plans. Cashless hospitalisation at 10,000+ hospitals.', tags: ['Individual', 'Family Floater', 'Senior Citizen'] },
+  { icon: <FaHome />, title: 'Home Insurance', desc: 'Protect your home and contents against fire, flood, theft and natural calamities.', tags: ['Fire & Flood', 'Theft Cover', 'Contents'] },
+  { icon: <FaPlane />, title: 'Travel Insurance', desc: 'Single trip & annual multi-trip plans. Medical emergency, trip cancellation, and baggage loss.', tags: ['Medical Cover', 'Trip Cancel', 'Baggage'] },
+  { icon: <FaBriefcase />, title: 'Life Insurance', desc: "Term plans to secure your family's future at the most affordable premiums.", tags: ['Term Plans', 'High Cover', 'Tax Benefit'] },
+  { icon: <FaBuilding />, title: 'Business Insurance', desc: 'Liability, fire, and burglary cover for shops, offices and commercial establishments.', tags: ['Liability', 'Fire Cover', 'Burglary'] },
 ];
 
 const Insurance = () => {
@@ -38,12 +39,12 @@ const Insurance = () => {
   };
 
   return (
-    <div style={{ background: '#f8f7f4', minHeight: '100vh', paddingTop: 80, fontFamily: "'Inter', sans-serif" }}>
+    <div className="theme-bg" style={{minHeight: '100vh', paddingTop: 80, fontFamily: "'Inter', sans-serif"}}>
 
       {/* Hero */}
       <div style={{ position: 'relative', overflow: 'hidden', minHeight: 420 }}>
         <img src="https://images.unsplash.com/photo-1585421514738-01798e348b17?w=1400&q=85" alt="Insurance" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.95) 0%, rgba(192,57,43,0.75) 60%, rgba(10,10,20,0.5) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,20,0.95) 0%, rgba(168,130,58,0.75) 60%, rgba(10,10,20,0.5) 100%)' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 980, margin: '0 auto', padding: '80px 28px' }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
 
@@ -54,7 +55,7 @@ const Insurance = () => {
               From health to motor to home — we connect you with India's top insurers at the best premiums. Instant policy issuance.
             </p>
             <div style={{ display: 'flex', gap: 14, marginTop: 28, flexWrap: 'wrap' }}>
-              <a href="#get-quote" style={{ padding: '13px 28px', background: '#c0392b', color: 'white', borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(192,57,43,0.35)' }}>Get a Quote →</a>
+              <a href="#get-quote" style={{ padding: '13px 28px', background: '#a8823a', color: 'white', borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: 'none', boxShadow: '0 4px 20px rgba(168,130,58,0.35)' }}>Get a Quote →</a>
               <Link to="/contact" style={{ padding: '13px 28px', background: 'rgba(255,255,255,0.12)', color: 'white', borderRadius: 12, fontWeight: 700, fontSize: 14, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.25)' }}>Talk to an Expert</Link>
             </div>
           </motion.div>
@@ -70,13 +71,13 @@ const Insurance = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {plans.map((p, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e', borderRadius: 18, padding: '28px 22px', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ fontSize: 34, marginBottom: 14 }}>{p.icon}</div>
+                style={{ background: 'linear-gradient(135deg, #a8823a 0%, #8d6b2c 100%)', borderRadius: 18, padding: '28px 22px', boxShadow: '0 8px 32px rgba(168,130,58,0.12)', position: 'relative', overflow: 'hidden', border: 'none' }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14, fontSize: 20, color: 'white' }}>{p.icon}</div>
                 <h3 style={{ fontSize: 15, fontWeight: 800, color: 'white', margin: '0 0 8px' }}>{p.title}</h3>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.6, margin: '0 0 14px' }}>{p.desc}</p>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6, margin: '0 0 14px' }}>{p.desc}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {p.tags.map((t, j) => (
-                    <span key={j} style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.85)', border: '1px solid rgba(255,255,255,0.18)' }}>{t}</span>
+                    <span key={j} style={{ fontSize: 10, fontWeight: 700, padding: '3px 9px', borderRadius: 20, background: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.9)', border: '1px solid rgba(255,255,255,0.2)' }}>{t}</span>
                   ))}
                 </div>
               </motion.div>
@@ -118,7 +119,7 @@ const Insurance = () => {
                   <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#94a3b8', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 6 }}>{f.label}</label>
                   <input type={f.type} value={form[f.key]} required onChange={e => setForm({ ...form, [f.key]: e.target.value })}
                     style={{ width: '100%', padding: '11px 14px', border: '1.5px solid #e2e8f0', borderRadius: 10, fontSize: 14, fontWeight: 600, color: '#0f172a', background: '#f8f7f4', outline: 'none', boxSizing: 'border-box' }}
-                    onFocus={e => e.target.style.borderColor = '#c0392b'}
+                    onFocus={e => e.target.style.borderColor = '#a8823a'}
                     onBlur={e => e.target.style.borderColor = '#e2e8f0'} />
                 </div>
               ))}
@@ -131,7 +132,7 @@ const Insurance = () => {
               </select>
             </div>
             <button type="submit" disabled={loading}
-              style={{ width: '100%', padding: '14px 0', background: loading ? '#e2e8f0' : '#c0392b', color: loading ? '#94a3b8' : 'white', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer', letterSpacing: 0.3 }}>
+              style={{ width: '100%', padding: '14px 0', background: loading ? '#e2e8f0' : '#a8823a', color: loading ? '#94a3b8' : 'white', border: 'none', borderRadius: 12, fontSize: 15, fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer', letterSpacing: 0.3 }}>
               {loading ? 'Submitting...' : 'Request Free Quote →'}
             </button>
           </form>

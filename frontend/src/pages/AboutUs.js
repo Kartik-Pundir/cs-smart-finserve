@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaBullseye, FaBolt, FaCoins, FaSearchDollar, FaUniversity, FaHandshake } from 'react-icons/fa';
 import StatsCounter from '../components/StatsCounter';
 import BankingPartners from '../components/BankingPartners';
 
@@ -117,12 +118,12 @@ const AboutUs = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: '🎯', title: 'Expert Guidance',       desc: '60+ financial experts to guide you through every step' },
-              { icon: '⚡', title: 'Quick Processing',      desc: 'Fast approval and disbursement within 24–48 hours' },
-              { icon: '💰', title: 'Best Rates',            desc: 'Competitive interest rates from top banks and NBFCs' },
-              { icon: '🔍', title: 'Transparent Dealings',  desc: 'No hidden charges. Complete transparency in all transactions' },
-              { icon: '🏦', title: 'Wide Network',          desc: 'Partnerships with 50+ banks and insurance companies' },
-              { icon: '🤝', title: 'Customer First',        desc: 'Dedicated support team available for all your queries' },
+              { icon: <FaBullseye />, title: 'Expert Guidance',       desc: '60+ financial experts to guide you through every step' },
+              { icon: <FaBolt />, title: 'Quick Processing',      desc: 'Fast approval and disbursement within 24–48 hours' },
+              { icon: <FaCoins />, title: 'Best Rates',            desc: 'Competitive interest rates from top banks and NBFCs' },
+              { icon: <FaSearchDollar />, title: 'Transparent Dealings',  desc: 'No hidden charges. Complete transparency in all transactions' },
+              { icon: <FaUniversity />, title: 'Wide Network',          desc: 'Partnerships with 50+ banks and insurance companies' },
+              { icon: <FaHandshake />, title: 'Customer First',        desc: 'Dedicated support team available for all your queries' },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -132,7 +133,10 @@ const AboutUs = () => {
                 transition={{ delay: index * 0.08 }}
                 className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-accent text-center"
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl mb-4 mx-auto"
+                  style={{ background: 'var(--badge-bg)', color: 'var(--accent)' }}>
+                  {item.icon}
+                </div>
                 <div className="w-8 h-1 bg-accent rounded-full mx-auto mb-4" />
                 <h3 className="text-lg font-heading font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-500 text-sm">{item.desc}</p>

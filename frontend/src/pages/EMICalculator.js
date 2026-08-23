@@ -3,11 +3,12 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import { Doughnut, Bar } from 'react-chartjs-2';
+import { FaHome, FaCar, FaUser, FaBriefcase, FaCoffee, FaCalendarAlt, FaCalendar, FaUniversity } from 'react-icons/fa';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const fmt  = (n) => `₹${Number(n).toLocaleString('en-IN')}`;
-const ACCENT = '#c0392b';
+const ACCENT = '#a8823a';
 
 /* ── Animated counter ── */
 function AnimatedNumber({ value, prefix = '₹' }) {
@@ -41,7 +42,7 @@ function Slider({ label, value, min, max, step, onChange, display, lo, hi }) {
         <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: `${pct}%`, background: `linear-gradient(90deg,${ACCENT}aa,${ACCENT})`, borderRadius: 99 }} />
         <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer', zIndex: 2 }} />
-        <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: `calc(${pct}% - 11px)`, width: 22, height: 22, borderRadius: '50%', background: 'white', border: `3px solid ${ACCENT}`, boxShadow: '0 2px 8px rgba(192,57,43,0.25)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: `calc(${pct}% - 11px)`, width: 22, height: 22, borderRadius: '50%', background: 'white', border: `3px solid ${ACCENT}`, boxShadow: '0 2px 8px rgba(168,130,58,0.25)', pointerEvents: 'none' }} />
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
         <span style={{ fontSize: 11, color: '#cbd5e1' }}>{lo}</span>
@@ -52,10 +53,10 @@ function Slider({ label, value, min, max, step, onChange, display, lo, hi }) {
 }
 
 const PRESETS = [
-  { label: 'Home Loan',     icon: '🏠', amount: 3000000, rate: 8.5,  tenure: 240 },
-  { label: 'Car Loan',      icon: '🚗', amount: 800000,  rate: 9.0,  tenure: 84  },
-  { label: 'Personal Loan', icon: '👤', amount: 500000,  rate: 12.0, tenure: 36  },
-  { label: 'Business Loan', icon: '💼', amount: 2000000, rate: 11.0, tenure: 60  },
+  { label: 'Home Loan',     icon: <FaHome />, amount: 3000000, rate: 8.5,  tenure: 240 },
+  { label: 'Car Loan',      icon: <FaCar />, amount: 800000,  rate: 9.0,  tenure: 84  },
+  { label: 'Personal Loan', icon: <FaUser />, amount: 500000,  rate: 12.0, tenure: 36  },
+  { label: 'Business Loan', icon: <FaBriefcase />, amount: 2000000, rate: 11.0, tenure: 60  },
 ];
 
 export default function EMICalculator() {
@@ -108,7 +109,7 @@ export default function EMICalculator() {
   }
 
   return (
-    <div style={{ background: '#f8f7f4', minHeight: '100vh', paddingTop: 80 }}>
+    <div className="theme-bg" style={{minHeight: '100vh', paddingTop: 80}}>
 
       {/* ── HERO with house photo ── */}
       <div style={{ position: 'relative', overflow: 'hidden', minHeight: 280 }}>
@@ -156,7 +157,7 @@ export default function EMICalculator() {
               background: active === i ? '#fff1f0' : 'white',
               color: active === i ? ACCENT : '#64748b',
               fontSize: 13, fontWeight: 600, cursor: 'pointer', transition: 'all .18s',
-              boxShadow: active === i ? `0 0 0 3px rgba(192,57,43,0.08)` : 'none',
+              boxShadow: active === i ? `0 0 0 3px rgba(168,130,58,0.08)` : 'none',
             }}>
               <span>{p.icon}</span>{p.label}
             </button>
@@ -256,13 +257,13 @@ export default function EMICalculator() {
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1.5, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 14 }}>What your EMI means</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }}>
             {[
-              { icon: '☕', label: 'Per Day', val: `₹${Math.round(emi / 30).toLocaleString('en-IN')}`, sub: 'Daily outflow' },
-              { icon: '📅', label: 'Per Week', val: `₹${Math.round(emi / 4.3).toLocaleString('en-IN')}`, sub: 'Weekly cost' },
-              { icon: '📆', label: 'Per Year', val: `₹${Math.round(emi * 12).toLocaleString('en-IN')}`, sub: 'Annual outflow' },
-              { icon: '🏦', label: 'Total Tenure', val: `${Math.round(tenure / 12)} yrs`, sub: `${totPay > 0 ? Math.round(totInt / totPay * 100) : 0}% goes to interest` },
+              { icon: <FaCoffee />, label: 'Per Day', val: `₹${Math.round(emi / 30).toLocaleString('en-IN')}`, sub: 'Daily outflow' },
+              { icon: <FaCalendarAlt />, label: 'Per Week', val: `₹${Math.round(emi / 4.3).toLocaleString('en-IN')}`, sub: 'Weekly cost' },
+              { icon: <FaCalendar />, label: 'Per Year', val: `₹${Math.round(emi * 12).toLocaleString('en-IN')}`, sub: 'Annual outflow' },
+              { icon: <FaUniversity />, label: 'Total Tenure', val: `${Math.round(tenure / 12)} yrs`, sub: `${totPay > 0 ? Math.round(totInt / totPay * 100) : 0}% goes to interest` },
             ].map((card, i) => (
               <div key={i} style={{ background: 'white', borderRadius: 18, padding: '20px 18px', boxShadow: '0 2px 12px rgba(15,23,42,0.06)', border: '1px solid #f1f5f9' }}>
-                <div style={{ fontSize: 26, marginBottom: 10 }}>{card.icon}</div>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: 'var(--badge-bg)', color: ACCENT, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10, fontSize: 16 }}>{card.icon}</div>
                 <p style={{ fontSize: 11, color: '#94a3b8', fontWeight: 600, margin: '0 0 5px', letterSpacing: 0.3 }}>{card.label}</p>
                 <p style={{ fontSize: 20, fontWeight: 900, color: '#0f172a', margin: '0 0 4px', letterSpacing: -0.5 }}>{card.val}</p>
                 <p style={{ fontSize: 11, color: '#cbd5e1', margin: 0 }}>{card.sub}</p>
@@ -309,7 +310,7 @@ export default function EMICalculator() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
-                  <tr style={{ borderTop: '1px solid #f1f5f9', background: '#f8f7f4' }}>
+                  <tr className="theme-bg" style={{ borderTop: '1px solid #f1f5f9'}}>
                     {['Month', 'EMI', 'Principal', 'Interest', 'Balance'].map(h => (
                       <th key={h} style={{ padding: '11px 24px', textAlign: 'left', fontSize: 10, fontWeight: 700, letterSpacing: 1.2, color: '#94a3b8', textTransform: 'uppercase' }}>{h}</th>
                     ))}

@@ -55,7 +55,7 @@ const Feedback = () => {
       {/* Hero */}
       <section
         className="pt-32 pb-20 text-white text-center"
-        style={{ background: 'linear-gradient(135deg, #8b0000 0%, #c0392b 50%, #e74c3c 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #8b0000 0%, #a8823a 50%, #8d6b2c 100%)' }}
       >
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
 
@@ -75,7 +75,7 @@ const Feedback = () => {
               animate={{ opacity: 1, scale: 1 }}
               className="bg-white rounded-3xl shadow-xl p-12 text-center"
             >
-              <div className="text-6xl mb-4">🎉</div>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style={{ background: "rgba(168,130,58,0.1)", color: "#a8823a" }}><span>✓</span></div>
               <h2 className="text-2xl font-heading font-bold text-gray-900 mb-3">Thank You!</h2>
               <p className="text-gray-600">Your feedback has been submitted. We appreciate you taking the time.</p>
             </motion.div>
@@ -101,7 +101,7 @@ const Feedback = () => {
                         className="text-4xl transition-transform hover:scale-110 focus:outline-none"
                       >
                         <FaStar
-                          color={(hoverRating || rating) >= star ? '#c0392b' : '#e5e7eb'}
+                          color={(hoverRating || rating) >= star ? '#a8823a' : '#e5e7eb'}
                         />
                       </button>
                     ))}
@@ -192,7 +192,7 @@ const Feedback = () => {
                   type="submit"
                   disabled={loading}
                   className="w-full py-4 bg-accent text-white rounded-xl font-bold text-lg hover:shadow-xl transition-all hover:scale-[1.02] disabled:opacity-50"
-                  style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}
+                  style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}
                 >
                   {loading ? 'Submitting...' : 'Submit Feedback'}
                 </button>

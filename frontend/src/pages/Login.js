@@ -128,7 +128,7 @@ const Login = () => {
                   </span>
                 </div>
                 <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full transition-all duration-1000" style={{ width: '80%' }}></div>
+                  <div className="h-full bg-gradient-to-r from-[#a8823a] to-[#8d6b2c] rounded-full transition-all duration-1000" style={{ width: '80%' }}></div>
                 </div>
                 <div className="flex items-center justify-between text-[10px] text-gray-400 mt-2">
                   <span>ID: #CS-89240</span>
@@ -177,7 +177,7 @@ const Login = () => {
           <div className="lg:hidden mb-8 text-center">
             <Link to="/" className="inline-flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
                 CS
               </div>
               <span className="text-xl font-bold" style={{ color: isDark ? 'white' : '#1a1a1a' }}>CS Smart Finserve</span>

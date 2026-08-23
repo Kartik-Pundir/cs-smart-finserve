@@ -64,16 +64,16 @@ const ScoreArc = ({ score }) => {
 };
 
 /* ── empty state ── */
-const Empty = ({ emoji, title, desc, link, linkLabel }) => (
+const Empty = ({ icon, title, desc, link, linkLabel }) => (
   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
     className="py-20 flex flex-col items-center text-center">
     <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-4"
-      style={{ background: 'rgba(192,57,43,0.07)' }}>{emoji}</div>
+      style={{ background: 'rgba(168,130,58,0.07)', color: '#a8823a' }}>{icon}</div>
     <p className="font-semibold text-gray-800 mb-1">{title}</p>
     <p className="text-gray-400 text-sm mb-6 max-w-xs">{desc}</p>
     <Link to={link}
       className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-[1.02]"
-      style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+      style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
       {linkLabel} <FaArrowRight size={11} />
     </Link>
   </motion.div>
@@ -175,7 +175,7 @@ const CustomerDashboard = () => {
 
       {/* ── Hero Banner ── */}
       <div className="relative overflow-hidden pt-20"
-        style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #c0392b 100%)' }}>
+        style={{ background: 'linear-gradient(135deg, #fdf6e8 0%, #a8823a 100%)' }}>
         {/* decorative circles */}
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10"
           style={{ background: 'radial-gradient(circle, #fff, transparent)' }} />
@@ -190,7 +190,7 @@ const CustomerDashboard = () => {
               className="flex items-center gap-4 relative group cursor-pointer"
               onClick={() => setIsEditingProfile(true)}>
               <div className="relative w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg flex-shrink-0 overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #e74c3c, #c0392b)', border: '1px solid rgba(255,255,255,0.3)' }}>
+                style={{ background: 'linear-gradient(135deg, #8d6b2c, #a8823a)', border: '1px solid rgba(255,255,255,0.3)' }}>
                 {user?.name?.charAt(0).toUpperCase() || 'U'}
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <FaEdit size={18} />
@@ -259,7 +259,7 @@ const CustomerDashboard = () => {
                     ? 'text-white shadow-md'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
-                style={activeTab === t.key ? { background: 'linear-gradient(135deg, #c0392b, #e74c3c)' } : {}}>
+                style={activeTab === t.key ? { background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' } : {}}>
                 {t.icon}
                 {t.label}
                 {t.count > 0 && (
@@ -280,7 +280,7 @@ const CustomerDashboard = () => {
               {activeTab === 'applications' && (
                 <motion.div key="apps" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   {applications.length === 0 ? (
-                    <Empty emoji="📋" title="No applications yet"
+                    <Empty icon={<FaFileAlt />} title="No applications yet"
                       desc="Submit a loan application and track every update right here."
                       link="/home-loan" linkLabel="Apply for a Loan" />
                   ) : (
@@ -329,7 +329,7 @@ const CustomerDashboard = () => {
               {activeTab === 'appointments' && (
                 <motion.div key="apts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   {appointments.length === 0 ? (
-                    <Empty emoji="📅" title="No appointments booked"
+                    <Empty icon={<FaCalendarAlt />} title="No appointments booked"
                       desc="Book a free consultation with our financial experts."
                       link="/book-appointment" linkLabel="Book Appointment" />
                   ) : (
@@ -374,7 +374,7 @@ const CustomerDashboard = () => {
               {activeTab === 'cibil' && (
                 <motion.div key="cibil" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   {cibilChecks.length === 0 ? (
-                    <Empty emoji="📊" title="No CIBIL checks yet"
+                    <Empty icon={<FaChartBar />} title="No CIBIL checks yet"
                       desc="Check your credit score for free — takes less than a minute."
                       link="/cibil-check" linkLabel="Check CIBIL Score" />
                   ) : (
@@ -449,7 +449,7 @@ const CustomerDashboard = () => {
               <form onSubmit={handleProfileSave} className="p-5 space-y-4">
                 <div className="flex flex-col items-center gap-3 mb-6">
                   <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-gray-50 flex items-center justify-center text-4xl font-bold text-white shadow-md"
-                    style={{ background: 'linear-gradient(135deg, #e74c3c, #c0392b)' }}>
+                    style={{ background: 'linear-gradient(135deg, #8d6b2c, #a8823a)' }}>
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
                 </div>
@@ -477,7 +477,7 @@ const CustomerDashboard = () => {
                   </button>
                   <button type="submit" disabled={profileSaving}
                     className="flex-1 py-2.5 rounded-lg text-white font-semibold transition-all shadow-sm hover:shadow"
-                    style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                    style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
                     {profileSaving ? 'Saving...' : 'Save Changes'}
                   </button>
                 </div>

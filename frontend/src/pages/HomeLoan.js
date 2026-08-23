@@ -38,8 +38,8 @@ const HomeLoan = () => {
       title: 'Home Loan',
       rate: '8.5%',
       icon: '🏠',
-      color: '#c0392b',
-      gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+      color: '#a8823a',
+      gradient: 'linear-gradient(135deg, #a8823a, #8d6b2c)',
       link: '/home-loan'
     });
   }, []);
@@ -112,10 +112,10 @@ const HomeLoan = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: '#f8f7f4' }}>
+    <div className="min-h-screen theme-bg">
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(192,57,43,0.60) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
+        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(168,130,58,0.60) 100%), url(https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=80)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
 
@@ -127,7 +127,7 @@ const HomeLoan = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20" style={{ background: '#f8f7f4' }}>
+      <section className="py-20 theme-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
 
@@ -136,7 +136,7 @@ const HomeLoan = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {['Interest Rates Starting from 8.5%', 'Flexible Financing Based on Requirements', 'Customised Tenure Options', 'Balance Transfer Facility', 'Top-Up Loan Available', 'Tax Benefits under Section 80C'].map((f, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="rounded-xl p-5" style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #1a0a0a 0%, #c0392b 100%)' : '#1a1a2e' }}>
+                className="rounded-xl p-5" style={{ background: 'linear-gradient(135deg, #a8823a 0%, #8d6b2c 100%)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <FaCheckCircle style={{ color: 'rgba(255,255,255,0.85)', fontSize: 18, flexShrink: 0 }} />
                   <p style={{ color: 'white', fontWeight: 600, margin: 0 }}>{f}</p>
@@ -148,7 +148,7 @@ const HomeLoan = () => {
       </section>
 
       {/* How to Apply */}
-      <section className="py-20" style={{ background: '#f8f7f4' }}>
+      <section className="py-20 theme-bg">
         <div ref={sectionRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
 
@@ -169,7 +169,7 @@ const HomeLoan = () => {
                   }`}
                 >
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 transition-colors duration-500 ${
-                    activeStep === i ? 'bg-white text-accent' : 'bg-red-100 text-accent'
+                    activeStep === i ? 'bg-white text-accent' : 'bg-amber-50 text-accent'
                   }`}>
                     {step.n}
                   </div>
@@ -186,7 +186,7 @@ const HomeLoan = () => {
               <a href="#apply" className="inline-block mt-2 px-8 py-3 bg-accent text-white rounded-xl font-bold hover:shadow-lg transition-all hover:scale-105">Apply Now →</a>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div className="bg-gradient-to-br from-accent to-red-800 rounded-3xl p-10 text-white shadow-2xl">
+              <div className="rounded-3xl p-10 text-white shadow-2xl" style={{ background: 'linear-gradient(135deg, #a8823a 0%, #8d6b2c 100%)' }}>
                 <FaHome className="text-6xl mb-6 opacity-80" />
                 <h3 className="text-2xl font-heading font-bold mb-3">Stop paying rent. Start building equity.</h3>
                 <p className="text-white/80 mb-6">Our home loan experts guide you from eligibility to disbursement — making the process smooth and stress-free.</p>
@@ -210,7 +210,7 @@ const HomeLoan = () => {
       <DocumentUpload loanType="Home Loan" />
 
       {/* Form */}
-      <section id="apply" className="py-20" style={{ background: '#f8f7f4' }}>
+      <section id="apply" className="py-20 theme-bg">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
 

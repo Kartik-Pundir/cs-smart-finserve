@@ -40,7 +40,7 @@ const BankCard = ({ bank }) => {
 };
 
 const BankingPartners = () => (
-  <section style={{ background: 'linear-gradient(135deg, #faf8ff 0%, #f0eeff 50%, #f5f0ff 100%)' }} className="py-16 border-y border-purple-100">
+  <section className="py-16 border-y theme-border theme-bg-alt">
     <div className="text-center mb-12">
 
       <h2 className="text-gray-900 text-3xl font-heading font-bold mt-4">
@@ -49,10 +49,7 @@ const BankingPartners = () => (
     </div>
 
     <div className="relative overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to right, #faf8ff, transparent)' }} />
-      <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-        style={{ background: 'linear-gradient(to left, #f5f0ff, transparent)' }} />
+
 
       <div className="marquee-track flex items-center w-max" style={{ willChange: 'transform' }}>
         {[...logos, ...logos, ...logos, ...logos].map((bank, i) => (

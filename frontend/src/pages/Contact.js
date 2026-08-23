@@ -43,7 +43,7 @@ const Contact = () => {
         className="relative pt-40 pb-24 bg-cover bg-center"
         style={{
           backgroundImage:
-            'linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(192,57,43,0.85) 100%), url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80)',
+            'linear-gradient(135deg, rgba(26,26,46,0.92) 0%, rgba(168,130,58,0.85) 100%), url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80)',
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

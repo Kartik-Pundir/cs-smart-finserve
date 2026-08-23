@@ -1,4 +1,4 @@
-const LoadingSpinner = ({ size = 'md', color = '#c0392b' }) => {
+const LoadingSpinner = ({ size = 'md', color = '#a8823a' }) => {
   const sizes = {
     sm: '20px',
     md: '40px',

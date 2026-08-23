@@ -13,7 +13,7 @@ const ApplyNowCTA = ({ loanType = 'Loan' }) => {
       gap: '12px',
       alignItems: 'center',
       padding: '16px 32px',
-      background: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+      background: 'linear-gradient(135deg, #a8823a, #8d6b2c)',
       borderRadius: '50px',
       boxShadow: '0 8px 30px rgba(192, 57, 43, 0.4)',
       animation: 'slideUp 0.5s ease-out'
@@ -34,7 +34,7 @@ const ApplyNowCTA = ({ loanType = 'Loan' }) => {
           gap: '8px',
           padding: '12px 24px',
           background: 'white',
-          color: '#c0392b',
+          color: '#a8823a',
           borderRadius: '30px',
           fontWeight: '700',
           textDecoration: 'none',

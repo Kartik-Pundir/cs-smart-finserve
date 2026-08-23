@@ -55,8 +55,8 @@ const VideoTestimonials = () => {
             border: '1px solid rgba(192, 57, 43, 0.2)',
             marginBottom: '16px'
           }}>
-            <FaQuoteLeft style={{ color: '#c0392b' }} />
-            <span style={{ color: '#c0392b', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <FaQuoteLeft style={{ color: '#a8823a' }} />
+            <span style={{ color: '#a8823a', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Customer Stories
             </span>
           </div>
@@ -150,7 +150,7 @@ const VideoTestimonials = () => {
                       onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
                       onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                       >
-                        <FaPlay style={{ color: '#c0392b', fontSize: '24px', marginLeft: '4px' }} />
+                        <FaPlay style={{ color: '#a8823a', fontSize: '24px', marginLeft: '4px' }} />
                       </div>
                     </div>
                     {/* Loan Type Badge */}
@@ -217,7 +217,7 @@ const VideoTestimonials = () => {
                   <div style={{
                     fontSize: '16px',
                     fontWeight: '700',
-                    color: '#c0392b'
+                    color: '#a8823a'
                   }}>
                     {testimonial.amount}
                   </div>
@@ -237,7 +237,7 @@ const VideoTestimonials = () => {
           border: '1px solid rgba(192, 57, 43, 0.1)'
         }}>
           <p style={{ color: 'var(--text-secondary)', fontSize: '14px', margin: 0 }}>
-            📹 Want to share your success story? <a href="/contact" style={{ color: '#c0392b', fontWeight: '600', textDecoration: 'none' }}>Contact us</a> to record your testimonial
+            📹 Want to share your success story? <a href="/contact" style={{ color: '#a8823a', fontWeight: '600', textDecoration: 'none' }}>Contact us</a> to record your testimonial
           </p>
         </div>
       </div>

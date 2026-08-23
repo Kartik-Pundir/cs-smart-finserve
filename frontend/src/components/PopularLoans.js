@@ -1,63 +1,49 @@
 import { Link } from 'react-router-dom';
-import { FaHome, FaCar, FaBriefcase, FaArrowRight, FaFire } from 'react-icons/fa';
+import { FaHome, FaCar, FaBriefcase, FaArrowRight } from 'react-icons/fa';
+
+const GOLD_1 = '#a8823a';
+const GOLD_2 = '#8d6b2c';
+const GOLD_3 = '#c9a55a';
+
+const popularLoans = [
+  {
+    icon: <FaHome />,
+    title: 'Home Loan',
+    rate: '8.5%',
+    amount: 'Flexible',
+    tenure: 'Customised',
+    link: '/home-loan',
+    color: GOLD_1,
+    gradient: `linear-gradient(135deg, ${GOLD_1}, ${GOLD_2})`
+  },
+  {
+    icon: <FaCar />,
+    title: 'Car Loan',
+    rate: '8.7%',
+    amount: 'Flexible',
+    tenure: 'Customised',
+    link: '/auto-loan',
+    color: GOLD_2,
+    gradient: `linear-gradient(135deg, ${GOLD_2}, ${GOLD_1})`
+  },
+  {
+    icon: <FaBriefcase />,
+    title: 'Business Loan',
+    rate: '11%',
+    amount: 'Flexible',
+    tenure: 'Customised',
+    link: '/business-loan',
+    color: GOLD_3,
+    gradient: `linear-gradient(135deg, ${GOLD_3}, ${GOLD_1})`
+  }
+];
 
 const PopularLoans = () => {
-  const popularLoans = [
-    {
-      icon: <FaHome />,
-      title: 'Home Loan',
-      rate: '8.5%',
-      amount: 'Flexible',
-      tenure: 'Customised',
-      badge: 'Most Popular',
-      link: '/home-loan',
-      color: '#c0392b',
-      gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)'
-    },
-    {
-      icon: <FaCar />,
-      title: 'Car Loan',
-      rate: '8.7%',
-      amount: 'Flexible',
-      tenure: 'Customised',
-      badge: 'Quick Approval',
-      link: '/auto-loan',
-      color: '#2980b9',
-      gradient: 'linear-gradient(135deg, #2980b9, #3498db)'
-    },
-    {
-      icon: <FaBriefcase />,
-      title: 'Business Loan',
-      rate: '11%',
-      amount: 'Flexible',
-      tenure: 'Customised',
-      badge: 'Trending',
-      link: '/business-loan',
-      color: '#27ae60',
-      gradient: 'linear-gradient(135deg, #27ae60, #2ecc71)'
-    }
-  ];
-
   return (
     <section style={{ background: 'var(--bg-base)', padding: '80px 0' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '8px 20px',
-            borderRadius: '30px',
-            background: 'rgba(192, 57, 43, 0.08)',
-            border: '1px solid rgba(192, 57, 43, 0.2)',
-            marginBottom: '16px'
-          }}>
-            <FaFire style={{ color: '#c0392b' }} />
-            <span style={{ color: '#c0392b', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              Popular Loans
-            </span>
-          </div>
           <h2 style={{
             fontSize: '36px',
             fontWeight: 'bold',
@@ -84,7 +70,7 @@ const PopularLoans = () => {
                 background: 'var(--bg-card)',
                 borderRadius: '20px',
                 padding: '32px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border)',
                 position: 'relative',
                 overflow: 'hidden',
                 transition: 'transform 0.3s, box-shadow 0.3s',
@@ -92,30 +78,13 @@ const PopularLoans = () => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(168,130,58,0.12)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              {/* Badge */}
-              <div style={{
-                position: 'absolute',
-                top: '16px',
-                right: '16px',
-                padding: '6px 12px',
-                borderRadius: '20px',
-                background: loan.gradient,
-                color: 'white',
-                fontSize: '11px',
-                fontWeight: '600',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px'
-              }}>
-                {loan.badge}
-              </div>
-
               {/* Icon */}
               <div style={{
                 width: '70px',
@@ -150,7 +119,7 @@ const PopularLoans = () => {
                   justifyContent: 'space-between',
                   marginBottom: '12px',
                   paddingBottom: '12px',
-                  borderBottom: '1px solid var(--border-color)'
+                  borderBottom: '1px solid var(--border)'
                 }}>
                   <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Interest Rate</span>
                   <span style={{ color: loan.color, fontWeight: '700', fontSize: '18px' }}>{loan.rate}*</span>
@@ -160,7 +129,7 @@ const PopularLoans = () => {
                   justifyContent: 'space-between',
                   marginBottom: '12px',
                   paddingBottom: '12px',
-                  borderBottom: '1px solid var(--border-color)'
+                  borderBottom: '1px solid var(--border)'
                 }}>
                   <span style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Loan Amount</span>
                   <span style={{ color: 'var(--text-primary)', fontWeight: '600' }}>{loan.amount}</span>
@@ -210,19 +179,19 @@ const PopularLoans = () => {
               gap: '8px',
               padding: '14px 32px',
               borderRadius: '12px',
-              border: '2px solid #c0392b',
-              color: '#c0392b',
+              border: '2px solid #a8823a',
+              color: '#a8823a',
               fontWeight: '600',
               textDecoration: 'none',
               transition: 'all 0.3s'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#c0392b';
+              e.currentTarget.style.background = '#a8823a';
               e.currentTarget.style.color = 'white';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.color = '#c0392b';
+              e.currentTarget.style.color = '#a8823a';
             }}
           >
             View All Loan Products

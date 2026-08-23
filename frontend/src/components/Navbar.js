@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX, FiChevronDown, FiUser, FiLogOut } from 'react-icons/fi';
+import { FiMenu, FiX, FiChevronDown, FiUser, FiLogOut, FiSun, FiMoon } from 'react-icons/fi';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import Logo from './Logo';
@@ -100,7 +100,7 @@ const Navbar = () => {
               style={{ background: 'var(--bg-alt)', color: 'var(--text-secondary)', border: '1px solid var(--border)' }}
               title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
-              {isDark ? '☀️' : '🌙'}
+              {isDark ? <FiSun size={16} /> : <FiMoon size={16} />}
             </button>
 
             {isAuthenticated ? (
@@ -109,7 +109,7 @@ const Navbar = () => {
                 {user?.role === 'admin' && (
                   <Link to="/admin"
                     className="px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all"
-                    style={{ color: '#c0392b', borderColor: 'rgba(192,57,43,0.3)', background: 'rgba(192,57,43,0.08)' }}>
+                    style={{ color: '#a8823a', borderColor: 'rgba(168,130,58,0.3)', background: 'rgba(168,130,58,0.08)' }}>
                     ⚙ Admin Panel
                   </Link>
                 )}
@@ -124,7 +124,7 @@ const Navbar = () => {
                   onMouseEnter={() => setIsUserMenuOpen(true)}
                   onMouseLeave={() => setIsUserMenuOpen(false)}>
                   <button className="w-9 h-9 rounded-full flex items-center justify-center font-semibold text-white"
-                    style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                    style={{ background: '#a8823a' }}>
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </button>
                   <AnimatePresence>
@@ -160,7 +160,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/signup"
                   className="px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all hover:shadow-md"
-                  style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                  style={{ background: '#a8823a' }}>
                   Sign Up
                 </Link>
               </>
@@ -174,7 +174,7 @@ const Navbar = () => {
               className="w-8 h-8 rounded-lg flex items-center justify-center text-sm"
               style={{ background: 'var(--bg-alt)', border: '1px solid var(--border)' }}
             >
-              {isDark ? '☀️' : '🌙'}
+              {isDark ? <FiSun size={14} /> : <FiMoon size={14} />}
             </button>
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-lg" style={{ color: 'var(--nav-text)' }}>
@@ -224,7 +224,7 @@ const Navbar = () => {
                     {user?.role === 'admin' && (
                       <Link to="/admin"
                         className="px-3 py-1.5 text-xs font-semibold rounded-lg"
-                        style={{ color: '#c0392b', background: 'rgba(192,57,43,0.1)' }}
+                        style={{ color: '#a8823a', background: 'rgba(168,130,58,0.1)' }}
                         onClick={() => setIsMobileMenuOpen(false)}>
                         ⚙ Admin Panel
                       </Link>
@@ -255,7 +255,7 @@ const Navbar = () => {
                     </Link>
                     <Link to="/signup"
                       className="px-4 py-2 text-sm font-semibold text-white rounded-lg"
-                      style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}
+                      style={{ background: '#a8823a' }}
                       onClick={() => setIsMobileMenuOpen(false)}>
                       Sign Up
                     </Link>

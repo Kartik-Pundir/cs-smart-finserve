@@ -7,14 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#f5f5f5',
-        accent: '#c0392b',
-        'accent-light': '#e74c3c',
-        secondary: '#1a1a1a',
-        cream: '#111111',
-        'cream-dark': '#1a1a1a',
-        surface: '#1e1e1e',
-        muted: '#2a2a2a',
+        primary: '#12203a',
+        accent: '#a8823a',
+        'accent-light': '#8d6b2c',
+        secondary: '#5b6478',
+        cream: '#faf8f3',
+        'cream-dark': '#f4f2ec',
+        surface: '#ffffff',
+        muted: '#f4f5f8',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

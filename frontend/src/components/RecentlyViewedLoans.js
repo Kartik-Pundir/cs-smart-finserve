@@ -44,12 +44,12 @@ const RecentlyViewedLoans = () => {
             gap: '8px',
             padding: '8px 20px',
             borderRadius: '30px',
-            background: 'rgba(192, 57, 43, 0.08)',
-            border: '1px solid rgba(192, 57, 43, 0.2)',
+            background: 'rgba(168,130,58,0.08)',
+            border: '1px solid rgba(168,130,58,0.2)',
             marginBottom: '12px'
           }}>
-            <FaClock style={{ color: '#c0392b' }} />
-            <span style={{ color: '#c0392b', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <FaClock style={{ color: '#a8823a' }} />
+            <span style={{ color: '#a8823a', fontSize: '13px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Recently Viewed
             </span>
           </div>

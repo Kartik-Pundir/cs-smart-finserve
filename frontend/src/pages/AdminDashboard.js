@@ -26,10 +26,10 @@ const TabBtn = ({ label, count, active, onClick, highlight }) => (
       active 
         ? 'text-white shadow-md' 
         : highlight 
-          ? 'bg-gradient-to-r from-red-50 to-orange-50 text-accent border-2 border-accent/30 hover:border-accent/50 shadow-sm' 
+          ? 'bg-gradient-to-r from-[#fdf6e8] to-[#f9f7f2] text-accent border-2 border-accent/30 hover:border-accent/50 shadow-sm' 
           : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
     }`}
-    style={active ? { background: 'linear-gradient(135deg, #c0392b, #e74c3c)' } : {}}>
+    style={active ? { background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' } : {}}>
     {label}
     {count > 0 && <span className={`text-xs px-1.5 py-0.5 rounded-full font-bold ${active ? 'bg-white/30 text-white' : highlight ? 'bg-accent text-white' : 'bg-gray-100 text-gray-500'}`}>{count}</span>}
   </button>
@@ -343,7 +343,7 @@ const AdminDashboard = () => {
 
               {todayLeads.length === 0 ? (
                 <div className="text-center py-16">
-                  <div className="text-6xl mb-4">📭</div>
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-4 mx-auto" style={{ background: "rgba(168,130,58,0.08)", color: "#a8823a" }}>✉</div>
                   <p className="text-gray-400 text-lg font-medium">No leads received today yet</p>
                   <p className="text-gray-400 text-sm mt-1">Check back later or view all leads</p>
                 </div>
@@ -402,7 +402,7 @@ const AdminDashboard = () => {
                                   <div className="flex gap-1 items-center">
                                     <ViewBtn onClick={() => setViewItem(l)} />
                                     {l._sourceType === 'Appointment' && l.status === 'pending' && (
-                                      <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>Confirm</button>
+                                      <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>Confirm</button>
                                     )}
                                     <DelBtn onClick={() => deleteItem(l._endpoint, l._id, l._sourceType.toLowerCase())} />
                                   </div>
@@ -454,7 +454,7 @@ const AdminDashboard = () => {
                       <div className="flex gap-1 items-center">
                         <ViewBtn onClick={() => setViewItem(l)} />
                         {l._sourceType === 'Appointment' && l.status === 'pending' && (
-                          <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>Confirm</button>
+                          <button onClick={() => confirmAppointment(l._id, l.fullName)} className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>Confirm</button>
                         )}
                         <DelBtn onClick={() => deleteItem(l._endpoint, l._id, l._sourceType.toLowerCase())} />
                       </div>
@@ -494,7 +494,7 @@ const AdminDashboard = () => {
                           className="w-20 px-2 py-1 border border-gray-200 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-accent" />
                         <button onClick={() => updateCibilScore(c._id)}
                           className="px-2 py-1 text-xs font-semibold rounded-lg text-white whitespace-nowrap"
-                          style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                          style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
                           Save
                         </button>
                       </div>
@@ -566,7 +566,7 @@ const AdminDashboard = () => {
                         {u.role !== 'admin' && (
                           <button onClick={() => promoteToAdmin(u._id, u.name)}
                             className="px-2 py-1 text-xs font-semibold rounded-lg border whitespace-nowrap"
-                            style={{ color: '#c0392b', borderColor: 'rgba(192,57,43,0.3)', background: 'rgba(192,57,43,0.05)' }}>
+                            style={{ color: '#a8823a', borderColor: 'rgba(168,130,58,0.3)', background: 'rgba(168,130,58,0.05)' }}>
                             Make Admin
                           </button>
                         )}
@@ -591,7 +591,7 @@ const AdminDashboard = () => {
                     <td className="px-4 py-3 text-gray-500">{f.email || '—'}</td>
                     <td className="px-4 py-3">{f.service || '—'}</td>
                     <td className="px-4 py-3">
-                      <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <FaStar key={s} size={12} color={s <= f.rating ? '#c0392b' : '#e5e7eb'} />)}</div>
+                      <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <FaStar key={s} size={12} color={s <= f.rating ? '#a8823a' : '#e5e7eb'} />)}</div>
                     </td>
                     <td className="px-4 py-3">{moodLabels[f.mood] || '—'}</td>
                     <td className="px-4 py-3 text-gray-500 max-w-[180px] truncate">{f.message || '—'}</td>

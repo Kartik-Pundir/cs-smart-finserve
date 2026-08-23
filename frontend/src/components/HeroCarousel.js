@@ -24,7 +24,7 @@ const HeroCarousel = () => {
       title: 'Cash Against Car',
       subtitle: "Don't Sell It. Leverage It.",
       service: 'Loan Against Car',
-      gradient: 'from-orange-600 to-red-500',
+      gradient: 'from-[#a8823a] to-[#12203a]',
       link: '#loan-against-property'
     },
     {
@@ -52,7 +52,7 @@ const HeroCarousel = () => {
       title: 'Protect What Matters Most',
       subtitle: 'Comprehensive Insurance Solutions.',
       service: 'General Insurance',
-      gradient: 'from-red-600 to-pink-500',
+      gradient: 'from-[#12203a] to-[#a8823a]',
       link: '#insurance'
     }
   ];

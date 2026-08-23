@@ -318,7 +318,7 @@ const CibilCheck = () => {
             {/* Curated Loan Advice / Next Step */}
             <div className="card p-6 border border-purple-50 shadow-md bg-white rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-center sm:text-left">
-                <div className="text-3xl p-3 bg-red-50 rounded-2xl flex-shrink-0 text-accent">🎉</div>
+                <div className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(168,130,58,0.1)", color: "#a8823a" }}>★</div>
                 <div>
                   <h4 className="font-bold text-gray-800">Ready to unlock your customized rates?</h4>
                   <p className="text-xs text-gray-500 mt-0.5">Let our experts help you secure pre-approved home, auto, or personal loan sanctions.</p>

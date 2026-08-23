@@ -21,7 +21,7 @@ const LoanCTABanner = ({ loanType = 'Loan' }) => {
           exit={{ y: 80, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 260, damping: 22 }}
           className="fixed bottom-0 left-0 right-0 z-40 shadow-2xl"
-          style={{ background: 'linear-gradient(90deg, #1a1a2e 0%, #c0392b 100%)' }}
+          style={{ background: 'linear-gradient(90deg, #fdf6e8 0%, #a8823a 100%)' }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-white font-semibold text-sm sm:text-base text-center sm:text-left">

@@ -189,7 +189,7 @@ const SignUp = () => {
           <div className="lg:hidden mb-8 text-center">
             <Link to="/" className="inline-flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #c0392b, #e74c3c)' }}>
+                style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
                 CS
               </div>
               <span className="text-xl font-bold" style={{ color: isDark ? 'white' : '#1a1a1a' }}>CS Smart Finserve</span>
@@ -377,7 +377,7 @@ const SignUp = () => {
               type="submit"
               disabled={loading}
               className="w-full py-3 rounded-lg font-semibold text-white text-sm transition-all hover:shadow-lg disabled:opacity-50"
-              style={{ background: 'linear-gradient(to right, #c0392b, #e74c3c)' }}
+              style={{ background: 'linear-gradient(to right, #a8823a, #8d6b2c)' }}
             >
               {loading ? 'Creating Account...' : 'Create Free Account →'}
             </button>
@@ -385,7 +385,7 @@ const SignUp = () => {
             {/* Login Link */}
             <p className="text-center text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
               Already have an account?{' '}
-              <Link to="/login" className="font-semibold hover:underline" style={{ color: '#c0392b' }}>
+              <Link to="/login" className="font-semibold hover:underline" style={{ color: '#a8823a' }}>
                 Log in
               </Link>
             </p>
@@ -393,7 +393,7 @@ const SignUp = () => {
 
           {/* Security Note */}
           <p className="text-center text-xs mt-4" style={{ color: isDark ? '#6b7280' : '#9ca3af' }}>
-            🔒 Your data is encrypted and never shared with third parties.
+            Your data is encrypted and never shared with third parties.
           </p>
         </div>
       </div>

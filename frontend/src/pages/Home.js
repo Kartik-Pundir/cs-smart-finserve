@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaStar, FaUniversity, FaBolt, FaLock, FaChartBar, FaHandshake, FaMobileAlt, FaClipboardList, FaDollarSign } from 'react-icons/fa';
 import PopularLoans from '../components/PopularLoans';
 import RecentlyViewedLoans from '../components/RecentlyViewedLoans';
 import AnimatedSection from '../components/AnimatedSection';
@@ -11,7 +11,7 @@ import ZoomImage from '../components/ZoomImage';
    Base:      #111111  (near black)
    Alt:       #1a1a1a  (dark surface)
    Card:      #1e1e1e
-   Accent:    #c0392b  (brand red — unchanged)
+   Accent:    #a8823a  (brand red — unchanged)
    Text:      #f5f5f5 / #a0a0a0
 ──────────────────────────────────────────────────────────── */
 
@@ -124,7 +124,7 @@ const CheckIcon = () => (
 
 const PremiumCheckIcon = () => (
   <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(192, 57, 43, 0.08)', border: '1px solid rgba(192, 57, 43, 0.15)' }}>
-    <svg className="w-4 h-4" style={{ color: '#c0392b' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg className="w-4 h-4" style={{ color: '#a8823a' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3.5} d="M5 13l4 4L19 7" />
     </svg>
   </div>
@@ -149,7 +149,7 @@ const Home = () => {
         {/* Background — always the dark car image */}
         <div className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1617531653332-bd46c16f4d68?w=1600&q=90)' }} />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(10,10,20,0.92) 0%, rgba(10,10,20,0.80) 50%, rgba(10,10,20,0.50) 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(18,32,58,0.93) 0%, rgba(18,32,58,0.80) 50%, rgba(18,32,58,0.45) 100%)' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
 
@@ -168,7 +168,7 @@ const Home = () => {
                   exit={{ opacity: 0, y: -20, clipPath: 'inset(100% 0 0% 0)' }}
                   transition={{ duration: 0.5, ease: 'easeOut' }}
                   className="inline-block"
-                  style={{ color: heroIdx === 0 ? '#fff' : '#e05c5c' }}
+                  style={{ color: heroIdx === 0 ? '#fff' : '#a8823a' }}
                 >
                   {slide.line2}
                 </motion.span>
@@ -197,7 +197,7 @@ const Home = () => {
               >
                 <Link to={slide.link}
                   className="inline-block px-8 py-4 bg-accent text-white rounded-xl font-semibold text-lg hover:shadow-2xl transition-all hover:scale-105"
-                  style={{ boxShadow: '0 8px 32px rgba(192,57,43,0.35)' }}>
+                  style={{ boxShadow: '0 8px 32px rgba(168,130,58,0.35)' }}>
                   {slide.cta}
                 </Link>
                 <Link to="/emi-calculator"
@@ -212,7 +212,7 @@ const Home = () => {
               {heroSlides.map((_, i) => (
                 <button key={i} onClick={() => setHeroIdx(i)}
                   className="rounded-full transition-all"
-                  style={{ height: '6px', width: i === heroIdx ? '24px' : '6px', background: i === heroIdx ? '#c0392b' : 'rgba(255,255,255,0.3)' }} />
+                  style={{ height: '6px', width: i === heroIdx ? '24px' : '6px', background: i === heroIdx ? '#a8823a' : 'rgba(255,255,255,0.3)' }} />
               ))}
             </div>
 
@@ -252,7 +252,7 @@ const Home = () => {
                     transition={{ duration: 0.7, ease: 'easeInOut' }}
                   />
                 </AnimatePresence>
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)' }} />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(18,32,58,0.75) 0%, transparent 55%)' }} />
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={heroIdx + '-overlay'}
@@ -266,7 +266,7 @@ const Home = () => {
                     </div>
                     <Link to={slide.link}
                       className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all hover:scale-105"
-                      style={{ background: 'rgba(192,57,43,0.85)', backdropFilter: 'blur(4px)' }}>
+                      style={{ background: 'rgba(168,130,58,0.85)', backdropFilter: 'blur(4px)' }}>
                       Apply →
                     </Link>
                   </motion.div>
@@ -279,9 +279,9 @@ const Home = () => {
                   <button key={i} onClick={() => setHeroIdx(i + 1)}
                     className="rounded-xl p-2 text-center transition-all hover:scale-105"
                     style={{
-                      background: heroIdx === i + 1 ? 'rgba(192,57,43,0.7)' : 'rgba(255,255,255,0.1)',
+                      background: heroIdx === i + 1 ? 'rgba(168,130,58,0.7)' : 'rgba(255,255,255,0.1)',
                       backdropFilter: 'blur(8px)',
-                      border: heroIdx === i + 1 ? '1px solid rgba(192,57,43,0.8)' : '1px solid rgba(255,255,255,0.15)'
+                      border: heroIdx === i + 1 ? '1px solid rgba(168,130,58,0.8)' : '1px solid rgba(255,255,255,0.15)'
                     }}>
                     <p className="text-white text-xs font-semibold leading-tight">{s.label}</p>
                   </button>
@@ -311,12 +311,12 @@ const Home = () => {
           {/* Feature grid — 3 cols, balanced size */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             {[
-              { icon: '🏦', title: '50+ Banking Partners', desc: 'Compare hundreds of offers from India\'s top banks and NBFCs to get you the best rate.' },
-              { icon: '⚡', title: '24-Hour Approvals', desc: 'Most loans sanctioned within 24 hours — fully digital, no branch visits required.' },
-              { icon: '🔒', title: 'Zero Hidden Charges', desc: 'Complete transparency from day one. The rate we quote is the rate you get.' },
-              { icon: '📊', title: 'Free CIBIL Check', desc: 'Know your credit score before applying. Improve your eligibility at no cost.' },
-              { icon: '🤝', title: 'Dedicated Advisor', desc: 'A personal loan advisor guides you from application to disbursement, step by step.' },
-              { icon: '📱', title: 'Fully Digital', desc: 'Apply, upload documents, and track your loan status — all from your phone.' },
+              { icon: <FaUniversity />, title: '50+ Banking Partners', desc: 'Compare hundreds of offers from India\'s top banks and NBFCs to get you the best rate.' },
+              { icon: <FaBolt />, title: '24-Hour Approvals', desc: 'Most loans sanctioned within 24 hours — fully digital, no branch visits required.' },
+              { icon: <FaLock />, title: 'Zero Hidden Charges', desc: 'Complete transparency from day one. The rate we quote is the rate you get.' },
+              { icon: <FaChartBar />, title: 'Free CIBIL Check', desc: 'Know your credit score before applying. Improve your eligibility at no cost.' },
+              { icon: <FaHandshake />, title: 'Dedicated Advisor', desc: 'A personal loan advisor guides you from application to disbursement, step by step.' },
+              { icon: <FaMobileAlt />, title: 'Fully Digital', desc: 'Apply, upload documents, and track your loan status — all from your phone.' },
             ].map((item, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -324,7 +324,7 @@ const Home = () => {
                 className="flex items-start gap-4 rounded-xl p-5 hover:shadow-lg transition-all"
                 style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
                 <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
-                  style={{ background: "var(--badge-bg)" }}>
+                  style={{ background: "var(--badge-bg)", color: 'var(--accent)' }}>
                   {item.icon}
                 </div>
                 <div>
@@ -338,7 +338,7 @@ const Home = () => {
           {/* Stats strip */}
           <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="rounded-xl px-8 py-5 flex flex-wrap justify-around gap-6"
-            style={{ background: 'linear-gradient(135deg, #c0392b 0%, #922b21 100%)' }}>
+            style={{ background: 'linear-gradient(135deg, #12203a 0%, #1a2f52 100%)' }}>
             {[
               { value: '5,000+', label: 'Happy Customers' },
               { value: '50+',    label: 'Banking Partners' },
@@ -593,11 +593,11 @@ const Home = () => {
             <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--text-secondary)" }}>No branch visits. No paperwork piles. Just a fast, digital process from start to finish.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-0.5" style={{ background: 'rgba(192,57,43,0.3)' }} />
+            <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-0.5" style={{ background: 'rgba(168,130,58,0.3)' }} />
             {[
-              { step: '01', icon: '📋', title: 'Apply Online', desc: 'Fill a quick form with your basic details and loan requirement — takes under 2 minutes.' },
-              { step: '02', icon: '🏦', title: 'Get Matched', desc: 'We compare offers from 50+ banks and NBFCs and present you the best rate for your profile.' },
-              { step: '03', icon: '💰', title: 'Get Funded', desc: 'Documents verified, loan sanctioned, and funds disbursed — all within 24–48 hours.' },
+              { step: '01', icon: <FaClipboardList />, title: 'Apply Online', desc: 'Fill a quick form with your basic details and loan requirement — takes under 2 minutes.' },
+              { step: '02', icon: <FaUniversity />, title: 'Get Matched', desc: 'We compare offers from 50+ banks and NBFCs and present you the best rate for your profile.' },
+              { step: '03', icon: <FaDollarSign />, title: 'Get Funded', desc: 'Documents verified, loan sanctioned, and funds disbursed — all within 24–48 hours.' },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
                 className="relative flex flex-col items-center text-center rounded-2xl p-8 hover:shadow-xl transition-all"
@@ -606,7 +606,7 @@ const Home = () => {
                   style={{ background: "var(--step-bg)", border: "1px solid var(--step-border)" }}>
                   {item.icon}
                 </div>
-                <span className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#c0392b' }}>Step {item.step}</span>
+                <span className="text-xs font-bold tracking-widest uppercase mb-2" style={{ color: '#a8823a' }}>Step {item.step}</span>
                 <h3 className="text-xl font-heading font-bold mb-3" style={{ color: "var(--text-primary)" }}>{item.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{item.desc}</p>
               </motion.div>
@@ -667,7 +667,7 @@ const Home = () => {
                 </div>
                 {/* Loan tag */}
                 <span className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 w-fit"
-                  style={{ background: 'rgba(192,57,43,0.1)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)' }}>
+                  style={{ background: 'rgba(168,130,58,0.1)', color: '#a8823a', border: '1px solid rgba(168,130,58,0.2)' }}>
                   {t.loan}
                 </span>
                 <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: "var(--text-secondary)" }}>"{t.review}"</p>

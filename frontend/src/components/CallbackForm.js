@@ -61,7 +61,7 @@ const CallbackForm = () => {
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
         className="text-center py-10">
         <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl"
-          style={{ background: 'rgba(192,57,43,0.08)' }}>✅</div>
+          style={{ background: 'rgba(168,130,58,0.08)' }}>✅</div>
         <h3 className="text-xl font-heading font-bold text-gray-900 mb-2">Message Sent!</h3>
         <p className="text-gray-500 text-sm mb-1">We've received your message and sent a confirmation to your email.</p>
         <p className="text-gray-500 text-sm">Our team will reach out within <strong>2–4 hours</strong>.</p>
@@ -120,7 +120,7 @@ const CallbackForm = () => {
             gap: '12px',
             padding: '16px',
             background: captchaError ? '#fee' : '#f9fafb',
-            border: `2px solid ${captchaError ? '#c0392b' : '#e5e7eb'}`,
+            border: `2px solid ${captchaError ? '#a8823a' : '#e5e7eb'}`,
             borderRadius: '12px'
           }}>
             <span style={{ fontSize: '18px', fontWeight: '600', color: '#374151' }}>
@@ -150,7 +150,7 @@ const CallbackForm = () => {
             </span>
           </div>
           {captchaError && (
-            <p style={{ color: '#c0392b', fontSize: '13px', marginTop: '6px' }}>
+            <p style={{ color: '#a8823a', fontSize: '13px', marginTop: '6px' }}>
               ❌ Incorrect answer. Please try again.
             </p>
           )}

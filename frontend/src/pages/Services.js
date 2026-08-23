@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   FaHome, FaCar, FaUserTie, FaBriefcase, FaCarSide,
   FaBuilding, FaShieldAlt, FaArrowRight, FaChartLine,
-  FaCheckCircle, FaPhoneAlt
+  FaCheckCircle, FaPhoneAlt, FaUniversity, FaBolt, FaBullseye, FaFileAlt, FaHandshake, FaLock
 } from 'react-icons/fa';
 
 const services = [
@@ -16,8 +16,8 @@ const services = [
     tenure: 'Customised',
     badge: 'Most Popular',
     link: '/home-loan',
-    color: '#c0392b',
-    gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+    color: '#a8823a',
+    gradient: 'linear-gradient(135deg, #a8823a, #8d6b2c)',
     features: ['Zero prepayment charges', 'Balance transfer facility', 'Tax benefits u/s 80C'],
     bgLight: '#fff5f5',
   },
@@ -30,10 +30,10 @@ const services = [
     tenure: 'Customised',
     badge: 'Quick Approval',
     link: '/auto-loan',
-    color: '#2980b9',
-    gradient: 'linear-gradient(135deg, #2980b9, #3498db)',
+    color: '#a8823a',
+    gradient: 'linear-gradient(135deg, #a8823a, #8d6b2c)',
     features: ['New & used vehicles', '24-hour approval', 'Doorstep delivery'],
-    bgLight: '#f0f7ff',
+    bgLight: '#fdf6e8',
   },
   {
     icon: <FaUserTie />,
@@ -42,12 +42,11 @@ const services = [
     rate: '10.5%',
     amount: 'Flexible',
     tenure: 'Customised',
-    badge: 'No Collateral',
     link: '/personal-loan',
-    color: '#8e44ad',
-    gradient: 'linear-gradient(135deg, #8e44ad, #9b59b6)',
+    color: '#8d6b2c',
+    gradient: 'linear-gradient(135deg, #8d6b2c, #a8823a)',
     features: ['No collateral needed', 'Disbursal in 48 hrs', 'Minimal documentation'],
-    bgLight: '#fdf5ff',
+    bgLight: '#fdf6e8',
   },
   {
     icon: <FaBriefcase />,
@@ -56,12 +55,11 @@ const services = [
     rate: '11%',
     amount: 'Flexible',
     tenure: 'Customised',
-    badge: 'Trending',
     link: '/business-loan',
-    color: '#27ae60',
-    gradient: 'linear-gradient(135deg, #27ae60, #2ecc71)',
+    color: '#c9a55a',
+    gradient: 'linear-gradient(135deg, #c9a55a, #a8823a)',
     features: ['Collateral-free options', 'Flexi repayment', 'For all business types'],
-    bgLight: '#f0fff5',
+    bgLight: '#fdf6e8',
   },
   {
     icon: <FaCarSide />,
@@ -70,12 +68,11 @@ const services = [
     rate: '9.5%',
     amount: 'Flexible',
     tenure: 'Customised',
-    badge: 'Best Value',
     link: '/used-car-loan',
-    color: '#e67e22',
-    gradient: 'linear-gradient(135deg, #e67e22, #f39c12)',
+    color: '#a8823a',
+    gradient: 'linear-gradient(135deg, #a8823a, #c9a55a)',
     features: ['All brands covered', 'Free RC transfer help', 'Up to 100% financing'],
-    bgLight: '#fff8f0',
+    bgLight: '#fdf6e8',
   },
   {
     icon: <FaBuilding />,
@@ -84,12 +81,11 @@ const services = [
     rate: '9%',
     amount: 'Flexible',
     tenure: 'Customised',
-    badge: 'High Amount',
     link: '/loan-against-property',
-    color: '#16a085',
-    gradient: 'linear-gradient(135deg, #16a085, #1abc9c)',
+    color: '#8d6b2c',
+    gradient: 'linear-gradient(135deg, #8d6b2c, #c9a55a)',
     features: ['Residential & commercial', 'Overdraft facility', 'High LTV ratio'],
-    bgLight: '#f0fffc',
+    bgLight: '#fdf6e8',
   },
   {
     icon: <FaShieldAlt />,
@@ -98,12 +94,11 @@ const services = [
     rate: 'Best Rates',
     amount: 'Customised Plans',
     tenure: 'Flexible',
-    badge: 'Protection',
     link: '/insurance',
-    color: '#c0392b',
-    gradient: 'linear-gradient(135deg, #c0392b, #e74c3c)',
+    color: '#a8823a',
+    gradient: 'linear-gradient(135deg, #a8823a, #8d6b2c)',
     features: ['Health & life cover', 'Vehicle insurance', 'Property protection'],
-    bgLight: '#fff5f5',
+    bgLight: '#fdf6e8',
   },
 ];
 
@@ -123,15 +118,15 @@ const Services = () => {
         style={{ backgroundImage: 'url(/assets/premium-bg.png)' }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #e74c3c, transparent)' }} />
-          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #3498db, transparent)' }} />
+          <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #8d6b2c, transparent)' }} />
+          <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #a8823a, transparent)' }} />
         </div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
 
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-5 leading-tight">
               Every Loan You Need,<br />
-              <span style={{ color: '#f9a8a8' }}>All in One Place</span>
+              <span style={{ color: '#a8823a' }}>All in One Place</span>
             </h1>
             <p className="text-white/75 text-lg max-w-2xl mx-auto mb-10">
               From home loans to business finance — we offer the complete range of loan products and insurance solutions tailored to your needs.
@@ -159,7 +154,7 @@ const Services = () => {
             {stats.map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="text-center">
-                <p className="text-3xl font-heading font-bold" style={{ color: '#c0392b' }}>{s.value}</p>
+                <p className="text-3xl font-heading font-bold" style={{ color: '#a8823a' }}>{s.value}</p>
                 <p className="text-gray-500 text-sm mt-1">{s.label}</p>
               </motion.div>
             ))}
@@ -191,15 +186,12 @@ const Services = () => {
                 <div style={{ height: '4px', background: s.gradient }} />
 
                 <div className="p-7 flex flex-col flex-1">
-                  {/* Badge & Icon Row */}
-                  <div className="flex items-start justify-between mb-5">
+                  {/* Icon Row */}
+                  <div className="mb-5">
                     <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-md"
                       style={{ background: s.gradient }}>
                       {s.icon}
                     </div>
-                    <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: s.gradient }}>
-                      {s.badge}
-                    </span>
                   </div>
 
                   <h3 className="text-xl font-heading font-bold text-gray-900 mb-2">{s.title}</h3>
@@ -257,12 +249,12 @@ const Services = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: '🏦', title: '30+ Banking Partners', desc: 'Access to the best rates from leading banks and NBFCs across India.' },
-              { icon: '⚡', title: 'Fast 48-Hour Approval', desc: 'Get your loan sanctioned within 48 hours with our streamlined process.' },
-              { icon: '🎯', title: 'Personalised Matching', desc: 'We match you with the right lender based on your profile and requirements.' },
-              { icon: '📄', title: 'Zero Paperwork Hassle', desc: 'Upload documents digitally. No branch visits, no running around.' },
-              { icon: '🤝', title: 'Dedicated Manager', desc: 'A dedicated relationship manager handles your case from start to finish.' },
-              { icon: '🔒', title: '100% Secure & Confidential', desc: 'Your data is encrypted and never shared without your consent.' },
+              { icon: <FaUniversity />, title: '30+ Banking Partners', desc: 'Access to the best rates from leading banks and NBFCs across India.' },
+              { icon: <FaBolt />, title: 'Fast 48-Hour Approval', desc: 'Get your loan sanctioned within 48 hours with our streamlined process.' },
+              { icon: <FaBullseye />, title: 'Personalised Matching', desc: 'We match you with the right lender based on your profile and requirements.' },
+              { icon: <FaFileAlt />, title: 'Zero Paperwork Hassle', desc: 'Upload documents digitally. No branch visits, no running around.' },
+              { icon: <FaHandshake />, title: 'Dedicated Manager', desc: 'A dedicated relationship manager handles your case from start to finish.' },
+              { icon: <FaLock />, title: '100% Secure & Confidential', desc: 'Your data is encrypted and never shared without your consent.' },
             ].map((item, i) => (
               <motion.div key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -270,7 +262,8 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
                 className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all">
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-lg mb-4"
+                  style={{ background: 'var(--badge-bg)', color: 'var(--accent)' }}>{item.icon}</div>
                 <h4 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
@@ -280,7 +273,7 @@ const Services = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-20" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #3d1a1a 50%, rgba(192,57,43,0.95) 100%)' }}>
+      <section className="py-20" style={{ background: 'linear-gradient(135deg, #fdf6e8 0%, #a8823a 100%)' }}>
         <div className="max-w-3xl mx-auto px-4 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <FaChartLine className="text-5xl mx-auto mb-5 opacity-80" />

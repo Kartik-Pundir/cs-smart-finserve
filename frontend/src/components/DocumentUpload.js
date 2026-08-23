@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FaUpload, FaFilePdf, FaFileImage, FaFileAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { FaUpload, FaFilePdf, FaFileImage, FaFileAlt, FaCheckCircle, FaTimesCircle, FaLock } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import api from '../utils/api';
 
@@ -116,7 +116,7 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
             <p className="text-gray-500">Our team will review your documents and get back to you within 24 hours.</p>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-cream rounded-2xl p-8 shadow-md">
+          <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-md">
             {/* Contact info */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div>
@@ -150,7 +150,7 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
                     onDrop={(e) => handleDrop(e, doc.id)}
                     onClick={() => !file && inputRefs.current[doc.id]?.click()}
                     className={`relative rounded-xl border-2 border-dashed p-5 transition-all cursor-pointer
-                      ${file ? 'border-accent bg-red-50' : isDragging ? 'border-accent bg-red-50 scale-[1.02]' : 'border-gray-200 bg-white hover:border-accent hover:bg-red-50'}`}
+                      ${file ? 'border-accent theme-bg-alt' : isDragging ? 'border-accent theme-bg-alt scale-[1.02]' : 'border-gray-200 bg-gray-50 hover:border-accent hover:bg-gray-100'}`}
                   >
                     <input
                       ref={el => inputRefs.current[doc.id] = el}
@@ -193,7 +193,7 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {Object.entries(files).map(([id, f]) => (
-                    <span key={id} className="inline-flex items-center gap-1 px-3 py-1 bg-red-100 text-accent rounded-full text-xs font-medium">
+                    <span key={id} className="inline-flex items-center gap-1 px-3 py-1 bg-amber-50 text-accent rounded-full text-xs font-medium">
                       <FaCheckCircle className="text-xs" /> {docTypes.find(d => d.id === id)?.label}
                     </span>
                   ))}
@@ -206,7 +206,7 @@ const DocumentUpload = ({ loanType = 'Loan' }) => {
               {uploading ? 'Uploading...' : 'Submit Documents →'}
             </button>
             <p className="text-center text-xs text-gray-400 mt-3">
-              🔒 Your documents are encrypted and never shared without your consent.
+              <FaLock className="inline-block mr-2 mb-1" /> Your documents are encrypted and never shared without your consent.
             </p>
           </form>
         )}

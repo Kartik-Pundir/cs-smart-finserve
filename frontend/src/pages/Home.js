@@ -321,8 +321,16 @@ const Home = () => {
               <motion.div key={i}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="flex items-start gap-4 rounded-xl p-5 hover:shadow-lg transition-all"
-                style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                className="flex items-start gap-4 rounded-2xl p-5 hover:shadow-2xl transition-all hover:-translate-y-1"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderLeft: '1px solid rgba(255, 255, 255, 0.15)',
+                  boxShadow: '0 4px 24px -4px rgba(0, 0, 0, 0.2)'
+                }}>
                 <div className="w-11 h-11 rounded-lg flex items-center justify-center text-xl flex-shrink-0"
                   style={{ background: "var(--badge-bg)", color: 'var(--accent)' }}>
                   {item.icon}
@@ -386,10 +394,15 @@ const Home = () => {
                 ].map((point, i) => (
                   <div 
                     key={i} 
-                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
+                    className="p-5 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex gap-4"
                     style={{ 
-                      background: 'var(--bg-card)', 
-                      borderColor: 'var(--border)' 
+                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                      backdropFilter: 'blur(24px)',
+                      WebkitBackdropFilter: 'blur(24px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.25)'
                     }}
                   >
                     <PremiumCheckIcon />
@@ -404,14 +417,24 @@ const Home = () => {
                 Apply for Car Loan →
               </Link>
             </AnimatedSection>
-            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
-              <ZoomImage 
-                src="/assets/real_toyota_fortuner.png" 
-                alt="Car Loan"
-                className="w-full h-full object-cover"
-                containerClassName="w-full h-full"
-                zoomScale={1.08}
-              />
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full max-w-xl mx-auto p-3 sm:p-5 rounded-[2.5rem]" style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.3)'
+            }}>
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                <ZoomImage 
+                  src="/assets/real_toyota_fortuner.png" 
+                  alt="Car Loan"
+                  className="w-full h-full object-cover"
+                  containerClassName="w-full h-full"
+                  zoomScale={1.08}
+                />
+              </div>
             </AnimatedSection>
           </div>
         </div>
@@ -421,14 +444,24 @@ const Home = () => {
       <section className="py-20" style={{ background: "var(--bg-alt)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection yOffset={50} duration={0.7} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20 order-2 lg:order-1">
-              <ZoomImage 
-                src="/assets/real_indian_luxury_house.png" 
-                alt="Home Loan"
-                className="w-full h-full object-cover"
-                containerClassName="w-full h-full"
-                zoomScale={1.08}
-              />
+            <AnimatedSection yOffset={50} duration={0.7} className="relative w-full max-w-xl mx-auto p-3 sm:p-5 rounded-[2.5rem] order-2 lg:order-1" style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.3)'
+            }}>
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                <ZoomImage 
+                  src="/assets/real_indian_luxury_house.png" 
+                  alt="Home Loan"
+                  className="w-full h-full object-cover"
+                  containerClassName="w-full h-full"
+                  zoomScale={1.08}
+                />
+              </div>
             </AnimatedSection>
             <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="order-1 lg:order-2">
 
@@ -457,10 +490,15 @@ const Home = () => {
                 ].map((point, i) => (
                   <div 
                     key={i} 
-                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
+                    className="p-5 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex gap-4"
                     style={{ 
-                      background: 'var(--bg-card)', 
-                      borderColor: 'var(--border)' 
+                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                      backdropFilter: 'blur(24px)',
+                      WebkitBackdropFilter: 'blur(24px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.25)'
                     }}
                   >
                     <PremiumCheckIcon />
@@ -510,10 +548,15 @@ const Home = () => {
                 ].map((point, i) => (
                   <div 
                     key={i} 
-                    className="p-5 rounded-2xl border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex gap-4"
+                    className="p-5 rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex gap-4"
                     style={{ 
-                      background: 'var(--bg-card)', 
-                      borderColor: 'var(--border)' 
+                      background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                      backdropFilter: 'blur(24px)',
+                      WebkitBackdropFilter: 'blur(24px)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                      borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.25)'
                     }}
                   >
                     <PremiumCheckIcon />
@@ -528,14 +571,24 @@ const Home = () => {
                 Explore Insurance Plans →
               </Link>
             </AnimatedSection>
-            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full aspect-[4/3] max-w-xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/20">
-              <ZoomImage 
-                src="/assets/insurance_hero.png" 
-                alt="Insurance"
-                className="w-full h-full object-cover"
-                containerClassName="w-full h-full"
-                zoomScale={1.08}
-              />
+            <AnimatedSection yOffset={50} duration={0.7} delay={0.2} className="relative w-full max-w-xl mx-auto p-3 sm:p-5 rounded-[2.5rem]" style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+              backdropFilter: 'blur(24px)',
+              WebkitBackdropFilter: 'blur(24px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.3)'
+            }}>
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                <ZoomImage 
+                  src="/assets/insurance_hero.png" 
+                  alt="Insurance"
+                  className="w-full h-full object-cover"
+                  containerClassName="w-full h-full"
+                  zoomScale={1.08}
+                />
+              </div>
             </AnimatedSection>
           </div>
         </div>
@@ -561,8 +614,16 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow border-2 border-transparent hover:border-accent group cursor-pointer"
-                style={{ background: "var(--bg-card2)", border: "1px solid var(--border)" }}
+                className="rounded-[2rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent hover:border-accent/50 group cursor-pointer"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+                }}
               >
                 <div className="overflow-hidden h-48">
                   <motion.img
@@ -600,8 +661,16 @@ const Home = () => {
               { step: '03', icon: <FaDollarSign />, title: 'Get Funded', desc: 'Documents verified, loan sanctioned, and funds disbursed — all within 24–48 hours.' },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-                className="relative flex flex-col items-center text-center rounded-2xl p-8 hover:shadow-xl transition-all"
-                style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+                className="relative flex flex-col items-center text-center rounded-3xl p-8 hover:shadow-2xl transition-all hover:-translate-y-2"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)'
+                }}>
                 <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mb-5 shadow-md"
                   style={{ background: "var(--step-bg)", border: "1px solid var(--step-border)" }}>
                   {item.icon}
@@ -656,8 +725,16 @@ const Home = () => {
               },
             ].map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12 }}
-                className="rounded-2xl p-7 hover:shadow-xl transition-all flex flex-col"
-                style={{ background: "var(--bg-card2)", border: "1px solid var(--border)" }}>
+                className="rounded-[2rem] p-7 hover:shadow-2xl transition-all flex flex-col hover:-translate-y-2"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                  backdropFilter: 'blur(24px)',
+                  WebkitBackdropFilter: 'blur(24px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.25)'
+                }}>
                 {/* Stars */}
                 <div className="flex gap-1 mb-3">
                   {Array(5).fill(0).map((_, s) => (
@@ -713,7 +790,15 @@ const Home = () => {
               </Link>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex justify-center">
-              <div className="rounded-3xl p-10 w-full max-w-md shadow-xl" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+              <div className="rounded-[2.5rem] p-10 w-full max-w-md shadow-2xl relative" style={{ 
+                background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+                borderLeft: '1px solid rgba(255, 255, 255, 0.25)',
+                boxShadow: '0 16px 50px 0 rgba(0, 0, 0, 0.3)'
+              }}>
                 <div className="text-center mb-8">
                   <p className="text-sm font-medium mb-2 uppercase tracking-wider" style={{ color: "var(--text-secondary)" }}>Your Credit Score</p>
                   <svg viewBox="0 0 200 120" className="w-64 mx-auto">

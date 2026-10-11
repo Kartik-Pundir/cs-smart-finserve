@@ -125,10 +125,12 @@ const SignUp = () => {
         <div className="relative z-10 flex flex-col p-10 text-white w-full">
           
           {/* Logo and Company Name */}
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg font-bold bg-white text-gray-900">
-              CS
-            </div>
+          <div className="flex items-center gap-3 mb-8">
+            <img
+              src="/logo.png"
+              alt="CS Smart Finserve Logo"
+              className="w-11 h-11 object-contain filter drop-shadow"
+            />
             <span className="text-base font-semibold">CS Smart Finserve</span>
           </div>
 
@@ -188,10 +190,11 @@ const SignUp = () => {
           {/* Mobile Logo */}
           <div className="lg:hidden mb-8 text-center">
             <Link to="/" className="inline-flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
-                style={{ background: 'linear-gradient(135deg, #a8823a, #8d6b2c)' }}>
-                CS
-              </div>
+              <img
+                src="/logo.png"
+                alt="CS Smart Finserve Logo"
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-xl font-bold" style={{ color: isDark ? 'white' : '#1a1a1a' }}>CS Smart Finserve</span>
             </Link>
           </div>

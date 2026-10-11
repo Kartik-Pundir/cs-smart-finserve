@@ -46,16 +46,16 @@ const Navbar = () => {
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}
       style={{ background: 'var(--nav-bg)', borderBottom: '1px solid var(--nav-border)' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-18 py-3">
+      <div className="w-full px-4 sm:px-6">
+        <div className="flex items-center justify-between h-18 py-3">
 
           {/* LEFT — Logo */}
-          <div className="flex-shrink-0 mr-10">
+          <div className="flex-shrink-0">
             <Logo size="nav" showText={false} />
           </div>
 
           {/* CENTER — Nav links */}
-          <div className="hidden lg:flex flex-1 items-center justify-center gap-8">
+          <div className="hidden lg:flex flex-1 items-center justify-center gap-6 xl:gap-8 mx-4">
             <Link to="/" className={navLink} style={{ color: 'var(--nav-text)' }}>Home</Link>
 
             {/* Services Dropdown */}

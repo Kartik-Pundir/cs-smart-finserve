@@ -72,7 +72,7 @@ const PersonalLoan = () => {
   return (
     <div className="min-h-screen theme-bg">
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(168,130,58,0.60) 100%), url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1400&q=80)' }}>
+        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(168,130,58,0.60) 100%), url(https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1400&q=80)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
 

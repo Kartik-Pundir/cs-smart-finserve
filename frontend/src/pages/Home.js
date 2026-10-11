@@ -96,7 +96,7 @@ const heroSlides = [
     line2: 'Loan Against Property.',
     sub: "Unlock your property's value. Get high-value loans against residential or commercial property.",
     tag: 'High Value Loans',
-    img: '/assets/premium_property.png',
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1000&q=85',
     label: 'Loan Against Property',
     rate: 'from 9.5% p.a.',
     link: '/loan-against-property',
@@ -428,7 +428,7 @@ const Home = () => {
             }}>
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                 <ZoomImage 
-                  src="/assets/real_toyota_fortuner.png" 
+                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1000&q=85" 
                   alt="Car Loan"
                   className="w-full h-full object-cover"
                   containerClassName="w-full h-full"
@@ -582,7 +582,7 @@ const Home = () => {
             }}>
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                 <ZoomImage 
-                  src="/assets/insurance_hero.png" 
+                  src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1000&q=85" 
                   alt="Insurance"
                   className="w-full h-full object-cover"
                   containerClassName="w-full h-full"
@@ -603,10 +603,10 @@ const Home = () => {
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: '/assets/real_mahindra_scorpio.png', link: '/auto-loan' },
-              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Flexible financing based on your requirements.', img: '/assets/real_indian_luxury_house.png', link: '/home-loan' },
-              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=85', link: '/business-loan' },
-              { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=85', link: '/insurance' },
+              { title: 'Car Loans', desc: 'New or used — zero to keys in 24 hours. We compare 50+ lenders for the lowest EMI on any car.', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=600&q=85', link: '/auto-loan' },
+              { title: 'Home Loans', desc: 'Stop paying rent. Start building equity. Flexible financing based on your requirements.', img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=85', link: '/home-loan' },
+              { title: 'Business Loans', desc: 'Fuel your ambition. Fast working capital and term loans for businesses of every size.', img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=85', link: '/business-loan' },
+              { title: 'Insurance', desc: "Car, health, home — we connect you with India's top insurers at the best premiums, instantly.", img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=85', link: '/insurance' },
             ].map((service, index) => (
               <motion.div key={index}
                 initial={{ opacity: 0, y: 40 }}

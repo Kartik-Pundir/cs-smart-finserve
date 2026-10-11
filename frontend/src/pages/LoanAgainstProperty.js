@@ -72,7 +72,7 @@ const LoanAgainstProperty = () => {
     <div className="min-h-screen theme-bg">
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(168,130,58,0.60) 100%), url(/assets/premium_property.png)' }}>
+        style={{ backgroundImage: 'linear-gradient(135deg, rgba(26,26,46,0.65) 0%, rgba(168,130,58,0.60) 100%), url(https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
 

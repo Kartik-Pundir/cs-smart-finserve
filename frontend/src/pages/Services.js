@@ -115,7 +115,7 @@ const Services = () => {
 
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-cover bg-center"
-        style={{ backgroundImage: 'url(/assets/premium-bg.png)' }}>
+        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=1600&q=85)' }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, #8d6b2c, transparent)' }} />

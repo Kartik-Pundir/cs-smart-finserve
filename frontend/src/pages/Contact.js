@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaWhatsapp, FaClock } from 'react-icons/fa';
+import { FaPhone, FaMapMarkerAlt, FaWhatsapp, FaClock } from 'react-icons/fa';
 import CallbackForm from '../components/CallbackForm';
 
 const Contact = () => {
@@ -18,13 +18,6 @@ const Contact = () => {
       label: 'WhatsApp',
       value: '+91 78388 25521',
       href: 'https://wa.me/917838825521',
-    },
-    {
-      icon: <FaEnvelope className="text-white text-lg" />,
-      bg: 'bg-accent',
-      label: 'Email Us',
-      value: 'krishan.pal1986@gmail.com',
-      href: 'mailto:krishan.pal1986@gmail.com',
     },
     {
       icon: <FaClock className="text-white text-lg" />,
@@ -60,7 +53,7 @@ const Contact = () => {
 
         {/* Info Cards — overlapping the banner */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {info.map((item, i) => (
               <motion.div
                 key={i}
@@ -182,13 +175,6 @@ const Contact = () => {
                   >
                     <FaPhone className="text-accent text-lg" />
                     <span className="text-sm font-semibold text-gray-700">Call Now</span>
-                  </a>
-                  <a
-                    href="mailto:krishan.pal1986@gmail.com"
-                    className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
-                  >
-                    <FaEnvelope className="text-gray-500 text-lg" />
-                    <span className="text-sm font-semibold text-gray-700">Send an Email</span>
                   </a>
                 </div>
               </div>

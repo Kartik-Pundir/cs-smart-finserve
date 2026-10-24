@@ -95,17 +95,6 @@ const Footer = () => {
             <h3 className="text-xl font-heading font-semibold mb-4" style={{ color: '#e8d9b8' }}>Contact Us</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <FaEnvelope className="mt-1 mr-3 flex-shrink-0" style={{ color: '#a8823a' }} />
-                <div>
-                  <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Email</p>
-                  <a href="mailto:krishan.pal1986@gmail.com" className="text-white text-sm transition-colors"
-                    onMouseEnter={e => e.target.style.color = '#a8823a'}
-                    onMouseLeave={e => e.target.style.color = '#ffffff'}>
-                    krishan.pal1986@gmail.com
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start">
                 <FaPhone className="mt-1 mr-3 flex-shrink-0" style={{ color: '#a8823a' }} />
                 <div>
                   <p className="text-sm" style={{ color: 'rgba(255,255,255,0.55)' }}>Phone / WhatsApp</p>

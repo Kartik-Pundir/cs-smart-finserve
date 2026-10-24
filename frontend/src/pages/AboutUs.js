@@ -34,7 +34,7 @@ const AboutUs = () => {
           </motion.div>
 
           {/* Leadership */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 mb-20">
+          <div className="max-w-3xl mx-auto mb-20">
             {/* MD */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-[2rem] p-4 shadow-xl border border-purple-50 flex flex-col sm:flex-row items-center gap-8 group hover:shadow-2xl transition-shadow">
               <div className="w-full sm:w-1/2 h-72 rounded-[1.5rem] overflow-hidden relative shadow-inner">
@@ -46,21 +46,6 @@ const AboutUs = () => {
                 <p className="text-accent font-bold tracking-wide text-sm uppercase mb-4">Managing Director & Founder</p>
                 <p className="text-gray-500 text-sm leading-relaxed">
                   With a deep understanding of the financial services industry, he laid the foundation of the company with a vision to make loans and insurance accessible to every Indian household.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Director */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-white rounded-[2rem] p-4 shadow-xl border border-purple-50 flex flex-col sm:flex-row items-center gap-8 group hover:shadow-2xl transition-shadow">
-              <div className="w-full sm:w-1/2 h-72 rounded-[1.5rem] overflow-hidden relative shadow-inner">
-                <img src="/assets/md.jpg" alt="Krishan Pal Singh" className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-              <div className="w-full sm:w-1/2 pr-4 pb-4 sm:pb-0 text-center sm:text-left">
-                <h3 className="text-3xl font-heading font-bold text-gray-900 mb-1">Krishan Pal Singh</h3>
-                <p className="text-accent font-bold tracking-wide text-sm uppercase mb-4">Director & Co-Founder</p>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  Based in Gurugram, he brings years of expertise in financial consulting. His commitment to transparency and a customer-first approach has helped build a reputation of trust across the NCR.
                 </p>
               </div>
             </motion.div>

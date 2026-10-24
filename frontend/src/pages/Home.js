@@ -428,7 +428,7 @@ const Home = () => {
             }}>
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                 <ZoomImage 
-                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1000&q=85" 
+                  src="/assets/real_indian_car_loan.jpg" 
                   alt="Car Loan"
                   className="w-full h-full object-cover"
                   containerClassName="w-full h-full"
